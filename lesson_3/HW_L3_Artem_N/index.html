@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!--  set styles for tables  -->
+  <style>
+    /*set the style of the table frame and cells of the entire document*/
+    table, th, td {
+      border: 1px solid black;
+      text-align: center;
+    }
+    /*set the vertical alignment of images*/
+    img {
+      vertical-align: middle;
+    }
+    /*set the background color (blue) using the class*/
+    .task_1_blue {
+      background-color: blue;
+    }
+    /*set the background color (yellow) using the class*/
+    .task_1_yellow {
+      background-color: yellow;
+    }
+    /*removing the table frame for task 2 using class*/
+    .task_2_table {
+      border: 0;
+      border-collapse: collapse;
+    }
+    /*hidden class for validation*/
+    .hidden {
+      display: none;
+    }
+  </style>
+<!--  set the page title  -->
+  <title>Tables | HW lesson 3</title>
+</head>
+<body>
+  <!--  set the <body> structure  -->
+  <!--  <header></header> no header information, no navigation-->
+  <!--  main body of the task page  -->
+  <main>
+    <!--  dividing content into two sections using <section> tags  -->
+    <section>
+      <!--  completing task 1 -->
+      <h2>Task 1</h2>
+      <table>
+        <!--  table header section  -->
+        <thead>
+          <tr>
+            <th colspan="4" class="task_1_blue">MY FIRST TABLE</th>
+          </tr>
+        </thead>
+        <!--  main table section  -->
+        <tbody>
+          <!--  hidden row for table dimension validation  -->
+          <tr class="hidden">
+            <td>hidden_cell</td>
+            <td>hidden_cell</td>
+            <td>hidden_cell</td>
+            <td>hidden_cell</td>
+          </tr>
+          <tr>
+            <td class="task_1_blue">First cell</td>
+            <td class="task_1_blue">Second cell</td>
+            <td colspan="2" rowspan="3" class="task_1_yellow">6 cells merged together</td>
+          </tr>
+          <tr>
+            <td colspan="2" class="task_1_yellow">2 cells merged into one</td>
+          </tr>
+          <tr>
+            <td class="task_1_yellow">1st cell 3rd row</td>
+            <td class="task_1_yellow">2nd cell 3rd row</td>
+          </tr>
+          <tr>
+            <td colspan="4" class="task_1_yellow">Do you like tables?</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <section>
+      <!--  completing task 2 -->
+      <h2>Task 2</h2>
+      <table class="task_2_table">
+        <!--  main table section  -->
+        <tbody>
+          <!--  putting together a puzzle taking into account the size of the picture in relation to the 4x3 table  -->
+          <tr>
+            <td class="task_2_table"><img src="./dog/ulybaka_01.jpg" alt="ulybaka_01"></td>
+            <td rowspan="3" class="task_2_table"><img src="./dog/ulybaka_02.jpg" alt="ulybaka_02"></td>
+            <td class="task_2_table"><img src="./dog/ulybaka_03.jpg" alt="ulybaka_03"></td>
+          </tr>
+          <tr>
+            <td rowspan="3" class="task_2_table"><img src="./dog/ulybaka_04.jpg" alt="ulybaka_04"></td>
+            <td class="task_2_table"><img src="./dog/ulybaka_05.jpg" alt="ulybaka_05"></td>
+          </tr>
+          <tr>
+            <td class="task_2_table"><img src="./dog/ulybaka_06.jpg" alt="ulybaka_06"></td>
+          </tr>
+          <tr>
+            <td colspan="2" class="task_2_table"><img src="./dog/ulybaka_07.jpg" alt="ulybaka_07"></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+</body>
+</html>
