@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Authorization</title>
+</head>
+<body>
+    <header>
+        <h1>Task 2. Authorization</h1>
+    </header>
+    <main>
+        <nav>
+            <a href="../index.html">Registration</a> |
+            <a href="./auth_page.html">Authorization</a> |
+            <a href="./search.html">Search</a>
+        </nav>
+        <form action="https://fom.in.ua/echo" method="get">
+            <fieldset>
+                <legend>Authorization</legend>
+                <p>
+                    <label for="email">Your email:<br></label>
+                    <input type="text" id="email" name="email" placeholder="Your email" value="" required minlength="8"
+                           title="Must contain at least 8 or more characters">
+                    <br>
+                    <label for="password">Password:<br></label>
+                    <input type="password" id="password" name="password" placeholder="Password" value="" required
+                           pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                           title="Must contain at least one number and one uppercase and lowercase letter,
+                           and at least 8 or more characters">
+                    <br>
+                    <input type="checkbox" id="remember" name="remember">
+                    <label for="remember">Remember me<br></label>
+                </p>
+                <button id="signIn" type="submit">Sign in</button>
+            </fieldset>
+        </form>
+    </main>
+</body>
+</html>
