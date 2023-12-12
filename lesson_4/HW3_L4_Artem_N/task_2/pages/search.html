@@ -179,24 +179,24 @@
                                 From: <br>
                                 <input id="priceFrom" name="priceFrom" type="text" value="100">$ <br>
                                 <input type="range" min="100" max="100000" step="1" value="100"
-                                       onchange="document.getElementById('priceFrom').value = this.value;">
+                                       onInput="document.getElementById('priceFrom').value = this.value;">
                                 <br>
                                 to: <br>
                                 <input id="priceTo" name="priceTo" type="text" value="100000">$ <br>
                                 <input type="range" min="100" max="100000" step="1" value="100000"
-                                       onchange="document.getElementById('priceTo').value = this.value;">
+                                       onInput="document.getElementById('priceTo').value = this.value;">
                         </td>
                         <td>
                             <label>Year of manufacture: <br></label>
                                 From: <br>
                                 <input id="yearFrom" name="yearFrom" type="text" value="2000"> year <br>
                                 <input type="range" min="2000" max="2023" step="1" list="yearList"
-                                       onchange="document.getElementById('yearFrom').value = this.value;">
+                                       onInput="document.getElementById('yearFrom').value = this.value;">
                                 <br>
                                 to: <br>
                                 <input id="yearTo" name="yearTo" type="text" value="2023"> year <br>
                                 <input type="range" min="2000" max="2023" step="1" list="yearList"
-                                       onchange="document.getElementById('yearTo').value = this.value;">
+                                       onInput="document.getElementById('yearTo').value = this.value;">
                                 <datalist id="yearList">
                                     <option value="2001" label="1"></option>
                                     <option value="2002" label="2"></option>
@@ -225,7 +225,7 @@
                         </td>
                     </tr>
                 </table>
-                <button id="search" type="submit">Search</button>
+                <button type="submit">Search</button>
             </fieldset>
         </form>
     </main>
