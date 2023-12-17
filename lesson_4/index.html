@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forms</title>
+</head>
+<body>
+    <form action="https://fom.in.ua/echo" method="GET">
+        <fieldset>
+            <legend>Full Name</legend>
+            <input tabindex="-1" type="text" placeholder="first name" name="firstName" maxlength="5">
+            <input tabindex="-1" type="text" placeholder="last name" name="lastName" minlength="">
+        </fieldset>
+        <br>
+        <fieldset>
+            <legend>Email/Password</legend>
+            <input type="email" name="myEmail" placeholder="test@gmail.com">
+            <input type="password" name="myPassword" placeholder="password">
+        </fieldset>
+        <br>
+        <!-- {
+            "myEmail": "kohut@gmail.com"
+            "myPassword": "123123123"
+            "firstName": "Denys"
+            "lastName": "Kohut"
+        } -->
+        <input type="button">
+        <br>
+        <label>
+            <input tabindex="-1" type="checkbox">
+            red
+        </label>
+        <br>
+        <label>
+            <input tabindex="-1" type="checkbox">
+            blue
+        </label>
+        <br>
+        <label>
+            <input type="checkbox">
+            magenta
+        </label>
+        <br>
+        <label for="pink">pink</label>
+        <input id="pink" type="checkbox">
+        <div>
+            text 3
+            <span>
+                text 2
+                <span tabindex="0">text</span>
+            </span>
+        </div>
+        <br>
+        <br>
+        <input tabindex="-1" type="color">
+        <br>
+        <input tabindex="-1" type="date">
+        <br>
+        <!-- <input type="datetime-local"> -->
+        <br>
+        <!-- <input type="email"> -->
+        <br>
+        <input type="file" name="file">
+        <br>
+        <input type="hidden">
+        <br>
+        <!-- <input src="/screencapture-codepen-io-quietplace-pen-QxdyKK-2023-12-08-15_04_42.png" type="image"> -->
+        <br>
+        <input type="month">
+        <br>
+        <input autofocus type="number" min="5" max="10" step="1" name="number">
+        <br>
+        <input type="password">
+        <br>
+        <input type="radio">
+        <br>
+        <input type="range">
+        <br>
+        <input type="reset">
+        <button type="reset">Reset</button>
+        <br>
+        <input type="search">
+        <br>
+        <!-- <input type="submit"> -->
+        <br>
+        <label>
+            telephone
+            <input type="tel" pattern="">
+        </label>
+        <br>
+        <!-- <input type="text"> (default value) -->
+        <br>
+        <input type="time">
+        <br>
+        <input type="url">
+        <br>
+        <input type="week">
+        <br>
+        <input type="submit">
+        <button type="submit">Submit</button>
+        <textarea name="textarea" cols="30" rows="1">value</textarea>
+        <select name="numbers">
+            <optgroup label="young">
+                <option value="10">Ten</option>
+                <option value="20">Twenty</option>
+                <option value="30">30</option>
+                <option value="40">40</option>
+                <option value="50">50</option>
+        </optgroup>
+        <optgroup label="a bit older than young">
+            <option value="60">60</option>
+            <option value="70">70</option>
+        </optgroup>
+        </select>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <label for="browser">Choose your browser from the list:</label>
+        <input list="browsers" name="browser" id="browser">
+        <datalist id="browsers">
+            <option value="Edge">
+            <option value="Firefox">
+            <option value="Chrome">
+            <option value="Opera">
+            <option value="Safari">
+        </datalist>
+        <br>
+        <br>
+        <br>
+        <br>
+        <label>
+            <input type="radio" name="ftuits" value="apples">
+            apples
+        </label>
+        <br>
+        <label>
+            <input type="radio" name="ftuits" value="pinapple">
+            pinapple
+        </label>
+        <br>
+        <label>
+            <input type="radio" name="ftuits" value="tomato">
+            tomato
+        </label>
+        <br>
+        <br>
+        <br>
+        <br>
+    </form>
+    <form oninput="x.value=parseInt(a.value)+parseInt(b.value)">
+        <input type="number" id="a" value="50">
+        +<input type="number" id="b" value="25">
+        =<output name="x" for="a b"></output>
+      </form>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/ecBco63zvas?si=wuOOonC8dG47S3kg&controls=0&autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <iframe src="https://www.uz.gov.ua/" width="560" height="315" frameborder="0"></iframe>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <video src="https://www.w3schools.com/tags/movie.mp4" controls></video>
+      <br>
+      <br>
+      <br>
+      <audio src="https://www.w3schools.com/tags/horse.mp3" controls>
+        <!-- <source src="https://www.w3schools.com/tags/horse.ogg" type="audio/ogg"> -->
+        <!-- <source > -->
+        <!-- Your browser does not support the audio element. -->
+      </audio>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+</body>
+</html>
