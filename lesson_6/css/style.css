@@ -1,0 +1,18 @@
+/*li {*/
+/*    color: red;*/
+/*}*/
+
+/*li span {*/
+/*    color: blue;*/
+/*}*/
+
+span > span {
+    color: green;
+}
+
+li + h2 {
+    color: aqua;
+}
+li ~ h2 {
+    color: yellow;
+}
