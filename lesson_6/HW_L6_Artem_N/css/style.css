@@ -1,0 +1,56 @@
+.chessboard {
+    width: 870px;
+    height: 870px;
+    border: 5px solid black;
+    text-align: center;
+}
+
+.row {
+    height: 100px;
+}
+
+.row-x {
+    height: 35px;
+}
+
+.cell {
+    width: 100px;
+    height: 100px;
+    box-sizing: border-box;
+    display: inline-block;
+    border: 1px solid black;
+}
+
+.cell + .cell {
+    margin-left: -4px;
+}
+
+.corner {
+    width: 35px;
+}
+
+.naming-x {
+    height: auto;
+    border: 0px;
+    display: inline-block;
+    font-size: 30px;
+    text-align: center;
+}
+
+.naming-y {
+    width: 35px;
+    border: 0px;
+    display: inline-block;
+    font-size: 30px;
+    text-align: center;
+    vertical-align: top;
+    line-height: 100px;
+}
+
+.white {
+    background-color: #fff;
+}
+
+.black {
+    background-color: #000;
+}
