@@ -1,16 +1,12 @@
 body {
-    /*text-align: center;*/
     font-family: Roboto, sans-serif;
     font-weight: 400;
+    font-size: 16px;
 }
 
 nav {
-    font-size: 16px;
     letter-spacing: 1.60px;
-}
-
-.section-nav, .section-one {
-    background-color: #EEEFF1;
+    padding: 79px 0 151px;
 }
 
 .wrapper {
@@ -18,12 +14,126 @@ nav {
     margin: 0 auto;
 }
 
+.section-nav, .section-one, .section-video {
+    background-color: #EEEFF1;
+}
+
+.section-two, .section-video {
+    text-align: center;
+}
+
+.section-three, footer {
+    background-color: #34547A;
+    color: white;
+}
+
+.section-three img {
+    padding-right: 20px;
+    float: left;
+}
+
+.section-three .wrapper {
+    display: flex;
+}
+
+.section-three figure {
+    width: 136px;
+    padding: 100px 0;
+    margin: 0 49px 0 0;
+}
+
+.section-three .figcaption-title, footer .author {
+    font-size: 21px;
+    font-weight: 500;
+}
+
+.section-three .wrapper::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+
 a {
     outline: none;
     text-decoration: none;
     color: black;
 }
 
+a + a {
+    margin-left: 42px;
+}
+
 a.active {
     color: #34547A;
+    font-weight: 500;
+}
+
+p {
+    color: #727272;
+    width: 540px;
+    line-height: 26.25px;
+}
+
+.section-one p {
+    margin-top: 60px;
+}
+
+.section-two p {
+    margin: 50px auto 100px;
+}
+
+.section-video p {
+    margin: 50px auto 57px;
+}
+
+button {
+    color: white;
+    background-color: #34547A;
+    min-width: 225px;
+    min-height: 65px;
+    letter-spacing: 1.60px;
+}
+
+.section-one button {
+    margin: 65px auto 141px;
+}
+
+.main-title {
+    font-size: 48px;
+    font-weight: 500;
+    margin: 0;
+}
+
+.sub-title {
+    display: block;
+    font-size: 32px;
+    font-weight: 500;
+}
+
+.section-two .sub-title {
+    margin: 112px auto 50px;
+}
+
+.section-video .sub-title {
+    padding-top: 100px;
+    margin-bottom: 50px;
+}
+
+.section-video iframe {
+    margin-bottom: 100px;
+}
+
+footer {
+    height: 151px;
+}
+
+footer .author {
+    display: block;
+    padding-top: 50px;
+}
+
+footer .copyright {
+    font-size: 13px;
+    line-height: 21.33px;
 }
