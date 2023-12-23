@@ -117,7 +117,7 @@ button {
 
 .section-video .sub-title {
     padding-top: 100px;
-    margin-bottom: 50px;
+    margin: 0 auto 50px;
 }
 
 .section-video iframe {
