@@ -50,7 +50,7 @@ a {
 
 /* hero-one block */
 .hero-one {
-    background: url("/lesson_8/HW_L8/assets/images/bg_hero_one.png");
+    background: url("https://decnewbis.github.io/H_Fullstack_JS/lesson_8/HW_L8/assets/images/bg_hero_one.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -290,7 +290,7 @@ hr {
 
 /* hero-eight block */
 .hero-eight {
-    background: url("/lesson_8/HW_L8/assets/images/bg_hero_8.png");
+    background: url("https://decnewbis.github.io/H_Fullstack_JS/lesson_8/HW_L8/assets/images/bg_hero_8.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
