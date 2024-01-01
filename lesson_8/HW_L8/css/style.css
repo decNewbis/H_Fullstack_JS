@@ -1,0 +1,371 @@
+body {
+    font-size: 24px;
+    font-weight: 500;
+    font-family: Montserrat, sans-serif;
+    margin: 0;
+}
+
+a {
+    outline: none;
+    text-decoration: none;
+    color: #252B42;
+}
+
+.wrapper {
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+/* header block */
+.header {
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+.header__wrapper {
+    display: flex;
+    padding: 26px 40px 28px 70px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header__list {
+    list-style: none;
+    display: flex;
+    justify-content: flex-start;
+    gap: 94px;
+}
+
+.header__item {
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.20px;
+    color: #252B42;
+}
+
+.header__anchor_active {
+    color: #FA4A0C;
+}
+/* end header block */
+
+/* hero-one block */
+.hero-one {
+    background: url("https://decnewbis.github.io/H_Fullstack_JS/lesson_8/HW_L8/assets/images/bg_hero_one.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: white;
+}
+
+.hero-one__wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hero-one__app-name {
+    font-weight: 700;
+    color: #F6F6F6;
+    letter-spacing: 0.10px;
+    margin: 73px 0 17px;
+}
+
+.hero-one__title {
+    font-size: 58px;
+    font-weight: 700;
+    letter-spacing: 0.20px;
+    line-height: 80px;
+    text-align: center;
+    margin: 0 0 27px;
+}
+
+.hero-one__text-content {
+    color: #F6F6F6;
+    letter-spacing: 0.20px;
+    line-height: 38px;
+    margin: 0 0 54px;
+}
+
+.hero-one__list {
+    list-style: none;
+    display: flex;
+    gap: 34px;
+    margin-left: 70px;
+}
+
+.hero-one__button {
+    font-weight: 700;
+    color: white;
+    letter-spacing: 0.10px;
+    line-height: 36px;
+    min-width: 236px;
+    min-height: 68px;
+    border: 1px solid white;
+    border-radius: 34px;
+    background: none;
+    margin: 0 0 146px;
+}
+
+.hero-one__button_focused {
+    background-color: #FA4A0C;
+}
+/* end hero-one block */
+
+/* group-53 block */
+.group-53__list {
+    margin: -305px 0 129px;
+    display: flex;
+    list-style: none;
+    align-items: baseline;
+    justify-content: center;
+    position: relative;
+    left: -46px;
+}
+/* end group-53 block */
+
+.mp-first {
+    position: relative;
+    left: -33px;
+    margin: 23px 0 -130px;
+    z-index: 5;
+}
+
+.mp-second {
+    position: relative;
+    margin-left: -269px;
+}
+
+hr {
+    color: #E4E4E4;
+    max-width: 884px;
+}
+
+/* hero-five block */
+.hero-five__paragraph {
+    font-size: 44px;
+    font-weight: 600;
+    line-height: 36px;
+    letter-spacing: 0.10px;
+    margin: 72px 0 59px;
+    text-align: center;
+}
+
+.hero-five__wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: -39px;
+}
+
+.hero-five__list {
+    list-style: none;
+}
+
+.hero-five__title {
+    color: #FA4A0C;
+    font-weight: 700;
+    line-height: 36px;
+    letter-spacing: 0.10px;
+    margin: 0 0 17px;
+}
+
+.hero-five__description {
+    color: #252B42;
+    display: block;
+    padding: 10px 0;
+    margin: 7px 0;
+    max-width: 561px;
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 57px;
+    letter-spacing: 0.20px;
+}
+
+.hero-five__result {
+    color: #737373;
+    display: block;
+    padding: 10px 0;
+    margin: 7px 0;
+    max-width: 467px;
+    font-weight: 500;
+    line-height: 38px;
+    letter-spacing: 0.20px;
+}
+
+/* end hero-five block */
+
+/* hero-nine block */
+.hero-nine__wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: -215px;
+}
+
+.hero-nine__list {
+    list-style: none;
+}
+
+.hero-nine__title {
+    color: #FA4A0C;
+    font-weight: 700;
+    line-height: 36px;
+    letter-spacing: 0.10px;
+    margin: 0 0 17px;
+}
+
+.hero-nine__description {
+    color: #252B42;
+    display: block;
+    padding: 10px 0;
+    margin: 7px 0;
+    max-width: 561px;
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 57px;
+    letter-spacing: 0.20px;
+}
+
+.hero-nine__result {
+    color: #737373;
+    display: block;
+    padding: 10px 0;
+    margin: 7px 0;
+    max-width: 467px;
+    font-weight: 500;
+    line-height: 38px;
+    letter-spacing: 0.20px;
+}
+
+/* end hero-nine block */
+
+/* hero-nine block */
+.hero-ten__wrapper {
+    margin-bottom: -356px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: -315px;
+}
+
+.hero-ten__list {
+    list-style: none;
+}
+
+.hero-ten__title {
+    color: #FA4A0C;
+    font-weight: 700;
+    line-height: 36px;
+    letter-spacing: 0.10px;
+    margin: 0 0 17px;
+}
+
+.hero-ten__description {
+    color: #252B42;
+    display: block;
+    padding: 10px 0;
+    margin: 7px 0;
+    max-width: 561px;
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 57px;
+    letter-spacing: 0.20px;
+}
+
+.hero-ten__result {
+    color: #737373;
+    display: block;
+    padding: 10px 0;
+    margin: 7px 0;
+    max-width: 467px;
+    font-weight: 500;
+    line-height: 38px;
+    letter-spacing: 0.20px;
+}
+
+/* end hero-ten block */
+
+/* hero-eight block */
+.hero-eight {
+    background: url("https://decnewbis.github.io/H_Fullstack_JS/lesson_8/HW_L8/assets/images/bg_hero_8.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: white;
+}
+
+.hero-eight__wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hero-eight__title {
+    font-size: 58px;
+    font-weight: 700;
+    letter-spacing: 0.20px;
+    line-height: 80px;
+    text-align: center;
+    padding: 10px;
+    margin: 146px 0 27px;
+}
+
+.hero-eight__text-content {
+    color: #F6F6F6;
+    letter-spacing: 0.20px;
+    line-height: 38px;
+    padding: 10px;
+    margin: 0 0 50px;
+}
+
+.hero-eight__list {
+    list-style: none;
+    display: flex;
+    gap: 34px;
+    margin-left: 70px;
+}
+
+.hero-eight__button {
+    font-size: 16px;
+    font-weight: 700;
+    color: white;
+    letter-spacing: 0.10px;
+    line-height: 28px;
+    min-width: 173px;
+    min-height: 64px;
+    border: 1px solid white;
+    border-radius: 10px;
+    background: none;
+    margin: 0 0 131px;
+}
+
+.hero-eight__button_focused {
+    background-color: #FA4A0C;
+}
+/* end hero-eight block */
+
+/* footer block */
+.footer__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: 37px auto 53px;
+}
+
+.footer__list {
+    list-style: none;
+    display: flex;
+    gap: 24px;
+}
+
+.footer__copyright {
+    color: #5C5C5C;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 18px;
+    letter-spacing: 0.10px;
+}
+/* end footer block */
