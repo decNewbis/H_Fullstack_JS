@@ -660,7 +660,7 @@ ul {
     gap: 126px;
 }
 
-.footer__nav-item {
+.footer__nav-item a {
     margin: 0 0 10px 0;
     line-height: 30px;
     color: #4F5665;
