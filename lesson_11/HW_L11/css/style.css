@@ -1,5 +1,6 @@
 * {
-    cursor: url("/lesson_10/HW_L10/assets/images/icon-cursor_16.png"), auto;
+    cursor: url("/lesson_11/HW_L11/assets/images/icon-cursor_16.png"),
+    url("/H_Fullstack_JS/lesson_11/HW_L11/assets/images/icon-tap_16.png"), auto;
 }
 
 body {
@@ -10,7 +11,8 @@ body {
 }
 
 a, button {
-    cursor: url("/lesson_10/HW_L10/assets/images/icon-tap_16.png"), auto;
+    cursor: url("/lesson_11/HW_L11/assets/images/icon-tap_161.png"),
+    url("/H_Fullstack_JS/lesson_11/HW_L11/assets/images/icon-tap_16.png"), auto;
 }
 
 a {
