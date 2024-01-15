@@ -16,10 +16,10 @@
     font-size: 20px;
     font-weight: 500;
     color: $title-text-color;
-  }
 
-  &__figcaption-span {
-    font-weight: 700;
+    &-span {
+      font-weight: 700;
+    }
   }
 
   &__logo {
@@ -27,26 +27,30 @@
     margin: 0 10px 0 0;
   }
 
-  &__navigation-list {
-    display: flex;
-    padding: 0;
-    gap: 40px;
+  &__navigation {
+    &-list {
+      display: flex;
+      padding: 0;
+      gap: 40px;
+    }
+
+    &-link {
+      color: $secondary-color;
+    }
   }
 
-  &__navigation-link {
-    color: $secondary-color;
-  }
+  &__auth {
+    &-list {
+      display: flex;
+      padding: 0;
+      gap: 30px;
+      align-items: center;
+      font-weight: 500;
+    }
 
-  &__auth-list {
-    display: flex;
-    padding: 0;
-    gap: 30px;
-    align-items: center;
-    font-weight: 500;
-  }
-
-  &__auth-link {
-    color: $title-text-color;
+    &-link {
+      color: $title-text-color;
+    }
   }
 
   &__button {
@@ -58,7 +62,6 @@
     border-radius: 50px;
     border: 1px solid $sub-primary-color;
     margin: 0 150px 0 0;
-
   }
 
   &__reg-link {
@@ -71,9 +74,9 @@
     border-radius: 50px;
     border: 1px solid $sub-primary-color;
     margin: 0 150px 0 0;
-  }
 
-  &__reg-link-text {
-    margin: auto;
+    &-text {
+      margin: auto;
+    }
   }
 }

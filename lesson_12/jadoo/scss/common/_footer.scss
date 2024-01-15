@@ -12,6 +12,20 @@
     justify-content: space-between;
     align-items: flex-start;
     min-width: 1060px;
+
+    &-list {
+      margin: 0;
+    }
+
+    &-title {
+      display: block;
+      margin: 0 0 34px 0;
+      max-width: 115px;
+      font-size: 21px;
+      font-weight: 700;
+      line-height: 26px;
+      color: #080809;
+    }
   }
 
   &__logo {
@@ -36,20 +50,6 @@
     align-items: flex-start;
     gap: 82px;
     margin: 0 0 74px;
-  }
-
-  &__navigation-list {
-    margin: 0;
-  }
-
-  &__navigation-title {
-    display: block;
-    margin: 0 0 34px 0;
-    max-width: 115px;
-    font-size: 21px;
-    font-weight: 700;
-    line-height: 26px;
-    color: #080809;
   }
 
   &__link {
@@ -90,27 +90,44 @@
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.10)
   }
 
-  &__app-title {
-    max-width: 180px;
-    margin: 26px 0 16px;
-    font-size: 20px;
-    line-height: 25px;
-    color: #5E6282;
-  }
+  &__app {
+    &-title {
+      max-width: 180px;
+      margin: 26px 0 16px;
+      font-size: 20px;
+      line-height: 25px;
+      color: #5E6282;
+    }
 
-  &__app-link {
-    display: flex;
-    align-items: center;
-    width: 107px;
-    min-height: 36px;
-    border-radius: 18px;
-    background-color: black;
-  }
+    &-link {
+      display: flex;
+      align-items: center;
+      width: 107px;
+      min-height: 36px;
+      border-radius: 18px;
+      background-color: black;
+    }
 
-  &__app-icon {
-    max-width: 20px;
-    max-height: 20px;
-    margin: 8px 5px 8px 17px;
+    &-icon {
+      max-width: 20px;
+      max-height: 20px;
+      margin: 8px 5px 8px 17px;
+    }
+
+    &-text {
+      display: block;
+      margin: 2px 0;
+      font-size: 7px;
+      font-weight: 100;
+      color: white;
+    }
+
+    &-subtitle {
+      margin: 2px 0;
+      font-size: 7px;
+      font-weight: 700;
+      color: white;
+    }
   }
 
   &__button-group {
@@ -119,27 +136,17 @@
     align-items: center;
   }
 
-  &__app-subtitle {
-    margin: 2px 0;
-    font-size: 7px;
-    font-weight: 700;
-    color: white;
-  }
 
-  &__app-text {
-    display: block;
-    margin: 2px 0;
-    font-size: 7px;
-    font-weight: 100;
-    color: white;
-  }
 
-  .apple-button-text {
-    font-size: 6px;
-  }
 
-  .apple-button-subtitle {
-    font-size: 9px;
+  .apple-button {
+    &-text {
+      font-size: 6px;
+    }
+
+    &-subtitle {
+      font-size: 9px;
+    }
   }
 
   &__copyright {

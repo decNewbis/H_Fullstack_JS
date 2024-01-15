@@ -25,10 +25,10 @@
     max-width: 340px;
     line-height: 30px;
     color: $secondary-color;
-  }
 
-  &__paragraph_emphasize {
-    font-weight: 500;
+    &_emphasize {
+      font-weight: 500;
+    }
   }
 
   &__social-network-list {
@@ -48,26 +48,28 @@
   &__copyright {
     line-height: 30px;
     color: #AFB5C0;
-  }
 
-  &__copyright_emphasize {
-    font-weight: 500;
+    &_emphasize {
+      font-weight: 500;
+    }
   }
 
   &__navigation {
     gap: 126px;
   }
 
-  &__nav-item a {
-    margin: 0 0 10px 0;
-    line-height: 30px;
-    color: $secondary-color;
-  }
+  &__nav {
+    &-item a {
+      margin: 0 0 10px 0;
+      line-height: 30px;
+      color: $secondary-color;
+    }
 
-  &__nav-title {
-    margin: 0 0 20px 0;
-    font-size: 18px;
-    font-weight: 500;
-    color: $title-text-color;
+    &-title {
+      margin: 0 0 20px 0;
+      font-size: 18px;
+      font-weight: 500;
+      color: $title-text-color;
+    }
   }
 }
