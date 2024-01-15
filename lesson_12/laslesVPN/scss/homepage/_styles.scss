@@ -1,0 +1,511 @@
+/* intro-content block */
+.intro-content {
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__text {
+    margin: 0 0 0 150px;
+    max-width: 555px;
+  }
+
+  &__header {
+    font-size: 50px;
+    font-weight: 500;
+    line-height: 70px;
+    margin: 0 0 20px;
+  }
+
+  &__header-span {
+    font-weight: 700;
+  }
+
+  &__paragraph {
+    line-height: 30px;
+    margin: 0 0 50px;
+  }
+
+  &__button {
+    min-width: 250px;
+    min-height: 60px;
+    border-radius: 10px;
+    font-weight: 700;
+    line-height: 25px;
+    color: white;
+    background: #F53838;
+    border: none;
+  }
+
+  &__image {
+    margin: 0 83px 0 0;
+  }
+}
+/* end intro-content block */
+
+/* counters block */
+.counters {
+  &__frame {
+    max-width: 1140px;
+    padding: 0 150px;
+    margin: 105px 0 95px 0;
+  }
+
+  &__list {
+    display: flex;
+    padding: 0 90px;
+    justify-content: space-between;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+  }
+
+  &__bg-icon {
+    display: flex;
+    margin: 0 36px 0 0;
+    min-width: 55px;
+    min-height: 55px;
+    background: #FFECEC;
+    border-radius: 50%;
+  }
+
+  &-icon {
+    max-width: 24px;
+    max-height: 24px;
+    margin: auto;
+  }
+
+  &__vertical-line {
+    border-left: 2px solid #EEEFF2;
+    min-height: 126px;
+    margin: 37px 0;
+  }
+
+  &__text {
+    font-size: 20px;
+    line-height: 30px;
+    color: #4F5665;
+  }
+
+  &__title {
+    font-size: 25px;
+    font-weight: 700;
+    color: #0B132A;
+  }
+
+  &__frame__list-shadow {
+    max-width: 1070px;
+    box-shadow: 0 -20px 20px 5px rgba(19, 18, 35, 0.1);
+  }
+}
+/* end counters block */
+
+/* offer-content block */
+.offer-content {
+  &__wrapper {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 0 auto 130px;
+  }
+
+  &__figure {
+    margin: 0;
+  }
+
+  &__image {
+    max-width: 508px;
+  }
+
+  &__text {
+    color: #4F5665;
+  }
+
+  &__title {
+    margin: 53px 0 20px 0;
+    max-width: 384px;
+    font-size: 35px;
+    font-weight: 500;
+    line-height: 50px;
+    color: #0B132A;
+  }
+
+  &__description {
+    display: block;
+    max-width: 430px;
+    margin: 20px 0;
+  }
+
+  &__list {
+    padding: 0;
+  }
+
+  &__item {
+    margin: 15px 0;
+    font-size: 14px;
+    line-height: 30px;
+    display: flex;
+    align-items: center;
+  }
+
+  &__item:last-child {
+    margin: 15px 0 0 0;
+  }
+
+  &__item img {
+    margin: 0 10px 0 0;
+    max-width: 24px;
+  }
+}
+/* vpn-plans block */
+.vpn-plans {
+  background: linear-gradient(180deg, #F8F8F8 0%, rgba(248, 248, 248, 0) 100%);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+
+  &__title {
+    padding: 80px 0 0;
+    margin: 20px auto;
+    max-width: 385px;
+    font-size: 35px;
+    font-weight: 500;
+    line-height: 50px;
+    color: #0B132A;
+  }
+
+  &__text {
+    display: inline-block;
+    margin: 20px 0 60px;
+    max-width: 555px;
+    line-height: 30px;
+    color: #4F5665;
+  }
+
+  &__text-bold {
+    font-weight: 500;
+  }
+
+  &__wrapper {
+    text-align: center;
+  }
+}
+/* end vpn-plans block */
+
+/* vpn-cards block */
+.vpn-cards {
+  &__list {
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    padding: 0 175px;
+  }
+
+  &__card-frame {
+    position: relative;
+    max-width: 330px;
+    min-height: 760px;
+    background: white;
+    border: 2px solid #DDDDDD;
+    border-radius: 10px;
+  }
+
+  &__card-frame img {
+    max-width: 145px;
+    margin: 80px 92px 30px;
+  }
+
+  &__sub-title {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 30px;
+    margin: 0 auto 30px;
+  }
+
+  &__sub-list {
+    padding: 0;
+  }
+
+  &__sub-item {
+    display: flex;
+    align-items: center;
+    margin: 10px 0 10px 70px;
+    font-size: 14px;
+    line-height: 30px;
+    color: #4F5665;
+  }
+
+  &__sub-item img {
+    max-width: 24px;
+    margin: 0 20px 0 0;
+  }
+
+  &__period {
+    position: absolute;
+    bottom: 115px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: block;
+    font-size: 25px;
+    font-weight: 400;
+    line-height: 30px;
+    color: #0B132A;
+  }
+
+  &__bold-text {
+    font-weight: 500;
+  }
+
+  &__card-button {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 178px;
+    min-height: 45px;
+    background: white;
+    border: 2px solid #F53838;
+    border-radius: 50px;
+    font-weight: 700;
+    color: #F53838;
+  }
+
+  &__card-frame:hover {
+    border: 2px solid #F53838;
+  }
+
+  &__card-button:hover {
+    background: #F53838;
+    color: white;
+
+    box-shadow: 0 20px 20px 4px rgba(245, 56, 56, 0.12);
+  }
+}
+/* end vpn-cards block */
+
+/* vpn-map block */
+.vpn-map {
+  &__image {
+    margin: 95px 190px 29px;
+    max-width: 1060px;
+  }
+}
+/* end vpn-map block */
+
+/* sponsor block */
+.sponsor {
+  &__wrapper {
+    text-align: center;
+  }
+
+  &__image {
+    max-width: 1136px;
+  }
+}
+/* end sponsor block */
+
+/* customers-reviews block */
+.customers-reviews {
+  &__wrapper {
+    text-align: center;
+  }
+
+  &__title {
+    margin: 50px auto 20px;
+    max-width: 385px;
+    font-size: 35px;
+    font-weight: 500;
+    line-height: 50px;
+    color: #0B132A;
+  }
+
+  &__text {
+    display: inline-block;
+    margin: 20px 0 60px;
+    max-width: 555px;
+    line-height: 30px;
+    color: #4F5665;
+  }
+
+  &__list {
+    display: flex;
+    padding: 0;
+    margin: 0 0 0 150px;
+    overflow: hidden;
+  }
+
+  &__item {
+    margin: 0 50px 60px 0;
+  }
+
+  &__frame {
+    width: 400px;
+    height: 230px;
+    background: white;
+    border: 2px solid #DDDDDD;
+    border-radius: 10px;
+  }
+
+  &__frame:hover {
+    border: 2px solid #F53838;
+    /*overflow: hidden;*/
+    box-shadow: 0 20px 18px -11px rgba(19, 18, 35, 0.3);
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__figure {
+    display: flex;
+    margin: 0;
+    align-items: center;
+    text-align: left;
+
+  }
+
+  &__image {
+    max-width: 50px;
+    border-radius: 50%;
+    margin: 30px 20px 20px 30px;
+  }
+
+  &__figcaption {
+    font-size: 14px;
+    color: #4F5665;
+  }
+
+  &__figcaption-name {
+    font-size: 18px;
+    font-weight: 500;
+    color: #0B132A;
+  }
+
+  &__rating {
+    display: flex;
+    align-items: center;
+  }
+
+  &__rating-star {
+    max-width: 16px;
+    margin: 10px 30px 10px 10px;
+  }
+
+  &__comment {
+    margin: 0 30px 30px;
+    text-align: left;
+    line-height: 30px;
+  }
+
+  &__slide {
+    display: inline-block;
+    min-width: 15px;
+    min-height: 15px;
+    margin: 0;
+    background: #DDE0E4;
+    border-radius: 50%;
+  }
+
+  &__slide_active {
+    min-width: 45px;
+    background: #F53838;
+    border-radius: 7.5px;
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 150px 65px 0;
+  }
+
+  &__slide-gap {
+    gap: 15px;
+  }
+
+  &__arrow-gap {
+    gap: 20px;
+  }
+
+  &__arrow_back, &__arrow_forward {
+    display: flex;
+    min-width: 60px;
+    min-height: 60px;
+    background: white;
+    border-radius: 50%;
+    border: 2px solid #F53838;
+  }
+
+  &__arrow_back span, &__arrow_forward span {
+    margin: auto;
+    scale: 1.25;
+    color: #F53838;
+  }
+
+  &__arrow_back:hover, &__arrow_forward:hover {
+    display: flex;
+    min-width: 60px;
+    min-height: 60px;
+    background: #F53838;
+    border-radius: 50%;
+    border: 2px solid #F53838;
+  }
+
+  &__arrow_back:hover span, &__arrow_forward:hover span {
+    margin: auto;
+    scale: 1.25;
+    color: white;
+  }
+}
+/* end customers-reviews block */
+
+/* subscribe-block block */
+.subscribe-block {
+  &__wrapper {
+    max-width: 1140px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 10px;
+    background: white;
+  }
+
+  &__title {
+    max-width: 372px;
+    font-size: 35px;
+    font-weight: 500;
+    line-height: 45px;
+    color: #0B132A;
+    margin: 58px 0 20px 70px;
+  }
+
+  &__paragraph {
+    max-width: 410px;
+    line-height: 30px;
+    margin: 0 0 58px 70px;
+  }
+
+  &__button {
+    min-width: 250px;
+    min-height: 60px;
+    background: #F53838;
+    border-radius: 10px;
+    border: 2px solid #F53838;
+    font-weight: 700;
+    line-height: 25px;
+    color: white;
+    margin: 86px 70px 86px 0;
+  }
+
+  &__text-shadow {
+    max-width: 1077px;
+    box-shadow: 0 20px 20px 4px rgba(19, 18, 35, 0.1);
+  }
+}
+/* end subscribe-block block */

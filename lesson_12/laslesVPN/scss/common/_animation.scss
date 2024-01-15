@@ -1,0 +1,79 @@
+.animation {
+  &__button {
+    position: relative;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  &__button:before {
+    content: "";
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: calc(100% - 8px);
+    height: calc(100% - 8px);
+    border-radius: inherit;
+    z-index: -1;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  &__button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 20px 20px 4px rgba(245, 56, 56, 0.2);
+  }
+
+  &__button:hover:before {
+    transform: translateY(3px);
+    box-shadow: 0 20px 20px 4px rgba(245, 56, 56, 0.2);
+  }
+  &__sn-link {
+    transition: transform 0.3s ease;
+  }
+
+  &__sn-link:hover {
+    transform: scale(1.2);
+  }
+
+  &__link {
+    transition: transform 0.3s, text-shadow 0.3s;
+  }
+
+  &__link:before {
+    transition: text-shadow 0.3s;
+  }
+
+  &__link:hover {
+    text-shadow: #F53838 1px 0 10px;
+  }
+
+  &__link:hover:before {
+    text-shadow: #F53838 1px 0 10px;
+  }
+
+  .vpn-cards__card-frame:hover &__jump {
+    animation: animation__jump 0.5s ease-in-out infinite alternate;
+  }
+
+  @keyframes animation__jump {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  &__pulse:hover {
+    animation: animation__pulse 1.5s infinite;
+  }
+
+  @keyframes animation__pulse {
+    0%, 100% {
+      transform: scale(1);
+      filter: drop-shadow(2px 4px 4px orange);
+    }
+    50% {
+      transform: scale(0.98);
+      filter: drop-shadow(2px 4px 4px black);
+    }
+  }
+}
