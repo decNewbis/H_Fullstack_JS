@@ -86,6 +86,22 @@ ul {
     margin: 0 150px 0 0;
 
 }
+
+.header__reg-link {
+    display: flex;
+    font-weight: 500;
+    color: #F53855;
+    min-width: 150px;
+    min-height: 45px;
+    background: white;
+    border-radius: 50px;
+    border: 1px solid #F53855;
+    margin: 0 150px 0 0;
+}
+
+.header__reg-link-text {
+    margin: auto;
+}
 /* end header block */
 
 /* intro-content block */
@@ -126,7 +142,7 @@ ul {
     background: #F53838;
     border: none;
 
-    box-shadow: 0 20px 20px 4px rgba(245, 56, 56, 0.12);
+    box-shadow: 0 44px 20px -15px rgba(245, 56, 56, 0.15);
 }
 
 .intro-content__image {
@@ -271,6 +287,10 @@ ul {
     max-width: 555px;
     line-height: 30px;
     color: #4F5665;
+}
+
+.vpn-plans__text-bold {
+    font-weight: 500;
 }
 
 .vpn-plans__wrapper {
