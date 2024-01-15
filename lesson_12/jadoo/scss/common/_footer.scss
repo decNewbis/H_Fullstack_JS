@@ -1,0 +1,159 @@
+.footer {
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0 194px 79px 186px;
+  }
+
+  &__navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    min-width: 1060px;
+  }
+
+  &__logo {
+    display: block;
+    max-width: 207px;
+    font-size: 44px;
+    color: #181E4B;
+    margin: 0 0 19px;
+  }
+
+  &__description {
+    display: block;
+    max-width: 207px;
+    font-size: 13px;
+    line-height: 16px;
+    margin: 19px 0 125px;
+    color: #5E6282;
+  }
+
+  &__links {
+    display: flex;
+    align-items: flex-start;
+    gap: 82px;
+    margin: 0 0 74px;
+  }
+
+  &__navigation-list {
+    margin: 0;
+  }
+
+  &__navigation-title {
+    display: block;
+    margin: 0 0 34px 0;
+    max-width: 115px;
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 26px;
+    color: #080809;
+  }
+
+  &__link {
+    display: block;
+    margin: 0 0 12px;
+    max-width: 115px;
+    font-size: 18px;
+    line-height: 22px;
+    color: #5E6282;
+  }
+
+  &__social-networks {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    margin: 0 0 30px;
+  }
+
+  &__sn-link {
+    display: flex;
+    width: 41px;
+    height: 41px;
+    border-radius: 50%;
+
+    box-shadow: 0 6px 20px -3px rgba(19, 18, 35, 0.1)
+  }
+
+  &__icon {
+    max-width: 16px;
+    max-height: 16px;
+    margin: auto;
+  }
+
+  &__icon:hover use, &__sn-link:hover use, &__sn-link:hover {
+    fill: white;
+    stroke: white;
+    background-image: $bg-conic-gradient;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.10)
+  }
+
+  &__app-title {
+    max-width: 180px;
+    margin: 26px 0 16px;
+    font-size: 20px;
+    line-height: 25px;
+    color: #5E6282;
+  }
+
+  &__app-link {
+    display: flex;
+    align-items: center;
+    width: 107px;
+    min-height: 36px;
+    border-radius: 18px;
+    background-color: black;
+  }
+
+  &__app-icon {
+    max-width: 20px;
+    max-height: 20px;
+    margin: 8px 5px 8px 17px;
+  }
+
+  &__button-group {
+    display: flex;
+    gap: 7px;
+    align-items: center;
+  }
+
+  &__app-subtitle {
+    margin: 2px 0;
+    font-size: 7px;
+    font-weight: 700;
+    color: white;
+  }
+
+  &__app-text {
+    display: block;
+    margin: 2px 0;
+    font-size: 7px;
+    font-weight: 100;
+    color: white;
+  }
+
+  .apple-button-text {
+    font-size: 6px;
+  }
+
+  .apple-button-subtitle {
+    font-size: 9px;
+  }
+
+  &__copyright {
+    min-width: 1040px;
+    text-align: center;
+    font-size: 14px;
+    line-height: 17px;
+    color: #5E6282;
+  }
+
+  &__decor {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: -5;
+  }
+}

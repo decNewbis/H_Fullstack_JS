@@ -1,0 +1,16 @@
+$primary-font-size: 16px;
+$primary-font-weight: 500;
+$primary-font-family: 'Poppins', sans-serif;
+$secondary-font-weight: 700;
+$secondary-font-family: 'Volkhov', serif;
+
+$bg-image-url-it: url("/H_Fullstack_JS/lesson_12/jadoo/assets/images/cover_it.jpg"),
+url("/lesson_12/jadoo/assets/images/cover_it.jpg");
+$bg-image-url-uk: url("/H_Fullstack_JS/lesson_12/jadoo/assets/images/cover_uk.jpg"),
+url("/lesson_12/jadoo/assets/images/cover_uk.jpg");
+$bg-image-url-eu: url("/H_Fullstack_JS/lesson_12/jadoo/assets/images/cover_eu.jpg"),
+url("/lesson_12/jadoo/assets/images/cover_eu.jpg");
+
+$bg-conic-gradient: conic-gradient(at 50% 50%, #B8D2F1 0deg, #F289AA 40deg, #C68BF0 80deg, #D164DA 120deg,
+        #C963E8 160deg, #BFC2E8 200deg, #FFC999 240deg, #D0D8C9 280deg, #BAD0F1 320deg, #CED8CB 360deg,
+        rgba(255, 255, 255, 0) 360deg);
