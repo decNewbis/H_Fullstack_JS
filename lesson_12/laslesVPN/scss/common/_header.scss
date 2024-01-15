@@ -15,7 +15,7 @@
   &__figcaption {
     font-size: 20px;
     font-weight: 500;
-    color: $titleTextColor;
+    color: $title-text-color;
   }
 
   &__figcaption-span {
@@ -34,7 +34,7 @@
   }
 
   &__navigation-link {
-    color: $secondaryColor;
+    color: $secondary-color;
   }
 
   &__auth-list {
@@ -46,17 +46,17 @@
   }
 
   &__auth-link {
-    color: $titleTextColor;
+    color: $title-text-color;
   }
 
   &__button {
     font-weight: 500;
-    color: $subPrimaryColor;
+    color: $sub-primary-color;
     min-width: 150px;
     min-height: 45px;
     background: white;
     border-radius: 50px;
-    border: 1px solid $subPrimaryColor;
+    border: 1px solid $sub-primary-color;
     margin: 0 150px 0 0;
 
   }
@@ -64,12 +64,12 @@
   &__reg-link {
     display: flex;
     font-weight: 500;
-    color: $subPrimaryColor;
+    color: $sub-primary-color;
     min-width: 150px;
     min-height: 45px;
     background: white;
     border-radius: 50px;
-    border: 1px solid $subPrimaryColor;
+    border: 1px solid $sub-primary-color;
     margin: 0 150px 0 0;
   }
 

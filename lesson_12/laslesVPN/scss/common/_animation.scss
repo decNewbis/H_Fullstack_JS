@@ -42,11 +42,11 @@
   }
 
   &__link:hover {
-    text-shadow: $primaryColor 1px 0 10px;
+    text-shadow: $primary-color 1px 0 10px;
   }
 
   &__link:hover:before {
-    text-shadow: $primaryColor 1px 0 10px;
+    text-shadow: $primary-color 1px 0 10px;
   }
 
   .vpn-cards__card-frame:hover &__jump {

@@ -1,16 +1,16 @@
 * {
-  cursor: $customCursorArrow, auto;
+  cursor: $custom-cursor-arrow, auto;
 }
 
 body {
-  font-size: $primaryFontSize;
-  font-weight: $primaryFontWeight;
-  font-family: $primaryFontFamily;
+  font-size: $primary-font-size;
+  font-weight: $primary-font-weight;
+  font-family: $primary-font-family;
   margin: 0;
 }
 
 a, button {
-  cursor: $customCursorPointer, auto;
+  cursor: $custom-cursor-pointer, auto;
 }
 
 a {

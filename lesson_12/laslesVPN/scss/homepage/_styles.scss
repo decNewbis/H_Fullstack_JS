@@ -34,7 +34,7 @@
     font-weight: 700;
     line-height: 25px;
     color: white;
-    background: $primaryColor;
+    background: $primary-color;
     border: none;
   }
 
@@ -87,13 +87,13 @@
   &__text {
     font-size: 20px;
     line-height: 30px;
-    color: $secondaryColor;
+    color: $secondary-color;
   }
 
   &__title {
     font-size: 25px;
     font-weight: 700;
-    color: $titleTextColor;
+    color: $title-text-color;
   }
 
   &__frame__list-shadow {
@@ -121,7 +121,7 @@
   }
 
   &__text {
-    color: $secondaryColor;
+    color: $secondary-color;
   }
 
   &__title {
@@ -130,7 +130,7 @@
     font-size: 35px;
     font-weight: 500;
     line-height: 50px;
-    color: $titleTextColor;
+    color: $title-text-color;
   }
 
   &__description {
@@ -175,7 +175,7 @@
     font-size: 35px;
     font-weight: 500;
     line-height: 50px;
-    color: $titleTextColor;
+    color: $title-text-color;
   }
 
   &__text {
@@ -183,7 +183,7 @@
     margin: 20px 0 60px;
     max-width: 555px;
     line-height: 30px;
-    color: $secondaryColor;
+    color: $secondary-color;
   }
 
   &__text-bold {
@@ -236,7 +236,7 @@
     margin: 10px 0 10px 70px;
     font-size: 14px;
     line-height: 30px;
-    color: $secondaryColor;
+    color: $secondary-color;
   }
 
   &__sub-item img {
@@ -253,7 +253,7 @@
     font-size: 25px;
     font-weight: 400;
     line-height: 30px;
-    color: $titleTextColor;
+    color: $title-text-color;
   }
 
   &__bold-text {
@@ -268,18 +268,18 @@
     min-width: 178px;
     min-height: 45px;
     background: white;
-    border: 2px solid $primaryColor;
+    border: 2px solid $primary-color;
     border-radius: 50px;
     font-weight: 700;
-    color: $primaryColor;
+    color: $primary-color;
   }
 
   &__card-frame:hover {
-    border: 2px solid $primaryColor;
+    border: 2px solid $primary-color;
   }
 
   &__card-button:hover {
-    background: $primaryColor;
+    background: $primary-color;
     color: white;
 
     box-shadow: 0 20px 20px 4px rgba(245, 56, 56, 0.12);
@@ -320,7 +320,7 @@
     font-size: 35px;
     font-weight: 500;
     line-height: 50px;
-    color: $titleTextColor;
+    color: $title-text-color;
   }
 
   &__text {
@@ -328,7 +328,7 @@
     margin: 20px 0 60px;
     max-width: 555px;
     line-height: 30px;
-    color: $secondaryColor;
+    color: $secondary-color;
   }
 
   &__list {
@@ -351,7 +351,7 @@
   }
 
   &__frame:hover {
-    border: 2px solid $primaryColor;
+    border: 2px solid $primary-color;
     /*overflow: hidden;*/
     box-shadow: 0 20px 18px -11px rgba(19, 18, 35, 0.3);
   }
@@ -378,13 +378,13 @@
 
   &__figcaption {
     font-size: 14px;
-    color: $secondaryColor;
+    color: $secondary-color;
   }
 
   &__figcaption-name {
     font-size: 18px;
     font-weight: 500;
-    color: $titleTextColor;
+    color: $title-text-color;
   }
 
   &__rating {
@@ -414,7 +414,7 @@
 
   &__slide_active {
     min-width: 45px;
-    background: $primaryColor;
+    background: $primary-color;
     border-radius: 7.5px;
   }
 
@@ -439,22 +439,22 @@
     min-height: 60px;
     background: white;
     border-radius: 50%;
-    border: 2px solid $primaryColor;
+    border: 2px solid $primary-color;
   }
 
   &__arrow_back span, &__arrow_forward span {
     margin: auto;
     scale: 1.25;
-    color: $primaryColor;
+    color: $primary-color;
   }
 
   &__arrow_back:hover, &__arrow_forward:hover {
     display: flex;
     min-width: 60px;
     min-height: 60px;
-    background: $primaryColor;
+    background: $primary-color;
     border-radius: 50%;
-    border: 2px solid $primaryColor;
+    border: 2px solid $primary-color;
   }
 
   &__arrow_back:hover span, &__arrow_forward:hover span {
@@ -481,7 +481,7 @@
     font-size: 35px;
     font-weight: 500;
     line-height: 45px;
-    color: $titleTextColor;
+    color: $title-text-color;
     margin: 58px 0 20px 70px;
   }
 
@@ -494,9 +494,9 @@
   &__button {
     min-width: 250px;
     min-height: 60px;
-    background: $primaryColor;
+    background: $primary-color;
     border-radius: 10px;
-    border: 2px solid $primaryColor;
+    border: 2px solid $primary-color;
     font-weight: 700;
     line-height: 25px;
     color: white;

@@ -311,6 +311,7 @@ template {
 /* end normalize block */
 /* normalize block */
 /* end normalize block */
+/* global block */
 * {
   cursor: url("/lesson_11/HW_L11/assets/images/icon-cursor_16.png"), url("/H_Fullstack_JS/lesson_11/HW_L11/assets/images/icon-cursor_16.png"), auto;
 }
@@ -346,6 +347,7 @@ ul {
   display: none;
 }
 
+/* end global block */
 /* header block */
 .header__wrapper {
   display: flex;

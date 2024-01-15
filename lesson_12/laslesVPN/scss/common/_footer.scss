@@ -24,7 +24,7 @@
   &__paragraph {
     max-width: 340px;
     line-height: 30px;
-    color: $secondaryColor;
+    color: $secondary-color;
   }
 
   &__paragraph_emphasize {
@@ -61,13 +61,13 @@
   &__nav-item a {
     margin: 0 0 10px 0;
     line-height: 30px;
-    color: $secondaryColor;
+    color: $secondary-color;
   }
 
   &__nav-title {
     margin: 0 0 20px 0;
     font-size: 18px;
     font-weight: 500;
-    color: $titleTextColor;
+    color: $title-text-color;
   }
 }
