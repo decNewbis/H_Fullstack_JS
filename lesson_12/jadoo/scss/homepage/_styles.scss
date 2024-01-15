@@ -7,7 +7,7 @@
     &__paragraph {
         max-width: 410px;
         font-size: 20px;
-        font-weight: 700;
+        font-weight: $secondary-font-weight;
         text-transform: uppercase;
         color: #DF6951;
         margin: 0 0 24px;
@@ -210,7 +210,7 @@
         &__sub-title {
             max-width: 190px;
             font-size: 20px;
-            font-weight: 500;
+            font-weight: $primary-font-weight;
             color: #1E1D4C;
             margin: 29px auto 15px;
         }
@@ -402,7 +402,7 @@
     }
 
     &__subtitle {
-        font-weight: 700;
+        font-weight: $secondary-font-weight;
         margin: 0 0 4px;
 
     }

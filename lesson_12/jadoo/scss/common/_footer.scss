@@ -22,7 +22,7 @@
       margin: 0 0 34px 0;
       max-width: 115px;
       font-size: 21px;
-      font-weight: 700;
+      font-weight: $secondary-font-weight;
       line-height: 26px;
       color: #080809;
     }
@@ -125,7 +125,7 @@
     &-subtitle {
       margin: 2px 0;
       font-size: 7px;
-      font-weight: 700;
+      font-weight: $secondary-font-weight;
       color: white;
     }
   }
