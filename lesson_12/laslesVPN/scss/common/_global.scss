@@ -1,18 +1,16 @@
 * {
-  cursor: url("/lesson_11/HW_L11/assets/images/icon-cursor_16.png"),
-  url("/H_Fullstack_JS/lesson_11/HW_L11/assets/images/icon-cursor_16.png"), auto;
+  cursor: $customCursorArrow, auto;
 }
 
 body {
-  font-size: 16px;
-  font-weight: 400;
-  font-family: Rubik, sans-serif;
+  font-size: $primaryFontSize;
+  font-weight: $primaryFontWeight;
+  font-family: $primaryFontFamily;
   margin: 0;
 }
 
 a, button {
-  cursor: url("/lesson_11/HW_L11/assets/images/icon-tap_16.png"),
-  url("/H_Fullstack_JS/lesson_11/HW_L11/assets/images/icon-tap_16.png"), auto;
+  cursor: $customCursorPointer, auto;
 }
 
 a {
