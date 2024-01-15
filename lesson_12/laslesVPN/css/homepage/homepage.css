@@ -313,7 +313,7 @@ template {
 /* end normalize block */
 /* global block */
 * {
-  cursor: url("/lesson_11/HW_L11/assets/images/icon-cursor_16.png"), url("/H_Fullstack_JS/lesson_11/HW_L11/assets/images/icon-cursor_16.png"), auto;
+  cursor: url("/lesson_12/laslesVPN/assets/images/icon-cursor_16.png"), url("/H_Fullstack_JS/lesson_12/laslesVPN/assets/images/icon-cursor_16.png"), auto;
 }
 
 body {
@@ -324,7 +324,7 @@ body {
 }
 
 a, button {
-  cursor: url("/lesson_11/HW_L11/assets/images/icon-tap_16.png"), url("/H_Fullstack_JS/lesson_11/HW_L11/assets/images/icon-tap_16.png"), auto;
+  cursor: url("/lesson_12/laslesVPN/assets/images/icon-tap_16.png"), url("/H_Fullstack_JS/lesson_12/laslesVPN/assets/images/icon-tap_16.png"), auto;
 }
 
 a {
