@@ -1,0 +1,23 @@
+/* normalize block */
+@import "../common/normalize";
+/* end normalize block */
+
+/* variables block */
+@import "../common/variables";
+/* end variables block */
+
+/* global block */
+@import "../common/global";
+/* end global block */
+
+/* header block */
+@import "../common/header";
+/* end header block */
+
+/* styles block */
+@import "styles";
+/* end styles block */
+
+/* footer block */
+@import "../common/footer";
+/* end footer block */

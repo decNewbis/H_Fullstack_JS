@@ -1,0 +1,46 @@
+.header {
+  &__wrapper {
+    display: flex;
+    padding: 48px 140px;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__block-actions, &__navigation, &__auth {
+    display: flex;
+    align-items: center;
+    gap: 86px;
+  }
+
+  &__navigation {
+    gap: 60px;
+  }
+
+  &__navigation a {
+    font-size: 17px;
+    font-weight: 400;
+    color: #212832;
+  }
+
+  &__auth {
+    gap: 47px;
+  }
+
+  &__auth a, button, select, option {
+    font-size: 17px;
+    font-weight: $primary-font-weight;
+    color: #212832;
+  }
+
+  &__button {
+    min-width: 102px;
+    min-height: 40px;
+    border: 1px solid #212832;
+    border-radius: 5px;
+    background: none;
+  }
+
+  &__auth select {
+    border: 0;
+  }
+}

@@ -1,0 +1,42 @@
+body {
+  font-size: $primary-font-size;
+  font-weight: $primary-font-weight;
+  font-family: $primary-font-family;
+  margin: 0;
+}
+
+a {
+  outline: none;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+figure, dd {
+  margin: 0;
+}
+
+.volkhov {
+  font-weight: $secondary-font-weight;
+  font-family: $secondary-font-family;
+}
+
+select {
+  background: none;
+}
+
+.wrapper {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.bg-space {
+  position: relative;
+}
+
+.hidden {
+  display: none;
+}

@@ -19,6 +19,9 @@
 *.cab
 *.xar
 
+# CSS
+#.css
+
 # Packing-only formats
 *.iso
 *.tar

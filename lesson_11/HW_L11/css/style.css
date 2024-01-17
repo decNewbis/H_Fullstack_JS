@@ -625,7 +625,7 @@ ul {
 
 }
 
-.footer_wrapper {
+.footer__wrapper {
     display: flex;
     justify-content: space-between;
     max-width: 1140px;

@@ -1,0 +1,34 @@
+* {
+  cursor: $custom-cursor-arrow, auto;
+}
+
+body {
+  font-size: $primary-font-size;
+  font-weight: $primary-font-weight;
+  font-family: $primary-font-family;
+  margin: 0;
+}
+
+a, button {
+  cursor: $custom-cursor-pointer, auto;
+}
+
+a {
+  outline: none;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.wrapper {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.hidden {
+  display: none;
+}
