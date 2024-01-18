@@ -1,1 +1,74 @@
 @import "normalize";
+@import "variables";
+@import "global";
+
+.main {
+  text-align: center;
+}
+.chessboard-flex {
+  text-align: center;
+
+  &__wrapper {
+    width: $chessboard-w;
+    height: $chessboard-h;
+    border: $chessboard-border;
+  }
+
+  &__row-naming, &__row-cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  &__cell {
+    min-width: $cell-w;
+    min-height: $cell-h;
+    box-sizing: border-box;
+    border: 1px solid #000;
+  }
+
+  &__cell + &__cell {
+    margin: 0 0 0 -1px;
+  }
+
+  &__cell-corner, &__cell-name-v {
+    min-width: $cell-corner-w;
+  }
+
+  &__cell-name-h {
+    min-width: $cell-w;
+  }
+
+  &__cell_black {
+    background-color: #000;
+  }
+}
+
+.chessboard-grid {
+  text-align: center;
+
+  &__wrapper {
+    display: grid;
+    grid-template-columns: $cell-corner-w repeat(8, 1fr) $cell-corner-w;
+    grid-template-rows: $cell-corner-w repeat(8, 1fr) $cell-corner-w;
+    width: $chessboard-w;
+    height: $chessboard-h;
+    border: $chessboard-border;
+  }
+
+  &__cell {
+    box-sizing: border-box;
+    border: 1px solid #000;
+  }
+
+  &__name-v {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__cell_black {
+    background-color: #000;
+  }
+}

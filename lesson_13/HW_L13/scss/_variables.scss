@@ -1,0 +1,6 @@
+$cell-w: 100px;
+$cell-h: 100px;
+$cell-corner-w: 35px;
+$chessboard-w: $cell-w * 8 + $cell-corner-w * 2;
+$chessboard-h: $cell-h * 8 + $cell-corner-w * 2;
+$chessboard-border: 5px solid #000;
