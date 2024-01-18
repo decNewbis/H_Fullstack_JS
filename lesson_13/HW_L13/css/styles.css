@@ -317,10 +317,6 @@ ul {
   list-style: none;
 }
 
-.hidden {
-  display: none;
-}
-
 .wrapper {
   max-width: 1440px;
   margin: 0 auto;
