@@ -1,5 +1,6 @@
 @import "normalize";
 @import "variables";
+@import "mixins";
 @import "global";
 
 .main {
@@ -9,15 +10,11 @@
   text-align: center;
 
   &__wrapper {
-    width: $chessboard-w;
-    height: $chessboard-h;
-    border: $chessboard-border;
+    @include section-wrapper-params;
   }
 
   &__row-naming, &__row-cell {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include flex-params;
     text-align: center;
   }
 
@@ -41,7 +38,7 @@
   }
 
   &__cell_black {
-    background-color: #000;
+    background-color: $dark-cell-color;
   }
 }
 
@@ -52,9 +49,7 @@
     display: grid;
     grid-template-columns: $cell-corner-w repeat(8, 1fr) $cell-corner-w;
     grid-template-rows: $cell-corner-w repeat(8, 1fr) $cell-corner-w;
-    width: $chessboard-w;
-    height: $chessboard-h;
-    border: $chessboard-border;
+    @include section-wrapper-params;
   }
 
   &__cell {
@@ -63,12 +58,10 @@
   }
 
   &__name-v {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include flex-params;
   }
 
   &__cell_black {
-    background-color: #000;
+    background-color: $dark-cell-color;
   }
 }
