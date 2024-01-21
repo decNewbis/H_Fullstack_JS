@@ -22,6 +22,9 @@
 # CSS
 #.css
 
+# Custom folders
+/trash
+
 # Packing-only formats
 *.iso
 *.tar
