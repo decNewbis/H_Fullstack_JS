@@ -1,0 +1,13 @@
+@import "variables";
+
+@mixin section-wrapper-params() {
+  width: $chessboard-w;
+  height: $chessboard-h;
+  border: $chessboard-border;
+}
+
+@mixin flex-params() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -1,0 +1,67 @@
+@import "normalize";
+@import "variables";
+@import "mixins";
+@import "global";
+
+.main {
+  text-align: center;
+}
+.chessboard-flex {
+  text-align: center;
+
+  &__wrapper {
+    @include section-wrapper-params;
+  }
+
+  &__row-naming, &__row-cell {
+    @include flex-params;
+    text-align: center;
+  }
+
+  &__cell {
+    min-width: $cell-w;
+    min-height: $cell-h;
+    box-sizing: border-box;
+    border: 1px solid #000;
+  }
+
+  &__cell + &__cell {
+    margin: 0 0 0 -1px;
+  }
+
+  &__cell-corner, &__cell-name-v {
+    min-width: $cell-corner-w;
+  }
+
+  &__cell-name-h {
+    min-width: $cell-w;
+  }
+
+  &__cell_black {
+    background-color: $dark-cell-color;
+  }
+}
+
+.chessboard-grid {
+  text-align: center;
+
+  &__wrapper {
+    display: grid;
+    grid-template-columns: $cell-corner-w repeat(8, 1fr) $cell-corner-w;
+    grid-template-rows: $cell-corner-w repeat(8, 1fr) $cell-corner-w;
+    @include section-wrapper-params;
+  }
+
+  &__cell {
+    box-sizing: border-box;
+    border: 1px solid #000;
+  }
+
+  &__name-v {
+    @include flex-params;
+  }
+
+  &__cell_black {
+    background-color: $dark-cell-color;
+  }
+}
