@@ -312,6 +312,7 @@ body {
   font-size: 18px;
   font-weight: 700;
   color: #fff;
+  background-color: #0B1D26;
 }
 
 a {
@@ -385,6 +386,7 @@ ul {
   justify-content: space-between;
   align-items: center;
   padding: 0 80px;
+  margin: 0 0 843px;
 }
 .intro__social-net {
   display: flex;
@@ -449,6 +451,73 @@ ul {
 .intro__scroll-bar-link {
   font-weight: 700;
   color: #fff;
+}
+
+.stepsSection__wrapper {
+  padding: 0 229px;
+  margin: 0 0 200px;
+}
+.stepsSection__content-list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.stepsSection__list-item {
+  position: relative;
+  padding: 140px 0 140px 150px;
+}
+.stepsSection__numStep {
+  display: block;
+  font-size: 240px;
+  line-height: 240px;
+  opacity: 0.1;
+  position: absolute;
+  top: 32px;
+  left: 0;
+}
+.stepsSection__paragraph {
+  font-weight: 800;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: #FBD784;
+  margin: 0;
+}
+.stepsSection__paragraph-list {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.stepsSection__paragraph-dash {
+  max-width: 72px;
+  margin: 10px 0;
+}
+.stepsSection__title {
+  font-family: "Chronicle Display", serif;
+  font-size: 64px;
+  font-weight: 600;
+  max-width: 555px;
+  margin: 27px 0;
+}
+.stepsSection__description {
+  display: block;
+  max-width: 650px;
+  line-height: 32px;
+  margin: 27px 0;
+}
+.stepsSection__link {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-weight: 700;
+  color: #FBD784;
+}
+.stepsSection__link-icon {
+  max-width: 24px;
+  max-height: 24px;
+}
+.stepsSection__poster {
+  max-width: 566px;
+  max-height: 720px;
 }
 
 /*# sourceMappingURL=styles.css.map */
