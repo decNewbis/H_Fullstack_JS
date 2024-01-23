@@ -1,0 +1,55 @@
+@import "variables";
+
+@mixin num-step-params() {
+  display: block;
+  font-size: 240px;
+  line-height: 240px;
+  opacity: 0.1;
+}
+
+@mixin paragraph-list-params() {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+@mixin paragraph-decor-params() {
+  max-width: 72px;
+  margin: 10px 0;
+}
+
+@mixin paragraph-params() {
+  font-weight: 800;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: $accent-color;
+  margin: 0;
+}
+
+@mixin h2-title-params() {
+  font-family: $secondary-font-family;
+  font-size: 64px;
+  font-weight: 600;
+  max-width: 555px;
+  margin: 27px 0;
+}
+
+@mixin description-params() {
+  display: block;
+  max-width: 650px;
+  line-height: 32px;
+  margin: 27px 0;
+}
+
+@mixin link-params() {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-weight: 700;
+  color: $accent-color;
+}
+
+@mixin link-icon-params() {
+  max-width: 24px;
+  max-height: 24px;
+}
