@@ -20,45 +20,7 @@
   }
 }
 
-.header {
-  &__wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 58px 80px 191px;
-  }
-
-  &__home-link {
-    @include logo-params();
-  }
-
-  &__navigation {
-    &-list {
-      display: flex;
-      align-items: center ;
-      gap: 40px;
-    }
-    &-link {
-      font-weight: 700;
-      color: #fff;
-    }
-  }
-
-  &__auth {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    &-icon {
-      max-width: 24px;
-      max-height: 24px;
-    }
-    &-link {
-      font-size: 17px;
-      font-weight: 700;
-      color: #fff;
-    }
-  }
-}
+@import "header";
 
 .intro {
   &__wrapper {
