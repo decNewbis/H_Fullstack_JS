@@ -2,35 +2,35 @@
   font-family: "Chronicle Display";
   src: url("../assets/fonts/ChronicleDisplay-Semibold(600).otf");
   font-weight: 600;
-  font-display: auto;
+  font-display: swap;
   font-style: normal;
 }
 @font-face {
   font-family: "Chronicle Display";
   src: url("../assets/fonts/ChronicleDisplay-Bold(700).otf");
   font-weight: 700;
-  font-display: auto;
+  font-display: swap;
   font-style: normal;
 }
 @font-face {
   font-family: "Gilroy";
   src: url("../assets/fonts/Gilroy-Medium(500).ttf");
   font-weight: 500;
-  font-display: auto;
+  font-display: swap;
   font-style: normal;
 }
 @font-face {
   font-family: "Gilroy";
   src: url("../assets/fonts/Gilroy-Bold(700).ttf");
   font-weight: 700;
-  font-display: auto;
+  font-display: swap;
   font-style: normal;
 }
 @font-face {
   font-family: "Gilroy";
   src: url("../assets/fonts/Gilroy-ExtraBold(800).ttf");
   font-weight: 800;
-  font-display: auto;
+  font-display: swap;
   font-style: normal;
 }
 
