@@ -520,4 +520,51 @@ ul {
   max-height: 720px;
 }
 
+.footer__wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.footer__content {
+  display: flex;
+  flex-direction: column;
+}
+.footer__home-link {
+  font-family: "Chronicle Display", serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.32px;
+  margin: 0 0 24px;
+}
+.footer__description {
+  display: block;
+  max-width: 305px;
+  line-height: 32px;
+  margin: 0 0 122px;
+}
+.footer__copyright {
+  font-weight: 500;
+  line-height: 32px;
+  opacity: 0.5;
+  margin: 0 0 120px;
+}
+.footer__list {
+  display: flex;
+  gap: 212px;
+  align-items: flex-start;
+}
+.footer__list-title {
+  font-size: 24px;
+  color: #FBD784;
+  margin: 0 0 24px;
+}
+.footer__list-link {
+  display: block;
+  font-weight: 500;
+  color: #fff;
+  line-height: 32px;
+  margin: 0 0 16px;
+}
+
 /*# sourceMappingURL=styles.css.map */

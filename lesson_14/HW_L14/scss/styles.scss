@@ -29,11 +29,7 @@
   }
 
   &__home-link {
-    font-family: $secondary-font-family;
-    font-size: 32px;
-    font-weight: 700;
-    color: #fff;
-    letter-spacing: 0.32px;
+    @include logo-params();
   }
 
   &__navigation {
@@ -210,3 +206,5 @@
     max-height: 720px;
   }
 }
+
+@import "footer";

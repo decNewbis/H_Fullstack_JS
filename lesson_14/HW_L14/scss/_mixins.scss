@@ -1,5 +1,13 @@
 @import "variables";
 
+@mixin logo-params() {
+  font-family: "Chronicle Display", serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.32px;
+}
+
 @mixin num-step-params() {
   display: block;
   font-size: 240px;
