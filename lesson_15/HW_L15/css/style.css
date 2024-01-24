@@ -324,6 +324,10 @@ nav {
   padding: 0 40px;
 }
 
+.hidden {
+  display: none;
+}
+
 a {
   outline: none;
   text-decoration: none;
@@ -405,6 +409,8 @@ button {
 }
 .section-video iframe {
   margin-bottom: 100px;
+  min-width: 1110px;
+  min-height: 623px;
 }
 
 .main-title {
@@ -429,6 +435,13 @@ footer .author {
 footer .copyright {
   font-size: 13px;
   line-height: 21.33px;
+}
+
+@media only screen and (max-width: 1190px) {
+  .section-video iframe {
+    min-width: calc(100vw - 80px);
+    min-height: calc((100vw - 80px) / 16 * 9);
+  }
 }
 
 /*# sourceMappingURL=style.css.map */
