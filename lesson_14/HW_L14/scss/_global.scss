@@ -1,0 +1,25 @@
+@import "variables";
+
+body {
+  font-family: $primary-font-family;
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  background-color: #0B1D26;
+}
+
+a {
+  outline: none;
+  text-decoration: none;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.wrapper {
+  max-width: 1920px;
+  margin: 0 auto;
+}

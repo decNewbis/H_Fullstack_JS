@@ -1,0 +1,6 @@
+<svg width="3" height="240" viewBox="0 0 3 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Slider">
+<rect id="Slider BG" opacity="0.5" width="3" height="240" fill="white"/>
+<rect id="Slider Indicator" width="3" height="60" fill="white"/>
+</g>
+</svg>
