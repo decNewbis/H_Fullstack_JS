@@ -328,11 +328,9 @@ a {
   text-decoration: none;
   color: black;
 }
-
 a + a {
   margin-left: 42px;
 }
-
 a.active {
   color: #34547A;
   font-weight: 500;
@@ -352,32 +350,9 @@ button {
   letter-spacing: 1.6px;
 }
 
-.section-nav, .section-one, .section-video {
-  background-color: #EEEFF1;
-}
-
-.section-two, .section-video {
-  text-align: center;
-}
-
 .section-three, footer {
   background-color: #34547A;
   color: white;
-}
-
-.section-three img {
-  padding-right: 20px;
-  float: left;
-}
-
-.section-three .wrapper {
-  display: flex;
-}
-
-.section-three figure {
-  width: 136px;
-  padding: 100px 0;
-  margin: 0 49px 0 0;
 }
 
 .section-three .figcaption-title, footer .author {
@@ -385,26 +360,50 @@ button {
   font-weight: 500;
 }
 
+.section-nav, .section-one, .section-video {
+  background-color: #EEEFF1;
+}
+.section-two, .section-video {
+  text-align: center;
+}
+.section-one p {
+  margin-top: 60px;
+}
+.section-one button {
+  margin: 65px auto 141px;
+}
+.section-two p {
+  margin: 50px auto 100px;
+}
+.section-two .sub-title {
+  margin: 112px auto 50px;
+}
+.section-three img {
+  padding-right: 20px;
+  float: left;
+}
+.section-three .wrapper {
+  display: flex;
+}
+.section-three figure {
+  width: 136px;
+  padding: 100px 0;
+  margin: 0 49px 0 0;
+}
 .section-three .wrapper::after {
   content: "";
   clear: both;
   display: table;
 }
-
-.section-one p {
-  margin-top: 60px;
-}
-
-.section-two p {
-  margin: 50px auto 100px;
-}
-
 .section-video p {
   margin: 50px auto 57px;
 }
-
-.section-one button {
-  margin: 65px auto 141px;
+.section-video .sub-title {
+  padding-top: 100px;
+  margin: 0 auto 50px;
+}
+.section-video iframe {
+  margin-bottom: 100px;
 }
 
 .main-title {
@@ -419,28 +418,13 @@ button {
   font-weight: 500;
 }
 
-.section-two .sub-title {
-  margin: 112px auto 50px;
-}
-
-.section-video .sub-title {
-  padding-top: 100px;
-  margin: 0 auto 50px;
-}
-
-.section-video iframe {
-  margin-bottom: 100px;
-}
-
 footer {
-  height: 151px;
+  min-height: 151px;
 }
-
 footer .author {
   display: block;
   padding-top: 50px;
 }
-
 footer .copyright {
   font-size: 13px;
   line-height: 21.33px;

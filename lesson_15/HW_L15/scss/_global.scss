@@ -19,15 +19,15 @@ a {
   outline: none;
   text-decoration: none;
   color: black;
-}
 
-a + a {
-  margin-left: 42px;
-}
+  & + & {
+    margin-left: 42px;
+  }
 
-a.active {
-  color: #34547A;
-  font-weight: 500;
+  &.active {
+    color: #34547A;
+    font-weight: 500;
+  }
 }
 
 p {

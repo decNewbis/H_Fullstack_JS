@@ -1,29 +1,8 @@
-.section-nav, .section-one, .section-video {
-  background-color: #EEEFF1;
-}
-
-.section-two, .section-video {
-  text-align: center;
-}
+@import "variables";
 
 .section-three, footer {
-  background-color: #34547A;
+  background-color: $secondary-bg-color;
   color: white;
-}
-
-.section-three img {
-  padding-right: 20px;
-  float: left;
-}
-
-.section-three .wrapper {
-  display: flex;
-}
-
-.section-three figure {
-  width: 136px;
-  padding: 100px 0;
-  margin: 0 49px 0 0;
 }
 
 .section-three .figcaption-title, footer .author {
@@ -31,26 +10,73 @@
   font-weight: 500;
 }
 
-.section-three .wrapper::after {
-  content: "";
-  clear: both;
-  display: table;
-}
+.section {
+  &-nav, &-one, &-video {
+    background-color: $primary-bg-color;
+  }
 
-.section-one p {
-  margin-top: 60px;
-}
+  &-two, &-video {
+    text-align: center;
+  }
 
-.section-two p {
-  margin: 50px auto 100px;
-}
+  &-one {
+    p {
+      margin-top: 60px;
+    }
 
-.section-video p {
-  margin: 50px auto 57px;
-}
+    button {
+      margin: 65px auto 141px;
+    }
+  }
 
-.section-one button {
-  margin: 65px auto 141px;
+  &-two {
+    p {
+      margin: 50px auto 100px;
+    }
+
+    .sub-title {
+      margin: 112px auto 50px;
+    }
+  }
+
+  &-three {
+    img {
+      padding-right: 20px;
+      float: left;
+    }
+
+    .wrapper {
+      display: flex;
+    }
+
+    figure {
+      width: 136px;
+      padding: 100px 0;
+      margin: 0 49px 0 0;
+    }
+
+
+    .wrapper::after {
+      content: "";
+      clear: both;
+      display: table;
+    }
+  }
+
+  &-video {
+    p {
+      margin: 50px auto 57px;
+    }
+
+    .sub-title {
+      padding-top: 100px;
+      margin: 0 auto 50px;
+    }
+
+    iframe {
+      margin-bottom: 100px;
+    }
+  }
 }
 
 .main-title {
@@ -63,17 +89,4 @@
   display: block;
   font-size: 32px;
   font-weight: 500;
-}
-
-.section-two .sub-title {
-  margin: 112px auto 50px;
-}
-
-.section-video .sub-title {
-  padding-top: 100px;
-  margin: 0 auto 50px;
-}
-
-.section-video iframe {
-  margin-bottom: 100px;
 }

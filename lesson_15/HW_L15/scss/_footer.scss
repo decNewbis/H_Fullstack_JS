@@ -1,13 +1,13 @@
 footer {
-  height: 151px;
-}
+  min-height: 151px;
 
-footer .author {
-  display: block;
-  padding-top: 50px;
-}
+  & .author {
+    display: block;
+    padding-top: 50px;
+  }
 
-footer .copyright {
-  font-size: 13px;
-  line-height: 21.33px;
+  & .copyright {
+    font-size: 13px;
+    line-height: 21.33px;
+  }
 }
