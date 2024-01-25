@@ -1,8 +1,76 @@
 @import "variables";
 
+.section-three__grid {
+  display: grid;
+  column-gap: 49px;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(1, 1fr);
+  grid-template-areas:
+  "cell_project-1 cell_project-2 cell_project-3 cell_project-4 cell_project-5 cell_project-6";
+
+  padding: 100px 0;
+}
+
+
+
+
 @media only screen and (max-width: 1190px) {
   .section-video iframe {
     min-width: $min-width;
     min-height: $min-height;
+  }
+
+  .section-three {
+    display: flex;
+    align-items: center;
+    &__grid {
+      row-gap: 16px;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      grid-template-areas:
+    "cell_project-1 cell_project-2 cell_project-3"
+    "cell_project-4 cell_project-5 cell_project-6";
+    }
+  }
+}
+
+@media only screen and (max-width: 586px) {
+  .section-three {
+    &__grid {
+      row-gap: 16px;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      grid-template-areas:
+    "cell_project-1 cell_project-2"
+    "cell_project-3 cell_project-4"
+    "cell_project-5 cell_project-6";
+    }
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .section-three {
+    &__grid {
+      row-gap: 16px;
+      grid-template-columns: repeat(1, 1fr);
+      grid-template-rows: repeat(6, 1fr);
+      grid-template-areas:
+    "cell_project-1" "cell_project-2"
+    "cell_project-3" "cell_project-4"
+    "cell_project-5" "cell_project-6";
+    }
+  }
+}
+
+@media only screen and (max-width: 380px) {
+  .section-video {
+    p {
+      margin: 50px 0 0;
+      padding: 0 0 100px;
+    }
+
+    iframe {
+      display: none;
+    }
   }
 }

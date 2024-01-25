@@ -343,7 +343,7 @@ a.active {
 
 p {
   color: #727272;
-  width: 540px;
+  max-width: 540px;
   line-height: 26.25px;
 }
 
@@ -387,13 +387,9 @@ button {
   padding-right: 20px;
   float: left;
 }
-.section-three .wrapper {
-  display: flex;
-}
 .section-three figure {
   width: 136px;
-  padding: 100px 0;
-  margin: 0 49px 0 0;
+  margin: 0;
 }
 .section-three .wrapper::after {
   content: "";
@@ -437,10 +433,54 @@ footer .copyright {
   line-height: 21.33px;
 }
 
+.section-three__grid {
+  display: grid;
+  column-gap: 49px;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(1, 1fr);
+  grid-template-areas: "cell_project-1 cell_project-2 cell_project-3 cell_project-4 cell_project-5 cell_project-6";
+  padding: 100px 0;
+}
+
 @media only screen and (max-width: 1190px) {
   .section-video iframe {
     min-width: calc(100vw - 80px);
     min-height: calc((100vw - 80px) / 16 * 9);
+  }
+  .section-three {
+    display: flex;
+    align-items: center;
+  }
+  .section-three__grid {
+    row-gap: 16px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-areas: "cell_project-1 cell_project-2 cell_project-3" "cell_project-4 cell_project-5 cell_project-6";
+  }
+}
+@media only screen and (max-width: 586px) {
+  .section-three__grid {
+    row-gap: 16px;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-areas: "cell_project-1 cell_project-2" "cell_project-3 cell_project-4" "cell_project-5 cell_project-6";
+  }
+}
+@media only screen and (max-width: 400px) {
+  .section-three__grid {
+    row-gap: 16px;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    grid-template-areas: "cell_project-1" "cell_project-2" "cell_project-3" "cell_project-4" "cell_project-5" "cell_project-6";
+  }
+}
+@media only screen and (max-width: 380px) {
+  .section-video p {
+    margin: 50px 0 0;
+    padding: 0 0 100px;
+  }
+  .section-video iframe {
+    display: none;
   }
 }
 
