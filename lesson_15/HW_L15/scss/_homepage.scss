@@ -19,6 +19,14 @@
     text-align: center;
   }
 
+  &-nav__grid {
+    display: grid;
+    column-gap: 42px;
+    justify-content: flex-start;
+    grid-template-areas:
+    "cell-link_1 cell-link_2 cell-link_3 cell-link_4 cell-link_5";
+  }
+
   &-one {
     p {
       margin-top: 60px;
