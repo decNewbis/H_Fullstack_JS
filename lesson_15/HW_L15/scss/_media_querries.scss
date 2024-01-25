@@ -1,19 +1,5 @@
 @import "variables";
 
-.section-three__grid {
-  display: grid;
-  column-gap: 49px;
-  grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: repeat(1, 1fr);
-  grid-template-areas:
-  "cell_project-1 cell_project-2 cell_project-3 cell_project-4 cell_project-5 cell_project-6";
-
-  padding: 100px 0;
-}
-
-
-
-
 @media only screen and (max-width: 1190px) {
   .section-video iframe {
     min-width: $min-width;
@@ -49,6 +35,10 @@
 }
 
 @media only screen and (max-width: 400px) {
+  .main-title {
+    font-size: 40px;
+  }
+
   .section-three {
     &__grid {
       row-gap: 16px;
