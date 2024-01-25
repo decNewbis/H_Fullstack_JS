@@ -514,7 +514,7 @@ footer .copyright {
     padding: 0 0 100px;
   }
   .section-video iframe {
-    display: none;
+    width: 240px;
   }
   .section-nav__grid {
     display: grid;
