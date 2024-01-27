@@ -1,0 +1,46 @@
+body {
+  font-family: Roboto, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  margin: 0
+}
+
+nav {
+  letter-spacing: 1.60px;
+  padding: 79px 0 151px;
+}
+
+.wrapper {
+  max-width: 1110px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.hidden {
+  display: none;
+}
+
+a {
+  outline: none;
+  text-decoration: none;
+  color: black;
+
+  &.active {
+    color: #34547A;
+    font-weight: 500;
+  }
+}
+
+p {
+  color: #727272;
+  max-width: 540px;
+  line-height: 26.25px;
+}
+
+button {
+  color: white;
+  background-color: #34547A;
+  min-width: 225px;
+  min-height: 65px;
+  letter-spacing: 1.60px;
+}

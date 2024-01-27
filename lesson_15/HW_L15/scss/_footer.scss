@@ -1,0 +1,13 @@
+footer {
+  min-height: 151px;
+
+  & .author {
+    display: block;
+    padding-top: 50px;
+  }
+
+  & .copyright {
+    font-size: 13px;
+    line-height: 21.33px;
+  }
+}
