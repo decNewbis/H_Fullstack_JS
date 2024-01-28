@@ -307,9 +307,9 @@ template {
 }
 
 body {
-  font-family: Roboto, sans-serif;
-  font-weight: 400;
-  font-size: 16px;
+  font-family: Montserrat, sans-serif;
+  font-weight: 700;
+  font-size: 14px;
   margin: 0;
 }
 
@@ -329,17 +329,51 @@ a {
 }
 
 .header__grid-container {
+  margin: 35px;
   display: grid;
-  grid-template-areas: "header__grid__cell-logo header__grid__cell-menu-control ." ". header__grid__cell-navigation header__grid__cell-navigation";
+  grid-template-areas: "header__grid__cell-logo header__grid__cell-menu-control" "header__grid__cell-navigation header__grid__cell-navigation";
+  align-items: center;
 }
 .header__grid__cell-logo {
+  grid-area: header__grid__cell-logo;
   justify-self: start;
 }
 .header__grid__cell-menu-control {
+  display: flex;
+  gap: 24px;
+  grid-area: header__grid__cell-menu-control;
   justify-self: end;
+  align-items: center;
 }
 .header__grid__cell-navigation {
+  padding: 96px 0;
+  display: flex;
+  flex-direction: column;
+  grid-area: header__grid__cell-navigation;
   justify-self: center;
+  align-items: center;
+}
+.header__logo {
+  font-size: 24px;
+  line-height: 32px;
+  letter-spacing: 0.1px;
+  color: #252B42;
+}
+.header__navigation__link {
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 45px;
+  letter-spacing: 0.2px;
+  color: #737373;
+}
+.header__category-shop {
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 45px;
+  letter-spacing: 0.2px;
+  color: #737373;
+  border: 0;
+  background: none;
 }
 
 /*# sourceMappingURL=styles.css.map */
