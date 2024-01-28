@@ -1,9 +1,9 @@
+@import "mixins";
 @import "variables";
 
 .adv {
-
   &__wrapper{
-    margin: 0 13px;
+    margin: 0 13px 110px;
     background: linear-gradient(90deg, #96E9FB 0%, #ABECD6 100%);
     border-radius: 20px;
     overflow: hidden;
@@ -53,5 +53,65 @@
     font-weight: 700;
     line-height: 32px;
     letter-spacing: 0.1px;
+  }
+}
+.brand {
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    align-items: center;
+    margin: 0 0 111px;
+    img {
+      max-width: 149px;
+      max-height: 142px;
+    }
+  }
+}
+
+.top-product {
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 0 35px;
+    overflow: hidden;
+  }
+  &__container {
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+  &__bg-content {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    min-width: 345px;
+    min-height: 238px;
+    background-color: rgba(45, 139, 192, 0.75);
+  }
+  &__content {
+    position: absolute;
+    left: 41px;
+    bottom: 36px;
+  }
+  &__title {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 30px;
+    letter-spacing: 0.1px;
+    color: #fff;
+  }
+  &__button {
+    @include primary-font();
+    min-width: 198px;
+    min-height: 52px;
+    margin: 26px 0 0;
+    padding: 15px 40px;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    background: none;
+    color: #fff;
   }
 }

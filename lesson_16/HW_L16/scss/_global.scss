@@ -1,8 +1,9 @@
+@import "mixins";
+@import "variables";
+
 body {
-  font-family: Montserrat, sans-serif;
-  font-weight: 700;
-  font-size: 14px;
-  margin: 0
+  @include primary-font();
+  margin: 0;
 }
 
 .wrapper {
@@ -20,6 +21,12 @@ a {
   color: black
 }
 
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
 button {
-  
+
 }
