@@ -542,7 +542,7 @@ ul {
   max-width: 300px;
   max-height: 360px;
 }
-.best-seller__container {
+.best-seller__grid-cell {
   display: flex;
   flex-direction: column;
   align-items: center;
