@@ -1,0 +1,17 @@
+.header__grid{
+  &-container {
+    display: grid;
+    grid-template-areas:
+          "header__grid__cell-logo header__grid__cell-menu-control ."
+          ". header__grid__cell-navigation header__grid__cell-navigation";
+  }
+  &__cell-logo {
+    justify-self: start;
+  }
+  &__cell-menu-control {
+    justify-self: end;
+  }
+  &__cell-navigation {
+    justify-self: center;
+  }
+}
