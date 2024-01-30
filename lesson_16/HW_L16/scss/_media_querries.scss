@@ -159,19 +159,11 @@
     }
     &__grid {
       &-container {
-        //grid-template-columns: min-content 248px;
         margin: 0 calc(100vw * 195 / 1440);
-        //column-gap: unset;
       }
 
 
     }
-    //&__text-container {
-    //  padding: 80px 0 0;
-    //}
-    //&__description {
-    //  max-width: 280px;
-    //}
   }
   .services {
     &__grid {
