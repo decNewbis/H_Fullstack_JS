@@ -659,6 +659,9 @@ ul {
   flex-direction: column;
   align-items: center;
 }
+.best-seller__grid-cell:nth-child(n+6):nth-child(-n+10) {
+  display: none;
+}
 .best-seller__sub-title {
   max-width: 240px;
   font-size: 16px;
@@ -701,7 +704,8 @@ ul {
   padding: 0 20px;
 }
 .our-thoughts__text-container {
-  margin: 80px 47px 50px;
+  margin: 0 auto;
+  padding: 80px 47px 0;
 }
 .our-thoughts__paragraph, .our-thoughts__title, .our-thoughts__description {
   max-width: 258px;
@@ -730,13 +734,24 @@ ul {
 }
 .our-thoughts__list {
   display: flex;
-  margin: 0 0 80px;
-  justify-content: space-between;
+  margin: 0 auto;
+  padding: 0 0 80px;
   align-items: center;
+  gap: 12px;
 }
-.our-thoughts__list img {
-  max-width: 205px;
-  max-height: 363px;
+.our-thoughts__grid-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  column-gap: 45px;
+  row-gap: 50px;
+}
+.our-thoughts__grid-cell:first-child {
+  display: flex;
+  flex-direction: column;
+}
+.our-thoughts__grid-cell:nth-child(2) {
+  display: flex;
+  align-items: center;
 }
 
 .services__wrapper {
@@ -1036,6 +1051,12 @@ ul {
     max-width: 103px;
     max-height: 75px;
   }
+  .best-seller__grid-container {
+    grid-template-columns: 1fr 1fr;
+  }
+  .best-seller__grid-cell:nth-child(n+6):nth-child(-n+6) {
+    display: flex;
+  }
 }
 @media only screen and (min-width: 1010px) {
   .header__contacts {
@@ -1071,6 +1092,9 @@ ul {
   .header__auth-links {
     display: flex;
   }
+  .best-seller__grid-container {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 }
 @media only screen and (min-width: 1024px) {
   .adv__paragraph, .adv__title, .adv__description {
@@ -1096,6 +1120,17 @@ ul {
   .adv__content {
     align-items: flex-start;
     text-align: left;
+  }
+  .our-thoughts__grid-container {
+    justify-content: center;
+    grid-template-columns: min-content 350px;
+    margin: 0 40px;
+  }
+  .our-thoughts__grid-cell:first-child {
+    grid-area: 1/2/2/3;
+  }
+  .our-thoughts__grid-cell:nth-child(2) {
+    grid-area: 1/1/2/2;
   }
 }
 @media only screen and (min-width: 1440px) {
@@ -1138,6 +1173,19 @@ ul {
     font-weight: 400;
     line-height: 30px;
     letter-spacing: 0.1px;
+  }
+  .best-seller__grid-container {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  }
+  .best-seller__grid-container img {
+    max-width: 183px;
+    max-height: 238px;
+  }
+  .best-seller__grid-cell:nth-child(n+7):nth-child(-n+10) {
+    display: flex;
+  }
+  .our-thoughts__grid-container {
+    margin: 0 195px;
   }
 }
 

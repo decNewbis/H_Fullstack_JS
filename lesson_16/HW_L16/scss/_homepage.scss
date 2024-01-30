@@ -80,7 +80,6 @@
     }
   }
 }
-
 .top-product {
   &__wrapper {
     display: flex;
@@ -148,7 +147,6 @@
     }
   }
 }
-
 .best-seller {
   &__wrapper {
     display: flex;
@@ -204,6 +202,9 @@
       flex-direction: column;
       align-items: center;
     }
+    &-cell:nth-child(n+6):nth-child(-n+10) {
+      display: none;
+    }
   }
 
   &__sub-title {
@@ -244,13 +245,13 @@
     color: #23856D;
   }
 }
-
 .our-thoughts {
   &__wrapper {
     padding: 0 20px;
   }
   &__text-container {
-    margin: 80px 47px 50px;
+    margin: 0 auto;
+    padding: 80px 47px 0;
   }
   &__paragraph, &__title, &__description{
     max-width: 258px;
@@ -279,13 +280,25 @@
   }
   &__list {
     display: flex;
-    margin: 0 0 80px;
-    justify-content: space-between;
+    margin: 0 auto;
+    padding: 0 0 80px;
     align-items: center;
-
-    img {
-      max-width: 205px;
-      max-height: 363px;
+    gap: 12px;
+  }
+  &__grid {
+    &-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      column-gap: 45px;
+      row-gap: 50px;
+    }
+    &-cell:first-child {
+      display: flex;
+      flex-direction: column;
+    }
+    &-cell:nth-child(2) {
+      display: flex;
+      align-items: center;
     }
   }
 }
