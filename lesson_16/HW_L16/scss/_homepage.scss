@@ -336,3 +336,123 @@
     }
   }
 }
+
+.featured-posts{
+  &__wrapper {
+    margin: 80px auto;
+  }
+  &__grid-container {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr;
+    grid-template-rows: 2fr;
+    gap: 30px;
+    grid-template-areas: 'grid-cell-card1' 'grid-cell-card2';
+  }
+  &__grid-cell:nth-child(1) {
+    grid-area: grid-cell-card1;
+  }
+  &__grid-cell:nth-child(2) {
+    grid-area: grid-cell-card2;
+  }
+  &__header {
+    text-align: center;
+    p {
+      margin: 0;
+      line-height: 24px;
+      letter-spacing: 0.2px;
+      color: $third-text-color;
+    }
+    h2 {
+      max-width: 310px;
+      margin: 10px auto 50px;
+      font-size: 40px;
+      font-weight: 700;
+
+    }
+  }
+  &__card {
+    display: flex;
+    flex-direction: column;
+    max-width: 330px;
+    margin: 0 auto;
+    position: relative;
+    box-shadow: 0 1px 8px 0 rgb(0 0 0 / 10%);
+
+    img {
+      max-width: 330px;
+    }
+  }
+  &__card-status {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 0 10px;
+    line-height: 24px;
+    letter-spacing: 0.2px;
+    color: #fff;
+    background-color: #E74040;
+    border-radius: 3px;
+  }
+  &__card-tags {
+    display: flex;
+    margin: 25px 25px 10px;
+    gap: 15px;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0.2px;
+    color: $secondary-text-color;
+
+    li:first-child {
+      color: #8EC2F2;
+    }
+  }
+  &__card-sub-title {
+    margin: 10px 25px;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 30px;
+    letter-spacing: 0.2px;
+    color: $primary-text-color;
+  }
+  &__card-description{
+    margin: 10px 25px;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: 0.2px;
+    color: $secondary-text-color;
+  }
+  &__statistics {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 25px;
+    padding: 15px 0;
+
+    li {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    img {
+      max-width: 16px;
+      max-height: 16px;
+    }
+    span {
+      font-size: 12px;
+      font-weight: 400;
+      color: $secondary-text-color;
+    }
+  }
+  &__link-details {
+    display: flex;
+    align-items: center;
+    margin: 10px 25px 35px;
+    gap: 10px;
+    line-height: 24px;
+    letter-spacing: 0.2px;
+    color: $secondary-text-color;
+  }
+}

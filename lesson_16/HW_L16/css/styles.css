@@ -698,4 +698,117 @@ ul {
   letter-spacing: 0.2px;
 }
 
+.featured-posts__wrapper {
+  margin: 80px auto;
+}
+.featured-posts__grid-container {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 1fr;
+  grid-template-rows: 2fr;
+  gap: 30px;
+  grid-template-areas: "grid-cell-card1" "grid-cell-card2";
+}
+.featured-posts__grid-cell:nth-child(1) {
+  grid-area: grid-cell-card1;
+}
+.featured-posts__grid-cell:nth-child(2) {
+  grid-area: grid-cell-card2;
+}
+.featured-posts__header {
+  text-align: center;
+}
+.featured-posts__header p {
+  margin: 0;
+  line-height: 24px;
+  letter-spacing: 0.2px;
+  color: #23A6F0;
+}
+.featured-posts__header h2 {
+  max-width: 310px;
+  margin: 10px auto 50px;
+  font-size: 40px;
+  font-weight: 700;
+}
+.featured-posts__card {
+  display: flex;
+  flex-direction: column;
+  max-width: 330px;
+  margin: 0 auto;
+  position: relative;
+  box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.1);
+}
+.featured-posts__card img {
+  max-width: 330px;
+}
+.featured-posts__card-status {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  padding: 0 10px;
+  line-height: 24px;
+  letter-spacing: 0.2px;
+  color: #fff;
+  background-color: #E74040;
+  border-radius: 3px;
+}
+.featured-posts__card-tags {
+  display: flex;
+  margin: 25px 25px 10px;
+  gap: 15px;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0.2px;
+  color: #737373;
+}
+.featured-posts__card-tags li:first-child {
+  color: #8EC2F2;
+}
+.featured-posts__card-sub-title {
+  margin: 10px 25px;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 30px;
+  letter-spacing: 0.2px;
+  color: #252B42;
+}
+.featured-posts__card-description {
+  margin: 10px 25px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0.2px;
+  color: #737373;
+}
+.featured-posts__statistics {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 25px;
+  padding: 15px 0;
+}
+.featured-posts__statistics li {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.featured-posts__statistics img {
+  max-width: 16px;
+  max-height: 16px;
+}
+.featured-posts__statistics span {
+  font-size: 12px;
+  font-weight: 400;
+  color: #737373;
+}
+.featured-posts__link-details {
+  display: flex;
+  align-items: center;
+  margin: 10px 25px 35px;
+  gap: 10px;
+  line-height: 24px;
+  letter-spacing: 0.2px;
+  color: #737373;
+}
+
 /*# sourceMappingURL=styles.css.map */
