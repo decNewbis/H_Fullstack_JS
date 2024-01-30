@@ -21,20 +21,25 @@
                 <div class="header__menu-control header__grid__cell-menu-control">
                     <img src="./assets/image/icon-search.svg" alt="illustration of icon search">
                     <img src="./assets/image/icon-shopping-cart.svg" alt="illustration of shopping cart">
-                    <img src="./assets/image/icon-sandwich-menu.svg" alt="illustration of sandwich menu button">
+                    <label for="menuToggle">
+                        <img src="./assets/image/icon-sandwich-menu.svg" alt="illustration of sandwich menu button">
+                    </label>
                 </div>
-                <nav class="header__navigation header__grid__cell-navigation">
-                    <a href="" class="header__navigation__link">Home</a>
-                    <label class="hidden" for="header__category-shop"></label>
-                    <select class="header__category-shop" id="header__category-shop" name="header__category-shop">
-                        <option value="Shop" selected>Shop</option>
-                        <option value="Shop">Shop</option>
-                    </select>
-                    <a href="" class="header__navigation__link">About</a>
-                    <a href="" class="header__navigation__link">Blog</a>
-                    <a href="" class="header__navigation__link">Contact</a>
-                    <a href="" class="header__navigation__link">Pages</a>
-                </nav>
+                <input class="header__menu-toggle hidden" type="checkbox" id="menuToggle">
+                <div class="header__menu-container">
+                    <nav class="header__navigation header__grid__cell-navigation">
+                        <a href="" class="header__navigation__link">Home</a>
+                        <label class="hidden" for="header__category-shop"></label>
+                        <select class="header__category-shop" id="header__category-shop" name="header__category-shop">
+                            <option value="Shop" selected>Shop</option>
+                            <option value="Shop">Shop</option>
+                        </select>
+                        <a href="" class="header__navigation__link">About</a>
+                        <a href="" class="header__navigation__link">Blog</a>
+                        <a href="" class="header__navigation__link">Contact</a>
+                        <a href="" class="header__navigation__link">Pages</a>
+                    </nav>
+                </div>
             </div>
         </div>
     </header>

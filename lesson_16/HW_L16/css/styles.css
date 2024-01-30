@@ -365,6 +365,13 @@ ul {
   letter-spacing: 0.1px;
   color: #252B42;
 }
+.header__menu-container {
+  display: none;
+}
+.header__menu-toggle:checked + .header__menu-container {
+  display: contents;
+  max-width: 1vw;
+}
 .header__navigation__link {
   font-size: 30px;
   font-weight: 400;

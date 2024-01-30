@@ -39,12 +39,21 @@
     letter-spacing: 0.1px;
     color: $primary-text-color;
   }
-  &__navigation__link {
-    font-size: 30px;
-    font-weight: 400;
-    line-height: 45px;
-    letter-spacing: 0.2px;
-    color: $secondary-text-color;
+  &__menu-container {
+    display: none;
+  }
+  &__menu-toggle:checked + &__menu-container {
+    display: contents;
+    max-width: 1vw;
+  }
+  &__navigation {
+    &__link {
+      font-size: 30px;
+      font-weight: 400;
+      line-height: 45px;
+      letter-spacing: 0.2px;
+      color: $secondary-text-color;
+    }
   }
   &__category-shop {
     font-size: 30px;
