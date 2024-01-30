@@ -114,4 +114,31 @@
       padding: 0 195px;
     }
   }
+  .top-product {
+    &__grid {
+      &-container {
+        grid-template-rows: unset;
+      }
+      &-cell:nth-child(1) {
+        grid-area: 1 / 1 / 3 / 2;
+        .top-product__bg-content {
+          min-width: 420px;
+        }
+      }
+      &-cell:nth-child(2) {
+        grid-area: 1 / 2 / 2 / 3;
+      }
+      &-cell:nth-child(3) {
+        grid-area: 2 / 2 / 3 / 3;
+      }
+      &-cell:nth-child(2), &-cell:nth-child(3) {
+        .top-product__title {
+          font-size: 20px;
+          font-weight: 400;
+          line-height: 30px;
+          letter-spacing: 0.1px;
+        }
+      }
+    }
+  }
 }
