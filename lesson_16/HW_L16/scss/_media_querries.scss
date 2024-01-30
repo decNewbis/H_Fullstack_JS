@@ -154,21 +154,24 @@
     }
   }
   .our-thoughts {
+    &__wrapper {
+      padding: 0;
+    }
     &__grid {
       &-container {
-        justify-content: center;
-        grid-template-columns: min-content 350px;
-        margin: 0 40px;
+        //grid-template-columns: min-content 248px;
+        margin: 0 calc(100vw * 195 / 1440);
+        //column-gap: unset;
       }
 
-      &-cell:first-child {
-        grid-area: 1 / 2 / 2 / 3;
-      }
 
-      &-cell:nth-child(2) {
-        grid-area: 1 / 1 / 2 / 2;;
-      }
     }
+    //&__text-container {
+    //  padding: 80px 0 0;
+    //}
+    //&__description {
+    //  max-width: 280px;
+    //}
   }
   .services {
     &__grid {
@@ -259,8 +262,23 @@
   .our-thoughts {
     &__grid {
       &-container {
+        justify-content: space-between;
         margin: 0 195px;
+        grid-template-columns: min-content 500px;
       }
+      &-cell:first-child {
+        grid-area: 1 / 2 / 2 / 3;
+      }
+
+      &-cell:nth-child(2) {
+        grid-area: 1 / 1 / 2 / 2;;
+      }
+    }
+    &__title {
+      max-width: 435px;
+    }
+    &__description {
+      max-width: 355px;
     }
   }
   .featured-posts {
