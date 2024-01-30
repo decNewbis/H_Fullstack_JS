@@ -13,8 +13,47 @@
 }
 
 @media only screen and (min-width: 1010px) {
-  .header__contacts {
-    display: block;
+  .header {
+    &__contacts {
+      display: block;
+    }
+
+    &__grid {
+      &-container {
+        margin: 35px;
+        display: grid;
+        grid-template-columns: 227px 370px 1fr;
+        grid-template-areas:
+          "header__grid__cell-logo header__grid__cell-navigation header__grid__cell-auth";
+        align-items: center;
+      }
+      &__cell-navigation {
+        flex-direction: row;
+        justify-self: flex-start;
+        gap: 15px;
+        padding: 0;
+      }
+      &__cell-auth {
+        justify-content: flex-end;
+      }
+    }
+
+    &__navigation__link, &__category-shop {
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 24px;
+    }
+
+    &__menu-container {
+      display: contents;
+    }
+
+    &__menu-control {
+      display: none;
+    }
+    &__auth-links {
+      display: flex;
+    }
   }
 }
 

@@ -88,6 +88,10 @@
       justify-self: center;
       align-items: center;
     }
+
+    &__cell-auth {
+      grid-area: header__grid__cell-auth;
+    }
   }
   &__logo {
     font-size: 24px;
@@ -119,5 +123,28 @@
     color: $secondary-text-color;
     border: 0;
     background: none;
+  }
+  &__auth-links {
+    display: none;
+    align-items: center;
+    gap: 30px;
+
+    a {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 16px;
+      letter-spacing: 0.2px;
+      color: $third-text-color;
+
+      &:first-child {
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 24px;
+      }
+
+    }
   }
 }
