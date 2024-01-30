@@ -21,6 +21,12 @@
       }
     }
   }
+  .featured-posts {
+    &__card {
+      flex-direction: row;
+      max-width: 660px;
+    }
+  }
 }
 
 @media only screen and (min-width: 1010px) {
@@ -210,6 +216,18 @@
     &__grid {
       &-container {
         margin: 0 195px;
+      }
+    }
+  }
+  .featured-posts {
+    &__grid {
+      &-container {
+        grid-template-columns: unset;
+        grid-template-rows: unset;
+        grid-template-areas:
+                'grid-cell-card1 grid-cell-card1'
+                'grid-cell-card2 grid-cell-card3';
+        justify-content: center;
       }
     }
   }
