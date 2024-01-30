@@ -2,6 +2,7 @@
 
 .header {
   &__contacts {
+    display: none;
     background-color: $primary-text-color;
     &-wrapper {
       display: flex;

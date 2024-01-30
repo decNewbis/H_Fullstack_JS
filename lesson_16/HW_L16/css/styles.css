@@ -335,6 +335,7 @@ ul {
 }
 
 .header__contacts {
+  display: none;
   background-color: #252B42;
 }
 .header__contacts-wrapper {
@@ -972,6 +973,12 @@ ul {
   line-height: 24px;
   letter-spacing: 0.2px;
   color: #737373;
+}
+
+@media only screen and (min-width: 1010px) {
+  .header__contacts {
+    display: block;
+  }
 }
 
 /*# sourceMappingURL=styles.css.map */
