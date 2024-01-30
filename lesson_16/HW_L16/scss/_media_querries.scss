@@ -3,3 +3,56 @@
     display: block;
   }
 }
+
+@media only screen and (min-width: 1024px) {
+  .adv {
+    &__paragraph, &__title, &__description {
+      max-width: 395px;
+    }
+    &__wrapper {
+      flex-direction: row;
+      position: relative;
+      margin: 0 89px 110px 59px;
+      overflow: visible;
+      picture {
+        min-width: 384px;
+        min-height: 519px;
+
+        img {
+          max-width: unset;
+          max-height: 519px;
+          position: absolute;
+          top: 0;
+          right: -65px;
+        }
+      }
+    }
+    &__content {
+      align-items: flex-start;
+      text-align: left;
+    }
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .adv {
+    &__wrapper {
+      picture {
+        min-width: 525px;
+        min-height: 619px;
+
+        img {
+          max-height: 619px;
+          position: absolute;
+          top: 0;
+          right: -65px;
+        }
+      }
+    }
+    &__title {
+      max-width: 570px;
+      font-size: 58px;
+      line-height: 80px;
+    }
+  }
+}

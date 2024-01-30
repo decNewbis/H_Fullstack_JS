@@ -3,10 +3,19 @@
 
 .adv {
   &__wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     margin: 0 13px 110px;
     background: linear-gradient(90deg, #96E9FB 0%, #ABECD6 100%);
     border-radius: 20px;
     overflow: hidden;
+
+    picture {
+      min-width: 390px;
+      min-height: 390px;
+    }
   }
 
   &__content {
