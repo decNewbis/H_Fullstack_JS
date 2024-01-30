@@ -1,6 +1,60 @@
 @import "variables";
 
 .header {
+  &__contacts {
+    background-color: $primary-text-color;
+    &-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 17px 24px;
+    }
+    &-direct {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+
+      li {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+      img {
+        max-width: 16px;
+        max-height: 16px;
+      }
+      span, a {
+        line-height: 24px;
+        letter-spacing: 0.2px;
+        color: #fff;
+      }
+    }
+    &-msg {
+      line-height: 24px;
+      letter-spacing: 0.2px;
+      color: #fff;
+    }
+    &-social-media {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+
+      li, a {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+      img {
+        max-width: 16px;
+        max-height: 16px;
+      }
+      span {
+        line-height: 24px;
+        letter-spacing: 0.2px;
+        color: #fff;
+      }
+    }
+  }
   &__grid {
     &-container {
       margin: 35px;
