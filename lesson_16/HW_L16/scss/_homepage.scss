@@ -13,8 +13,8 @@
     overflow: hidden;
 
     picture {
-      min-width: 390px;
-      min-height: 390px;
+      min-width: 387px;
+      min-height: 376px;
     }
   }
 
@@ -67,12 +67,14 @@
 }
 .brand {
   &__wrapper {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr;
     gap: 60px;
     align-items: center;
     margin: 0 0 111px;
+
     img {
+      margin: 0 auto;
       max-width: 149px;
       max-height: 142px;
     }

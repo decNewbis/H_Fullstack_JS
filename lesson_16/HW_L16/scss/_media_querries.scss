@@ -1,3 +1,17 @@
+@media only screen and (min-width: 768px) {
+  .brand {
+    &__wrapper {
+      grid-template-columns: repeat(3, 1fr);
+      padding: 0 95px;
+
+      img {
+        max-width: 103px;
+        max-height: 75px;
+      }
+    }
+  }
+}
+
 @media only screen and (min-width: 1010px) {
   .header__contacts {
     display: block;
@@ -53,6 +67,12 @@
       max-width: 570px;
       font-size: 58px;
       line-height: 80px;
+    }
+  }
+  .brand {
+    &__wrapper {
+      grid-template-columns: repeat(6, 1fr);
+      padding: 0 195px;
     }
   }
 }
