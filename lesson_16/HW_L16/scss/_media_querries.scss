@@ -120,6 +120,20 @@
       }
     }
   }
+  .services {
+    &__grid {
+      &-container {
+        grid-template-columns: unset;
+        grid-template-rows: unset;
+        grid-template-areas:
+              "grid-cell-list1 grid-cell-list1 grid-cell-list1"
+              "grid-cell-list2 grid-cell-list3 grid-cell-list4";
+        margin: 0 195px;
+        column-gap: 30px;
+        row-gap: 80px;
+      }
+    }
+  }
 }
 
 @media only screen and (min-width: 1440px) {
