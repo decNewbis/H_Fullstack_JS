@@ -272,6 +272,15 @@
                 'grid-cell-card1 grid-cell-card1'
                 'grid-cell-card2 grid-cell-card3';
         justify-content: center;
+        margin: 80px 195px;
+      }
+    }
+
+    &__card {
+      max-width: 540px;
+
+      img {
+        max-width: 210px;
       }
     }
   }

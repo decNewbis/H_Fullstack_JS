@@ -1244,6 +1244,13 @@ ul {
     grid-template-rows: unset;
     grid-template-areas: "grid-cell-card1 grid-cell-card1" "grid-cell-card2 grid-cell-card3";
     justify-content: center;
+    margin: 80px 195px;
+  }
+  .featured-posts__card {
+    max-width: 540px;
+  }
+  .featured-posts__card img {
+    max-width: 210px;
   }
   .footer__navigation-wrapper {
     grid-template-areas: "footer__navigation-list1 footer__navigation-list2 footer__navigation-list3 footer__navigation-list4 footer__navigation-list5";
