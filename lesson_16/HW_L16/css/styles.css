@@ -544,7 +544,6 @@ ul {
   display: flex;
   flex-direction: column;
   gap: 15px;
-  margin: 0 168px 104px 87px;
   overflow: hidden;
 }
 .top-product__container {
@@ -1054,6 +1053,9 @@ ul {
   .brand__wrapper img {
     max-width: 103px;
     max-height: 75px;
+  }
+  .top-product__wrapper {
+    margin: 0 168px 104px 87px;
   }
   .best-seller__grid-container {
     grid-template-columns: 1fr 1fr;
