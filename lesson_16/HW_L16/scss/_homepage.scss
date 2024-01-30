@@ -456,3 +456,116 @@
     color: $secondary-text-color;
   }
 }
+.footer {
+  &__contacts, &__copyright {
+    background-color: #FAFAFA;
+  }
+  &__contacts-wrapper {
+    margin: 0 45px;
+    padding: 40px 0;
+  }
+  &__logo {
+    display: block;
+    padding: 13px 0;
+    margin: 0 0 11px;
+    font-size: 24px;
+    line-height: 32px;
+    letter-spacing: 0.1px;
+    color: $primary-text-color;
+  }
+  &__sn-list {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    img {
+      max-width: 24px;
+      max-height: 24px;
+    }
+  }
+  &__navigation {
+    &-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      margin: 0 45px;
+      padding: 70px 0;
+    }
+    &-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      h2 {
+        display: block;
+        margin: 0 0 10px;
+        font-size: 16px;
+        line-height: 24px;
+        letter-spacing: 0.1px;
+        color: $primary-text-color;
+      }
+      a {
+        color: $secondary-text-color;
+      }
+      span {
+        display: block;
+        margin: 0;
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 28px;
+        letter-spacing: 0.1px;
+        color: $primary-text-color;
+      }
+    }
+  }
+  &__subscribe {
+    gap: 0;
+
+    h2 {
+      margin: 0 0 20px;
+    }
+  }
+  &__input {
+    &-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid $secondary-text-color;
+      border-radius: 5px;
+    }
+    &-email, &-submit {
+      font-family: Montserrat, sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 28px;
+      letter-spacing: 0.2px;
+    }
+    &-email {
+      padding: 15px 0 15px 20px;
+      border: none;
+      border-radius: 5px;
+      background-color: #F9F9F9;
+      color: $secondary-text-color;
+    }
+    &-submit {
+      padding: 15px 23px;
+      border-radius: 0 5px 5px 0;
+      border: none;
+      background-color: $third-text-color;
+      color: #fff;
+    }
+  }
+  &__copyright-wrapper {
+    padding: 25px 0;
+    text-align: center;
+
+    span {
+      display: block;
+      max-width: 205px;
+      margin: 0 auto;
+      line-height: 24px;
+      letter-spacing: 0.2px;
+      color: $secondary-text-color;
+    }
+  }
+}
