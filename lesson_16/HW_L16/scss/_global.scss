@@ -1,0 +1,43 @@
+@import "mixins";
+@import "variables";
+
+body {
+  @include primary-font();
+  margin: 0;
+}
+
+.wrapper {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.hidden {
+  display: none;
+}
+
+a {
+  outline: none;
+  text-decoration: none;
+  color: black
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.icon-16 {
+  max-width: 16px;
+  max-height: 16px;
+}
+
+.icon-24 {
+  max-width: 24px;
+  max-height: 24px;
+}
+
+.icon-72 {
+  max-width: 72px;
+  max-height: 72px;
+}

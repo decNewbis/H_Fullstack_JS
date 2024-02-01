@@ -1,0 +1,601 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Bandage | HW lesson 16</title>
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="header__contacts">
+            <div class="wrapper">
+                <div class="header__contacts-wrapper">
+                    <ul class="header__contacts-direct">
+                        <li>
+                            <svg class="icon-16 icon-header-phone-icon">
+                                <use xlink:href="./assets/image/header-icon-sprites.svg#icon-header-phone-icon"></use>
+                            </svg>
+                            <span>(225) 555-0118</span>
+                        </li>
+                        <li>
+                            <svg class="icon-16 icon-header-convert-icon">
+                                <use xlink:href="./assets/image/header-icon-sprites.svg#icon-header-convert-icon"></use>
+                            </svg>
+                            <a href="mailto:michelle.rivera@example.com">michelle.rivera@example.com</a>
+                        </li>
+                    </ul>
+                    <span class="header__contacts-msg">Follow Us  and get a chance to win 80% off</span>
+                    <ul class="header__contacts-social-media">
+                        <li>
+                            <span>Follow Us  :</span>
+                        </li>
+                        <li>
+                            <a href="">
+                                <svg class="icon-16 icon-header-instagram-icon">
+                                    <use xlink:href="./assets/image/header-icon-sprites.svg#icon-header-instagram-icon"></use>
+                                </svg>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <svg class="icon-16 icon-header-youtube-icon">
+                                    <use xlink:href="./assets/image/header-icon-sprites.svg#icon-header-youtube-icon"></use>
+                                </svg>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <svg class="icon-16 icon-header-facebook-icon">
+                                    <use xlink:href="./assets/image/header-icon-sprites.svg#icon-header-facebook-icon"></use>
+                                </svg>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <svg class="icon-16 icon-header-twitter-icon">
+                                    <use xlink:href="./assets/image/header-icon-sprites.svg#icon-header-twitter-icon"></use>
+                                </svg>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="wrapper">
+            <div class="header__grid-container">
+                <a class="header__logo header__grid__cell-logo" href="">
+                    <span>Bandage</span>
+                </a>
+                <div class="header__menu-control header__grid__cell-menu-control">
+                    <img src="./assets/image/icon-search.svg" alt="illustration of icon search">
+                    <img src="./assets/image/icon-shopping-cart.svg" alt="illustration of shopping cart">
+                    <label for="menuToggle">
+                        <img src="./assets/image/icon-sandwich-menu.svg" alt="illustration of sandwich menu button">
+                    </label>
+                </div>
+                <input class="header__menu-toggle hidden" type="checkbox" id="menuToggle">
+                <div class="header__menu-container">
+                    <nav class="header__navigation header__grid__cell-navigation">
+                        <a href="" class="header__navigation__link">Home</a>
+                        <label class="hidden" for="header__category-shop"></label>
+                        <select class="header__category-shop" id="header__category-shop" name="header__category-shop">
+                            <option value="Shop" selected>Shop</option>
+                            <option value="Shop">Shop</option>
+                        </select>
+                        <a href="" class="header__navigation__link">About</a>
+                        <a href="" class="header__navigation__link">Blog</a>
+                        <a href="" class="header__navigation__link">Contact</a>
+                        <a href="" class="header__navigation__link">Pages</a>
+                    </nav>
+                </div>
+                <div class="header__auth">
+                    <ul class="header__auth-links header__grid__cell-auth">
+                        <li>
+                            <a href="">
+                                <svg class="icon-16 icon-auth-human-icon">
+                                    <use xlink:href="./assets/image/auth-icon-sprites.svg#icon-auth-human-icon"></use>
+                                </svg>
+                                Login / Register
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <svg class="icon-16 icon-auth-search-icon">
+                                    <use xlink:href="./assets/image/auth-icon-sprites.svg#icon-auth-search-icon"></use>
+                                </svg>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <svg class="icon-16 icon-auth-basket-icon">
+                                    <use xlink:href="./assets/image/auth-icon-sprites.svg#icon-auth-basket-icon"></use>
+                                </svg>
+                                1
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <svg class="icon-16 icon-auth-heart-icon">
+                                    <use xlink:href="./assets/image/auth-icon-sprites.svg#icon-auth-heart-icon"></use>
+                                </svg>
+                                1
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main>
+        <section class="new-collection">
+            <div class="wrapper">
+                <div class="new-collection__wrapper">
+                    <div class="new-collection__content">
+                        <p class="new-collection__paragraph">SUMMER 2020</p>
+                        <h1 class="new-collection__title">NEW COLLECTION</h1>
+                        <span class="new-collection__description">
+                            We know how large objects
+                            will act, but things on a
+                            small scale.
+                        </span>
+                        <button class="new-collection__button">SHOP NOW</button>
+                    </div>
+                    <picture>
+                        <source media="(min-width: 1024px)" srcset="./assets/image/desktop_adv_bg_img_optimized.png">
+                        <img class="new-collection__bg-image"
+                             src="./assets/image/mobile_adv_bg_img_optimized.png"
+                             alt="illustration of happy woman">
+                    </picture>
+                </div>
+            </div>
+        </section>
+        <section class="brand">
+            <div class="wrapper">
+                <h2 class="hidden">hidden header</h2>
+                <div class="brand__wrapper">
+                    <img src="./assets/image/brands_hooli.svg" alt="illustration of brand Hooli">
+                    <img src="./assets/image/brands_lyft.svg" alt="illustration of brand Lyft">
+                    <img src="./assets/image/brands_pied-piper-hat.svg" alt="illustration of brand Pied Piper">
+                    <img src="./assets/image/brands_stripe.svg" alt="illustration of brand Stripe">
+                    <img src="./assets/image/brands_aws.svg" alt="illustration of brand AWS">
+                    <img src="./assets/image/brands_reddit-alien.svg" alt="illustration of brand Reddit Alien">
+                </div>
+            </div>
+        </section>
+        <section class="top-product">
+            <div class="wrapper">
+                <div class="top-product__wrapper top-product__grid-container">
+                    <div class="top-product__container top-product__grid-cell">
+                        <picture>
+                            <source media="(min-width: 1440px)" srcset="./assets/image/top-product_1.jpg">
+                            <img src="./assets/image/top-product_m_1.jpg" alt="illustration of product">
+                        </picture>
+                        <div class="top-product__bg-content">
+                            <div class="top-product__content">
+                                <h2 class="top-product__title">
+                                    Top Product Of the Week
+                                </h2>
+                                <button class="top-product__button">EXPLORE ITEMS</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="top-product__container top-product__grid-cell">
+                        <picture>
+                            <source media="(min-width: 1440px)" srcset="./assets/image/top-product_2.jpg">
+                            <img src="./assets/image/top-product_m_2.jpg" alt="illustration of product">
+                        </picture>
+                        <div class="top-product__bg-content">
+                            <div class="top-product__content">
+                                <h2 class="top-product__title">
+                                    Top Product Of the Week
+                                </h2>
+                                <button class="top-product__button">EXPLORE ITEMS</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="top-product__container top-product__grid-cell">
+                        <picture>
+                            <source media="(min-width: 1440px)" srcset="./assets/image/top-product_3.jpg">
+                            <img src="./assets/image/top-product_m_3.jpg" alt="illustration of product">
+                        </picture>
+                        <div class="top-product__bg-content">
+                            <div class="top-product__content">
+                                <h2 class="top-product__title">
+                                    Top Product Of the Week
+                                </h2>
+                                <button class="top-product__button">EXPLORE ITEMS</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="best-seller">
+            <div class="wrapper">
+                <div class="best-seller__wrapper">
+                    <h2 class="best-seller__title">BESTSELLER PRODUCTS</h2>
+                    <span class="best-seller__description">
+                        Problems trying to resolve the conflict between
+                    </span>
+                    <div class="best-seller__grid-container">
+                        <div class="best-seller__grid-cell">
+                            <img src="./assets/image/bs-product_1.jpg" alt="illustration of product">
+                            <h3 class="best-seller__sub-title">Graphic Design</h3>
+                            <span class="best-seller__category">English Department</span>
+                            <ul class="best-seller__price-list">
+                                <li><span class="best-seller__price-wholesale">$16.48</span></li>
+                                <li><span class="best-seller__price-retail">$6.48</span></li>
+                            </ul>
+                        </div>
+                        <div class="best-seller__grid-cell">
+                            <img src="./assets/image/bs-product_2.jpg" alt="illustration of product">
+                            <h3 class="best-seller__sub-title">Graphic Design</h3>
+                            <span class="best-seller__category">English Department</span>
+                            <ul class="best-seller__price-list">
+                                <li><span class="best-seller__price-wholesale">$16.48</span></li>
+                                <li><span class="best-seller__price-retail">$6.48</span></li>
+                            </ul>
+                        </div>
+                        <div class="best-seller__grid-cell">
+                            <img src="./assets/image/bs-product_3.jpg" alt="illustration of product">
+                            <h3 class="best-seller__sub-title">Graphic Design</h3>
+                            <span class="best-seller__category">English Department</span>
+                            <ul class="best-seller__price-list">
+                                <li><span class="best-seller__price-wholesale">$16.48</span></li>
+                                <li><span class="best-seller__price-retail">$6.48</span></li>
+                            </ul>
+                        </div>
+                        <div class="best-seller__grid-cell">
+                            <img src="./assets/image/bs-product_4.jpg" alt="illustration of product">
+                            <h3 class="best-seller__sub-title">Graphic Design</h3>
+                            <span class="best-seller__category">English Department</span>
+                            <ul class="best-seller__price-list">
+                                <li><span class="best-seller__price-wholesale">$16.48</span></li>
+                                <li><span class="best-seller__price-retail">$6.48</span></li>
+                            </ul>
+                        </div>
+                        <div class="best-seller__grid-cell">
+                            <img src="./assets/image/bs-product_5.jpg" alt="illustration of product">
+                            <h3 class="best-seller__sub-title">Graphic Design</h3>
+                            <span class="best-seller__category">English Department</span>
+                            <ul class="best-seller__price-list">
+                                <li><span class="best-seller__price-wholesale">$16.48</span></li>
+                                <li><span class="best-seller__price-retail">$6.48</span></li>
+                            </ul>
+                        </div>
+                        <div class="best-seller__grid-cell">
+                            <img src="./assets/image/bs-product_1.jpg" alt="illustration of product">
+                            <h3 class="best-seller__sub-title">Graphic Design</h3>
+                            <span class="best-seller__category">English Department</span>
+                            <ul class="best-seller__price-list">
+                                <li><span class="best-seller__price-wholesale">$16.48</span></li>
+                                <li><span class="best-seller__price-retail">$6.48</span></li>
+                            </ul>
+                        </div>
+                        <div class="best-seller__grid-cell">
+                            <img src="./assets/image/bs-product_6.jpg" alt="illustration of product">
+                            <h3 class="best-seller__sub-title">Graphic Design</h3>
+                            <span class="best-seller__category">English Department</span>
+                            <ul class="best-seller__price-list">
+                                <li><span class="best-seller__price-wholesale">$16.48</span></li>
+                                <li><span class="best-seller__price-retail">$6.48</span></li>
+                            </ul>
+                        </div>
+                        <div class="best-seller__grid-cell">
+                            <img src="./assets/image/bs-product_7.jpg" alt="illustration of product">
+                            <h3 class="best-seller__sub-title">Graphic Design</h3>
+                            <span class="best-seller__category">English Department</span>
+                            <ul class="best-seller__price-list">
+                                <li><span class="best-seller__price-wholesale">$16.48</span></li>
+                                <li><span class="best-seller__price-retail">$6.48</span></li>
+                            </ul>
+                        </div>
+                        <div class="best-seller__grid-cell">
+                            <img src="./assets/image/bs-product_8.jpg" alt="illustration of product">
+                            <h3 class="best-seller__sub-title">Graphic Design</h3>
+                            <span class="best-seller__category">English Department</span>
+                            <ul class="best-seller__price-list">
+                                <li><span class="best-seller__price-wholesale">$16.48</span></li>
+                                <li><span class="best-seller__price-retail">$6.48</span></li>
+                            </ul>
+                        </div>
+                        <div class="best-seller__grid-cell">
+                            <img src="./assets/image/bs-product_9.jpg" alt="illustration of product">
+                            <h3 class="best-seller__sub-title">Graphic Design</h3>
+                            <span class="best-seller__category">English Department</span>
+                            <ul class="best-seller__price-list">
+                                <li><span class="best-seller__price-wholesale">$16.48</span></li>
+                                <li><span class="best-seller__price-retail">$6.48</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <button>LOAD MORE PRODUCTS</button>
+                </div>
+            </div>
+        </section>
+        <section class="our-thoughts">
+            <div class="wrapper">
+                <div class="our-thoughts__wrapper our-thoughts__grid-container">
+                    <div class="our-thoughts__text-container our-thoughts__grid-cell">
+                        <p class="our-thoughts__paragraph">Featured Products</p>
+                        <h2 class="our-thoughts__title">We love what we do</h2>
+                        <span class="our-thoughts__description">
+                            Problems trying to resolve the conflict between the two major realms of Classical physics:
+                            Newtonian mechanics<br><br>
+                            Problems trying to resolve the conflict between the two major realms of Classical physics:
+                            Newtonian mechanics
+                        </span>
+                    </div>
+                    <ul class="our-thoughts__list our-thoughts__grid-cell">
+                        <li>
+                            <picture>
+                                <source media="(min-width: 1024px)" srcset="./assets/image/our-thoughts_1.jpg">
+                                <img src="./assets/image/our-thoughts_m_1.jpg" alt="photo of happy customer">
+                            </picture>
+                        </li>
+                        <li>
+                            <picture>
+                                <source media="(min-width: 1024px)" srcset="./assets/image/our-thoughts_2.jpg">
+                                <img src="./assets/image/our-thoughts_m_2.jpg" alt="photo of happy customer">
+                            </picture>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <section class="services">
+            <div class="wrapper">
+                <div class="services__wrapper services__grid-container">
+                    <div class="services__header services__grid-cell">
+                        <p>Featured Products</p>
+                        <h2>THE BEST SERVICES</h2>
+                        <span>
+                            Problems trying to resolve the conflict between
+                        </span>
+                    </div>
+                    <ul class="services__list services__grid-cell">
+                        <li>
+                            <svg class="icon-72 icon-service-book-reader">
+                                <use xlink:href="./assets/image/service-icon-sprites.svg#icon-service-book-reader"></use>
+                            </svg>
+                        </li>
+                        <li>
+                            <h3>Easy Wins</h3>
+                        </li>
+                        <li>
+                            <span>
+                                Get your best looking smile now!
+                            </span>
+                        </li>
+                    </ul>
+                    <ul class="services__list services__grid-cell">
+                        <li>
+                            <svg class="icon-72 icon-service-concrete-carbon_book">
+                                <use xlink:href="./assets/image/service-icon-sprites.svg#icon-service-concrete-carbon_book"></use>
+                            </svg>
+                        </li>
+                        <li>
+                            <h3>Concrete</h3>
+                        </li>
+                        <li>
+                            <span>
+                                Defalcate is most focused in helping you discover your most beautiful smile
+                            </span>
+                        </li>
+                    </ul>
+                    <ul class="services__list services__grid-cell">
+                        <li>
+                            <svg class="icon-72 icon-service-arrow-growth">
+                                <use xlink:href="./assets/image/service-icon-sprites.svg#icon-service-arrow-growth"></use>
+                            </svg>
+                        </li>
+                        <li>
+                            <h3>Hack Growth</h3>
+                        </li>
+                        <li>
+                            <span>
+                                Overcame any hurdle or any other problem.
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <section class="featured-posts">
+            <div class="wrapper">
+                <div class="featured-posts__wrapper featured-posts__grid-container">
+                    <div class="featured-posts__header featured-posts__grid-cell">
+                        <p>Practice Advice</p>
+                        <h2>Featured Posts</h2>
+                    </div>
+                    <div class="featured-posts__grid-cell">
+                        <div class="featured-posts__card">
+                            <img class="featured-posts__card-wallpaper"
+                                 src="./assets/image/card-wallpaper-1.jpg"
+                                 alt="wallpaper of card">
+                            <span class="featured-posts__card-status">SALE</span>
+                            <div class="featured-posts__card-context">
+                                <ul class="featured-posts__card-tags">
+                                    <li>Google</li>
+                                    <li>Trending</li>
+                                    <li>New</li>
+                                </ul>
+                                <h3 class="featured-posts__card-sub-title">
+                                    Loudest à la Madison #1
+                                    (L'integral)
+                                </h3>
+                                <span class="featured-posts__card-description">
+                                    We focus on ergonomics and meeting
+                                    you where you work. It's only a
+                                    keystroke away.
+                                </span>
+                                <ul class="featured-posts__statistics">
+                                    <li>
+                                        <svg class="icon-16 icon-card-clock-icon">
+                                            <use xlink:href="./assets/image/card-icon-sprites.svg#icon-card-clock-icon"></use>
+                                        </svg>
+                                        <span>
+                                            22 April 2021
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <svg class="icon-16 icon-card-graphic">
+                                            <use xlink:href="./assets/image/card-icon-sprites.svg#icon-card-graphic"></use>
+                                        </svg>
+                                        <span>
+                                            10 comments
+                                        </span>
+                                    </li>
+                                </ul>
+                                <a class="featured-posts__link-details" href="">
+                                    Learn More
+                                    <svg class="icon-16 icon-card-arrow-next">
+                                        <use xlink:href="./assets/image/card-icon-sprites.svg#icon-card-arrow-next"></use>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="featured-posts__grid-cell">
+                        <div class="featured-posts__card">
+                            <img class="featured-posts__card-wallpaper"
+                                 src="./assets/image/card-wallpaper-2.jpg"
+                                 alt="wallpaper of card">
+                            <span class="featured-posts__card-status">SALE</span>
+                            <div class="featured-posts__card-context">
+                                <ul class="featured-posts__card-tags">
+                                    <li>Google</li>
+                                    <li>Trending</li>
+                                    <li>New</li>
+                                </ul>
+                                <h3 class="featured-posts__card-sub-title">
+                                    Loudest à la Madison #1
+                                    (L'integral)
+                                </h3>
+                                <span class="featured-posts__card-description">
+                                    We focus on ergonomics and meeting
+                                    you where you work. It's only a
+                                    keystroke away.
+                                </span>
+                                <ul class="featured-posts__statistics">
+                                    <li>
+                                        <svg class="icon-16 icon-card-clock-icon">
+                                            <use xlink:href="./assets/image/card-icon-sprites.svg#icon-card-clock-icon"></use>
+                                        </svg>
+                                        <span>
+                                            22 April 2021
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <svg class="icon-16 icon-card-graphic">
+                                            <use xlink:href="./assets/image/card-icon-sprites.svg#icon-card-graphic"></use>
+                                        </svg>
+                                        <span>
+                                            10 comments
+                                        </span>
+                                    </li>
+                                </ul>
+                                <a class="featured-posts__link-details" href="">
+                                    Learn More
+                                    <svg class="icon-16 icon-card-arrow-next">
+                                        <use xlink:href="./assets/image/card-icon-sprites.svg#icon-card-arrow-next"></use>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="footer__contacts">
+            <div class="wrapper">
+                <div class="footer__contacts-wrapper">
+                    <a class="footer__logo" href="">
+                        <span>Bandage</span>
+                    </a>
+                    <ul class="footer__sn-list">
+                        <li>
+                            <svg class="icon-24 icon-sn-facebook">
+                                <use xlink:href="./assets/image/sn-icon-sprites.svg#icon-sn-facebook"></use>
+                            </svg>
+                        </li>
+                        <li>
+                            <svg class="icon-24 icon-sn-instagram">
+                                <use xlink:href="./assets/image/sn-icon-sprites.svg#icon-sn-instagram"></use>
+                            </svg>
+                        </li>
+                        <li>
+                            <svg class="icon-24 icon-sn-twitter">
+                                <use xlink:href="./assets/image/sn-icon-sprites.svg#icon-sn-twitter"></use>
+                            </svg>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer__navigation">
+            <div class="wrapper">
+                <div class="footer__navigation-wrapper">
+                    <ul class="footer__navigation-list">
+                        <li><h2>Company Info</h2></li>
+                        <li><a href="">About Us</a></li>
+                        <li><a href="">Carrier</a></li>
+                        <li><a href="">We are hiring</a></li>
+                        <li><a href="">Blog</a></li>
+                    </ul>
+                    <ul class="footer__navigation-list">
+                        <li><h2>Legal</h2></li>
+                        <li><a href="">About Us</a></li>
+                        <li><a href="">Carrier</a></li>
+                        <li><a href="">We are hiring</a></li>
+                        <li><a href="">Blog</a></li>
+                    </ul>
+                    <ul class="footer__navigation-list">
+                        <li><h2>Features</h2></li>
+                        <li><a href="">Business Marketing</a></li>
+                        <li><a href="">User Analytic</a></li>
+                        <li><a href="">Live Chat</a></li>
+                        <li><a href="">Unlimited Support</a></li>
+                    </ul>
+                    <ul class="footer__navigation-list">
+                        <li><h2>Resources</h2></li>
+                        <li><a href="">IOS & Android</a></li>
+                        <li><a href="">Watch a Demo</a></li>
+                        <li><a href="">Customers</a></li>
+                        <li><a href="">API</a></li>
+                    </ul>
+                    <ul class="footer__navigation-list footer__subscribe">
+                        <li><h2>Get In Touch</h2></li>
+                        <li>
+                            <form action="." method="post">
+                                <div class="footer__input-wrapper">
+                                    <label for="email" class="hidden"></label>
+                                    <input class="footer__input-email" type="email" id="email" placeholder="Your Email">
+                                    <input class="footer__input-submit"  type="submit" value="Subscribe">
+                                </div>
+                            </form>
+                        </li>
+                        <li><span>Lore imp sum dolor Amit</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer__copyright">
+            <div class="wrapper">
+                <div class="footer__copyright-wrapper">
+                    <span>
+                        Made With Love By Finland All Right Reserved
+                    </span>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

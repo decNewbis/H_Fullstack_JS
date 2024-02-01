@@ -1,0 +1,7 @@
+@import "variables";
+
+@mixin primary-font() {
+  font-family: $primary-font-family;
+  font-weight: 700;
+  font-size: 14px;
+}
