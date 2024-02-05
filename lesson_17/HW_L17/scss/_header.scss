@@ -39,12 +39,3 @@
     background: none;
   }
 }
-
-.control-panel {
-  &__wrapper {
-    background: linear-gradient(-49.76deg, rgba(83, 95, 230, 0.84) 29.457%,rgba(32, 193, 207, 0.57) 93.71%);
-  }
-  img:hover {
-    filter: gradient(linear-gradient(-49.76deg, rgba(83, 95, 230, 0.84) 29.457%,rgba(32, 193, 207, 0.57) 93.71%));
-  }
-}

@@ -1,3 +1,7 @@
-@media only screen and (min-width: 1200px) {
-
+@media only screen and (min-width: 1400px) {
+  .control-panel{
+    &__notification, &__link {
+      margin: 24px 0;
+    }
+  }
 }

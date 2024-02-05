@@ -123,7 +123,7 @@ sup {
 /* Embedded content
    ========================================================================== */
 /**
- * Remove the border on image inside links in IE 10.
+ * Remove the border on images inside links in IE 10.
  */
 img {
   border-style: none;
@@ -350,6 +350,11 @@ ul {
   gap: 8px;
 }
 
+.icon-24 {
+  max-width: 24px;
+  max-height: 24px;
+}
+
 .header .container-md {
   margin: 40px auto;
 }
@@ -388,10 +393,81 @@ ul {
 }
 
 .control-panel__wrapper {
+  min-height: 50px;
   background: linear-gradient(-49.76deg, rgba(83, 95, 230, 0.84) 29.457%, rgba(32, 193, 207, 0.57) 93.71%);
 }
-.control-panel img:hover {
-  filter: gradient(linear-gradient(-49.76deg, rgba(83, 95, 230, 0.84) 29.457%, rgba(32, 193, 207, 0.57) 93.71%));
+.control-panel__notification {
+  font-size: 16px;
+  line-height: 28px;
+  border-radius: 20px;
+  color: #fff;
+  gap: 10px;
+  padding: 12px 16px;
+  margin: 5px 0;
+}
+.control-panel__notification .image-container {
+  width: 24px;
+  height: 24px;
+}
+.control-panel__notification .image-container__notification {
+  position: relative;
+  width: 24px;
+  height: 24px;
+}
+.control-panel__notification .image-container__notification-counter {
+  font-size: 12px;
+  line-height: 12px;
+  min-width: 17px;
+  min-height: 17px;
+  padding: 3px;
+  border-radius: 50%;
+  background-color: #20C1CF;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(30%, -50%);
+}
+.control-panel__link {
+  font-size: 16px;
+  line-height: 28px;
+  border-radius: 20px;
+  color: #fff;
+  gap: 10px;
+  padding: 12px 16px;
+  margin: 5px 0;
+}
+.control-panel__link .image-container {
+  position: relative;
+  width: 24px;
+  height: 24px;
+}
+.control-panel__link .image-container .img-back {
+  position: absolute;
+}
+.control-panel__link .image-container .img-front {
+  position: absolute;
+}
+.control-panel__link .image-container .img-front {
+  transition: opacity 0.3s ease-in-out;
+}
+.control-panel__link:hover {
+  background-color: #23252F;
+  min-width: 130px;
+  min-height: 50px;
+}
+.control-panel__link:hover .img-front {
+  opacity: 0;
+}
+.control-panel__link:hover.white-btn {
+  background-color: #fff;
+  color: #535FE6;
+}
+
+@media only screen and (min-width: 1400px) {
+  .control-panel__notification, .control-panel__link {
+    margin: 24px 0;
+  }
 }
 
 /*# sourceMappingURL=styles.css.map */
