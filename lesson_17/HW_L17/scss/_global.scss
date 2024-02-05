@@ -1,0 +1,46 @@
+body {
+  margin: 0;
+  //background-color: #1D1E22;
+  background-color: #686d77;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.wrapper {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.hidden {
+  display: none;
+}
+
+a {
+  outline: none;
+  text-decoration: none;
+  color: #000
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.active-link {
+  color: #535FE6;
+}
+
+.dropdown {
+  &-menu {
+    background-color: #1D1E22;
+    border-radius: 20px;
+  }
+  a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+}

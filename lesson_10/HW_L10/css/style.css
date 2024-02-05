@@ -363,7 +363,7 @@ figure, dd {
 }
 
 .top-selling__bg-italy {
-    /*background: url("/lesson_10/HW_L10/assets/images/cover_it.jpg");*/
+    /*background: url("/lesson_10/HW_L10/assets/image/cover_it.jpg");*/
     background: url("/H_Fullstack_JS/lesson_10/HW_L10/assets/images/cover_it.jpg");
     background-size: cover;
     background-position: center;
@@ -371,7 +371,7 @@ figure, dd {
 }
 
 .top-selling__bg-united-kingdom {
-    /*background: url("/lesson_10/HW_L10/assets/images/cover_uk.jpg");*/
+    /*background: url("/lesson_10/HW_L10/assets/image/cover_uk.jpg");*/
     background: url("/H_Fullstack_JS/lesson_10/HW_L10/assets/images/cover_uk.jpg");
     background-size: cover;
     background-position: center;
@@ -379,7 +379,7 @@ figure, dd {
 }
 
 .top-selling__bg-europa {
-    /*background: url("/lesson_10/HW_L10/assets/images/cover_eu.jpg");*/
+    /*background: url("/lesson_10/HW_L10/assets/image/cover_eu.jpg");*/
     background: url("/H_Fullstack_JS/lesson_10/HW_L10/assets/images/cover_eu.jpg");
     background-size: cover;
     background-position: center;
