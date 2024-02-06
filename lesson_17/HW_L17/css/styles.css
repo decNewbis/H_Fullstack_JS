@@ -703,6 +703,11 @@ ul {
 .footer__notes {
   gap: 16px;
 }
+.footer__notes span {
+  font-size: 12px;
+  line-height: 28px;
+}
+
 @media only screen and (min-width: 1400px) {
   .control-panel__notification, .control-panel__link {
     margin: 24px 0;

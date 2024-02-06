@@ -310,6 +310,8 @@
   &__notes {
     gap: 16px;
 
-    span {}
+    span {
+      @include font-fs-lh(12px, 28px);
+    }
   }
 }
