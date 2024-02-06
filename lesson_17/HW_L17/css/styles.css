@@ -362,6 +362,9 @@ ul {
 .header__navigation-link {
   color: #fff;
 }
+.header__navigation-link:hover {
+  color: #fff;
+}
 .header__social-network-list {
   display: flex;
   justify-content: space-around;
