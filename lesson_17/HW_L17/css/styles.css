@@ -397,6 +397,10 @@ ul {
   color: #000;
 }
 
+.toast-body {
+  color: #000;
+}
+
 .control-panel__wrapper {
   min-height: 50px;
   margin: 0 0 72px;
