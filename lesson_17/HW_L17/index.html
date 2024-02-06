@@ -730,7 +730,8 @@
                                         <img src="./assets/image/deposit/bg-brand.png"
                                              alt="illustration of statistics background">
                                         <ul class="statistic-circles d-flex justify-content-around align-items-center
-                                        position-absolute top-50 start-50">
+                                        position-absolute top-50 start-50" data-bs-toggle="tooltip"
+                                            data-bs-placement="top" data-bs-title="Progress of deposit">
                                             <li>
                                                 <img src="./assets/image/deposit/24px_arrow-left.svg"
                                                      alt="illustration of arrow-left-icon">
@@ -747,7 +748,9 @@
                                         <span class="statistic-circles__currency d-block">
                                             USD
                                         </span>
-                                        <div class="image-container__bg-statistics position-absolute start-50">
+                                        <div class="image-container__bg-statistics position-absolute start-50"
+                                             data-bs-toggle="tooltip" data-bs-placement="top"
+                                             data-bs-title="Deposit details">
                                             <ul class="position-relative">
                                                 <li class="bg__position position-absolute top-50 start-50">
                                                     <img src="./assets/image/deposit/bg_statistics.png"
@@ -901,5 +904,12 @@
             liveToast.show();
         });
     </script>
+    <script>
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+    </script>
+
 </body>
 </html>
