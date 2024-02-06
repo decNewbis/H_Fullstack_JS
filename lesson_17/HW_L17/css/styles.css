@@ -359,10 +359,7 @@ ul {
 .header .container-md {
   margin: 40px auto;
 }
-.header__navigation-link {
-  color: #fff;
-}
-.header__navigation-link:hover {
+.header .nav-link {
   color: #fff;
 }
 .header__social-network-list {
@@ -673,7 +670,7 @@ ul {
   gap: 14px;
 }
 .footer .company-location address {
-  max-width: 306px;
+  max-width: 255px;
   font-size: 16px;
   font-weight: 400;
   line-height: 26px;
@@ -711,9 +708,18 @@ ul {
   line-height: 28px;
 }
 
+@media only screen and (min-width: 768px) {
+  .footer__sn {
+    gap: 24px;
+    margin: 24px;
+  }
+}
 @media only screen and (min-width: 1400px) {
   .control-panel__notification, .control-panel__link {
     margin: 24px 0;
+  }
+  .footer__sn {
+    margin: 0;
   }
 }
 

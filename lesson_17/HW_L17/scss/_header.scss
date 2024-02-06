@@ -4,13 +4,8 @@
   .container-md {
     margin: 40px auto;
   }
-  &__navigation {
-    &-link {
-      color: #fff;
-      &:hover {
-        color: #fff;
-      }
-    }
+  .nav-link {
+    color: #fff;
   }
   &__social-network {
     &-list {
