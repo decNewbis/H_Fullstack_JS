@@ -37,3 +37,8 @@
     background: none;
   }
 }
+.modal {
+  &-title, &-body {
+    color: #000;
+  }
+}
