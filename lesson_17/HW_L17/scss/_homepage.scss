@@ -292,6 +292,8 @@
     }
   }
   .footer-btn {
+    text-align: end;
+
     a {
       display: inline-block;
       @include font-fs-lh(16px, 26px);
