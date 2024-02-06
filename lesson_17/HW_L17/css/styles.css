@@ -708,12 +708,12 @@ ul {
 .footer__copyright {
   padding: 44px 0;
 }
-.footer__notes {
-  gap: 16px;
-}
-.footer__notes span {
+.footer__copyright span {
   font-size: 12px;
   line-height: 28px;
+}
+.footer__notes {
+  gap: 16px;
 }
 
 @media only screen and (min-width: 768px) {
