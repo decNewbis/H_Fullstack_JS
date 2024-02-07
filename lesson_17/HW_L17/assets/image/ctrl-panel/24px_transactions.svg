@@ -1,0 +1,13 @@
+<svg width="24.000000" height="24.000000" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+	<desc>
+			Created with Pixso.
+	</desc>
+	<defs>
+		<linearGradient id="paint_linear_22_22134_0" x1="15.698186" y1="15.486369" x2="4.129090" y2="5.479199" gradientUnits="userSpaceOnUse">
+			<stop stop-color="#535FE6" stop-opacity="0.839216"/>
+			<stop offset="1.000000" stop-color="#20C1CF" stop-opacity="0.568627"/>
+		</linearGradient>
+	</defs>
+	<rect width="24.000000" height="24.000000" fill="#FFFFFF" fill-opacity="0"/>
+	<path d="M12 21C4.58789 21 3 19.4115 3 12C3 4.5885 4.58789 3 12 3C19.4121 3 21 4.5885 21 12C21 19.4115 19.4121 21 12 21ZM11.25 7.5C11.25 7.08582 11.5859 6.75 12 6.75C12.4141 6.75 12.75 7.08582 12.75 7.5L12.75 11.25L16.5 11.25C16.9141 11.25 17.25 11.5858 17.25 12C17.25 12.4142 16.9141 12.75 16.5 12.75L12 12.75C11.5859 12.75 11.25 12.4142 11.25 12L11.25 7.5Z" fill="url(#paint_linear_22_22134_0)" fill-opacity="1.000000" fill-rule="evenodd"/>
+</svg>

@@ -1,0 +1,19 @@
+<svg width="32.000000" height="32.000000" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<desc>
+			Created with Pixso.
+	</desc>
+	<defs>
+		<clipPath id="clip3_20375">
+			<rect id="24px / youtube" width="24.000000" height="24.000000" transform="translate(4.000000 4.000000)" fill="white" fill-opacity="0"/>
+		</clipPath>
+		<linearGradient id="paint_linear_3_20374_0" x1="22.574553" y1="22.197989" x2="2.007273" y2="4.407467" gradientUnits="userSpaceOnUse">
+			<stop stop-color="#535FE6" stop-opacity="0.839216"/>
+			<stop offset="1.000000" stop-color="#20C1CF" stop-opacity="0.568627"/>
+		</linearGradient>
+	</defs>
+	<rect id="BG" rx="12.000000" width="32.000000" height="32.000000" fill="url(#paint_linear_3_20374_0)" fill-opacity="1.000000"/>
+	<rect id="24px / youtube" width="24.000000" height="24.000000" transform="translate(4.000000 4.000000)" fill="#FFFFFF" fill-opacity="0"/>
+	<g clip-path="url(#clip3_20375)">
+		<path id="Vector" d="M23.6914 12.6433C23.5176 12.0007 23.0117 11.4941 22.3691 11.3212C21.1953 11 16.5 11 16.5 11C16.5 11 11.8047 11 10.6309 11.309C10 11.4818 9.48242 12.0009 9.30859 12.6433C9 13.817 9 16.2512 9 16.2512C9 16.2512 9 18.6975 9.30859 19.859C9.48242 20.5015 9.98828 21.0081 10.6309 21.1812C11.8164 21.5023 16.5 21.5023 16.5 21.5023C16.5 21.5023 21.1953 21.5023 22.3691 21.1934C23.0117 21.0204 23.5176 20.5139 23.6914 19.8713C24 18.6975 24 16.2635 24 16.2635C24 16.2635 24.0117 13.817 23.6914 12.6433ZM15.0059 18.4999L15.0059 14.0024L18.9102 16.2512L15.0059 18.4999Z" fill="#FFFFFF" fill-opacity="1.000000" fill-rule="nonzero"/>
+	</g>
+</svg>

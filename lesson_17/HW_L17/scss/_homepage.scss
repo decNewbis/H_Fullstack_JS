@@ -1,0 +1,317 @@
+@import "mixins";
+
+.control-panel {
+  &__wrapper {
+    min-height: 50px;
+    margin: 0 0 72px;
+    background: linear-gradient(-49.76deg, rgba(83, 95, 230, 0.84) 29.457%,rgba(32, 193, 207, 0.57) 93.71%);
+  }
+  &__notification {
+    @include font-fs-lh(16px, 28px);
+    border-radius: 20px;
+    color: #fff;
+    gap: 10px;
+    padding: 12px 16px;
+    margin: 5px 0;
+
+    .image-container {
+      width: 24px;
+      height: 24px;
+
+      &__notification {
+        position: relative;
+        width: 24px;
+        height: 24px;
+      }
+      &__notification-counter {
+        @include font-fs-lh(12px, 12px);
+        min-width: 17px;
+        min-height: 17px;
+        padding: 3px;
+        border-radius: 50%;
+        background-color: #20C1CF;
+        text-align: center;
+        position: absolute;
+        top: 0;
+        right: 0;
+        transform: translate(30%, -50%);
+      }
+    }
+  }
+  &__link {
+    @include font-fs-lh(16px, 28px);
+    border-radius: 20px;
+    color: #fff;
+    gap: 10px;
+    padding: 12px 16px;
+    margin: 5px 0;
+
+    .image-container {
+      position: relative;
+      width: 24px;
+      height: 24px;
+
+      .img-back {
+        position: absolute;
+      }
+      .img-front {
+        position: absolute;
+      }
+      .img-front {
+        transition: opacity 0.3s ease-in-out;
+      }
+
+    }
+    &:hover {
+      background-color: #23252F;
+      min-width: 130px;
+      min-height: 50px;
+
+      .img-front {
+        opacity: 0;
+      }
+      &.white-btn {
+        background-color: #fff;
+        color: #535FE6;
+      }
+    }
+  }
+}
+.deposit-details {
+  &__header{
+    gap: 18px;
+    margin: 0 0 48px;
+
+    &-title {
+      @include font-fs-lw-lh(32px, 600, 38px);
+      margin: 0;
+    }
+    &-description {
+      @include font-fs-lw-lh(16px, 400, 26px);
+      color: #5E647A;
+    }
+  }
+  &__filter-panel {
+    gap: 52px;
+    margin: 0 0 48px;
+    &-list {
+      gap: 14px;
+    }
+    &-title {
+      @include font-fs-lw-lh(14px, 600, 17px);
+      margin: 0;
+      color: #5E647A;
+    }
+    .dropdown {
+      a {
+        @include font-fs-lh(16px, 26px);
+      }
+      & > a {
+        color: #535FE6;
+        border-bottom: 1px dashed;
+      }
+      .show {
+        color: #fff;
+        border-bottom: none;
+      }
+      &-menu-array {
+        &.show {
+          display: flex;
+        }
+      }
+    }
+  }
+  &__row {
+    &-wrapper {
+      gap: 24px;
+    }
+    &-bg {
+      min-height: 64px;
+      background-color: #23252F;
+      border-radius: 20px;
+
+      .period-gap{
+        gap: 8px;
+      }
+      .table-m-l {
+        margin: 23px 0 23px 23px;
+      }
+      .table-m-r {
+        margin: 23px 23px 23px 0;
+      }
+      .table-m-rd {
+        margin: 0 23px 23px 0;
+      }
+      .gradient-text {
+        background-image: linear-gradient(-49.76deg, rgba(83, 95, 230, 0.84), rgba(32, 193, 207, 0.57));
+        background-clip: text;
+        color: transparent;
+      }
+      .status-column {
+        gap: 10px
+      }
+    }
+  }
+  .custom-pagination {
+    gap: 24px;
+    margin: 44px 0 95px;
+
+    .page {
+      @include font-fs-lh(14px, 24px);
+      color: #5E647A;
+
+      &__current {
+        color: #535FE6;
+      }
+    }
+  }
+  &__table {
+    &-header {
+      @include font-fs-lh(14px, 17px);
+      color: #5E647A;
+    }
+    &-rate {
+      @include font-fs-lh(32px, 38px);
+      margin: 24px 0 17px 24px;
+    }
+    &-progress {
+      height: 8px;
+      max-width: 197px;
+      margin: 0 0 32px 24px;
+      background-color: #23252F;
+
+      .custom-gradient {
+        background-image: linear-gradient(-49.76deg, rgba(83, 95, 230, 0.84) 29.457%,rgba(32, 193, 207, 0.57) 93.711%);
+      }
+    }
+    &-active {
+      padding: 4px 10px;
+      background-color: #20C1CF;
+      border-radius: 20px;
+    }
+    &-complete {
+      padding: 4px 10px;
+      background-color: #535FE6;
+      border-radius: 20px;
+    }
+    &-currency {
+      @include font-fs-lh(12px, 28px);
+    }
+    &-invest, &-profit {
+      @include font-fs-lh(16px, 28px);
+    }
+    &-period {
+      @include font-fs-lh(12px, 1px);
+    }
+    &-data {
+      @include font-fs-lh(10px, 1px);
+      color: #5E647A;
+    }
+  }
+  .statistic-circles {
+    gap: 35px;
+    transform: translate(-50%, -75%);
+
+    &__currency {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -250%);
+    }
+  }
+  .image-container{
+    &__bg-statistics{
+      top: 70%;
+      transform: translate(-50%, -50%);
+
+      .bg__position{
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
+  .header-container {
+    top: 56px;
+    left: 56px;
+
+    &__header {
+      @include font-fs-lw-lh(72px, 600, 86px);
+      margin: 0;
+    }
+    &__description {
+      @include font-fs-lw-lh(40px, 400, 46px);
+    }
+  }
+  .text-statistics {
+    width: 265px;
+    gap: 28px;
+    bottom: 175px;
+    left: 50%;
+    transform: translate(-50%, 0);
+
+    &__title {
+      @include font-fs-lh(16px, 19px);
+    }
+    &__value{
+      @include font-fs-lh(18px, 21px);
+    }
+  }
+  .footnote {
+    max-width: 300px;
+    @include font-fs-lw-lh(12px, 400, 14px);
+    bottom: 64px;
+    left: 56px;
+  }
+}
+.footer {
+  &__wrapper {
+    background-color: #23252F;
+  }
+  .currencies {
+    padding: 58px 0 80px;
+    max-height: 32px;
+  }
+  .company-location {
+    gap: 16px;
+    a {
+      @include font-fs-lh(16px, 26px);
+      color: #535FE6;
+      gap: 14px;
+    }
+    address {
+      max-width: 255px;
+      @include font-fs-lw-lh(16px, 400, 26px);
+      color: #5E647A;
+    }
+  }
+  &__link-list {
+    gap: 16px;
+
+    a {
+      @include font-fs-lh(16px, 26px);
+      color: #5E647A;
+    }
+  }
+  .footer-btn {
+    text-align: end;
+
+    a {
+      display: inline-block;
+      @include font-fs-lh(16px, 26px);
+      padding: 12px 24px;
+      background-image: linear-gradient(-49.76deg, rgba(83, 95, 230, 0.84), rgba(32, 193, 207, 0.57));
+      background-clip: text;
+      color: transparent;
+      border-radius: 20px;
+    }
+  }
+  &__copyright {
+    padding: 44px 0;
+
+    span {
+      @include font-fs-lh(12px, 28px);
+    }
+  }
+  &__notes {
+    gap: 16px;
+  }
+}
