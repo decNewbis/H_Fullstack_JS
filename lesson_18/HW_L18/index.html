@@ -5,9 +5,142 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        first_text_color: '#252B42',
+                        second_text_color: '#737373',
+                        third_text_color: '#23A6F0',
+                        bg_color_contacts : '#23856D'
+                    },
+                    fontFamily: {
+                        'sans': ['"Montserrat", sans-serif'],
+                    },
+                    fontSize: {
+                        64: "64px"
+                    }
+                }
+            }
+        }
+    </script>
     <title>Bandage - Tailwind | HW lesson 18</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-
+    <header>
+        <div class="bg-bg_color_contacts">
+            <div class="max-w-[1440px] container mx-auto px-[197px] flex items-center justify-between text-[#fff]">
+                <ul class="flex items-center gap-[30px] my-[21px]">
+                    <li class="flex items-center gap-[5px]">
+                        <svg class="max-w-[16px] max-h-[16px]">
+                            <use xlink:href="./assets/image/header/header-icon-sprites.svg#phone_16x16"></use>
+                        </svg>
+                        <a class="font-normal text-[12px] leading-[16px] tracking-[0.2px]" href="tel:+3(225) 555-0118">+3(225) 555-0118</a>
+                    </li>
+                    <li class="flex items-center gap-[5px]">
+                        <svg class="max-w-[16px] max-h-[16px]">
+                            <use xlink:href="./assets/image/header/header-icon-sprites.svg#mail_16x16"></use>
+                        </svg>
+                        <a class="font-normal text-[12px] leading-[16px] tracking-[0.2px]" href="mailto:michelle.rivera@example.com">michelle.rivera@example.com</a>
+                    </li>
+                </ul>
+                <h1 class="text-[14px] font-bold leading-[24px] tracking-[0.2px]">
+                    Follow Us  and get a chance to win 80% off
+                </h1>
+                <ul class="flex items-center gap-[10px]">
+                    <li class="text-[14px] font-bold leading-[24px] tracking-[0.2px]">Follow Us :</li>
+                    <li>
+                        <svg class="max-w-[16px] max-h-[16px]">
+                            <use xlink:href="./assets/image/header/header-icon-sprites.svg#instagram_16x16"></use>
+                        </svg>
+                    </li>
+                    <li>
+                        <svg class="max-w-[16px] max-h-[16px]">
+                            <use xlink:href="./assets/image/header/header-icon-sprites.svg#youtube_16x16"></use>
+                        </svg>
+                    </li>
+                    <li>
+                        <svg class="max-w-[16px] max-h-[16px]">
+                            <use xlink:href="./assets/image/header/header-icon-sprites.svg#facebook_16x16"></use>
+                        </svg>
+                    </li>
+                    <li>
+                        <svg class="max-w-[16px] max-h-[16px]">
+                            <use xlink:href="./assets/image/header/header-icon-sprites.svg#twitter_16x16"></use>
+                        </svg>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="max-w-[1440px] container mx-auto px-[197px] flex items-center justify-between">
+            <a class="text-[24px] font-bold leading-[32px] tracking-[0.1px] my-[23px]" href="#">Bandage</a>
+            <nav>
+                <ul class="flex items-center gap-[13px] text-[14px] font-bold text-second_text_color leading-[24px]
+                tracking-[0.2px]">
+                    <li>
+                        <a href="#">Home</a>
+                    </li>
+                    <li>
+                        <label class="hidden" for="category">hidden label</label>
+                        <select name="category" id="category">
+                            <option value="shop" selected>Shop</option>
+                        </select>
+                    </li>
+                    <li>
+                        <a href="#">About</a>
+                    </li>
+                    <li>
+                        <a href="#">Blog</a>
+                    </li>
+                    <li>
+                        <a href="#">Contact</a>
+                    </li>
+                    <li>
+                        <a href="#">Pages</a>
+                    </li>
+                </ul>
+            </nav>
+            <ul class="flex text-[14px] font-bold text-third_text_color items-center gap-[30px]">
+                <li>
+                    <a class="flex items-center gap-[5px]" href="#">
+                        <svg class="max-w-[16px] max-h-[16px]">
+                            <use xlink:href="./assets/image/header/header-icon-sprites.svg#human_16x16"></use>
+                        </svg>
+                        Login / Register
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <svg class="max-w-[16px] max-h-[16px]">
+                            <use xlink:href="./assets/image/header/header-icon-sprites.svg#lens_16x16"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    <a class="flex items-center gap-[5px]" href="#">
+                        <svg class="max-w-[16px] max-h-[16px]">
+                            <use xlink:href="./assets/image/header/header-icon-sprites.svg#basket_16x16"></use>
+                        </svg>
+                        1
+                    </a>
+                </li>
+                <li>
+                    <a class="flex items-center gap-[5px]" href="#">
+                        <svg class="max-w-[16px] max-h-[16px]">
+                            <use xlink:href="./assets/image/header/header-icon-sprites.svg#heart_16x16"></use>
+                        </svg>
+                        1
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <main></main>
+    <footer></footer>
 </body>
 </html>
