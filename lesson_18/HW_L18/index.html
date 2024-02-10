@@ -1,0 +1,846 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        first_text_color: '#252B42',
+                        second_text_color: '#737373',
+                        third_text_color: '#23A6F0',
+                        bg_color_contacts : '#23856D',
+                        bg_light_gray: '#FAFAFA'
+                    },
+                    fontFamily: {
+                        'sans': ['"Montserrat", sans-serif'],
+                    },
+                    fontSize: {
+                        64: "64px"
+                    }
+                }
+            }
+        }
+    </script>
+    <title>Bandage - Tailwind | HW lesson 18</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="bg-bg_color_contacts">
+            <div class="max-w-[1440px] mx-auto lg:px-[197px] md:px-[150px]">
+                <div class="max-w-[1440px] xl:flex md:grid md:grid-cols-2 items-center
+                justify-between text-[#fff]">
+                    <ul class="xl:flex md:grid md:grid-cols-1 items-center xl:gap-[30px] xl:my-[21px] md:gap-[5px]
+                    xl:justify-self-auto md:justify-self-start">
+                        <li class="flex items-center gap-[5px]">
+                            <svg class="max-w-[16px] max-h-[16px]">
+                                <use xlink:href="./assets/image/header/header-icon-sprites.svg#phone_16x16"></use>
+                            </svg>
+                            <a class="font-normal text-[12px] leading-[16px] tracking-[0.2px]"
+                               href="tel:+3(225)555-0118">+3(225) 555-0118</a>
+                        </li>
+                        <li class="flex items-center gap-[5px]">
+                            <svg class="max-w-[16px] max-h-[16px]">
+                                <use xlink:href="./assets/image/header/header-icon-sprites.svg#mail_16x16"></use>
+                            </svg>
+                            <a class="font-normal text-[12px] leading-[16px] tracking-[0.2px]"
+                               href="mailto:michelle.rivera@example.com">michelle.rivera@example.com</a>
+                        </li>
+                    </ul>
+                    <h1 class="text-[14px] font-bold leading-[24px] tracking-[0.2px] xl:my-[21px] md:col-span-full
+                    md:order-last xl:order-none xl:justify-self-auto md:justify-self-center">
+                        Follow Us  and get a chance to win 80% off
+                    </h1>
+                    <ul class="flex items-center gap-[10px] xl:my-[21px] xl:justify-self-auto md:justify-self-end">
+                        <li class="text-[14px] font-bold leading-[24px] tracking-[0.2px]">Follow Us :</li>
+                        <li>
+                            <a href="#">
+                                <svg class="max-w-[16px] max-h-[16px]">
+                                    <use xlink:href="./assets/image/header/header-icon-sprites.svg#instagram_16x16"></use>
+                                </svg>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <svg class="max-w-[16px] max-h-[16px]">
+                                    <use xlink:href="./assets/image/header/header-icon-sprites.svg#youtube_16x16"></use>
+                                </svg>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <svg class="max-w-[16px] max-h-[16px]">
+                                    <use xlink:href="./assets/image/header/header-icon-sprites.svg#facebook_16x16"></use>
+                                </svg>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <svg class="max-w-[16px] max-h-[16px]">
+                                    <use xlink:href="./assets/image/header/header-icon-sprites.svg#twitter_16x16"></use>
+                                </svg>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-[1440px] mx-auto lg:px-[197px] md:px-[150px]">
+            <div class="xl:flex md:grid md:grid-cols-2 items-center justify-between">
+                <a class="text-[24px] font-bold leading-[32px] tracking-[0.1px] xl:my-[23px] xl:justify-self-auto
+                md:justify-self-start" href="#">
+                    Bandage
+                </a>
+                <nav class="md:col-span-full md:order-last xl:order-none xl:justify-self-auto md:justify-self-center">
+                    <ul class="flex items-center gap-[13px] text-[14px] font-bold text-second_text_color leading-[24px]
+                    tracking-[0.2px] xl:my-[23px]">
+                        <li>
+                            <a href="#">Home</a>
+                        </li>
+                        <li>
+                            <label class="hidden" for="category">hidden label</label>
+                            <select name="category" id="category">
+                                <option value="shop" selected>Shop</option>
+                            </select>
+                        </li>
+                        <li>
+                            <a href="#">About</a>
+                        </li>
+                        <li>
+                            <a href="#">Blog</a>
+                        </li>
+                        <li>
+                            <a href="#">Contact</a>
+                        </li>
+                        <li>
+                            <a href="#">Pages</a>
+                        </li>
+                    </ul>
+                </nav>
+                <ul class="flex text-[14px] font-bold text-third_text_color items-center xl:gap-[30px] md:gap-[8px]
+                xl:my-[23px] xl:justify-self-auto md:justify-self-end">
+                    <li>
+                        <a class="flex items-center gap-[5px]" href="#">
+                            <svg class="max-w-[16px] max-h-[16px]">
+                                <use xlink:href="./assets/image/header/header-icon-sprites.svg#human_16x16"></use>
+                            </svg>
+                            Login / Register
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <svg class="max-w-[16px] max-h-[16px]">
+                                <use xlink:href="./assets/image/header/header-icon-sprites.svg#lens_16x16"></use>
+                            </svg>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="flex items-center gap-[5px]" href="#">
+                            <svg class="max-w-[16px] max-h-[16px]">
+                                <use xlink:href="./assets/image/header/header-icon-sprites.svg#basket_16x16"></use>
+                            </svg>
+                            1
+                        </a>
+                    </li>
+                    <li>
+                        <a class="flex items-center gap-[5px]" href="#">
+                            <svg class="max-w-[16px] max-h-[16px]">
+                                <use xlink:href="./assets/image/header/header-icon-sprites.svg#heart_16x16"></use>
+                            </svg>
+                            1
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    <main>
+        <section class="bg-bg_light_gray">
+            <div class="max-w-[1440px] mx-auto lg:px-[195px] md:px-[150px]">
+                <div class="text-first_text_color flex items-center justify-between">
+                    <h2 class="font-bold text-[24px] leading-[32px] tracking-[0.1px] my-[30px]">Shop</h2>
+                    <ul class="flex items-center gap-[15px] font-bold text-[14px] leading-[24px] tracking-[0.2px]">
+                        <li>
+                            <a class="text-first_text_color" href="#">Home</a>
+                        </li>
+                        <li>
+                            <img class="max-w-[16px] max-h-[16px]" src="./assets/image/category/arrow-right-icon.svg"
+                                 alt="illustration of arrow-right">
+                        </li>
+                        <li>
+                            <a class="text-second_text_color" href="#">Shop</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="max-w-[1440px] mx-auto xl:px-[179px] md:px-[150px]">
+                <div class="text-[#fff] pb-[48px] ">
+                    <ul class="xl:flex xl:flex-wrap md:grid md:grid-cols-2 md:justify-items-center
+                    lg:grid-cols-5 lg:justify-items-center items-center
+                    justify-center gap-[10px] mx-auto">
+                        <li class="flex min-w-[205px] max-w-[205px] min-h-[223px] lg:col-span-2
+                        bg-[url('./assets/image/category/card-cover-5.jpeg')]">
+                            <div class="flex flex-col items-center m-auto">
+                                <span class="block font-bold leading-[24px] tracking-[0.1px]">CLOTHS</span>
+                                <a class="block font-normal leading-[20px] tracking-[0.2px]" href="#">5 Items</a>
+                            </div>
+                        </li>
+                        <li class="flex min-w-[205px] max-w-[205px] min-h-[223px] lg:row-span-2
+                        bg-[url('./assets/image/category/card-cover-6.jpeg')]">
+                            <div class="flex flex-col items-center m-auto">
+                                <span class="block font-bold leading-[24px] tracking-[0.1px]">CLOTHS</span>
+                                <a class="block font-normal leading-[20px] tracking-[0.2px]" href="#">5 Items</a>
+                            </div>
+                        </li>
+                        <li class="flex min-w-[205px] max-w-[205px] min-h-[223px] lg:col-span-2
+                        bg-[url('./assets/image/category/card-cover-7.jpeg')]">
+                            <div class="flex flex-col items-center m-auto">
+                                <span class="block font-bold leading-[24px] tracking-[0.1px]">CLOTHS</span>
+                                <a class="block font-normal leading-[20px] tracking-[0.2px]" href="#">5 Items</a>
+                            </div>
+                        </li>
+                        <li class="flex min-w-[205px] max-w-[205px] min-h-[223px] lg:col-span-2 lg:col-start-1
+                        bg-[url('./assets/image/category/card-cover-7_1.jpeg')]">
+                            <div class="flex flex-col items-center m-auto">
+                                <span class="block font-bold leading-[24px] tracking-[0.1px]">CLOTHS</span>
+                                <a class="block font-normal leading-[20px] tracking-[0.2px]" href="#">5 Items</a>
+                            </div>
+                        </li>
+                        <li class="flex min-w-[205px] max-w-[205px] min-h-[223px] md:col-span-2 lg:col-start-4
+                        bg-[url('./assets/image/category/card-cover-7_2.jpeg')]">
+                            <div class="flex flex-col items-center m-auto">
+                                <span class="block font-bold leading-[24px] tracking-[0.1px]">CLOTHS</span>
+                                <a class="block font-normal leading-[20px] tracking-[0.2px]" href="#">5 Items</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="max-w-[1440px] mx-auto lg:px-[195px] md:px-[150px]">
+                <div class="text-second_text_color lg:flex md:grid md:grid-cols-2
+                items-center justify-between">
+                    <a class="font-bold text-[14px] leading-[24px] tracking-[0.2px] lg:my-[37px] md:justify-self-start
+                    lg:justify-self-auto" href="#">
+                        Showing all 12 results
+                    </a>
+                    <ul class="flex items-center gap-[15px] lg:my-[24px] md:justify-self-end lg:justify-self-auto">
+                        <li>
+                            <span class="block font-bold text-[14px] leading-[24px] tracking-[0.2px]">
+                                Views:
+                            </span>
+                        </li>
+                        <li class="border-solid border-[1px] border-[#ECECEC] rounded-[5px] p-[15px]">
+                            <svg class="max-w-[16px] max-h-[16px]">
+                                <use xlink:href="./assets/image/category/category-icon-sprites.svg#views_card_16x16"></use>
+                            </svg>
+                        </li>
+                        <li class="border-solid border-[1px] border-[#ECECEC] rounded-[5px] p-[15px]">
+                            <svg class="max-w-[16px] max-h-[16px]">
+                                <use xlink:href="./assets/image/category/category-icon-sprites.svg#views_list_16x16"></use>
+                            </svg>
+                        </li>
+                    </ul>
+                    <ul class="flex align-center gap-[15px] font-normal text-[14px] lg:my-[24px] md:col-span-full
+                    md:justify-self-center lg:justify-self-auto">
+                        <li class="border-solid border-[1px] border-[#ECECEC] rounded-[5px] px-[18px] py-[11px]">
+                            <label class="hidden" for="sorting">hidden label</label>
+                            <select name="sorting" id="sorting">
+                                <option value="popularity">Popularity</option>
+                            </select>
+                        </li>
+                        <li>
+                            <button class="px-[20px] py-[10px] border-[1px] border-[third_text_color] bg-third_text_color
+                            rounded-[5px] text-[#fff] font-bold">
+                                Filter
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="max-w-[1440px] mx-auto px-[158px]">
+                <div class="py-[48px] xl:flex xl:flex-wrap lg:grid-cols-2 md:grid md:grid-cols-1
+                md:justify-items-center justify-center gap-x-[30px] gap-y-[48px]">
+                    <ul class="flex flex-col max-w-[238px] max-h-[488px] text-center">
+                        <li>
+                            <img src="./assets/image/category/product-cover-5.jpeg" alt="product-cover">
+                        </li>
+                        <li>
+                            <ul class="flex flex-col gap-[10px] justify-center p-[25px]">
+                                <li>
+                                    <h2 class="font-bold leading-[24px] tracking-[0.1px] text-first_text_color">
+                                        Graphic Design
+                                    </h2>
+                                </li>
+                                <li>
+                                    <span class="block font-bold text-[14px] leading-[24px] tracking-[0.2px] 
+                                    text-second_text_color">
+                                        English Department
+                                    </span>
+                                </li>
+                                <li class="flex items-center gap-[6px] justify-center">
+                                    <span class="block font-bold leading-[24px] tracking-0.1px] text-[#BDBDBD]">
+                                        $16.48
+                                    </span>
+                                    <span class="block font-bold leading-[24px] tracking-0.1px] text-[#23856D]">
+                                        $16.48
+                                    </span>
+                                </li>
+                                <li class="flex items-center gap-[6px] justify-center">
+                                    <span class="inline-block min-w-[16px] min-h-[16px] rounded-full bg-third_text_color"></span>
+                                    <span class="inline-block min-w-[16px] min-h-[16px] rounded-full bg-[#23856D]"></span>
+                                    <span class="inline-block min-w-[16px] min-h-[16px] rounded-full bg-[#E77C40]"></span>
+                                    <span class="inline-block min-w-[16px] min-h-[16px] rounded-full bg-third_text_color"></span>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="flex flex-col max-w-[238px] max-h-[488px] text-center">
+                        <li>
+                            <img src="./assets/image/category/product-cover-5(1).jpeg" alt="product-cover">
+                        </li>
+                        <li>
+                            <ul class="flex flex-col gap-[10px] justify-center p-[25px]">
+                                <li>
+                                    <h2 class="font-bold leading-[24px] tracking-[0.1px] text-first_text_color">
+                                        Graphic Design
+                                    </h2>
+                                </li>
+                                <li>
+                                    <span class="block font-bold text-[14px] leading-[24px] tracking-[0.2px] 
+                                    text-second_text_color">
+                                        English Department
+                                    </span>
+                                </li>
+                                <li class="flex items-center gap-[6px] justify-center">
+                                    <span class="block font-bold leading-[24px] tracking-0.1px] text-[#BDBDBD]">
+                                        $16.48
+                                    </span>
+                                    <span class="block font-bold leading-[24px] tracking-0.1px] text-[#23856D]">
+                                        $16.48
+                                    </span>
+                                </li>
+                                <li class="flex items-center gap-[6px] justify-center">
+                                    <span class="inline-block min-w-[16px] min-h-[16px] rounded-full bg-third_text_color"></span>
+                                    <span class="inline-block min-w-[16px] min-h-[16px] rounded-full bg-[#23856D]"></span>
+                                    <span class="inline-block min-w-[16px] min-h-[16px] rounded-full bg-[#E77C40]"></span>
+                                    <span class="inline-block min-w-[16px] min-h-[16px] rounded-full bg-third_text_color"></span>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="flex flex-col max-w-[238px] max-h-[488px] text-center">
+                        <li>
+                            <img src="./assets/image/category/product-cover-5(2).jpeg" alt="product-cover">
+                        </li>
+                        <li>
+                            <ul class="flex flex-col gap-[10px] justify-center p-[25px]">
+                                <li>
+                                    <h2 class="font-bold leading-[24px] tracking-[0.1px] text-first_text_color">
+                                        Graphic Design
+                                    </h2>
+                                </li>
+                                <li>
+                                    <span class="block font-bold text-[14px] leading-[24px] tracking-[0.2px] 
+                                    text-second_text_color">
+                                        English Department
+                                    </span>
+                                </li>
+                                <li class="flex items-center gap-[6px] justify-center">
+                                    <span class="block font-bold leading-[24px] tracking-0.1px] text-[#BDBDBD]">
+                                        $16.48
+                                    </span>
+                                    <span class="block font-bold leading-[24px] tracking-0.1px] text-[#23856D]">
+                                        $16.48
+                                    </span>
+                                </li>
+                                <li class="flex items-center gap-[6px] justify-center">
+                                    <span class="inline-block min-w-[16px] min-h-[16px] rounded-full bg-third_text_color"></span>
+                                    <span class="inline-block min-w-[16px] min-h-[16px] rounded-full bg-[#23856D]"></span>
+                                    <span class="inline-block min-w-[16px] min-h-[16px] rounded-full bg-[#E77C40]"></span>
+                                    <span class="inline-block min-w-[16px] min-h-[16px] rounded-full bg-third_text_color"></span>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="flex flex-col max-w-[238px] max-h-[488px] text-center">
+                        <li>
+                            <img src="./assets/image/category/product-cover-5(3).jpeg" alt="product-cover">
+                        </li>
+                        <li>
+                            <ul class="flex flex-col gap-[10px] justify-center p-[25px]">
+                                <li>
+                                    <h2 class="font-bold leading-[24px] tracking-[0.1px] text-first_text_color">
+                                        Graphic Design
+                                    </h2>
+                                </li>
+                                <li>
+                                    <span class="block font-bold text-[14px] leading-[24px] tracking-[0.2px] 
+                                    text-second_text_color">
+                                        English Department
+                                    </span>
+                                </li>
+                                <li class="flex items-center gap-[6px] justify-center">
+                                    <span class="block font-bold leading-[24px] tracking-0.1px] text-[#BDBDBD]">
+                                        $16.48
+                                    </span>
+                                    <span class="block font-bold leading-[24px] tracking-0.1px] text-[#23856D]">
+                                        $16.48
+                                    </span>
+                                </li>
+                                <li class="flex items-center gap-[6px] justify-center">
+                                    <span class="inline-block min-w-[16px] min-h-[16px] rounded-full bg-third_text_color"></span>
+                                    <span class="inline-block min-w-[16px] min-h-[16px] rounded-full bg-[#23856D]"></span>
+                                    <span class="inline-block min-w-[16px] min-h-[16px] rounded-full bg-[#E77C40]"></span>
+                                    <span class="inline-block min-w-[16px] min-h-[16px] rounded-full bg-third_text_color"></span>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="flex flex-col max-w-[238px] max-h-[488px] text-center">
+                        <li>
+                            <img src="./assets/image/category/product-cover-5(4).jpeg" alt="product-cover">
+                        </li>
+                        <li>
+                            <ul class="flex flex-col gap-[10px] justify-center p-[25px]">
+                                <li>
+                                    <h2 class="font-bold leading-[24px] tracking-[0.1px] text-first_text_color">
+                                        Graphic Design
+                                    </h2>
+                                </li>
+                                <li>
+                                    <span class="block font-bold text-[14px] leading-[24px] tracking-[0.2px] 
+                                    text-second_text_color">
+                                        English Department
+                                    </span>
+                                </li>
+                                <li class="flex items-center gap-[6px] justify-center">
+                                    <span class="block font-bold leading-[24px] tracking-0.1px] text-[#BDBDBD]">
+                                        $16.48
+                                    </span>
+                                    <span class="block font-bold leading-[24px] tracking-0.1px] text-[#23856D]">
+                                        $16.48
+                                    </span>
+                                </li>
+                                <li class="flex items-center gap-[6px] justify-center">
+                                    <span class="inline-block min-w-[16px] min-h-[16px] rounded-full bg-third_text_color"></span>
+                                    <span class="inline-block min-w-[16px] min-h-[16px] rounded-full bg-[#23856D]"></span>
+                                    <span class="inline-block min-w-[16px] min-h-[16px] rounded-full bg-[#E77C40]"></span>
+                                    <span class="inline-block min-w-[16px] min-h-[16px] rounded-full bg-third_text_color"></span>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="flex flex-col max-w-[238px] max-h-[488px] text-center">
+                        <li>
+                            <img src="./assets/image/category/product-cover-5(5).jpeg" alt="product-cover">
+                        </li>
+                        <li>
+                            <ul class="flex flex-col gap-[10px] justify-center p-[25px]">
+                                <li>
+                                    <h2 class="font-bold leading-[24px] tracking-[0.1px] text-first_text_color">
+                                        Graphic Design
+                                    </h2>
+                                </li>
+                                <li>
+                                    <span class="block font-bold text-[14px] leading-[24px] tracking-[0.2px] 
+                                    text-second_text_color">
+                                        English Department
+                                    </span>
+                                </li>
+                                <li class="flex items-center gap-[6px] justify-center">
+                                    <span class="block font-bold leading-[24px] tracking-0.1px] text-[#BDBDBD]">
+                                        $16.48
+                                    </span>
+                                    <span class="block font-bold leading-[24px] tracking-0.1px] text-[#23856D]">
+                                        $16.48
+                                    </span>
+                                </li>
+                                <li class="flex items-center gap-[6px] justify-center">
+                                    <span class="inline-block min-w-[16px] min-h-[16px] rounded-full bg-third_text_color"></span>
+                                    <span class="inline-block min-w-[16px] min-h-[16px] rounded-full bg-[#23856D]"></span>
+                                    <span class="inline-block min-w-[16px] min-h-[16px] rounded-full bg-[#E77C40]"></span>
+                                    <span class="inline-block min-w-[16px] min-h-[16px] rounded-full bg-third_text_color"></span>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="flex flex-col max-w-[238px] max-h-[488px] text-center">
+                        <li>
+                            <img src="./assets/image/category/product-cover-5(6).jpeg" alt="product-cover">
+                        </li>
+                        <li>
+                            <ul class="flex flex-col gap-[10px] justify-center p-[25px]">
+                                <li>
+                                    <h2 class="font-bold leading-[24px] tracking-[0.1px] text-first_text_color">
+                                        Graphic Design
+                                    </h2>
+                                </li>
+                                <li>
+                                    <span class="block font-bold text-[14px] leading-[24px] tracking-[0.2px] 
+                                    text-second_text_color">
+                                        English Department
+                                    </span>
+                                </li>
+                                <li class="flex items-center gap-[6px] justify-center">
+                                    <span class="block font-bold leading-[24px] tracking-0.1px] text-[#BDBDBD]">
+                                        $16.48
+                                    </span>
+                                    <span class="block font-bold leading-[24px] tracking-0.1px] text-[#23856D]">
+                                        $16.48
+                                    </span>
+                                </li>
+                                <li class="flex items-center gap-[6px] justify-center">
+                                    <span class="inline-block min-w-[16px] min-h-[16px] rounded-full bg-third_text_color"></span>
+                                    <span class="inline-block min-w-[16px] min-h-[16px] rounded-full bg-[#23856D]"></span>
+                                    <span class="inline-block min-w-[16px] min-h-[16px] rounded-full bg-[#E77C40]"></span>
+                                    <span class="inline-block min-w-[16px] min-h-[16px] rounded-full bg-third_text_color"></span>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="flex flex-col max-w-[238px] max-h-[488px] text-center">
+                        <li>
+                            <img src="./assets/image/category/product-cover-5(7).jpeg" alt="product-cover">
+                        </li>
+                        <li>
+                            <ul class="flex flex-col gap-[10px] justify-center p-[25px]">
+                                <li>
+                                    <h2 class="font-bold leading-[24px] tracking-[0.1px] text-first_text_color">
+                                        Graphic Design
+                                    </h2>
+                                </li>
+                                <li>
+                                    <span class="block font-bold text-[14px] leading-[24px] tracking-[0.2px] 
+                                    text-second_text_color">
+                                        English Department
+                                    </span>
+                                </li>
+                                <li class="flex items-center gap-[6px] justify-center">
+                                    <span class="block font-bold leading-[24px] tracking-0.1px] text-[#BDBDBD]">
+                                        $16.48
+                                    </span>
+                                    <span class="block font-bold leading-[24px] tracking-0.1px] text-[#23856D]">
+                                        $16.48
+                                    </span>
+                                </li>
+                                <li class="flex items-center gap-[6px] justify-center">
+                                    <span class="inline-block min-w-[16px] min-h-[16px] rounded-full bg-third_text_color"></span>
+                                    <span class="inline-block min-w-[16px] min-h-[16px] rounded-full bg-[#23856D]"></span>
+                                    <span class="inline-block min-w-[16px] min-h-[16px] rounded-full bg-[#E77C40]"></span>
+                                    <span class="inline-block min-w-[16px] min-h-[16px] rounded-full bg-third_text_color"></span>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="flex flex-col max-w-[238px] max-h-[488px] text-center">
+                        <li>
+                            <img src="./assets/image/category/product-cover-5(8).jpeg" alt="product-cover">
+                        </li>
+                        <li>
+                            <ul class="flex flex-col gap-[10px] justify-center p-[25px]">
+                                <li>
+                                    <h2 class="font-bold leading-[24px] tracking-[0.1px] text-first_text_color">
+                                        Graphic Design
+                                    </h2>
+                                </li>
+                                <li>
+                                    <span class="block font-bold text-[14px] leading-[24px] tracking-[0.2px] 
+                                    text-second_text_color">
+                                        English Department
+                                    </span>
+                                </li>
+                                <li class="flex items-center gap-[6px] justify-center">
+                                    <span class="block font-bold leading-[24px] tracking-0.1px] text-[#BDBDBD]">
+                                        $16.48
+                                    </span>
+                                    <span class="block font-bold leading-[24px] tracking-0.1px] text-[#23856D]">
+                                        $16.48
+                                    </span>
+                                </li>
+                                <li class="flex items-center gap-[6px] justify-center">
+                                    <span class="inline-block min-w-[16px] min-h-[16px] rounded-full bg-third_text_color"></span>
+                                    <span class="inline-block min-w-[16px] min-h-[16px] rounded-full bg-[#23856D]"></span>
+                                    <span class="inline-block min-w-[16px] min-h-[16px] rounded-full bg-[#E77C40]"></span>
+                                    <span class="inline-block min-w-[16px] min-h-[16px] rounded-full bg-third_text_color"></span>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="flex flex-col max-w-[238px] max-h-[488px] text-center">
+                        <li>
+                            <img src="./assets/image/category/product-cover-5(9).jpeg" alt="product-cover">
+                        </li>
+                        <li>
+                            <ul class="flex flex-col gap-[10px] justify-center p-[25px]">
+                                <li>
+                                    <h2 class="font-bold leading-[24px] tracking-[0.1px] text-first_text_color">
+                                        Graphic Design
+                                    </h2>
+                                </li>
+                                <li>
+                                    <span class="block font-bold text-[14px] leading-[24px] tracking-[0.2px] 
+                                    text-second_text_color">
+                                        English Department
+                                    </span>
+                                </li>
+                                <li class="flex items-center gap-[6px] justify-center">
+                                    <span class="block font-bold leading-[24px] tracking-0.1px] text-[#BDBDBD]">
+                                        $16.48
+                                    </span>
+                                    <span class="block font-bold leading-[24px] tracking-0.1px] text-[#23856D]">
+                                        $16.48
+                                    </span>
+                                </li>
+                                <li class="flex items-center gap-[6px] justify-center">
+                                    <span class="inline-block min-w-[16px] min-h-[16px] rounded-full bg-third_text_color"></span>
+                                    <span class="inline-block min-w-[16px] min-h-[16px] rounded-full bg-[#23856D]"></span>
+                                    <span class="inline-block min-w-[16px] min-h-[16px] rounded-full bg-[#E77C40]"></span>
+                                    <span class="inline-block min-w-[16px] min-h-[16px] rounded-full bg-third_text_color"></span>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="flex flex-col max-w-[238px] max-h-[488px] text-center">
+                        <li>
+                            <img src="./assets/image/category/product-cover-5(10).jpeg" alt="product-cover">
+                        </li>
+                        <li>
+                            <ul class="flex flex-col gap-[10px] justify-center p-[25px]">
+                                <li>
+                                    <h2 class="font-bold leading-[24px] tracking-[0.1px] text-first_text_color">
+                                        Graphic Design
+                                    </h2>
+                                </li>
+                                <li>
+                                    <span class="block font-bold text-[14px] leading-[24px] tracking-[0.2px] 
+                                    text-second_text_color">
+                                        English Department
+                                    </span>
+                                </li>
+                                <li class="flex items-center gap-[6px] justify-center">
+                                    <span class="block font-bold leading-[24px] tracking-0.1px] text-[#BDBDBD]">
+                                        $16.48
+                                    </span>
+                                    <span class="block font-bold leading-[24px] tracking-0.1px] text-[#23856D]">
+                                        $16.48
+                                    </span>
+                                </li>
+                                <li class="flex items-center gap-[6px] justify-center">
+                                    <span class="inline-block min-w-[16px] min-h-[16px] rounded-full bg-third_text_color"></span>
+                                    <span class="inline-block min-w-[16px] min-h-[16px] rounded-full bg-[#23856D]"></span>
+                                    <span class="inline-block min-w-[16px] min-h-[16px] rounded-full bg-[#E77C40]"></span>
+                                    <span class="inline-block min-w-[16px] min-h-[16px] rounded-full bg-third_text_color"></span>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="flex flex-col max-w-[238px] max-h-[488px] text-center">
+                        <li>
+                            <img src="./assets/image/category/product-cover-5(11).jpeg" alt="product-cover">
+                        </li>
+                        <li>
+                            <ul class="flex flex-col gap-[10px] justify-center p-[25px]">
+                                <li>
+                                    <h2 class="font-bold leading-[24px] tracking-[0.1px] text-first_text_color">
+                                        Graphic Design
+                                    </h2>
+                                </li>
+                                <li>
+                                    <span class="block font-bold text-[14px] leading-[24px] tracking-[0.2px] 
+                                    text-second_text_color">
+                                        English Department
+                                    </span>
+                                </li>
+                                <li class="flex items-center gap-[6px] justify-center">
+                                    <span class="block font-bold leading-[24px] tracking-0.1px] text-[#BDBDBD]">
+                                        $16.48
+                                    </span>
+                                    <span class="block font-bold leading-[24px] tracking-0.1px] text-[#23856D]">
+                                        $16.48
+                                    </span>
+                                </li>
+                                <li class="flex items-center gap-[6px] justify-center">
+                                    <span class="inline-block min-w-[16px] min-h-[16px] rounded-full bg-third_text_color"></span>
+                                    <span class="inline-block min-w-[16px] min-h-[16px] rounded-full bg-[#23856D]"></span>
+                                    <span class="inline-block min-w-[16px] min-h-[16px] rounded-full bg-[#E77C40]"></span>
+                                    <span class="inline-block min-w-[16px] min-h-[16px] rounded-full bg-third_text_color"></span>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="mb-[48px] flex items-center justify-center">
+                    <span class="inline-block p-[25px] border-[1px] border-solid border-[#E9E9E9] bg-[#f3f3f3]
+                    rounded-l-[5px]">
+                        First
+                    </span>
+                    <span class="inline-block px-[20px] py-[25px] border-[1px] border-solid border-[#E9E9E9]">1</span>
+                    <span class="inline-block px-[20px] py-[25px] border-[1px] border-solid border-[#E9E9E9]
+                    bg-third_text_color">
+                        2
+                    </span>
+                    <span class="inline-block px-[20px] py-[25px] border-[1px] border-solid border-[#E9E9E9]">3</span>
+                    <span class="inline-block p-[25px] border-[1px] border-solid border-[#E9E9E9] rounded-r-[5px]">
+                        Next
+                    </span>
+                </div>
+            </div>
+        </section>
+        <section class="bg-bg_light_gray">
+            <h2 class="hidden">hidden header</h2>
+            <div class="max-w-[1440px] mx-auto px-[195px] lg:flex lg:flex-wrap md:grid md:grid-cols-3
+            md:justify-items-center lg:justify-items-normal items-center justify-around">
+                <img class="my-[50px]" src="./assets/image/brand/hooli.svg" alt="illustration of hooli-logo">
+                <img class="my-[50px]" src="./assets/image/brand/lyft.svg" alt="illustration of lyft-logo">
+                <img class="my-[50px]" src="./assets/image/brand/writer.svg" alt="illustration of writer-logo">
+                <img class="my-[50px]" src="./assets/image/brand/stripe.svg" alt="illustration of stripe-logo">
+                <img class="my-[50px]" src="./assets/image/brand/aws.svg" alt="illustration of aws-logo">
+                <img class="my-[50px]" src="./assets/image/brand/moon-man.svg" alt="illustration of moon-man-logo">
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="max-w-[1440px] mx-auto px-[195px]">
+            <div class="flex items-center justify-between">
+                <a class="font-bold text-[24px] leading-[32px] tracking-[0.1px] text-first_text_color my-[54px]"
+                   href="#">
+                    Bandage
+                </a>
+                <div class="flex items-center gap-[20px] my-[54px]">
+                    <a href="#">
+                        <svg class="max-w-[24px] max-h-[24px]">
+                            <use xlink:href="./assets/image/footer/sn-icon-sprites.svg#facebook_24x24"></use>
+                        </svg>
+                    </a>
+                    <a href="#">
+                        <svg class="max-w-[24px] max-h-[24px]">
+                            <use xlink:href="./assets/image/footer/sn-icon-sprites.svg#instagram_24x24"></use>
+                        </svg>
+                    </a>
+                    <a href="#">
+                        <svg class="max-w-[24px] max-h-[24px]">
+                            <use xlink:href="./assets/image/footer/sn-icon-sprites.svg#twitter_24x24"></use>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <hr class="border-[#E6E6E6]">
+            <div class="xl:flex xl:flex-wrap md:grid md:grid-cols-2 lg:grid-cols-3 md:justify-items-center xl:justify-items-normal
+            items-start justify-between xl:gap-[5px] md:gap-[20px] my-[50px]">
+                <ul class="flex flex-col gap-[10px] font-bold text-[14px] text-second_text_color md:text-center
+                xl:text-left">
+                    <li class="mb-[10px] text-[16px] text-first_text_color">
+                        <h2>Company Info</h2>
+                    </li>
+                    <li>
+                        <a href="#">About Us</a>
+                    </li>
+                    <li>
+                        <a href="#">Carrier</a>
+                    </li>
+                    <li>
+                        <a href="#">We are hiring</a>
+                    </li>
+                    <li>
+                        <a href="#">Blog</a>
+                    </li>
+                </ul>
+                <ul class="flex flex-col gap-[10px] font-bold text-[14px] text-second_text_color md:text-center
+                xl:text-left">
+                    <li class="mb-[10px] text-[16px] text-first_text_color">
+                        <h2>Legal</h2>
+                    </li>
+                    <li>
+                        <a href="#">About Us</a>
+                    </li>
+                    <li>
+                        <a href="#">Carrier</a>
+                    </li>
+                    <li>
+                        <a href="#">We are hiring</a>
+                    </li>
+                    <li>
+                        <a href="#">Blog</a>
+                    </li>
+                </ul>
+                <ul class="flex flex-col gap-[10px] font-bold text-[14px] text-second_text_color md:text-center
+                xl:text-left">
+                    <li class="mb-[10px] text-[16px] text-first_text_color">
+                        <h2>Features</h2>
+                    </li>
+                    <li>
+                        <a href="#">Business Marketing</a>
+                    </li>
+                    <li>
+                        <a href="#">User Analytic</a>
+                    </li>
+                    <li>
+                        <a href="#">Live Chat</a>
+                    </li>
+                    <li>
+                        <a href="#">Unlimited Support</a>
+                    </li>
+                </ul>
+                <ul class="flex flex-col gap-[10px] font-bold text-[14px] text-second_text_color md:text-center
+                xl:text-left">
+                    <li class="mb-[10px] text-[16px] text-first_text_color">
+                        <h2>Resources</h2>
+                    </li>
+                    <li>
+                        <a href="#">IOS & Android</a>
+                    </li>
+                    <li>
+                        <a href="#">Watch a Demo</a>
+                    </li>
+                    <li>
+                        <a href="#">Customers</a>
+                    </li>
+                    <li>
+                        <a href="#">API</a>
+                    </li>
+                </ul>
+                <ul class="flex flex-col font-bold text-[14px] text-second_text_color md:col-span-full lg:col-span-2 xl:col-auto">
+                    <li class="mb-[20px] text-[16px] text-first_text_color">
+                        <h2>Get In Touch</h2>
+                    </li>
+                    <li>
+                        <form action="." method="post">
+                            <div class="flex rounded-[5px]">
+                                <label for="email" aria-label="enter your email for subscription"></label>
+                                <input class="xl:min-w-[320px] md:min-w-[260px] min-h-[58px] px-[20px] py-[15px]
+                                text-[14px] text-second_text_color leading-[28px] tracking-[0.2px] border-[1px]
+                                border-[#E6E6E6] rounded-l-[5px] bg-[#F9F9F9]" type="email" id="email" placeholder="Your e-mail"
+                                       autocomplete="off">
+                                <input class="min-w-[117px] min-h-[58px] px-[20px] py-[15px] text-[14px] leading-[28px]
+                                tracking-[0.2px] text-[#fff] rounded-r-[5px] border-solid border-third_text_color
+                                bg-third_text_color"  type="submit" value="Subscribe">
+                            </div>
+                        </form>
+                    </li>
+                    <li>
+                        <span class="block font-normal text-[12px]">Lore imp sum dolor Amit</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="bg-bg_light_gray">
+            <div class="max-w-[1440px] mx-auto px-[195px] xl:text-left md:text-center">
+                <span class="block font-bold text-[14px] text-second_text_color leading-[24px] tracking-[0.2px]
+                py-[25px]">
+                    Made With Love By Finland All Right Reserved
+                </span>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
