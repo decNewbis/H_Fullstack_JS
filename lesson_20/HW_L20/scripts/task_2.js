@@ -21,15 +21,15 @@ function getAnswer(msg, maxAnswer) {
 
 // ending story and breacking the loop
 function endStory() {
-    alive = false;
+    isAlive = false;
     alert(MSG_STORY_OVER);
 }
 
 // agree or disagree to start the story
 let isAgree = confirm('Ты готов начать нашу увлекательную историю путешестви рыцаря?');
 
-// alive: yes or not
-let alive = true;
+// isAlive: yes or not
+let isAlive = true;
 
 const INTRO = "В королевстве, где легенды оживают, молодой оруженосец по имени Люк мечтает стать рыцарем. " +
     "Он служит сир Роберту, рыцарю, который считает, что честь - это наивысшая благотворительность. " +
@@ -117,7 +117,7 @@ const ENDING_OF_STORY = [
 alert('Приветствую!\nСейчас мы побываем в фентезийной истори "Загадочная история Скайвокера в эпоху рыцарства", ' +
     'в которой можно повлиять на ход событий.');
 
-while (alive) {
+while (isAlive) {
     if (isAgree) {
         // start the story
         alert(INTRO);
@@ -131,7 +131,7 @@ while (alive) {
             secondChoice = +getAnswer(secondChoiceObj.value, 2);
             if (1 <= secondChoice && secondChoice <= 2) {
                 alert(secondChoiceObj.choicesList[secondChoice - 1]);
-                //check alive
+                //check isAlive
                 if (firstChoice === 3 && secondChoice === 1) {
                     alert(ENDING_OF_STORY[3]);
                     endStory();
