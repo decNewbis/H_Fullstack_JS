@@ -61,10 +61,18 @@ if (customerBudget) {
                 );
             } else {
                 affordableTrip = getAffordableTripInfo(TRIP_DICTIONARY, customerBudget);
-                alert(
-                    `К сожалению, вашего бюджета (${customerBudget}$) не достаточно для поездки в ${customerTrip}, ` +
-                `но вы можете выбрать другую страну из подходящих по стоимости к вашему бюджету: \n${affordableTrip}`
-                );
+                if (affordableTrip) {
+                    alert(
+                        `К сожалению, вашего бюджета (${customerBudget}$) не достаточно для поездки в ${customerTrip}, ` +
+                        `но вы можете выбрать другую страну из подходящих по стоимости к вашему бюджету: \n${affordableTrip}`
+                    );
+                } else {
+                    alert(
+                        `К сожалению, вашего бюджета (${customerBudget}$) не достаточно для какого либо из туров`
+                    );
+                    customerTrip = '';
+                    break;
+                }
                 // reset customerTrip value
                 customerTrip = '';
             }
