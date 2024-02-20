@@ -1,21 +1,17 @@
 // task 1
 
-function getAffordableTripInfo(objDict, budget) {
+function getAffordableTripInfo(objectDictionary, budget) {
     let resultString = '';
-    for (let key in objDict) {
-        if (objDict[key] <= +budget) {
-            resultString += `${key}: ${objDict[key]}$\n`
+    for (let key in objectDictionary) {
+        if (objectDictionary[key] <= +budget) {
+            resultString += `${key}: ${objectDictionary[key]}$\n`
         }
     }
     return resultString;
 }
 
-function getCountryNames(objDict) {
-    let resultList = [];
-    for (let key in objDict) {
-        resultList.push(key);
-    }
-    return resultList.join(', ');
+function getCountryNames(objectDictionary) {
+    return Object.keys(objectDictionary).join(', ');
 }
 
 function getCustomerBudget() {
@@ -32,7 +28,7 @@ function getCustomerTrip(countries) {
     );
 }
 
-let tripDict = {
+const TRIP_DICTIONARY = {
     'Ukraine': 500,
     'Italy': 1500,
     'Thailand': 1000,
@@ -42,7 +38,7 @@ let tripDict = {
     'France': 1700
 };
 
-let affordableTrip = getCountryNames(tripDict);
+let affordableTrip = getCountryNames(TRIP_DICTIONARY);
 let customerTrip;
 let tripCost;
 
@@ -56,7 +52,7 @@ if (customerBudget) {
             alert('Вы ничего не выбрали, попробуем в другой раз.');
             break;
         }
-        tripCost = tripDict[customerTrip];
+        tripCost = TRIP_DICTIONARY[customerTrip];
         if (tripCost) {
             if (tripCost <= +customerBudget) {
                 alert(
@@ -64,7 +60,7 @@ if (customerBudget) {
                     `хватит вашего бюджета (${customerBudget}$)`
                 );
             } else {
-                affordableTrip = getAffordableTripInfo(tripDict, customerBudget);
+                affordableTrip = getAffordableTripInfo(TRIP_DICTIONARY, customerBudget);
                 alert(
                     `К сожалению, вашего бюджета (${customerBudget}$) не достаточно для поездки в ${customerTrip}, ` +
                 `но вы можете выбрать другую страну из подходящих по стоимости к вашему бюджету: \n${affordableTrip}`
@@ -86,14 +82,14 @@ if (customerBudget) {
 
 // task 2
 
-let discountDict = {
+const DISCOUNT_DICTIONARY = {
     'NEWYEAR': 20,
     'BLACKFRIDAY': 30,
     'SUMMERSALE': 15
 }
 
 function totalCost(cost, discount, amount) {
-    let tempDiscount = discountDict[discount];
+    let tempDiscount = DISCOUNT_DICTIONARY[discount];
     let tempCost;
     if (tempDiscount) {
         tempCost = (cost * amount * (100 - tempDiscount) / 100);
