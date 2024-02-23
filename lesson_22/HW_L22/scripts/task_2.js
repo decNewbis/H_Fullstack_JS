@@ -52,7 +52,6 @@ function spinRoulette(tempBet, tempField) {
             message = 'Выпало Красное!';
             break;
     }
-    console.log(randomBlackOrRed, tempField);
     if (randomBlackOrRed === tempField) {
         tempBet *= 2;
         alert(`${message}\nПоздравляем, Вы выиграли и ваша ставка удваивается!`);
