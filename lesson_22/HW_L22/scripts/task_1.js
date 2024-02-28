@@ -2,7 +2,7 @@
 // list of leap years from 1900 to 2100
 
 let leapYear = [];
-let isAgree = confirm('Task 1\nДавайте составим список високосных лет и посчитаем их количество в ' +
+const isAgree = confirm('Task 1\nДавайте составим список високосных лет и посчитаем их количество в ' +
     'промежутке между 1900 годом и 2100 годом включительно.\n Вы готовы?')
 if (isAgree) {
     for (let currentYear = 1900; currentYear <= 2100; currentYear++) {

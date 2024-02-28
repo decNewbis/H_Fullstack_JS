@@ -1,6 +1,6 @@
 function convertMinutes(amountMinutes) {
     let days = Math.trunc(amountMinutes / (60 * 24));
-    let hours = Math.trunc(amountMinutes / 60);
+    let hours = Math.trunc((amountMinutes % (60 * 24)) / 60);
     let minutes = (amountMinutes % 60);
     return `${days}д ${hours}ч ${minutes}м`;
 }

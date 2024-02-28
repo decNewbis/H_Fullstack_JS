@@ -42,17 +42,9 @@ function getField() {
 
 function spinRoulette(tempBet, tempField) {
     // black = 0, red = 1
-    let randomBlackOrRed = Math.round(Math.random());
-    let message;
-    switch (randomBlackOrRed) {
-        case 0:
-            message = 'Выпало Черное!';
-            break;
-        case 1:
-            message = 'Выпало Красное!';
-            break;
-    }
-    if (randomBlackOrRed === tempField) {
+    const isRed = Math.round(Math.random());
+    const message = isRed ? 'Выпало Красное!' : 'Выпало Черное!'
+    if (isRed === tempField) {
         tempBet *= 2;
         alert(`${message}\nПоздравляем, Вы выиграли и ваша ставка удваивается!`);
     } else {
@@ -62,7 +54,7 @@ function spinRoulette(tempBet, tempField) {
     return tempBet;
 }
 
-let isAgree = confirm('Давай сыграем в увлекательную игру под названием "Рулетка"?');
+const isAgree = confirm('Давай сыграем в увлекательную игру под названием "Рулетка"?');
 if (isAgree) {
     let userBalance = getBalance();
     // set default min bet
