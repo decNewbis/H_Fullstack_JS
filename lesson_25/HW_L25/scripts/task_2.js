@@ -13,7 +13,7 @@ function moveOver(valueArr=[], position='') {
         }
         console.log(valueArr);
     } else {
-        console.log('Incorrect params!')
+        console.log('Incorrect params!');
     }
 }
 
