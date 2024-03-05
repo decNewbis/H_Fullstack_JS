@@ -2,9 +2,55 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        first_text_color: '#252B42',
+                        second_text_color: '#737373',
+                        third_text_color: '#23A6F0',
+                        bg_color_contacts : '#23856D',
+                        bg_light_gray: '#FAFAFA'
+                    },
+                    fontFamily: {
+                        'sans': ['"Montserrat", sans-serif'],
+                    },
+                    fontSize: {
+                        64: "64px"
+                    }
+                }
+            }
+        }
+    </script>
     <title>JS Introduction | HW lesson 19</title>
 </head>
 <body>
+<h1>hello</h1>
+    <header id="header"></header>
+<section id="publications"></section>
+    <footer id="footer"></footer>
     <script src="scripts/script.js"></script>
+    <script src="scripts/include.js"></script>
 </body>
 </html>
+
+
+<!--
+/
+- index.html
+- /scripts
+    - include.js
+- /templates
+    - footer_template.html
+- /assets
+    -/images
+- /scss
+    - variables.scss
+    - mixins.scss
+    - global.scss
+    - normalize.scss
+    - style.scss
+- /css
+    - style.css-->
