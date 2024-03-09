@@ -9,7 +9,8 @@ function roundValueToSecondNum(value) {
 function startAppV1() {
     const prices = [100, 200, 300, 400, 500];
     const priceIncreasePercentage = 1.1; // 1 + 10% / 100%
-    prices.forEach((price, index, arr) => {  // result: modified array
+    // result: modified array
+    prices.forEach((price, index, arr) => {
         arr[index] = roundValueToSecondNum(price * priceIncreasePercentage);
     })
     console.log('[V1] prices:', prices);
