@@ -19,7 +19,7 @@ function startApp() {
     const bookTitle = getBookTitle(targetValue, books);
 
     if (bookTitle) {
-        console.log(bookTitle);
+        console.log(`По запросу поиска по имени автора "${targetValue}", найдена книга: ${bookTitle}`);
     } else {
         console.log('Автор не найден в БД');
     }
