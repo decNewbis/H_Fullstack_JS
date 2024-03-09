@@ -21,7 +21,7 @@ function startApp() {
 
     ordersModule.addOrder(order1);
     ordersModule.addOrder(order2);
-    console.log('OrdersArray', ordersModule.getOrdersArray());  // checkpoint
+    console.log('Orders added. OrdersArray:', ordersModule.getOrdersArray());  // checkpoint
 
     console.log('Сумма замовлення для столу 1:', ordersModule.getTotalAmount(1));
     console.log('Сумма замовлення для столу 2:', ordersModule.getTotalAmount(2));
@@ -34,7 +34,7 @@ function startApp() {
     }`);
 
     ordersModule.cancelOrder(1);
-    console.log('OrdersArray', ordersModule.getOrdersArray());  // checkpoint
+    console.log('Order canceled. OrdersArray:', ordersModule.getOrdersArray());  // checkpoint
 }
 
 const ordersModule = function() {
