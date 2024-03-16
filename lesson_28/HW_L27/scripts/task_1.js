@@ -33,8 +33,8 @@ function CreateWeekObj(weekTemps) {
                 .join('-')
             })`;
         }
-        return null
-    }
+        return null;
+    };
 }
 
 function startApp() {
