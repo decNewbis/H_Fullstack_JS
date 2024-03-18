@@ -2,7 +2,7 @@
 
 function getAmountOfWorkDays(deadline) {
     let currentDate = new Date();
-    deadline.setHours(0,0 ,0 ,0);
+    deadline.setHours(0, 0, 0, 0);
 
     if (deadline <= currentDate) {
         return 'The deadline is overdue';
