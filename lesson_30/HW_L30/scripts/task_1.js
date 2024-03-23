@@ -81,10 +81,10 @@ function startApp() {
     }
 
     sportBike.__proto__ = bike;
-    sedan.__proto__ = bike;
+    scooter.__proto__ = bike;
     console.log('sportBike', sportBike);
     console.log('sportBike.__proto__', sportBike.__proto__);
-    console.log('scooter', sedan);
+    console.log('scooter', scooter);
     console.log('scooter.__proto__', scooter.__proto__);
 }
 
