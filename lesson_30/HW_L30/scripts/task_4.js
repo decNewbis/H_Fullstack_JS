@@ -22,8 +22,8 @@ function User(username, email) {
         console.log(`${this.username} was log out`);
     }
 }
+
 function Admin() {
-    this.id = idUsers();
     this.removeUser = function(userID, requesterID) {
         if (
             system.adminIDList.includes(requesterID)
@@ -73,11 +73,16 @@ const system = {
     }
 }
 
+function addAdminPrototype(obj, proto) {
+    Object.setPrototypeOf(obj, proto);
+}
+
 function startApp() {
     // create user 'admin'
-    Admin.prototype = new User('admin', 'admin@company.com');
-    const admin = new Admin();
-    const hackAdmin = new Admin();  // bad admin;
+    const admin = new User('admin', 'admin@company.com');
+    const hackAdmin = new User('hackAdmin', 'hackAdmin@company.com');  // bad admin;
+    addAdminPrototype(admin, new Admin());
+    addAdminPrototype(hackAdmin, new Admin());
     system.addUser(admin);
     system.setAsAdmin(admin.id);
     console.log('admin', admin);
