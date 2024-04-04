@@ -147,9 +147,7 @@ function startApp() {
     // create library
     const worldLibrary = new Library();
     // add books into library DB
-    for (let book of booksList) {
-        worldLibrary.addBook(book);
-    }
+    booksList.forEach((book) => worldLibrary.addBook(book));
     // remove book from library DB and add new book, test id generator
     worldLibrary.removeBook(8);
     booksList[8] = new Book('Harry Potter', 'Joan Rowling', 1997);
