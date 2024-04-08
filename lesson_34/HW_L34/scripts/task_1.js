@@ -1,14 +1,14 @@
 // task_1
 
 function startApp() {
-    const categoriesList = document.querySelectorAll('.categories__list')[0];
+    const categoriesList = document.querySelector('.categories__list');
     const categoriesItems = categoriesList.querySelectorAll('.categories__item');
 
     console.log('Numbers of categories:', categoriesItems.length);
     console.log('---');
     categoriesItems.forEach((element) => {
         console.log('Category:', element.querySelector('.categories__category-title').textContent);
-        const categoryList = element.querySelectorAll('.categories__category-list')[0].children;
+        const categoryList = element.querySelector('.categories__category-list').children;
         console.log('Elements:', categoryList.length);
 
         let longestElement = '';
