@@ -1,7 +1,7 @@
 // task_1
 
 function startApp() {
-    const categoriesList = document.querySelector('.categories__list');
+    const categoriesList = document.querySelector('ul#categories');
     const categoriesItems = categoriesList.querySelectorAll('.categories__item');
 
     console.log('Numbers of categories:', categoriesItems.length);
