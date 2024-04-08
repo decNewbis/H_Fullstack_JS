@@ -371,4 +371,30 @@ a {
   text-align: center;
 }
 
+.gallery__wrapper {
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 20px;
+}
+.gallery__wrapper h2 {
+  text-align: center;
+}
+.gallery__list {
+  display: grid;
+  justify-content: center;
+  gap: 8px;
+  grid-template-columns: repeat(4, 250px);
+  grid-template-rows: repeat(4, 250px);
+  border-radius: 40px;
+  overflow: hidden;
+  box-shadow: 14px 12px 18px 7px rgba(0, 0, 255, 0.2);
+}
+.gallery__item {
+  background: none;
+}
+.gallery__item img {
+  max-width: 250px;
+  max-height: 250px;
+}
+
 /*# sourceMappingURL=styles.css.map */
