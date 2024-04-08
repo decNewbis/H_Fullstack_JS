@@ -1,5 +1,12 @@
 // task_2
 
+function shuffle(tempList) {
+    for (let currentIndex = tempList.length - 1; currentIndex >= 1; currentIndex--) {
+        const futureIndex = Math.floor(Math.random() * (currentIndex + 1));
+        [tempList[currentIndex], tempList[futureIndex]] = [tempList[futureIndex], tempList[currentIndex]];
+    }
+}
+
 function startApp() {
     const images = [
         {src: './assets/1.jpg', alt: 'photo of leopard 1'}, {src: './assets/2.jpg', alt: 'photo of leopard 2'},
@@ -11,6 +18,8 @@ function startApp() {
         {src: './assets/13.jpg', alt: 'photo of leopard 13'}, {src: './assets/14.jpg', alt: 'photo of leopard 14'},
         {src: './assets/15.jpg', alt: 'photo of leopard 15'}, {src: './assets/16.jpg', alt: 'photo of leopard 16'}
     ]
+
+    shuffle(images);
 
     const section = document.createElement('section');
     section.className = 'gallery';
