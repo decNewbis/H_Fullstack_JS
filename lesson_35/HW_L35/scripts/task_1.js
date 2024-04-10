@@ -10,24 +10,24 @@ function shuffle(tempList) {
 function createSection(images) {
     const section = document.createElement('section');
     section.className = 'gallery';
-    const wrapper = document.createElement('div');
-    wrapper.className = 'gallery__wrapper';
-    const sectionTitle = document.createElement('h2');
-    sectionTitle.textContent = 'Grid of gallery';
-    const galleryList = document.createElement('ul');
-    galleryList.className = 'gallery__list';
-    section.append(wrapper);
-    wrapper.append(sectionTitle, galleryList);
-    images.forEach((element) => {
-        const galleryItem = document.createElement('li');
-        galleryItem.className = 'gallery__item';
-        galleryItem.innerHTML = `<img src="${element.src}" alt="${element.alt}">`;
-        galleryList.append(galleryItem);
-    })
+    section.innerHTML = `
+        <div class="gallery__wrapper">
+            <h2>Grid of gallery</h2>
+            <ul class="gallery__list">
+            ${images.map((element) => {
+                return (`
+                    <li class="gallery__item">
+                        <img src="${element.src}"  alt="${element.alt}">
+                    </li>
+                `);
+            }).join('')}
+            </ul>
+        </div>
+    `;
     const main = document.querySelector('main');
     main.append(section);
 
-    wrapper.addEventListener('click', () => {
+    section.addEventListener('click', () => {
         main.innerHTML = '';
         shuffle(images);
         createSection(images);
