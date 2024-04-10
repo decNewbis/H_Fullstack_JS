@@ -39,8 +39,8 @@ function createSection(images) {
     `;
     const main = document.querySelector('main');
     main.append(section);
-
-    section.addEventListener('click', () => {
+    const h2Title = document.querySelector('.gallery__wrapper > h2');
+    h2Title.addEventListener('click', () => {
         main.innerHTML = '';
         shuffle(images);
         createSection(images);
