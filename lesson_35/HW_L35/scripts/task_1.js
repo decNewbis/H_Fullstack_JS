@@ -7,6 +7,17 @@ function shuffle(tempList) {
     }
 }
 
+function getRandomDate(start, end) {
+    const date = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+    return `${
+        String(date.getDate()).padStart(2, '0')
+    }-${
+        String(date.getMonth()+1).padStart(2, '0')
+    }-${
+        String(date.getFullYear()).padStart(4, '0')
+    }`;
+}
+
 function createSection(images) {
     const section = document.createElement('section');
     section.className = 'gallery';
@@ -17,7 +28,9 @@ function createSection(images) {
             ${images.map((element) => {
                 return (`
                     <li class="gallery__item">
-                        <img src="${element.src}"  alt="${element.alt}">
+                        <img src="${element.src}"  alt="${element.alt}" data-public-date="${
+                            getRandomDate(new Date(2023, 0, 1), new Date())
+                        }">
                     </li>
                 `);
             }).join('')}
