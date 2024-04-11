@@ -1,4 +1,4 @@
-// task_2
+// task_1
 
 class Gallery {
     constructor(images) {
