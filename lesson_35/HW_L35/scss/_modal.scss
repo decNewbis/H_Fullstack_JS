@@ -8,13 +8,16 @@
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   text-align: center;
-
   &__content {
     background-color: #fff;
     margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
+    border-radius: 35px;
     min-width: 25%;
+  }
+  &__img {
+    border-radius: 20px;
   }
 }
 

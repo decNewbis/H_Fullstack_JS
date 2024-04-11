@@ -6,9 +6,9 @@ class Gallery {
         this.modal = document.getElementById('modal');
         this.closeModalBtn = document.querySelector('.close');
         this.modalContent = this.modal.querySelector('.modal__content');
-        this.modalImg = this.modal.querySelector('.modal__content > img.modalImg');
-        this.modalAlt = this.modal.querySelector('.modal__content > h2.modalTitle');
-        this.modalDate = this.modal.querySelector('.modal__content > p.modalDate');
+        this.modalImg = this.modal.querySelector('.modal__content > img.modal__img');
+        this.modalAlt = this.modal.querySelector('.modal__content > h2.modal__title');
+        this.modalDate = this.modal.querySelector('.modal__content > p.modal__date');
         this.sectionGallery = document.getElementById('gallery');
         this.wrapper = document.createElement('div');
 

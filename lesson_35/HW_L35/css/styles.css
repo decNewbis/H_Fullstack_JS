@@ -413,7 +413,11 @@ a {
   margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
+  border-radius: 35px;
   min-width: 25%;
+}
+.modal__img {
+  border-radius: 20px;
 }
 
 .close {
