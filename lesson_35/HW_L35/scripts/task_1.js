@@ -1,73 +1,89 @@
 // task_2
 
-function shuffle(tempList) {
-    for (let currentIndex = tempList.length - 1; currentIndex >= 1; currentIndex--) {
-        const futureIndex = Math.floor(Math.random() * (currentIndex + 1));
-        [tempList[currentIndex], tempList[futureIndex]] = [tempList[futureIndex], tempList[currentIndex]];
+class Gallery {
+    constructor(images) {
+        this.imagesArr = images;
+        this.modal = document.getElementById('modal');
+        this.closeModalBtn = document.querySelector('.close');
+        this.modalContent = this.modal.querySelector('.modal__content');
+        this.modalImg = this.modal.querySelector('.modal__content > img.modalImg');
+        this.modalAlt = this.modal.querySelector('.modal__content > h2.modalTitle');
+        this.modalDate = this.modal.querySelector('.modal__content > p.modalDate');
+        this.sectionGallery = document.getElementById('gallery');
+        this.wrapper = document.createElement('div');
+
     }
-}
 
-function getRandomDate(start, end) {
-    const date = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
-    return `${
-        String(date.getDate()).padStart(2, '0')
-    }-${
-        String(date.getMonth()+1).padStart(2, '0')
-    }-${
-        String(date.getFullYear()).padStart(4, '0')
-    }`;
-}
+    shuffle(tempList) {
+        for (let currentIndex = tempList.length - 1; currentIndex >= 1; currentIndex--) {
+            const futureIndex = Math.floor(Math.random() * (currentIndex + 1));
+            [tempList[currentIndex], tempList[futureIndex]] = [tempList[futureIndex], tempList[currentIndex]];
+        }
+    }
 
-function toCapitalize(str) {
-    return `${str.charAt(0).toUpperCase()}${str.slice(1)}`;
-}
+    getRandomDate(start, end) {
+        const date = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+        return `${
+            String(date.getDate()).padStart(2, '0')
+        }-${
+            String(date.getMonth() + 1).padStart(2, '0')
+        }-${
+            String(date.getFullYear()).padStart(4, '0')
+        }`;
+    }
 
-function fillSection(images) {
-    const wrapper = document.createElement('div');
-    wrapper.className = 'gallery__wrapper';
-    wrapper.innerHTML = `
-        <h2>Grid of gallery</h2>
-        <ul class="gallery__list">
-        ${images.map((element) => {
+    toCapitalize(str) {
+        return `${str.charAt(0).toUpperCase()}${str.slice(1)}`;
+    }
+
+    fillSection() {
+        this.wrapper.className = 'gallery__wrapper';
+        this.wrapper.innerHTML = `
+            <h2 id="randomizer">Grid of gallery</h2>
+            <ul class="gallery__list">
+            ${this.imagesArr.map((element) => {
             return (`
-                <li class="gallery__item">
-                    <img src="${element.src}"  alt="${element.alt}" data-public-date="${
-                        getRandomDate(new Date(2023, 0, 1), new Date())
-                    }">
-                </li>
-            `);
+                    <li class="gallery__item">
+                        <img src="${element.src}"  alt="${element.alt}" data-public-date="${
+                this.getRandomDate(new Date(2023, 0, 1), new Date())
+            }">
+                    </li>
+                `);
         }).join('')}
-        </ul>
-    `;
-    const sectionGallery = document.getElementById('gallery');
-    sectionGallery.append(wrapper);
+            </ul>
+        `;
 
-    wrapper.addEventListener('click', (event) => {
-        if (event.target.matches('h2')) {
-            sectionGallery.innerHTML = '';
-            shuffle(images);
-            fillSection(images);
-        }
-        if (event.target.matches('img')) {
-            modal.style.display = 'inline-block';
-            // modal.querySelector('.modal__content').style.display = 'inline-block';
-            const modalContent = modal.querySelector('.modal__content');
-            const modalImg = modal.querySelector('.modal__content > img');
-            const modalAlt = modal.querySelector('.modal__content > h2');
-            const modalDate = modal.querySelector('.modal__content > p');
-            modalContent.style.display = 'inline-block';
-            modalImg.setAttribute('src', event.target.getAttribute('src'));
-            modalAlt.textContent = toCapitalize(event.target.getAttribute('alt'));
-            modalDate.textContent = `Publication date: ${event.target.dataset.publicDate}`;
-        }
-    });
+        this.sectionGallery.append(this.wrapper);
+    }
 
-    const modal = document.getElementById('modal');
-    const closeModalBtn = document.querySelector('.close');
+    addWrapperEvent() {
+        this.wrapper.addEventListener('click', (event) => {
+            if (event.target.matches('h2#randomizer')) {
+                this.sectionGallery.innerHTML = '';
+                this.shuffle(this.imagesArr);
+                this.fillSection(this.imagesArr);
+                this.addCloseModalEvent();
+            }
+            if (event.target.matches('img')) {
+                this.modal.style.display = 'inline-block';
+                this.modalContent.style.display = 'inline-block';
+                this.modalImg.setAttribute('src', event.target.getAttribute('src'));
+                this.modalAlt.textContent = this.toCapitalize(event.target.getAttribute('alt'));
+                this.modalDate.textContent = `Publication date: ${event.target.dataset.publicDate}`;
+            }
+        });
+    }
 
-    closeModalBtn.addEventListener('click', () => {
-        modal.style.display = 'none';
-    });
+    addCloseModalEvent() {
+        this.closeModalBtn.addEventListener('click', () => {
+            this.modal.style.display = 'none';
+        });
+    }
+
+    addAllEvents() {
+        this.addWrapperEvent();
+        this.addCloseModalEvent();
+    }
 }
 
 function startApp() {
@@ -82,7 +98,9 @@ function startApp() {
         {src: './assets/15.jpg', alt: 'photo of leopard 15'}, {src: './assets/16.jpg', alt: 'photo of leopard 16'}
     ]
 
-    fillSection(images);
+    const gallery = new Gallery(images);
+    gallery.fillSection();
+    gallery.addAllEvents();
 }
 
 startApp();
