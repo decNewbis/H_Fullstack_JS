@@ -18,32 +18,55 @@ function getRandomDate(start, end) {
     }`;
 }
 
-function createSection(images) {
-    const section = document.createElement('section');
-    section.className = 'gallery';
-    section.innerHTML = `
-        <div class="gallery__wrapper">
-            <h2>Grid of gallery</h2>
-            <ul class="gallery__list">
-            ${images.map((element) => {
-                return (`
-                    <li class="gallery__item">
-                        <img src="${element.src}"  alt="${element.alt}" data-public-date="${
-                            getRandomDate(new Date(2023, 0, 1), new Date())
-                        }">
-                    </li>
-                `);
-            }).join('')}
-            </ul>
-        </div>
+function toCapitalize(str) {
+    return `${str.charAt(0).toUpperCase()}${str.slice(1)}`;
+}
+
+function fillSection(images) {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'gallery__wrapper';
+    wrapper.innerHTML = `
+        <h2>Grid of gallery</h2>
+        <ul class="gallery__list">
+        ${images.map((element) => {
+            return (`
+                <li class="gallery__item">
+                    <img src="${element.src}"  alt="${element.alt}" data-public-date="${
+                        getRandomDate(new Date(2023, 0, 1), new Date())
+                    }">
+                </li>
+            `);
+        }).join('')}
+        </ul>
     `;
-    const main = document.querySelector('main');
-    main.append(section);
-    const h2Title = document.querySelector('.gallery__wrapper > h2');
-    h2Title.addEventListener('click', () => {
-        main.innerHTML = '';
-        shuffle(images);
-        createSection(images);
+    const sectionGallery = document.getElementById('gallery');
+    sectionGallery.append(wrapper);
+
+    wrapper.addEventListener('click', (event) => {
+        if (event.target.matches('h2')) {
+            sectionGallery.innerHTML = '';
+            shuffle(images);
+            fillSection(images);
+        }
+        if (event.target.matches('img')) {
+            modal.style.display = 'inline-block';
+            // modal.querySelector('.modal__content').style.display = 'inline-block';
+            const modalContent = modal.querySelector('.modal__content');
+            const modalImg = modal.querySelector('.modal__content > img');
+            const modalAlt = modal.querySelector('.modal__content > h2');
+            const modalDate = modal.querySelector('.modal__content > p');
+            modalContent.style.display = 'inline-block';
+            modalImg.setAttribute('src', event.target.getAttribute('src'));
+            modalAlt.textContent = toCapitalize(event.target.getAttribute('alt'));
+            modalDate.textContent = `Publication date: ${event.target.dataset.publicDate}`;
+        }
+    });
+
+    const modal = document.getElementById('modal');
+    const closeModalBtn = document.querySelector('.close');
+
+    closeModalBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
     });
 }
 
@@ -59,7 +82,7 @@ function startApp() {
         {src: './assets/15.jpg', alt: 'photo of leopard 15'}, {src: './assets/16.jpg', alt: 'photo of leopard 16'}
     ]
 
-    createSection(images);
+    fillSection(images);
 }
 
 startApp();
