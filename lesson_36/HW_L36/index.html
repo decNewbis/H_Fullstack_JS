@@ -25,6 +25,27 @@
             </div>
         </section>
     </main>
+    <div id="modal" class="modal">
+        <form class="modal__content">
+            <div class="close__wrapper">
+                <span class="close close-event">&times;</span>
+            </div>
+            <ul class="modal__content-list">
+                <li class="modal__content-item">
+                    <label for="diameter">Input diameter:</label>
+                    <input id="diameter" type="number" placeholder="5-1024" min="5" max="1024" value="20">
+                </li>
+                <li class="modal__content-item">
+                    <label for="color">Input color:</label>
+                    <input id="color" type="color" value="#000000">
+                </li>
+                <li class="modal__content-item">
+                    <button class="close-event" type="reset">Cancel</button>
+                    <button id="updateBtn" type="submit">Update</button>
+                </li>
+            </ul>
+        </form>
+    </div>
     <script src="scripts/task_2.js"></script>
 </body>
 </html>
