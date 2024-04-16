@@ -1,0 +1,40 @@
+body {
+  background-color: #eaeaea;
+}
+
+.header {
+  &__wrapper {
+    max-width: 1024px;
+    margin: 0 auto;
+  }
+}
+
+.canvas-painting {
+  &__wrapper {
+    max-width: 1024px;
+    padding: 10px;
+    margin: 0 auto 50px;
+  }
+  &__area {
+    min-width: 1000px;
+    min-height: 1000px;
+    border: 2px solid #aaa;
+    background-color: #fff;
+  }
+  &__palette {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding: 10px;
+    margin: 5px;
+    max-width: 300px;
+    min-height: 25px;
+    border: 1px solid #000;
+  }
+}
+.circle {
+  //width: 25px;
+  //height: 25px;
+  border-radius: 50%;
+  //background-color: #4F5665;
+}
