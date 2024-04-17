@@ -11,12 +11,17 @@ function parseRGB(value) {
     }).join('')}`;
 }
 
+function resetForm() {
+    pageObj.modalForm.reset();
+    pageObj.modal.style.display = 'none';
+}
+
 function setProperties(event) {
     event.preventDefault();
     const minDiameterValue = 5;
     const maxDiameterValue = 1024;
-    let newDiameter = document.getElementById('diameter').value;
-    const newColor = document.getElementById('color').value;
+    let newDiameter = pageObj.modalElementDiameter.value;
+    const newColor = pageObj.modalElementColor.value;
     if (newDiameter < minDiameterValue) {
         newDiameter = 5;
     } else if (newDiameter > maxDiameterValue) {
@@ -25,88 +30,76 @@ function setProperties(event) {
     this.currentCircle.style.width = `${newDiameter}px`;
     this.currentCircle.style.height = `${newDiameter}px`;
     this.currentCircle.style.backgroundColor = `${newColor}`;
-    // this.currentCircle.style.opacity = 0.5;
-    this.modal.style.display = 'none';
+    resetForm();
 }
 
 function openProperties(event) {
     event.preventDefault();
-    const modal = document.getElementById('modal');
     const currentCircle = this;
-    const updateBtn = document.getElementById('updateBtn');
-    modal.style.display = 'flex';
-    document.getElementById('diameter').setAttribute(
+    pageObj.modal.style.display = 'flex';
+    pageObj.modalElementDiameter.setAttribute(
         'value',
         `${parseInt(currentCircle.style.width)}`
     );
-    document.getElementById('color').setAttribute(
+    pageObj.modalElementColor.setAttribute(
         'value',
         parseRGB(currentCircle.style.backgroundColor)
     );
-    const setProp = setProperties.bind({currentCircle: currentCircle, modal: modal});
-    updateBtn.addEventListener('click', setProp, {once: true});
-    const closeModalBtn = document.querySelectorAll('.close-event');
-    closeModalBtn.forEach((element) => {
+    const setProp = setProperties.bind({currentCircle: currentCircle});
+    pageObj.updateBtn.addEventListener('click', setProp, {once: true});
+    pageObj.closeModalBtn.forEach((element) => {
         element.addEventListener('click', closeEvent.bind(
-            {updateBtn: updateBtn, setProperties: setProp}),
+            {elementOfEvent: pageObj.updateBtn, funcOfEvent: setProp}),
             {once: true}
         );
     });
     document.addEventListener('keydown', (event) => {
         if (event.key === 'Escape') {
-            closeEvent.bind({updateBtn: updateBtn, setProperties: setProp})();
+            closeEvent.bind({elementOfEvent: pageObj.updateBtn, funcOfEvent: setProp})();
         }
     }, {once: true});
 }
 
 function onMobileMode(event) {
-    const currentDiameter = parseInt(this.currentCircle.style.width);
-    this.currentCircle.style.left = `${event.pageX - currentDiameter / 2}px`;
-    this.currentCircle.style.top = `${event.pageY - currentDiameter / 2}px`;
+    this.currentCircle.style.left = `${event.pageX - this.currentRadius}px`;
+    this.currentCircle.style.top = `${event.pageY - this.currentRadius}px`;
 }
 
-function offMobileMode(event) {
+function offMobileMode() {
     this.elementOfEvent.removeEventListener('mousemove', this.funcOfEvent);
     this.currentCircle.style.pointerEvents = 'auto';
     this.currentCircle.style.zIndex = 'unset';
 }
 
 function setMobileMode(event) {
-    const paintingArea = document.getElementById('paintingArea');
     const currentCircle = this.currentCircle;
     currentCircle.style.position = 'absolute';
-    const currentDiameter = parseInt(this.currentCircle.style.width);
-    currentCircle.style.left = `${event.pageX - currentDiameter / 2}px`;
-    currentCircle.style.top = `${event.pageY - currentDiameter / 2}px`;
+    const currentRadius = parseInt(this.currentCircle.style.width) / 2;
+    currentCircle.style.left = `${event.pageX - currentRadius}px`;
+    currentCircle.style.top = `${event.pageY - currentRadius}px`;
     currentCircle.style.opacity = '0.5';
     currentCircle.style.zIndex = '5';
     this.currentCircle.style.pointerEvents = 'none';
-    // const setOnMobileMode = onMobileMode.bind({currentCircle: currentCircle});
-    const setOnMobileMode = onMobileMode.bind({currentCircle: currentCircle});
-    // currentCircle.addEventListener('mousemove', setOnMobileMode);
-    paintingArea.addEventListener('mousemove', setOnMobileMode);
+    const setOnMobileMode = onMobileMode.bind({currentCircle: currentCircle, currentRadius: currentRadius});
+    pageObj.paintingArea.addEventListener('mousemove', setOnMobileMode);
     document.addEventListener('keydown', (event) => {
         if (event.key === 'Escape') {
             offMobileMode.bind({
-                elementOfEvent: paintingArea,
+                elementOfEvent: pageObj.paintingArea,
                 funcOfEvent: setOnMobileMode,
                 currentCircle: currentCircle
             })();
         }
     },{once: true});
-    // const paintingArea = document.getElementById('paintingArea');
-    paintingArea.addEventListener('mouseleave', (event) => {
+    pageObj.paintingArea.addEventListener('mouseleave', () => {
             offMobileMode.bind({
-                elementOfEvent: paintingArea,
+                elementOfEvent: pageObj.paintingArea,
                 funcOfEvent: setOnMobileMode,
                 currentCircle: currentCircle})();
     }, {once: true});
-
-    // this.currentCircle.style.left = `${event.pageX - currentDiameter / 2}px`;
-    // this.currentCircle.style.top = `${event.pageY - currentDiameter / 2}px`;
 }
 
-function createCircle(event) {
+function createCircle() {
     const circle = document.createElement('div');
     const radius = randomNum(10, 100);
     circle.className = 'circle';
@@ -116,19 +109,28 @@ function createCircle(event) {
     circle.style.height = `${radius}px`;
     circle.addEventListener('contextmenu', openProperties);
     circle.addEventListener('click', setMobileMode.bind({currentCircle: circle}));
-    const palette = document.getElementById('paintingPalette');
-    palette.append(circle);
-}
-
-const closeEvent = function() {
-    const modal = document.getElementById('modal');
-    modal.style.display = 'none';
-    this.updateBtn.removeEventListener('click', this.setProperties);
+    pageObj.palette.append(circle);
 }
 
 function startApp() {
-    const paintingArea = document.getElementById('paintingArea');
-    paintingArea.addEventListener('dblclick', createCircle);
+    pageObj.paintingArea.addEventListener('dblclick', createCircle);
 }
+
+const closeEvent = function() {
+    resetForm();
+    this.elementOfEvent.removeEventListener('click', this.funcOfEvent);
+}
+
+
+const pageObj = {
+    paintingArea: document.getElementById('paintingArea'),
+    palette: document.getElementById('paintingPalette'),
+    modal: document.getElementById('modal'),
+    modalForm: this.modal.querySelector('form.modal__content'),
+    modalElementDiameter: document.getElementById('diameter'),
+    modalElementColor: document.getElementById('color'),
+    updateBtn: document.getElementById('updateBtn'),
+    closeModalBtn: document.querySelectorAll('.close-event'),
+};
 
 startApp();
