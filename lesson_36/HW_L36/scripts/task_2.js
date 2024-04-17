@@ -51,6 +51,11 @@ function openProperties(event) {
     closeModalBtn.forEach((element) => {
         element.addEventListener('click', closeEvent.bind({updateBtn: updateBtn, setProperties: setProp}), {once: true});
     });
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+            closeEvent.bind({updateBtn: updateBtn, setProperties: setProp})();
+        }
+    }, {once: true})
     console.log('setProperties');
 }
 
