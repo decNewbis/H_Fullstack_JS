@@ -19,9 +19,6 @@ ul {
 
     &-field {
       width: 370px;
-      border: 1px solid #aaa;
-      border-radius: 4px;
-      outline-color: #aaa;
       padding: 2px 5px;
     }
     &-button {
@@ -77,4 +74,10 @@ ul {
       background-color: #ff0000;
     }
   }
+}
+
+.borders-extra-param {
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  outline-color: #aaa;
 }
