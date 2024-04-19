@@ -26,11 +26,31 @@ function addTodoItem() {
     saveTodo();
 }
 
+function loadTodo() {
+    pageObj.listArray = JSON.parse(localStorage.getItem('listOfTodo')) || [];
+    if (pageObj.listArray) {
+        pageObj.listArray.forEach((element) => {
+            const listItemContentTemplate = `
+                <span class="todo__content">
+                    ${element}
+                </span>
+                <div class="todo__content-btnBar">
+                    <button class="todo__content-editBtn">✏️</button>
+                    <button class="todo__content-applyBtn">✔️</button>
+                    <button class="todo__content-deleteBtn">🗑️</button>
+                </div>
+                `;
+            const listItem = document.createElement('li');
+            listItem.className = 'todo__item';
+            listItem.innerHTML = listItemContentTemplate;
+            pageObj.todoList.prepend(listItem);
+        });
+    }
+}
+
 function startApp() {
     pageObj.addTodoBtn.addEventListener('click', addTodoItem);
-    const a = JSON.stringify({a: 'asdsdad', b: 'lknkjdfhg'});
-    console.log(a);
-    console.log(JSON.parse(a));
+    loadTodo();
 }
 
 const pageObj = {
