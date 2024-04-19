@@ -4,7 +4,6 @@ function saveTodo() {
     localStorage.setItem('listOfTodo', JSON.stringify(pageObj.listArrayOfContent));
 }
 
-
 function deleteCurrentTodo() {
     const textContent = this.listItem.querySelector('span.todo__content').textContent.trim();
     const indexOfCurrentContent = pageObj.listArrayOfContent.indexOf(textContent);
@@ -13,30 +12,6 @@ function deleteCurrentTodo() {
         pageObj.listArrayOfContent.splice(indexOfCurrentContent, 1);
     }
     this.listItem.remove();
-    saveTodo();
-}
-
-function addTodoItem() {
-    if (!pageObj.inputField.value) { return }
-    const value = pageObj.inputField.value.trim();
-    const listItemContentTemplate = `
-    <span class="todo__content">
-        ${value}
-    </span>
-    <div class="todo__content-btnBar">
-        <button class="todo__content-editBtn">✏️</button>
-        <button class="todo__content-applyBtn">✔️</button>
-        <button class="todo__content-deleteBtn">🗑️</button>
-    </div>
-    `;
-    const listItem = document.createElement('li');
-    listItem.className = 'todo__item';
-    listItem.innerHTML = listItemContentTemplate;
-    const deleteBtn = listItem.querySelector('button.todo__content-deleteBtn');
-    deleteBtn.addEventListener('click', deleteCurrentTodo.bind({listItem: listItem}));
-    pageObj.todoList.prepend(listItem);
-    pageObj.listArrayOfContent.push(value);
-    pageObj.inputField.value = '';
     saveTodo();
 }
 
@@ -68,13 +43,41 @@ function editCurrentTodo() {
         this.applyBtn.style.display = 'none';
     }, {once: true});
     this.listItem.addEventListener('focusout', (event) => {
-        editArea.remove();
-        console.log(this.listItem);
-        this.listItem.prepend(content);
-        this.editBtn.style.display = 'block';
-        this.deleteBtn.style.display = 'block';
-        this.applyBtn.style.display = 'none';
+        const currentTarget = event.currentTarget;
+        const relatedTarget = event.relatedTarget;
+        if (!currentTarget.contains(relatedTarget)) {
+            editArea.remove();
+            console.log(this.listItem);
+            this.listItem.prepend(content);
+            this.editBtn.style.display = 'block';
+            this.deleteBtn.style.display = 'block';
+            this.applyBtn.style.display = 'none';
+        }
     }, {once: true});
+}
+
+function addTodoItem() {
+    if (!pageObj.inputField.value) { return }
+    const value = pageObj.inputField.value.trim();
+    const listItemContentTemplate = `
+    <span class="todo__content">
+        ${value}
+    </span>
+    <div class="todo__content-btnBar">
+        <button class="todo__content-editBtn">✏️</button>
+        <button class="todo__content-applyBtn">✔️</button>
+        <button class="todo__content-deleteBtn">🗑️</button>
+    </div>
+    `;
+    const listItem = document.createElement('li');
+    listItem.className = 'todo__item';
+    listItem.innerHTML = listItemContentTemplate;
+    const deleteBtn = listItem.querySelector('button.todo__content-deleteBtn');
+    deleteBtn.addEventListener('click', deleteCurrentTodo.bind({listItem: listItem}));
+    pageObj.todoList.prepend(listItem);
+    pageObj.listArrayOfContent.push(value);
+    pageObj.inputField.value = '';
+    saveTodo();
 }
 
 function loadTodo() {
