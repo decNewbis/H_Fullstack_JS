@@ -1,0 +1,80 @@
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.todo {
+  &__wrapper {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  &__input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    margin: 0 0 25px;
+
+    &-field {
+      width: 370px;
+      border: 1px solid #aaa;
+      border-radius: 4px;
+      outline-color: #aaa;
+      padding: 2px 5px;
+    }
+    &-button {
+      padding: 0;
+      width: 24px;
+      height: 24px;
+      border-radius: 4px;
+      border: 0;
+      background-color: #20c1cf;
+    }
+  }
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 4px;
+    background-color: #edebeb;
+    padding: 8px;
+
+    &:hover .todo__content-editBtn, &:hover .todo__content-applyBtn, &:hover .todo__content-deleteBtn {
+      opacity: 1;
+      transition: 0.2s linear;
+    }
+  }
+  &__content {
+    display: flex;
+    max-width: 300px;
+
+    &-btnBar {
+      display: flex;
+      gap: 10px;
+    }
+    &-editBtn, &-applyBtn, &-deleteBtn {
+      padding: 0;
+      width: 24px;
+      height: 24px;
+      border-radius: 4px;
+      border: 0;
+      opacity: 0;
+    }
+    &-editBtn, &-applyBtn {
+      background-color: #059305;
+    }
+    &-applyBtn {
+      display: none;
+    }
+    &-deleteBtn {
+      background-color: #ff0000;
+    }
+  }
+}
