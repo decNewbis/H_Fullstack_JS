@@ -9,29 +9,36 @@
     <title>ToDo list | HW lesson 37</title>
 </head>
 <body>
-<header>
-    <h1>ToDo list</h1>
-</header>
-<section class="todo">
-    <div class="todo__wrapper">
-        <div class="todo__input">
-            <input type="text" class="todo__input-field" placeholder="Add ToDo">
-            <button class="todo__input-button">➕</button>
-        </div>
-        <ul class="todo__list">
-            <li class="todo__item">
-                <span class="todo__content">test todo itemtest todo itemtest todo itemtest todo itemtest todo itemtest todo itemtest todo item</span>
-                <div class="todo__content-btnBar">
-                    <button class="todo__content-editBtn">✏️</button>
-                    <button class="todo__content-applyBtn">✔️</button>
-                    <button class="todo__content-deleteBtn">🗑️</button>
+    <header>
+        <h1>ToDo list | HW lesson 37</h1>
+    </header>
+    <main>
+        <section class="todo">
+            <div class="todo__wrapper">
+                <h2>ToDo list</h2>
+                <div class="todo__input">
+                    <input id="inputField" type="text" class="todo__input-field" placeholder="Add ToDo">
+                    <button id="addTodo" class="todo__input-button">➕</button>
                 </div>
-            </li>
-            <li class="todo__item"><span>test todo item</span></li>
-            <li class="todo__item"><span>test todo item</span></li>
-        </ul>
-    </div>
-</section>
-<script src="./scripts/todoList.js"></script>
+                <ul id="todoList" class="todo__list">
+                    <li class="todo__item">
+                        <span class="todo__content">
+                            test todo itemtest todo itemtest
+                            todo itemtest todo itemtest todo
+                            itemtest todo itemtest todo item
+                        </span>
+                        <div class="todo__content-btnBar">
+                            <button class="todo__content-editBtn">✏️</button>
+                            <button class="todo__content-applyBtn">✔️</button>
+                            <button class="todo__content-deleteBtn">🗑️</button>
+                        </div>
+                    </li>
+                    <li class="todo__item"><span>test todo item</span></li>
+                    <li class="todo__item"><span>test todo item</span></li>
+                </ul>
+            </div>
+        </section>
+    </main>
+    <script src="./scripts/todoList.js"></script>
 </body>
 </html>
