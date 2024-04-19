@@ -20,6 +20,7 @@ function editCurrentTodo() {
     const editArea = document.createElement('input');
     const indexOfCurrentContent = pageObj.listArrayOfContent.indexOf(textContent);
     editArea.setAttribute('type', 'text');
+    editArea.style.minWidth = '332px';
     editArea.className = content.className;
     editArea.classList.toggle('borders-extra-param');
     editArea.value = textContent;
