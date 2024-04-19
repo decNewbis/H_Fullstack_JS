@@ -7,7 +7,6 @@ function saveTodo() {
 function deleteCurrentTodo() {
     const textContent = this.listItem.querySelector('span.todo__content').textContent.trim();
     const indexOfCurrentContent = pageObj.listArrayOfContent.indexOf(textContent);
-    console.log(indexOfCurrentContent);
     if (indexOfCurrentContent !== -1) {
         pageObj.listArrayOfContent.splice(indexOfCurrentContent, 1);
     }
@@ -42,12 +41,12 @@ function editCurrentTodo() {
         this.deleteBtn.style.display = 'block';
         this.applyBtn.style.display = 'none';
     }, {once: true});
+    // cancel changes
     this.listItem.addEventListener('focusout', (event) => {
         const currentTarget = event.currentTarget;
         const relatedTarget = event.relatedTarget;
         if (!currentTarget.contains(relatedTarget)) {
             editArea.remove();
-            console.log(this.listItem);
             this.listItem.prepend(content);
             this.editBtn.style.display = 'block';
             this.deleteBtn.style.display = 'block';
@@ -56,35 +55,8 @@ function editCurrentTodo() {
     }, {once: true});
 }
 
-function addTodoItem() {
-    if (!pageObj.inputField.value) { return }
-    const value = pageObj.inputField.value.trim();
+function createListItemStructure(value) {
     const listItemContentTemplate = `
-    <span class="todo__content">
-        ${value}
-    </span>
-    <div class="todo__content-btnBar">
-        <button class="todo__content-editBtn">✏️</button>
-        <button class="todo__content-applyBtn">✔️</button>
-        <button class="todo__content-deleteBtn">🗑️</button>
-    </div>
-    `;
-    const listItem = document.createElement('li');
-    listItem.className = 'todo__item';
-    listItem.innerHTML = listItemContentTemplate;
-    const deleteBtn = listItem.querySelector('button.todo__content-deleteBtn');
-    deleteBtn.addEventListener('click', deleteCurrentTodo.bind({listItem: listItem}));
-    pageObj.todoList.prepend(listItem);
-    pageObj.listArrayOfContent.push(value);
-    pageObj.inputField.value = '';
-    saveTodo();
-}
-
-function loadTodo() {
-    pageObj.listArrayOfContent = JSON.parse(localStorage.getItem('listOfTodo')) || [];
-    if (pageObj.listArrayOfContent) {
-        pageObj.listArrayOfContent.forEach((value) => {
-            const listItemContentTemplate = `
                 <span class="todo__content">
                     ${value}
                 </span>
@@ -94,22 +66,38 @@ function loadTodo() {
                     <button class="todo__content-deleteBtn">🗑️</button>
                 </div>
                 `;
-            const listItem = document.createElement('li');
-            listItem.className = 'todo__item';
-            listItem.innerHTML = listItemContentTemplate;
-            const editBtn = listItem.querySelector('button.todo__content-editBtn');
-            const applyBtn = listItem.querySelector('button.todo__content-applyBtn');
-            const deleteBtn = listItem.querySelector('button.todo__content-deleteBtn');
-            deleteBtn.addEventListener('click', deleteCurrentTodo.bind({listItem: listItem}));
-            editBtn.addEventListener('click', editCurrentTodo.bind(
-                    {
-                        listItem: listItem,
-                        editBtn: editBtn,
-                        deleteBtn: deleteBtn,
-                        applyBtn: applyBtn
-                    }
-                ));
-            pageObj.todoList.prepend(listItem);
+    const listItem = document.createElement('li');
+    listItem.className = 'todo__item';
+    listItem.innerHTML = listItemContentTemplate;
+    const editBtn = listItem.querySelector('button.todo__content-editBtn');
+    const applyBtn = listItem.querySelector('button.todo__content-applyBtn');
+    const deleteBtn = listItem.querySelector('button.todo__content-deleteBtn');
+    deleteBtn.addEventListener('click', deleteCurrentTodo.bind({listItem: listItem}));
+    editBtn.addEventListener('click', editCurrentTodo.bind(
+        {
+            listItem: listItem,
+            editBtn: editBtn,
+            deleteBtn: deleteBtn,
+            applyBtn: applyBtn
+        }
+    ));
+    pageObj.todoList.prepend(listItem);
+}
+
+function addTodoItem() {
+    if (!pageObj.inputField.value) { return }
+    const value = pageObj.inputField.value.trim();
+    createListItemStructure(value)
+    pageObj.listArrayOfContent.push(value);
+    pageObj.inputField.value = '';
+    saveTodo();
+}
+
+function loadTodo() {
+    pageObj.listArrayOfContent = JSON.parse(localStorage.getItem('listOfTodo')) || [];
+    if (pageObj.listArrayOfContent) {
+        pageObj.listArrayOfContent.forEach((value) => {
+            createListItemStructure(value);
         });
     }
 }
