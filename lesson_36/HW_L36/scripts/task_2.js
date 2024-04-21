@@ -11,11 +11,6 @@ function parseRGB(value) {
     }).join('')}`;
 }
 
-function resetForm() {
-    pageObj.modalForm.reset();
-    pageObj.modal.style.display = 'none';
-}
-
 function setProperties(event) {
     event.preventDefault();
     const minDiameterValue = 5;
@@ -30,21 +25,19 @@ function setProperties(event) {
     this.currentCircle.style.width = `${newDiameter}px`;
     this.currentCircle.style.height = `${newDiameter}px`;
     this.currentCircle.style.backgroundColor = `${newColor}`;
-    resetForm();
+    if (pageObj.modal.classList.contains('modal__open')) {
+        pageObj.modal.classList.toggle('modal__open');
+    }
 }
 
 function openProperties(event) {
     event.preventDefault();
     const currentCircle = this;
-    pageObj.modal.style.display = 'flex';
-    pageObj.modalElementDiameter.setAttribute(
-        'value',
-        `${parseInt(currentCircle.style.width)}`
-    );
-    pageObj.modalElementColor.setAttribute(
-        'value',
-        parseRGB(currentCircle.style.backgroundColor)
-    );
+    if (!pageObj.modal.classList.contains('modal__open')) {
+        pageObj.modal.classList.toggle('modal__open');
+    }
+    pageObj.modalElementDiameter.value = `${parseInt(currentCircle.style.width)}`;
+    pageObj.modalElementColor.value = parseRGB(currentCircle.style.backgroundColor);
     const setProp = setProperties.bind({currentCircle: currentCircle});
     pageObj.updateBtn.addEventListener('click', setProp, {once: true});
     pageObj.closeModalBtn.forEach((element) => {
@@ -129,7 +122,9 @@ function startApp() {
 }
 
 const closeEvent = function() {
-    resetForm();
+    if (pageObj.modal.classList.contains('modal__open')) {
+        pageObj.modal.classList.toggle('modal__open');
+    }
     this.elementOfEvent.removeEventListener('click', this.funcOfEvent);
 }
 

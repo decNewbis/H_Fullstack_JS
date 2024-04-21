@@ -384,6 +384,9 @@ body {
 .modal__content-item:last-child {
   justify-content: space-around;
 }
+.modal__open {
+  display: flex;
+}
 
 .close {
   display: block;
