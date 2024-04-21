@@ -35,3 +35,13 @@ body {
 .circle {
   border-radius: 50%;
 }
+
+.mobile-mode {
+  position: absolute;
+  opacity: 0.5;
+
+  &__on {
+    z-index: 5;
+    pointer-events: none;
+  }
+}

@@ -67,30 +67,42 @@ function onMobileMode(event) {
 
 function offMobileMode() {
     this.elementOfEvent.removeEventListener('mousemove', this.funcOfEvent);
-    this.currentCircle.style.pointerEvents = 'auto';
-    this.currentCircle.style.zIndex = 'unset';
+    if (this.currentCircle.classList.contains('mobile-mode__on')) {
+        this.currentCircle.classList.toggle('mobile-mode__on');
+    }
 }
+
+// function offMobileMode(elementOfEvent, funcOfEvent, currentCircle) {
+//     return function(event) {
+//         if (event.key === 'Escape') {
+//             elementOfEvent.removeEventListener('mousemove', funcOfEvent);
+//             if (currentCircle.classList.contains('mobile-mode__on')) {
+//                 currentCircle.classList.toggle('mobile-mode__on');
+//             }
+//         }
+//     }
+// }
 
 function setMobileMode(event) {
     const currentCircle = this.currentCircle;
-    currentCircle.style.position = 'absolute';
     const currentRadius = parseInt(this.currentCircle.style.width) / 2;
     currentCircle.style.left = `${event.pageX - currentRadius}px`;
     currentCircle.style.top = `${event.pageY - currentRadius}px`;
-    currentCircle.style.opacity = '0.5';
-    currentCircle.style.zIndex = '5';
-    this.currentCircle.style.pointerEvents = 'none';
+    if (!currentCircle.classList.contains('mobile-mode')) {
+        currentCircle.classList.toggle('mobile-mode');
+    }
+    currentCircle.classList.toggle('mobile-mode__on');
     const setOnMobileMode = onMobileMode.bind({currentCircle: currentCircle, currentRadius: currentRadius});
     pageObj.paintingArea.addEventListener('mousemove', setOnMobileMode);
     document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape') {
-            offMobileMode.bind({
-                elementOfEvent: pageObj.paintingArea,
-                funcOfEvent: setOnMobileMode,
-                currentCircle: currentCircle
-            })();
-        }
-    },{once: true});
+            if (event.key === 'Escape') {
+                offMobileMode.bind({
+                    elementOfEvent: pageObj.paintingArea,
+                    funcOfEvent: setOnMobileMode,
+                    currentCircle: currentCircle
+                })();
+            }
+        },{once: true});
     pageObj.paintingArea.addEventListener('mouseleave', () => {
             offMobileMode.bind({
                 elementOfEvent: pageObj.paintingArea,
