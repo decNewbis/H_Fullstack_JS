@@ -75,9 +75,6 @@ ul {
     &-editBtn, &-applyBtn {
       background-color: #059305;
     }
-    &-applyBtn {
-      display: none;
-    }
     &-deleteBtn {
       background-color: #ff0000;
     }
@@ -85,7 +82,12 @@ ul {
 }
 
 .borders-extra-param {
+  min-width: 332px;
   border: 1px solid #aaa;
   border-radius: 4px;
   outline-color: #aaa;
+}
+
+.hidden {
+  display: none;
 }

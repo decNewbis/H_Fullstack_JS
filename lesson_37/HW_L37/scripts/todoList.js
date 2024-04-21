@@ -14,22 +14,33 @@ function deleteCurrentTodo() {
     saveTodo();
 }
 
+function setHiddenElement(element, flag=true) {
+    if (flag) {
+        if (!element.classList.contains('hidden')) {
+            element.classList.toggle('hidden');
+        }
+        return;
+    }
+    if (element.classList.contains('hidden')) {
+        element.classList.toggle('hidden');
+    }
+}
+
 function editCurrentTodo() {
     const content = this.listItem.querySelector('li > span');
     const textContent = content.textContent.trim();
     const editArea = document.createElement('input');
     const indexOfCurrentContent = pageObj.listArrayOfContent.indexOf(textContent);
     editArea.setAttribute('type', 'text');
-    editArea.style.minWidth = '332px';
     editArea.className = content.className;
     editArea.classList.toggle('borders-extra-param');
     editArea.value = textContent;
     content.remove();
     this.listItem.prepend(editArea);
     editArea.focus();
-    this.editBtn.style.display = 'none';
-    this.deleteBtn.style.display = 'none';
-    this.applyBtn.style.display = 'block';
+    setHiddenElement(this.editBtn, true);
+    setHiddenElement(this.deleteBtn, true);
+    setHiddenElement(this.applyBtn, false);
     this.applyBtn.addEventListener('click', () => {
         content.textContent = editArea.value.trim();
         editArea.remove();
@@ -38,9 +49,9 @@ function editCurrentTodo() {
             pageObj.listArrayOfContent.splice(indexOfCurrentContent, 1, content.textContent);
             saveTodo();
         }
-        this.editBtn.style.display = 'block';
-        this.deleteBtn.style.display = 'block';
-        this.applyBtn.style.display = 'none';
+        setHiddenElement(this.editBtn, false);
+        setHiddenElement(this.deleteBtn, false);
+        setHiddenElement(this.applyBtn, true);
     }, {once: true});
     // cancel changes
     this.listItem.addEventListener('focusout', (event) => {
@@ -49,9 +60,9 @@ function editCurrentTodo() {
         if (!currentTarget.contains(relatedTarget)) {
             editArea.remove();
             this.listItem.prepend(content);
-            this.editBtn.style.display = 'block';
-            this.deleteBtn.style.display = 'block';
-            this.applyBtn.style.display = 'none';
+            setHiddenElement(this.editBtn, false);
+            setHiddenElement(this.deleteBtn, false);
+            setHiddenElement(this.applyBtn, true);
         }
     }, {once: true});
 }
@@ -63,7 +74,7 @@ function createListItemStructure(value) {
                 </span>
                 <div class="todo__content-btnBar">
                     <button class="todo__content-editBtn">✏️</button>
-                    <button class="todo__content-applyBtn">✔️</button>
+                    <button class="todo__content-applyBtn hidden">✔️</button>
                     <button class="todo__content-deleteBtn">🗑️</button>
                 </div>
                 `;

@@ -378,17 +378,19 @@ ul {
 .todo__content-editBtn, .todo__content-applyBtn {
   background-color: #059305;
 }
-.todo__content-applyBtn {
-  display: none;
-}
 .todo__content-deleteBtn {
   background-color: #ff0000;
 }
 
 .borders-extra-param {
+  min-width: 332px;
   border: 1px solid #aaa;
   border-radius: 4px;
   outline-color: #aaa;
+}
+
+.hidden {
+  display: none;
 }
 
 /*# sourceMappingURL=styles.css.map */
