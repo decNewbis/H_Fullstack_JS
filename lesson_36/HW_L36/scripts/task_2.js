@@ -11,22 +11,24 @@ function parseRGB(value) {
     }).join('')}`;
 }
 
-function setProperties(event) {
-    event.preventDefault();
-    const minDiameterValue = 5;
-    const maxDiameterValue = 1024;
-    let newDiameter = pageObj.modalElementDiameter.value;
-    const newColor = pageObj.modalElementColor.value;
-    if (newDiameter < minDiameterValue) {
-        newDiameter = 5;
-    } else if (newDiameter > maxDiameterValue) {
-        newDiameter = 1024;
-    }
-    this.currentCircle.style.width = `${newDiameter}px`;
-    this.currentCircle.style.height = `${newDiameter}px`;
-    this.currentCircle.style.backgroundColor = `${newColor}`;
-    if (pageObj.modal.classList.contains('modal__open')) {
-        pageObj.modal.classList.toggle('modal__open');
+function setProperties(currentCircle) {
+    return function(event) {
+        event.preventDefault();
+        const minDiameterValue = 5;
+        const maxDiameterValue = 1024;
+        let newDiameter = pageObj.modalElementDiameter.value;
+        const newColor = pageObj.modalElementColor.value;
+        if (newDiameter < minDiameterValue) {
+            newDiameter = 5;
+        } else if (newDiameter > maxDiameterValue) {
+            newDiameter = 1024;
+        }
+        currentCircle.style.width = `${newDiameter}px`;
+        currentCircle.style.height = `${newDiameter}px`;
+        currentCircle.style.backgroundColor = `${newColor}`;
+        if (pageObj.modal.classList.contains('modal__open')) {
+            pageObj.modal.classList.toggle('modal__open');
+        }
     }
 }
 
@@ -38,70 +40,66 @@ function openProperties(event) {
     }
     pageObj.modalElementDiameter.value = `${parseInt(currentCircle.style.width)}`;
     pageObj.modalElementColor.value = parseRGB(currentCircle.style.backgroundColor);
-    const setProp = setProperties.bind({currentCircle: currentCircle});
+    const setProp = setProperties(currentCircle);
     pageObj.updateBtn.addEventListener('click', setProp, {once: true});
     pageObj.closeModalBtn.forEach((element) => {
-        element.addEventListener('click', closeEvent.bind(
-            {elementOfEvent: pageObj.updateBtn, funcOfEvent: setProp}),
-            {once: true}
+        element.addEventListener('click', closeEvent({
+                elementOfEvent: pageObj.updateBtn,
+                funcOfEvent: setProp
+            }), {once: true}
         );
     });
     document.addEventListener('keydown', (event) => {
         if (event.key === 'Escape') {
-            closeEvent.bind({elementOfEvent: pageObj.updateBtn, funcOfEvent: setProp})();
+            closeEvent({
+                elementOfEvent: pageObj.updateBtn,
+                funcOfEvent: setProp
+            });
         }
     }, {once: true});
 }
 
-function onMobileMode(event) {
-    this.currentCircle.style.left = `${event.pageX - this.currentRadius}px`;
-    this.currentCircle.style.top = `${event.pageY - this.currentRadius}px`;
-}
-
-function offMobileMode() {
-    this.elementOfEvent.removeEventListener('mousemove', this.funcOfEvent);
-    if (this.currentCircle.classList.contains('mobile-mode__on')) {
-        this.currentCircle.classList.toggle('mobile-mode__on');
+function onMobileMode({currentCircle, currentRadius}) {
+    return function(event) {
+        currentCircle.style.left = `${event.pageX - currentRadius}px`;
+        currentCircle.style.top = `${event.pageY - currentRadius}px`;
     }
 }
 
-// function offMobileMode(elementOfEvent, funcOfEvent, currentCircle) {
-//     return function(event) {
-//         if (event.key === 'Escape') {
-//             elementOfEvent.removeEventListener('mousemove', funcOfEvent);
-//             if (currentCircle.classList.contains('mobile-mode__on')) {
-//                 currentCircle.classList.toggle('mobile-mode__on');
-//             }
-//         }
-//     }
-// }
-
-function setMobileMode(event) {
-    const currentCircle = this.currentCircle;
-    const currentRadius = parseInt(this.currentCircle.style.width) / 2;
-    currentCircle.style.left = `${event.pageX - currentRadius}px`;
-    currentCircle.style.top = `${event.pageY - currentRadius}px`;
-    if (!currentCircle.classList.contains('mobile-mode')) {
-        currentCircle.classList.toggle('mobile-mode');
+function offMobileMode({elementOfEvent, funcOfEvent, currentCircle}) {
+    return function() {
+        elementOfEvent.removeEventListener('mousemove', funcOfEvent);
+        currentCircle.classList.toggle('mobile-mode__on', false);
     }
-    currentCircle.classList.toggle('mobile-mode__on');
-    const setOnMobileMode = onMobileMode.bind({currentCircle: currentCircle, currentRadius: currentRadius});
-    pageObj.paintingArea.addEventListener('mousemove', setOnMobileMode);
-    document.addEventListener('keydown', (event) => {
+}
+
+function setMobileMode(currentCircle) {
+    return function(event) {
+        const currentRadius = parseInt(currentCircle.style.width) / 2;
+        currentCircle.style.left = `${event.pageX - currentRadius}px`;
+        currentCircle.style.top = `${event.pageY - currentRadius}px`;
+        currentCircle.classList.toggle('mobile-mode', true);
+        currentCircle.classList.toggle('mobile-mode__on', true);
+        const setOnMobileMode = onMobileMode({
+            currentCircle: currentCircle,
+            currentRadius: currentRadius
+        });
+        pageObj.paintingArea.addEventListener('mousemove', setOnMobileMode);
+        document.addEventListener('keydown', (event) => {
             if (event.key === 'Escape') {
-                offMobileMode.bind({
+                offMobileMode({
                     elementOfEvent: pageObj.paintingArea,
                     funcOfEvent: setOnMobileMode,
                     currentCircle: currentCircle
                 })();
             }
-        },{once: true});
-    pageObj.paintingArea.addEventListener('mouseleave', () => {
-            offMobileMode.bind({
+        }, {once: true});
+        pageObj.paintingArea.addEventListener('mouseleave', offMobileMode({
                 elementOfEvent: pageObj.paintingArea,
                 funcOfEvent: setOnMobileMode,
-                currentCircle: currentCircle})();
-    }, {once: true});
+                currentCircle: currentCircle
+            }), {once: true});
+    }
 }
 
 function createCircle() {
@@ -113,7 +111,7 @@ function createCircle() {
     circle.style.width = `${radius}px`;
     circle.style.height = `${radius}px`;
     circle.addEventListener('contextmenu', openProperties);
-    circle.addEventListener('click', setMobileMode.bind({currentCircle: circle}));
+    circle.addEventListener('click', setMobileMode(circle));
     pageObj.palette.append(circle);
 }
 
@@ -121,11 +119,11 @@ function startApp() {
     pageObj.paintingArea.addEventListener('dblclick', createCircle);
 }
 
-const closeEvent = function() {
-    if (pageObj.modal.classList.contains('modal__open')) {
-        pageObj.modal.classList.toggle('modal__open');
+function closeEvent({elementOfEvent, funcOfEvent}) {
+    return function() {
+        pageObj.modal.classList.toggle('modal__open', false);
+        elementOfEvent.removeEventListener('click', funcOfEvent);
     }
-    this.elementOfEvent.removeEventListener('click', this.funcOfEvent);
 }
 
 
