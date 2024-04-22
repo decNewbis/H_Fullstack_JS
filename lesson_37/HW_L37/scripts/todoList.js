@@ -1,70 +1,63 @@
 // task todoList
 
 function saveTodo() {
-    localStorage.setItem('listOfTodo', JSON.stringify(pageObj.listArrayOfContent));
+    localStorage.setItem(pageObj.todoListKey, JSON.stringify(pageObj.listArrayOfContent));
 }
 
-function deleteCurrentTodo() {
-    const textContent = this.listItem.querySelector('span.todo__content').textContent.trim();
-    const indexOfCurrentContent = pageObj.listArrayOfContent.indexOf(textContent);
-    if (indexOfCurrentContent !== -1) {
-        pageObj.listArrayOfContent.splice(indexOfCurrentContent, 1);
+function deleteCurrentTodo(listItem) {
+    return function() {
+        const textContent = listItem.querySelector('span.todo__content').textContent.trim();
+        pageObj.listArrayOfContent = pageObj.listArrayOfContent.filter((element) => element !== textContent);
+        listItem.remove();
+        saveTodo();
     }
-    this.listItem.remove();
-    saveTodo();
 }
 
 function setHiddenElement(element, flag=true) {
-    if (flag) {
-        if (!element.classList.contains('hidden')) {
-            element.classList.toggle('hidden');
-        }
-        return;
-    }
-    if (element.classList.contains('hidden')) {
-        element.classList.toggle('hidden');
-    }
+    element.classList.toggle('hidden', flag);
 }
 
-function editCurrentTodo() {
-    const content = this.listItem.querySelector('li > span');
-    const textContent = content.textContent.trim();
-    const editArea = document.createElement('input');
-    const indexOfCurrentContent = pageObj.listArrayOfContent.indexOf(textContent);
-    editArea.setAttribute('type', 'text');
-    editArea.className = content.className;
-    editArea.classList.toggle('borders-extra-param');
-    editArea.value = textContent;
-    content.remove();
-    this.listItem.prepend(editArea);
-    editArea.focus();
-    setHiddenElement(this.editBtn, true);
-    setHiddenElement(this.deleteBtn, true);
-    setHiddenElement(this.applyBtn, false);
-    this.applyBtn.addEventListener('click', () => {
-        content.textContent = editArea.value.trim();
-        editArea.remove();
-        this.listItem.prepend(content);
-        if (indexOfCurrentContent !== -1) {
-            pageObj.listArrayOfContent.splice(indexOfCurrentContent, 1, content.textContent);
-            saveTodo();
-        }
-        setHiddenElement(this.editBtn, false);
-        setHiddenElement(this.deleteBtn, false);
-        setHiddenElement(this.applyBtn, true);
-    }, {once: true});
-    // cancel changes
-    this.listItem.addEventListener('focusout', (event) => {
-        const currentTarget = event.currentTarget;
-        const relatedTarget = event.relatedTarget;
-        if (!currentTarget.contains(relatedTarget)) {
+function editCurrentTodo({listItem, editBtn, deleteBtn, applyBtn}) {
+    return function() {
+        const content = listItem.querySelector('li > span.todo__content');
+        const textContent = content.textContent.trim();
+        const editArea = document.createElement('input');
+        const indexOfCurrentContent = pageObj.listArrayOfContent.indexOf(textContent);
+        editArea.setAttribute('type', 'text');
+        editArea.className = content.className;
+        editArea.classList.toggle('borders-extra-param');
+        editArea.value = textContent;
+        content.remove();
+        listItem.prepend(editArea);
+        editArea.focus();
+        setHiddenElement(editBtn, true);
+        setHiddenElement(deleteBtn, true);
+        setHiddenElement(applyBtn, false);
+        applyBtn.addEventListener('click', () => {
+            content.textContent = editArea.value.trim();
             editArea.remove();
-            this.listItem.prepend(content);
-            setHiddenElement(this.editBtn, false);
-            setHiddenElement(this.deleteBtn, false);
-            setHiddenElement(this.applyBtn, true);
-        }
-    }, {once: true});
+            listItem.prepend(content);
+            if (indexOfCurrentContent !== -1) {
+                pageObj.listArrayOfContent.splice(indexOfCurrentContent, 1, content.textContent);
+                saveTodo();
+            }
+            setHiddenElement(editBtn, false);
+            setHiddenElement(deleteBtn, false);
+            setHiddenElement(applyBtn, true);
+        }, {once: true});
+        // cancel changes
+        listItem.addEventListener('focusout', (event) => {
+            const currentTarget = event.currentTarget;
+            const relatedTarget = event.relatedTarget;
+            if (!currentTarget.contains(relatedTarget)) {
+                editArea.remove();
+                listItem.prepend(content);
+                setHiddenElement(editBtn, false);
+                setHiddenElement(deleteBtn, false);
+                setHiddenElement(applyBtn, true);
+            }
+        }, {once: true});
+    }
 }
 
 function createListItemStructure(value) {
@@ -84,8 +77,8 @@ function createListItemStructure(value) {
     const editBtn = listItem.querySelector('button.todo__content-editBtn');
     const applyBtn = listItem.querySelector('button.todo__content-applyBtn');
     const deleteBtn = listItem.querySelector('button.todo__content-deleteBtn');
-    deleteBtn.addEventListener('click', deleteCurrentTodo.bind({listItem: listItem}));
-    editBtn.addEventListener('click', editCurrentTodo.bind(
+    deleteBtn.addEventListener('click', deleteCurrentTodo(listItem));
+    editBtn.addEventListener('click', editCurrentTodo(
         {
             listItem: listItem,
             editBtn: editBtn,
@@ -106,7 +99,7 @@ function addTodoItem() {
 }
 
 function loadTodo() {
-    pageObj.listArrayOfContent = JSON.parse(localStorage.getItem('listOfTodo')) || [];
+    pageObj.listArrayOfContent = JSON.parse(localStorage.getItem(pageObj.todoListKey)) || [];
     if (pageObj.listArrayOfContent) {
         pageObj.listArrayOfContent.forEach((value) => {
             createListItemStructure(value);
@@ -123,6 +116,7 @@ const pageObj = {
     inputField: document.getElementById('inputField'),
     addTodoBtn: document.getElementById('addTodo'),
     todoList: document.getElementById('todoList'),
+    todoListKey: 'listOfTodo',
     listArrayOfContent: [],
 }
 
