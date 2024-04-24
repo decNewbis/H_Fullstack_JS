@@ -5,9 +5,40 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <link rel="stylesheet" href="./css/styles.css">
+    <script type="module" src="scripts/timer.js"></script>
+    <title>Timer | HW lesson 38</title>
 </head>
 <body>
+<header class="header">
+    <div class="header__wrapper">
+        <h1>Timer | HW lesson 38</h1>
+    </div>
+</header>
+<main>
+    <section class="timer">
+        <h2 class="timer__title">Timer</h2>
+        <ul class="timer__interface">
+            <li>
+                <span id="display" class="timer__display">00:00:00</span>
+            </li>
+            <li>
+                <ul class="timer__btnBar">
+                    <li class="pauseBtn">
+                        <button id="pauseBtn" class="timer__button">Pause</button>
+                    </li>
+                    <li>
+                        <button id="startBtn" class="timer__button">Start</button>
+                    </li>
+                    <li>
+                        <button id="resetBtn" class="timer__button">Reset</button>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <span class="timer__status"></span>
+    </section>
 
+</main>
 </body>
 </html>
