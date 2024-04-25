@@ -19,6 +19,10 @@
   &__display {
     display: block;
     font-size: 100px;
+
+    &.inactive {
+      pointer-events: none;
+    }
   }
   &__btnBar {
     display: flex;
@@ -32,24 +36,29 @@
     border: 2px solid #e7e7e7;
     border-radius: 50%;
 
-    &#pauseBtn {
+    &.pauseBtn {
       background-color: #ff4a4a;
     }
-    &#startBtn {
+    &.startBtn {
       background-color: #4da49c;
     }
-    &#resetBtn {
-      color: #bfc0c0;
-      background-color: #fff;
+    &.resetBtn {
+      color: #efecec;
+      background-color: #4387d0;
     }
-    &#pauseBtn:hover, &#startBtn:hover, &#resetBtn:hover {
+    &.pauseBtn:hover, &.startBtn:hover, &.resetBtn:hover {
       background-color: #000;
       transition: background-color linear 0.5s;
     }
+    &.inactive {
+      pointer-events: none;
+      color: #bfc0c0;
+      background-color: #fff;
+    }
   }
-  &__status {
+  &__status-bar {
     width: 540px;
     height: 20px;
-    background-color: #059305;
+    background: linear-gradient(90deg, #059305 100%, #aaa 0);
   }
 }

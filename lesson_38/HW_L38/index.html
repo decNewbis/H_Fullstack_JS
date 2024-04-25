@@ -24,19 +24,19 @@
                     </li>
                     <li>
                         <ul class="timer__btnBar">
-                            <li class="pauseBtn">
-                                <button id="pauseBtn" class="timer__button hidden">Pause</button>
+                            <li class="hidden">
+                                <button id="pauseBtn" class="timer__button pauseBtn">Pause</button>
                             </li>
                             <li>
-                                <button id="startBtn" class="timer__button">Start</button>
+                                <button id="startBtn" class="timer__button startBtn">Start</button>
                             </li>
                             <li>
-                                <button id="resetBtn" class="timer__button">Reset</button>
+                                <button id="resetBtn" class="timer__button resetBtn inactive">Reset</button>
                             </li>
                         </ul>
                     </li>
                 </ul>
-                <span id="status" class="timer__status"></span>
+                <span id="statusBar" class="timer__status-bar"></span>
             </div>
         </section>
         <section>
@@ -48,19 +48,19 @@
                     </div>
                     <ul class="modal__content-list">
                         <li class="modal__content-item">
-                            <input id="set-hours" type="number" placeholder="Hours" min="0" value="0">
+                            <input id="set-hours" type="number" placeholder="Hours" min="0" max="99" value="0">
                             <label for="set-hours">Hours</label>
                         </li>
                         <li class="modal__content-item">
-                            <input id="set-minutes" type="number" placeholder="Minutes" min="0" value="5">
+                            <input id="set-minutes" type="number" placeholder="Minutes" min="0" max="59" value="0">
                             <label for="set-minutes">Minutes</label>
                         </li>
                         <li class="modal__content-item">
-                            <input id="set-seconds" type="number" placeholder="Seconds" min="0" value="0">
+                            <input id="set-seconds" type="number" placeholder="Seconds" min="0" max="59" value="0">
                             <label for="set-seconds">Seconds</label>
                         </li>
                         <li class="modal__content-item">
-                            <button id="doneBtn">Done</button>
+                            <button class="close close-event applyBtn">Apply</button>
                         </li>
                     </ul>
                 </div>
