@@ -6,6 +6,15 @@ function setElementSrc(elementId, content) {
     document.getElementById(elementId).src = content;
 }
 
+export function setBackground(response) {
+    const body = document.querySelector('body');
+    const results = response['results'];
+    const randomNumberBackgroundImage = Math.floor(Math.random() * results.length);
+    const randomImage = results[randomNumberBackgroundImage];
+    const {regular: link} = randomImage['urls'];
+    body.style.backgroundImage = `url(${link})`;
+}
+
 function getLocalTime24(timeInSeconds, timezoneInSeconds) {
     const timeInMilliseconds = timeInSeconds * 1000;
     const timezoneInMilliseconds = timezoneInSeconds * 1000;
