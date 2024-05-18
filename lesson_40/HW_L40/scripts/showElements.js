@@ -1,28 +1,63 @@
+function setElementContent(elementId, content) {
+    document.getElementById(elementId).textContent = content;
+}
+
+function setElementSrc(elementId, content) {
+    document.getElementById(elementId).src = content;
+}
+
+function getLocalTime24(timeInSeconds, timezoneInSeconds) {
+    const timeInMilliseconds = timeInSeconds * 1000;
+    const timezoneInMilliseconds = timezoneInSeconds * 1000;
+    const date = new Date(timeInMilliseconds);
+    const localTime = new Date(date.getTime() + timezoneInMilliseconds);
+    const options = {
+        hour12: false,
+        hour: '2-digit',
+        minute: '2-digit',
+        timeZone: 'UTC'
+    }
+    return localTime.toLocaleTimeString('en-US', options);
+}
+
 function fillLocation(name, coord) {
     const { lon, lat } = coord
 
-    document.getElementById('city-name').textContent = name
-    document.getElementById('longitude').textContent = lon
-    document.getElementById('latitude').textContent = lat
+    setElementContent('city-name', name)
+    setElementContent('longitude', lon)
+    setElementContent('latitude', lat)
 }
 
 function fillTemperature(weather, main) {
     const { main: weatherTitle, description, icon } = weather[0]
     const { temp, feels_like } = main
 
-    document.getElementById('weather-icon').src = `https://openweathermap.org/img/wn/${icon}@2x.png`
-    document.getElementById('weather-main').textContent = weatherTitle;
-    document.getElementById('weather-description').textContent = description;
-    document.getElementById('temp-current').textContent = temp;
-    document.getElementById('temp-current-feelings').textContent = feels_like;   
+    setElementSrc('weather-icon', `https://openweathermap.org/img/wn/${icon}@2x.png`)
+    setElementContent('weather-main', weatherTitle);
+    setElementContent('weather-description', description);
+    setElementContent('temp-current', temp);
+    setElementContent('temp-current-feelings', feels_like);
 }
 
 function fillWindAndHumidity(main, wind) {
     const { humidity } = main;
     const { speed } = wind
 
-    document.getElementById('wind-speed').textContent = speed;
-    document.getElementById('humidity').textContent = humidity;
+    setElementContent('wind-speed', speed);
+    setElementContent('humidity', humidity);
+}
+
+function fillModal(data) {
+    const { main, visibility, timezone, sys } = data;
+    const { pressure, temp_max, temp_min } = main;
+    const { sunrise, sunset } = sys;
+
+    setElementContent('pressure', pressure);
+    setElementContent('visibility', visibility);
+    setElementContent('temp-max', temp_max);
+    setElementContent('temp-min', temp_min);
+    setElementContent('sunrise', getLocalTime24(sunrise, timezone));
+    setElementContent('sunset', getLocalTime24(sunset, timezone));
 }
 
 export function showDetails() {
@@ -39,16 +74,27 @@ export function fillDetails(response) {
         weather,
         main,
         wind,
+        timezone,
+        visibility,
+        sys,
     } = response
 
     if (cod === "404") {
-        alert('please enter existing city', message)
+        alert(`please enter existing city: ${message}`);
         return false
     }
+
+    const modalData = {
+        main,
+        visibility,
+        timezone,
+        sys
+    };
 
     fillLocation(name, coord);
     fillTemperature(weather, main);
     fillWindAndHumidity(main, wind);
-    showDetails()
+    fillModal(modalData);
+    showDetails();
 }
 

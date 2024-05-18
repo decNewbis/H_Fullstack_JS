@@ -16,7 +16,7 @@ function handleSubmit(event) {
     event.preventDefault();
     const city = document.getElementById('city').value.trim();
     if (city?.length >= 1) {
-        getWeatherDetails(`${WEATHER_API_DOMAIN}&q=${city}`)
+        getWeatherDetails(`${WEATHER_API_DOMAIN}&q=${city}`);
     }
 }
 
