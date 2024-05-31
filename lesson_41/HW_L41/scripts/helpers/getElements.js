@@ -12,3 +12,11 @@ export function getPostersContainer() {
 export function getPreviewList() {
     return document.querySelector('.preview-list');
 }
+export function getFilterType() {
+    const filterType = document.getElementsByName('type');
+    for (let elementIndex = 0; elementIndex < filterType.length; elementIndex++) {
+        if (filterType[elementIndex].type === 'radio' && filterType[elementIndex].checked) {
+            return `&type=${filterType[elementIndex].value}`;
+        }
+    }
+}

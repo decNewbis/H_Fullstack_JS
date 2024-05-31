@@ -1,6 +1,9 @@
 {
   "name": "hillel_fullstack",
   "version": "1.0.0",
+  "engines": {
+    "node": ">=20.14.0"
+  },
   "description": "Fullstack JS learning",
   "main": "index.js",
   "scripts": {

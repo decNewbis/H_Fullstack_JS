@@ -9,7 +9,13 @@ import {
     renderNotFound,
 } from "./components.js";
 import { createCollectionList } from "./helpers/createCollectionList.js";
-import { getSearchElement, getSearchButton, getPostersContainer, getPreviewList } from "./helpers/getElements.js";
+import {
+    getSearchElement,
+    getSearchButton,
+    getPostersContainer,
+    getPreviewList,
+    getFilterType
+} from "./helpers/getElements.js";
 
 
 
@@ -29,10 +35,11 @@ function hidePreviewAndCreatePosters(previewResponse) {
 
 function handleInputSearch(previewResponse) {
     return async function (event) {
-        const value = event.target.value
-        if (value.length > 2) { 
-            const data = await fetch(createPreviewUrl(value));
-            const response = await data.json()
+        const value = event.target.value;
+        const filterTypeRequest = getFilterType();
+        if (value.length > 2) {
+            const data = await fetch(createPreviewUrl({value, filterTypeRequest}));
+            const response = await data.json();
             previewResponse.data = response;
             const collection = createCollectionList(response, createPreviewItem, true, 5);
             const previewList = getPreviewList();
@@ -57,6 +64,7 @@ function handleSearch(previewResponse) {
 }
 
 function handleSearchButton(previewResponse) {
+    console.log(previewResponse);
     return function (event) {
         const search = getSearchElement();
         const value = search.value
@@ -74,7 +82,7 @@ function app() {
     let previewResponse = {};
     const search = getSearchElement();
     const searchButton = getSearchButton();
-    searchButton.addEventListener('click', handleSearchButton(previewResponse))
+    searchButton.addEventListener('click', handleSearchButton(previewResponse));
     search.addEventListener('search', handleSearch(previewResponse));
     search.addEventListener('input', debounce(handleInputSearch(previewResponse), 500));
 }

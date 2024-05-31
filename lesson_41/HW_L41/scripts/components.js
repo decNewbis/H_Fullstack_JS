@@ -28,11 +28,11 @@ const renderMainComponent = () => {
                 <h2>Filters</h2>
                 <fieldset>
                     <div>
-                        <input type="radio" id="both" name="type" value="both" checked>
+                        <input type="radio" id="both" name="type" value="" checked>
                         <label for="both">Movie and series</label>
                     </div>
                     <div>
-                        <input type="radio" id="movies" name="type" value="movies">
+                        <input type="radio" id="movie" name="type" value="movie">
                         <label for="movies">Movies</label>
                     </div>
                     <div>
