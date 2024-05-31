@@ -97,3 +97,9 @@ input[type="checkbox"]:checked + label + .series-options {
 .hidden {
     display: none;
 }
+
+fieldset {
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
