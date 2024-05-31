@@ -61,17 +61,17 @@ const renderMainComponent = () => {
 
 const renderMediaInfo = ({title, released, country, actors, plot, poster}) => {
     document.getElementById('app').innerHTML = `
-    <head>Header</head>
-    <main>
-        <img src="${poster}" alt="poster for ${title}">
-        <h1>${title}</h1>
-        <p>${released}</p>
-        <p>${country}</p>
-        <p>${actors}</p>
-        <p>Description: ${plot}</p>
-    </main>
-    <button id="back-to-home">Back</button>
-`
+        <head>Header</head>
+        <main>
+            <img src="${poster}" alt="poster for ${title}">
+            <h1>${title}</h1>
+            <p>${released}</p>
+            <p>${country}</p>
+            <p>${actors}</p>
+            <p>Description: ${plot}</p>
+        </main>
+        <button id="back-to-home">Back</button>
+    `
 }
 
 const renderNotFound = () => {

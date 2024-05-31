@@ -94,12 +94,11 @@ function previewMediaInfo() {
     previewList.addEventListener('click', getMediaInfo);
 
     function getMediaInfo(event) {
-        // console.log('event.target.tagName', event.target.tagName === "LI")
-        const item = event.target.matches('.preview-item');
+        const item = event.target.closest('.preview-item');
         if(item) {
-            const id = event.target.dataset.id;
+            const id = item.dataset.id;
             history.pushState(null, null, `/media?id=${id}`);
-            renderMediaPage()
+            renderMediaPage();
         }
     }
 }
