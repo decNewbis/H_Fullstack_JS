@@ -42,7 +42,7 @@ const renderMainComponent = () => {
                 </fieldset>
                 <div>
                     <label for="year">Release Year:</label>
-                    <input type="number" id="year" placeholder="2023" min="1900" max="2023">
+                    <input type="number" id="year" placeholder="2023" min="1900" max="2024">
                 </div>
             </aside>
             <main class="content">

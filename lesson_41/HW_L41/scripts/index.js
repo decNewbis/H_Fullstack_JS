@@ -14,7 +14,8 @@ import {
     getSearchButton,
     getPostersContainer,
     getPreviewList,
-    getFilterType
+    getFilterType,
+    getFilterYear
 } from "./helpers/getElements.js";
 
 
@@ -36,9 +37,10 @@ function hidePreviewAndCreatePosters(previewResponse) {
 function handleInputSearch(previewResponse) {
     return async function (event) {
         const value = event.target.value;
-        const filterTypeRequest = getFilterType();
+        const filterByType = getFilterType();
+        const filterByYear = getFilterYear();
         if (value.length > 2) {
-            const data = await fetch(createPreviewUrl({value, filterTypeRequest}));
+            const data = await fetch(createPreviewUrl({value, filterByType, filterByYear}));
             const response = await data.json();
             previewResponse.data = response;
             const collection = createCollectionList(response, createPreviewItem, true, 5);
