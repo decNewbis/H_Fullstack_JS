@@ -9,7 +9,7 @@ import {
     renderNotFound,
 } from "./components.js";
 import { createCollectionList } from "./helpers/createCollectionList.js";
-import { getSearchElement, getPostersContainer, getPreviewList } from "./helpers/getElements.js";
+import { getSearchElement, getSearchButton, getPostersContainer, getPreviewList } from "./helpers/getElements.js";
 
 
 
@@ -73,7 +73,7 @@ function handleSearchButton(previewResponse) {
 function app() {
     let previewResponse = {};
     const search = getSearchElement();
-    const searchButton = document.getElementById("search-button");
+    const searchButton = getSearchButton();
     searchButton.addEventListener('click', handleSearchButton(previewResponse))
     search.addEventListener('search', handleSearch(previewResponse));
     search.addEventListener('input', debounce(handleInputSearch(previewResponse), 500));
