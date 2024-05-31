@@ -26,12 +26,24 @@ function hidePreview() {
     previewList.innerHTML = '';
 }
 
-function hidePreviewAndCreatePosters(previewResponse) {
-        hidePreview()
+function getMediaInfo(event, closestObj) {
+    const item = event.target.closest(closestObj);
+    if(item) {
+        const id = item.dataset.id;
+        history.pushState(null, null, `/media?id=${id}`);
+        renderMediaPage();
+    }
+}
 
-        const collection = createCollectionList(previewResponse.data, createTile);
-        const list = getPostersContainer();
-        list.innerHTML = collection;
+function hidePreviewAndCreatePosters(previewResponse) {
+    hidePreview()
+
+    const collection = createCollectionList(previewResponse.data, createTile);
+    const list = getPostersContainer();
+    list.innerHTML = collection;
+    list.addEventListener('click', (event) => {
+        getMediaInfo(event, '.movie-card');
+    });
 }
 
 function handleInputSearch(previewResponse) {
@@ -91,16 +103,9 @@ function app() {
 
 function previewMediaInfo() {
     const previewList = document.getElementById('preview-list');
-    previewList.addEventListener('click', getMediaInfo);
-
-    function getMediaInfo(event) {
-        const item = event.target.closest('.preview-item');
-        if(item) {
-            const id = item.dataset.id;
-            history.pushState(null, null, `/media?id=${id}`);
-            renderMediaPage();
-        }
-    }
+    previewList.addEventListener('click', (event) => {
+        getMediaInfo(event, '.preview-item');
+    });
 }
 
 
