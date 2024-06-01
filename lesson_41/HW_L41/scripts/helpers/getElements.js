@@ -25,7 +25,6 @@ export function getFilterType() {
 export function getFilterYear() {
     const filterYear = document.getElementById('year');
     let filterYearValue = +filterYear.value;
-    console.log('filterYearValue', filterYearValue);
     if (filterYearValue) {
         if ((+filterYear.getAttribute('min')) <= (filterYearValue)
             && (filterYearValue) <= (+filterYear.getAttribute('max'))) {

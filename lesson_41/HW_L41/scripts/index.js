@@ -78,7 +78,6 @@ function handleSearch(previewResponse) {
 }
 
 function handleSearchButton(previewResponse) {
-    console.log(previewResponse);
     return function (event) {
         const search = getSearchElement();
         const value = search.value
