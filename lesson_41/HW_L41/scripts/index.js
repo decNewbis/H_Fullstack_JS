@@ -86,7 +86,6 @@ function handleSearchButton(previewResponse) {
     }
 }
 
-
 function app() {
     let previewResponse = {};
     const search = getSearchElement();
@@ -102,7 +101,6 @@ function previewMediaInfo() {
         getMediaInfo(event, '.preview-item');
     });
 }
-
 
 function handleReturnToHome() {
     history.pushState(null, null, `/`);
