@@ -1,3 +1,5 @@
+import {NO_IMG} from "./constants.js";
+
 const createPreviewItem = ({ poster, title, year, id }) => `
     <li data-id="${id}" class="preview-item">
         <img class="preview-poster" src="${poster}" alt="poster for ${title}">
@@ -13,7 +15,7 @@ const createPreviewItem = ({ poster, title, year, id }) => `
 
 const createTile = ({ poster, title, year, id }) => `
     <div data-id="${id}" class="movie-card">
-        <img src="${poster}"></img>
+        <img src="${poster}" alt="poster for ${title}">
         <h3>${title} (${year})</h3>
     </div>
 `
@@ -59,19 +61,57 @@ const renderMainComponent = () => {
     `
 }
 
-const renderMediaInfo = ({title, released, country, actors, plot, poster}) => {
+const renderMediaInfo = ({title, released, country, actors, plot, poster, genre, writer, rating, votes}) => {
+    const N_A = 'N/A';
     document.getElementById('app').innerHTML = `
-        <head>Header</head>
         <main>
-            <img src="${poster}" alt="poster for ${title}">
-            <h1>${title}</h1>
-            <p>${released}</p>
-            <p>${country}</p>
-            <p>${actors}</p>
-            <p>Description: ${plot}</p>
+            <div class="media__wrapper">
+                <ul class="media__list">
+                    <li class="media__item">
+                        <h1 class="media__title">${checkNA(title)}</h1>
+                        <img class="media__poster" src="${poster && poster !== N_A ? poster : NO_IMG}" 
+                        alt="poster for ${checkNA(title)}">
+                        <div class="media__rating">
+                            <img src="./assets/imdb-mini.png" alt="imdb logo">
+                            <span>${checkNA(rating)} / ${checkNA(votes)}</span>
+                        </div>
+                    </li>
+                    <li class="media__item">
+                        <ul class="media__list-info">
+                            <li class="media__item-info">
+                                <h2 class="media__info-title">Released:</h2>
+                                <p class="media__info-content">${checkNA(released)}</p>
+                            </li>
+                            <li class="media__item-info">
+                                <h2 class="media__info-title">Country:</h2>
+                                <p class="media__info-content">${checkNA(country)}</p>
+                            </li>
+                            <li class="media__item-info">
+                                <h2 class="media__info-title">Genre:</h2>
+                                <p class="media__info-content">${checkNA(genre)}</p>
+                            </li>
+                            <li class="media__item-info">
+                                <h2 class="media__info-title">Writer:</h2>
+                                <p class="media__info-content">${checkNA(writer)}</p>
+                            </li>
+                            <li class="media__item-info">
+                                <h2 class="media__info-title">Actors:</h2>
+                                <p class="media__info-content">${checkNA(actors)}</p>
+                            </li>
+                            <li class="media__item-info">
+                                <h2 class="media__info-title">Description:</h2>
+                                <p class="media__info-content">${checkNA(plot)}</p>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <button class="media__button" id="back-to-home">Back</button>
+            </div>
         </main>
-        <button id="back-to-home">Back</button>
     `
+    function checkNA(value) {
+        return value && value !== N_A ? value : '-';
+    }
 }
 
 const renderNotFound = () => {

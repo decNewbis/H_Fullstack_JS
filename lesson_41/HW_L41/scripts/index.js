@@ -117,9 +117,22 @@ async function renderMediaPage() {
     try {
         const id = location.search.slice(4)
         const data = await fetch(createDetailedInfoUrl(id));
-        const response = await data.json()
-        const { Title: title, Released: released, Country: country, Actors: actors, Plot: plot, Poster: poster } = response;
-        renderMediaInfo({title, released, country, actors, plot, poster})
+        const response = await data.json();
+        const {
+            Title: title,
+            Released: released,
+            Country: country,
+            Actors: actors,
+            Plot: plot,
+            Poster: poster,
+            Genre: genre,
+            Writer: writer,
+            imdbRating: rating,
+            imdbVotes: votes
+        } = response;
+        renderMediaInfo({
+            title, released, country, actors, plot, poster, genre, writer, rating, votes
+        })
 
         document.getElementById("back-to-home").addEventListener('click', handleReturnToHome)
     } catch (error) {
