@@ -1,4 +1,3 @@
-// import { searchCollection } from "./mock.js"
 import { debounce } from "./helpers/debounce.js"
 import { createPreviewUrl, createDetailedInfoUrl } from "./helpers/urls.js"
 import {
@@ -36,8 +35,7 @@ function getMediaInfo(event, closestObj) {
 }
 
 function hidePreviewAndCreatePosters(previewResponse) {
-    hidePreview()
-
+    hidePreview();
     const collection = createCollectionList(previewResponse.data, createTile);
     const list = getPostersContainer();
     list.innerHTML = collection;
@@ -52,6 +50,7 @@ function handleInputSearch(previewResponse) {
         const filterByType = getFilterType();
         const filterByYear = getFilterYear();
         if (value.length > 2) {
+            console.log(value, filterByType, filterByYear)
             const data = await fetch(createPreviewUrl({value, filterByType, filterByYear}));
             const response = await data.json();
             previewResponse.data = response;
@@ -60,7 +59,7 @@ function handleInputSearch(previewResponse) {
             previewList.classList.remove('hidden');
             previewList.innerHTML = collection;
         } else {
-            hidePreview()
+            hidePreview();
         }
     }
 }
@@ -70,23 +69,20 @@ function handleSearch(previewResponse) {
         event.stopImmediatePropagation();
         const value = event.target.value;
         if(!value) {
-            hidePreview()
+            hidePreview();
         }
-
-        hidePreviewAndCreatePosters(previewResponse)
+        hidePreviewAndCreatePosters(previewResponse);
     }
 }
 
 function handleSearchButton(previewResponse) {
-    return function (event) {
+    return function () {
         const search = getSearchElement();
-        const value = search.value
-
+        const value = search.value;
         if(!value) {
             return false
         }
-
-        hidePreviewAndCreatePosters(previewResponse)
+        hidePreviewAndCreatePosters(previewResponse);
     }
 }
 
@@ -108,14 +104,14 @@ function previewMediaInfo() {
 }
 
 
-function handleReturnToHome(event) {
+function handleReturnToHome() {
     history.pushState(null, null, `/`);
     renderMainPage();
 }
 
 async function renderMediaPage() {
     try {
-        const id = location.search.slice(4)
+        const id = location.search.slice(4);
         const data = await fetch(createDetailedInfoUrl(id));
         const response = await data.json();
         const {
@@ -132,18 +128,17 @@ async function renderMediaPage() {
         } = response;
         renderMediaInfo({
             title, released, country, actors, plot, poster, genre, writer, rating, votes
-        })
-
+        });
         document.getElementById("back-to-home").addEventListener('click', handleReturnToHome)
     } catch (error) {
-        renderNotFound()
+        renderNotFound();
     }
 }
 
 function renderMainPage() {
-    renderMainComponent()
+    renderMainComponent();
     app();
-    previewMediaInfo()
+    previewMediaInfo();
 }
 
 
@@ -155,4 +150,4 @@ function router() {
     }
 }
 
-router()
+router();

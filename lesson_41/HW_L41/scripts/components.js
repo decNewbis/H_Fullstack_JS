@@ -1,22 +1,27 @@
-import {NO_IMG} from "./constants.js";
+import {NO_IMG, N_A} from "./constants.js";
+
+function checkNA(value) {
+    return value && value !== N_A ? value : '-';
+}
 
 const createPreviewItem = ({ poster, title, year, id }) => `
-    <li data-id="${id}" class="preview-item">
-        <img class="preview-poster" src="${poster}" alt="poster for ${title}">
+    <li data-id="${checkNA(id)}" class="preview-item">
+        <img class="preview-poster" src="${poster && poster !== N_A ? poster : NO_IMG}" 
+        alt="poster for ${checkNA(title)}">
         <span class="preview-title">
-            ${title}
+            ${checkNA(title)}
         </span>
         <span class="preview-year">
-            ${year}
+            ${checkNA(year)}
         </span>
     </li>
 `
 
 
 const createTile = ({ poster, title, year, id }) => `
-    <div data-id="${id}" class="movie-card">
-        <img src="${poster}" alt="poster for ${title}">
-        <h3>${title} (${year})</h3>
+    <div data-id="${checkNA(id)}" class="movie-card">
+        <img src="${poster && poster !== N_A ? poster : NO_IMG}" alt="poster for ${checkNA(title)}">
+        <h3>${checkNA(title)} (${checkNA(year)})</h3>
     </div>
 `
 
@@ -62,7 +67,6 @@ const renderMainComponent = () => {
 }
 
 const renderMediaInfo = ({title, released, country, actors, plot, poster, genre, writer, rating, votes}) => {
-    const N_A = 'N/A';
     document.getElementById('app').innerHTML = `
         <main>
             <div class="media__wrapper">
@@ -109,9 +113,6 @@ const renderMediaInfo = ({title, released, country, actors, plot, poster, genre,
             </div>
         </main>
     `
-    function checkNA(value) {
-        return value && value !== N_A ? value : '-';
-    }
 }
 
 const renderNotFound = () => {
