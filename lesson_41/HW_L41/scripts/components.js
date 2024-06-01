@@ -76,7 +76,8 @@ const renderMediaInfo = ({title, released, country, actors, plot, poster, genre,
                         <img class="media__poster" src="${poster && poster !== N_A ? poster : NO_IMG}" 
                         alt="poster for ${checkNA(title)}">
                         <div class="media__rating">
-                            <img src="./assets/imdb-mini.png" alt="imdb logo">
+                            <img src="https://decnewbis.github.io/H_Fullstack_JS/lesson_41/HW_L41/assets/imdb-mini.png" 
+                            alt="imdb logo">
                             <span>${checkNA(rating)} / ${checkNA(votes)}</span>
                         </div>
                     </li>

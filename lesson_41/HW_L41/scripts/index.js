@@ -50,7 +50,6 @@ function handleInputSearch(previewResponse) {
         const filterByType = getFilterType();
         const filterByYear = getFilterYear();
         if (value.length > 2) {
-            console.log(value, filterByType, filterByYear)
             const data = await fetch(createPreviewUrl({value, filterByType, filterByYear}));
             const response = await data.json();
             previewResponse.data = response;
