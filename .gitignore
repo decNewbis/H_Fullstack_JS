@@ -146,6 +146,7 @@ share/python-wheels/
 *.egg-info/
 .installed.cfg
 MANIFEST
+node_modules/
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
@@ -403,6 +404,3 @@ fabric.properties
 .idea/**/azureSettings.xml
 
 # End of https://www.toptal.com/developers/gitignore/api/webstorm,python,images,database,archives,dotenv
-
-*/node_modules/
-*/dist/
