@@ -4,4 +4,4 @@
 - open the terminal and run command:
   - > npm install
   - > npm run build
-  - > npm run start
+  - > npm run start-server
