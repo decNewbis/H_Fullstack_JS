@@ -1,0 +1,39 @@
+.search-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.search {
+    width: 100%;
+}
+
+.preview-list {
+    position: absolute;
+    width: 100%;
+    background: #fff;
+    border-radius: 5px;
+    top: 40px;
+}
+
+.preview-item {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.preview-item:hover {
+    background-color: aliceblue;
+}
+
+.preview-item + .preview-item {
+    padding-top: 0;
+}
+
+.preview-item span {
+    margin-left: 10px;
+}   
+
+.preview-poster {
+    max-height: 50px;
+}
