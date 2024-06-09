@@ -1,0 +1,14 @@
+.button {
+  min-width: 26px;
+  min-height: 26px;
+  border: 2px solid #2d2f31;
+
+  &.light {
+    background-color: white;
+  }
+
+  &.dark {
+    color: #fff;
+    background-color: #2d2f31;
+  }
+}
