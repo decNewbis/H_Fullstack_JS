@@ -1,0 +1,13 @@
+.footer {
+  background-color: #f7f9fa;
+
+  &__wrapper {
+    max-width: 1024px;
+    margin: 0 auto;
+    padding: 50px 0;
+  }
+
+  &__content {
+    color: #8a8c8e;
+  }
+}
