@@ -1,0 +1,31 @@
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+fieldset {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+input[type="checkbox"]:checked + label + .series-options {
+  display: block;
+  padding-top: 10px;
+}
+
+.hidden {
+  display: none;
+}

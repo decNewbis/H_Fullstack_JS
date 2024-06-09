@@ -4,7 +4,6 @@
   "description": "Movie Searcher is a simple and intuitive web application designed to help you quickly find information about your favorite movies. With an easy-to-use interface, you can search for movies by title, browse through detailed information including release year, plot summaries, cast, and ratings.",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start-server": "node server.js",
     "build": "webpack"
   },
@@ -23,6 +22,10 @@
     "@babel/core": "^7.24.7",
     "@babel/preset-env": "^7.24.7",
     "babel-loader": "^9.1.3",
+    "css-loader": "^7.1.2",
+    "mini-css-extract-plugin": "^2.9.0",
+    "sass": "^1.77.4",
+    "sass-loader": "^14.2.1",
     "webpack": "^5.91.0",
     "webpack-cli": "^5.1.4"
   }
