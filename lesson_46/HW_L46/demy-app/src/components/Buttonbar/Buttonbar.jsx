@@ -1,7 +1,7 @@
-import "./_authbar.scss";
+import "./_buttonbar.scss";
 import {Button} from "../Button";
 
-export function Authbar() {
+export function Buttonbar() {
   return (
     <ul className="authbar__list">
       <li className="authbar__item">
