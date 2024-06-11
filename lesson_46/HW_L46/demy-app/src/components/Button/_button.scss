@@ -4,14 +4,14 @@
   align-items: center;
   padding: 4px 8px;
   text-decoration: none;
-  min-width: 30px;
-  min-height: 26px;
+  min-width: 21px;
+  min-height: 21px;
   font-size: 16px;
   color: #000;
   background-color: #fff;
   border: none;
 
-  &.light {
+  &.light, &.dark {
     border: 2px solid #2d2f31;
   }
 
