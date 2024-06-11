@@ -1,15 +1,26 @@
 .button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 8px;
+  text-decoration: none;
   min-width: 30px;
   min-height: 26px;
   font-size: 16px;
-  border: 2px solid #2d2f31;
+  color: #000;
+  background-color: #fff;
+  border: none;
 
   &.light {
-    background-color: white;
+    border: 2px solid #2d2f31;
   }
 
   &.dark {
     color: #fff;
     background-color: #2d2f31;
+  }
+
+  &.light:active, &.dark:active {
+    box-shadow: 0 0 4px 1px #b9babb;
   }
 }

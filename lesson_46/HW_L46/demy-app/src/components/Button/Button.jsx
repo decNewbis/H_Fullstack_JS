@@ -1,7 +1,7 @@
 import "./_button.scss";
 
-export function Button({theme, children}) {
+export function Button({link='#', theme='', children}) {
   return (
-    <button className={`button ${theme}`}>{children}</button>
+      <a href={link} className={`button ${theme}`}>{children}</a>
   );
 }
