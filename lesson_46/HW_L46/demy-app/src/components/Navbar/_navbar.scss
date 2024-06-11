@@ -1,5 +1,8 @@
 .navbar {
+  position: relative;
   padding: 8px 0;
+  box-shadow: 0 0 10px 2px #a5a5a5;
+
   &__list {
     list-style: none;
     margin: 0;
