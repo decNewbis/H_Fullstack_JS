@@ -3,3 +3,9 @@
     max-width: 790px;
   }
 }
+
+@media (max-width: 950px) {
+  input[type=search] {
+    min-width: 300px;
+  }
+}
