@@ -1,4 +1,5 @@
 import "./_search.scss";
+import "./_media-search.scss"
 
 export function Search() {
   return (
