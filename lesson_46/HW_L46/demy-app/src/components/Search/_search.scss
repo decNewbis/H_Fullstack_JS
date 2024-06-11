@@ -1,5 +1,5 @@
 input[type=search] {
-  width: 100%;
+  width: calc(100vw - 650px);
   height: 30px;
   box-sizing: border-box;
   border: 2px solid #ccc;
