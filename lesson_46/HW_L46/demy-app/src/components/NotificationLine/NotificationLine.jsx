@@ -13,8 +13,7 @@ export function NotificationLine() {
   return (
     <div className="notification" ref={notificationRef}>
       <div className="notification__wrapper">
-        <ul className="notification__list">
-          <li className="notification__item">
+          <div className="notification__line">
             <span className="notification__close" onClick={handleCloseClick}>x</span>
             <span className="notification__message">
               New to Demy? Learning leds to opportunity
@@ -23,12 +22,11 @@ export function NotificationLine() {
             <span className="notification__offer">
               Shop now to get an exclusive offer: Courses from €14.99.
             </span>
-          </li>
-          <li className="notification__item">
+          </div>
+          <div className="notification__line">
             <span className="notification__deadline">Ends</span>
             <span className="notification__date">12.06.24</span>
-          </li>
-        </ul>
+          </div>
       </div>
     </div>
   );
