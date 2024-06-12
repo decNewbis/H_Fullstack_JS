@@ -1,0 +1,13 @@
+input[type=search] {
+  width: calc(100vw - 650px);
+  height: 30px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 15px;
+  font-size: 16px;
+  background-color: white;
+  background-image: url('../../assets/png/search/search-icon.png');
+  background-position: 10px 3px;
+  background-repeat: no-repeat;
+  padding: 0 8px 0 40px;
+}

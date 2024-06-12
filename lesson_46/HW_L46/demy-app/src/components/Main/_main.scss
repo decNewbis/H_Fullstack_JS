@@ -1,0 +1,40 @@
+.main {
+  &__wrapper {
+    max-width: 956px;
+    min-width: 950px;
+    min-height: 300px;
+    margin: 0 auto 40px;
+    padding: 50px 0 0;
+  }
+
+  &__background-image {
+    background-image: url("../../assets/png/main/main-bg.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+  }
+
+  &__content {
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 0 auto 0 100px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 7px #959393;
+  }
+
+  &__title {
+    font-size: 25px;
+    margin: 0;
+    text-align: left;
+  }
+
+  &__paragraph {
+    margin: 0;
+    text-align: left;
+  }
+}
+
