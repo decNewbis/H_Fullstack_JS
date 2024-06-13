@@ -1,4 +1,5 @@
 import "./_main.scss";
+import {Partners} from "../Partners";
 
 export function Main() {
   return (
@@ -14,6 +15,7 @@ export function Main() {
           </p>
         </div>
       </div>
+      <Partners />
     </main>
   );
 }
