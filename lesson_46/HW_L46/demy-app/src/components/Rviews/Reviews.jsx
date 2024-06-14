@@ -32,17 +32,21 @@ export function Reviews() {
             return (
               <SwiperSlide key={key}>
                 <div className="reviews__container">
-                  <img className="reviews__quote" src={quoteIcon} alt="illustation of quote"/>
-                  <span className="reviews__text">{text}</span>
-                  <div className="reviews__author">
-                    <span className="reviews__author-initials">{getNameInitials(author)}</span>
-                    <span className="reviews__author-name">{author}</span>
+                  <div>
+                    <img className="reviews__quote" src={quoteIcon} alt="illustation of quote"/>
+                    <span className="reviews__text">{text}</span>
                   </div>
-                  <hr className="reviews__dividing-line"/>
-                  <a href="#" className="reviews__course">
-                    <img className="reviews__play" src={playIcon} alt="illustration of play-icon"/>
-                    <span className="reviews__course-name">{courseName}</span>
-                  </a>
+                  <div>
+                    <div className="reviews__author">
+                      <span className="reviews__author-initials">{getNameInitials(author)}</span>
+                      <span className="reviews__author-name">{author}</span>
+                    </div>
+                    <hr className="reviews__dividing-line"/>
+                    <a href="#" className="reviews__course">
+                      <img className="reviews__play" src={playIcon} alt="illustration of play-icon"/>
+                      <span className="reviews__course-name">{courseName}</span>
+                    </a>
+                  </div>
                 </div>
               </SwiperSlide>
             );

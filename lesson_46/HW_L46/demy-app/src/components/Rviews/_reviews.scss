@@ -60,10 +60,13 @@
   }
 
   &__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     min-width: 325px;
     max-width: 485px;
     width: calc((100vw - 48px - 35px) / 3);
-    min-height: 335px;
+    min-height: 300px;
     padding: 24px;
     background-color: #fff;
     border: 1px solid #d1d7dc;
