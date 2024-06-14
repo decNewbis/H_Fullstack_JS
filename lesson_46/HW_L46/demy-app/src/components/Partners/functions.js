@@ -1,6 +1,6 @@
 const importImages = (value) => {
   let images = {};
-  value.keys().map((item, index) => {images[item.replace('./', '')] = value(item);});
+  value.keys().map((item) => {images[item.replace('./', '')] = value(item);});
   return images;
 }
 

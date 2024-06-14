@@ -1,7 +1,7 @@
 import "./_partners.scss";
 import "./_media-partners.scss";
 
-import {images} from "./importImages";
+import {images} from "./functions";
 
 import {companiesLogoDb} from "./companiesLogoDb";
 
