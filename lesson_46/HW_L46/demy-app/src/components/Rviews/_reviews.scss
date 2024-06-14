@@ -1,0 +1,126 @@
+.swiper {
+  width: 100%;
+  height: 100%;
+
+  &-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+
+    /* Center slide text vertically */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &-button{
+    &-prev, &-next {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background-color: #2d2f31;
+
+      &:after {
+        font-size: 16px;
+        font-weight: 700;
+        background-color: #00000000;
+        color: #fff;
+      }
+
+      &:hover {
+        background-color: #3e4143;
+      }
+    }
+  }
+}
+
+.reviews {
+  min-width: 950px;
+  background-color: #f7f9fa;
+
+  &__wrapper {
+    max-width: 1440px;
+    min-width: 925px;
+    padding: 32px 24px;
+    margin: 0 auto;
+  }
+
+  &__title {
+    margin: 0 0 32px;
+    font-size: 24px;
+    font-weight: 700;
+    color: #2d2f31;
+  }
+
+  &__container {
+    min-width: 325px;
+    max-width: 500px;
+    width: calc((100vw - 48px - 35px) / 3);
+    min-height: 335px;
+    padding: 24px;
+    background-color: #fff;
+    border: 1px solid #d1d7dc;
+  }
+
+  &__quote {
+    max-width: 18px;
+    margin: 0 0 16px
+  }
+
+  &__text {
+    display: block;
+    text-align: start;
+    margin: 0 0 16px;
+  }
+
+  &__author {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    &-initials, &-name {
+      font-size: 14px;
+      font-weight: 700;
+    }
+    &-initials {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 32px;
+      height: 32px;
+      color: #fff;
+      border-radius: 50%;
+      background-color: #000;
+    }
+  }
+
+  &__dividing-line {
+    margin: 24px 0;
+  }
+
+  &__course {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    text-decoration: none;
+    color: #5624d0;
+
+    &-name {
+      display: block;
+      text-align: start;
+    }
+  }
+
+  &__play {
+    max-width: 32px;
+    margin: 0;
+  }
+}
+
