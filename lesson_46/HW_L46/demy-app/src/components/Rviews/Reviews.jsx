@@ -11,9 +11,7 @@ import { Navigation } from 'swiper/modules';
 
 import {reviewsDb} from "./reviewsDb";
 
-function getNameInitials(value) {
-  return value.split(' ').map((word) => word[0].toUpperCase()).join('');
-}
+import {getNameInitials} from "./functions";
 
 export function Reviews() {
   return (
