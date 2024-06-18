@@ -1,6 +1,6 @@
 import "./_main.scss";
 import {Partners} from "../Partners";
-import {Reviews} from "../Rviews";
+import {ReviewList} from "../RviewList";
 
 export function Main() {
   return (
@@ -19,7 +19,7 @@ export function Main() {
         </div>
       </section>
       <Partners />
-      <Reviews />
+      <ReviewList />
     </main>
   );
 }
