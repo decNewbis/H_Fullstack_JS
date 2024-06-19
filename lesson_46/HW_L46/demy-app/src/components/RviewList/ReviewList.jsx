@@ -1,7 +1,7 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
-import {reviewsDb} from "./reviewsDb";
 import {Review} from "../Review";
+import {useGetDataFromUrl} from "../../hooks";
 import 'swiper/css/navigation';
 import "./_reviews.scss";
 import 'swiper/css';
@@ -9,6 +9,18 @@ import 'swiper/css';
 
 export function ReviewList() {
   const sectionClassName = 'reviews';
+  const urlData = "https://jsonplaceholder.typicode.com/comments";
+  let [reviewsDb, error] = useGetDataFromUrl(urlData);
+
+  if (error) {
+    return (
+      <h2>Smth wrong: {error}</h2>
+    );
+  }
+  if (reviewsDb.length > 10) {
+    reviewsDb = reviewsDb.slice(0, 10);
+  }
+
   return (
     <section className={sectionClassName}>
       <div className={`${sectionClassName}__wrapper`}>
@@ -23,7 +35,8 @@ export function ReviewList() {
                 navigation={true}
                 modules={[Navigation]}
                 className={`${sectionClassName}__swiper`}>
-          {reviewsDb.map(({text, author, courseName, key}) => {
+          {reviewsDb.map(({body: text, email: author, name: courseName, id: key}) => {
+            author = author.split('@')[0];
             const contentProps = {text, author, courseName, sectionClassName}
             return (
               <SwiperSlide key={key}>
