@@ -3,7 +3,7 @@ import logo from "../../assets/svg/logo.svg";
 import {Search} from "../Search";
 import {Buttonbar} from "../Buttonbar";
 
-export function Navbar() {
+export function Navbar({onClick}) {
   return (
     <nav className="navbar">
       <ul className="navbar__list">
@@ -25,7 +25,7 @@ export function Navbar() {
           <a href="#">Teach on Demy</a>
         </li>
         <li className="navbar__item">
-          <Buttonbar />
+          <Buttonbar onClick={onClick} />
         </li>
       </ul>
     </nav>
