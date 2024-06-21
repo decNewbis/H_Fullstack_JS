@@ -1,7 +1,8 @@
-import "./_sign-up.scss";
+import {useEffect, useState} from "react";
 import {Button} from "../Button";
 import {Input} from "../Input";
-import {useEffect, useState} from "react";
+import {REG_EXPS} from "../../constants";
+import "./_sign-up.scss";
 
 
 
@@ -72,13 +73,10 @@ export function SignUp({onClick}) {
   }
 
   function isPasswordValid(value) {
-    const minimum8Chars = /^.{8,15}$/;
-    const withoutSpaces = /^\S{8,15}$/;
-    const containsSymbols = /(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])/;
     if(
-      minimum8Chars.test(value) &&
-      withoutSpaces.test(value) &&
-      containsSymbols.test(value)
+      REG_EXPS.minimum8Chars.test(value) &&
+      REG_EXPS.withoutSpaces.test(value) &&
+      REG_EXPS.containsSymbols.test(value)
     ){
       return '';
     }
@@ -86,8 +84,7 @@ export function SignUp({onClick}) {
   }
 
   function isEmailValid(value) {
-    const emailRegexp = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
-    if (emailRegexp.test(value)) {
+    if (REG_EXPS.emailNamingRegExp.test(value)) {
       return '';
     }
     return 'Email is invalid';

@@ -2,6 +2,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import {Review} from "../Review";
 import {useGetDataFromUrl} from "../../hooks";
+import {API_COMMENTS} from "../../constants";
 import 'swiper/css/navigation';
 import "./_reviews.scss";
 import 'swiper/css';
@@ -9,8 +10,7 @@ import 'swiper/css';
 
 export function ReviewList() {
   const sectionClassName = 'reviews';
-  const urlData = "https://jsonplaceholder.typicode.com/comments";
-  let [reviewsDb, error] = useGetDataFromUrl(urlData);
+  let [reviewsDb, error] = useGetDataFromUrl(API_COMMENTS);
 
   if (error) {
     return (
