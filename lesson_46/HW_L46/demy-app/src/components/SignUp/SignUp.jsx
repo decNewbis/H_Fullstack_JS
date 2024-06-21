@@ -1,7 +1,7 @@
 import "./_sign-up.scss";
 import {Button} from "../Button";
 import {Input} from "../Input";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 
 
@@ -21,18 +21,20 @@ export function SignUp({onClick}) {
     password: false
   });
 
+  useEffect(() => {
+    const error = {
+      fullName: isFullNameValid(fullName),
+      email: isEmailValid(email),
+      password: isPasswordValid(password)
+    };
+    const allValid = Object.values(submitEnable).every(Boolean);
+    setFormErrors(error);
+    setIsButtonDisabled(!allValid);
+  }, [submitEnable]);
+
   function handleSubmit(event) {
     event.preventDefault();
-    const error = {
-    fullName: isFullNameValid(fullName),
-    email: isEmailValid(email),
-    password: isPasswordValid(password)
-    };
-    setFormErrors(error);
-    const isFormValid = !Boolean(error.fullName || error.email || error.password);
-    if (isFormValid) {
-      onClick();
-    }
+    onClick();
   }
 
   function onChangeFullName(event) {
@@ -40,8 +42,7 @@ export function SignUp({onClick}) {
     if (value.length < 25) {
       setFullName(value);
     }
-    setSubmitEnable({...submitEnable, fullName: Boolean(value)});
-    setIsButtonDisabled(isSubmitDisable());
+    setSubmitEnable({...submitEnable, fullName: isFullNameValid(value) === ''});
   }
 
   function onChangePassword(event) {
@@ -49,8 +50,8 @@ export function SignUp({onClick}) {
     if (value.length < 15) {
       setPassword(value);
     }
-    setSubmitEnable({...submitEnable, password: Boolean(value)});
-    setIsButtonDisabled(isSubmitDisable());
+
+    setSubmitEnable({...submitEnable, password: isPasswordValid(value) === ''});
   }
 
   function onChangeEmail(event) {
@@ -58,8 +59,7 @@ export function SignUp({onClick}) {
     if (value.length < 25) {
       setEmail(value);
     }
-    setSubmitEnable({...submitEnable, email: Boolean(value)});
-    setIsButtonDisabled(isSubmitDisable());
+    setSubmitEnable({...submitEnable, email: isEmailValid(value) === ''});
   }
 
   function isFullNameValid(value) {
@@ -93,21 +93,32 @@ export function SignUp({onClick}) {
     return 'Email is invalid';
   }
 
-  const isSubmitDisable = () => {
-    return !(submitEnable.fullName && submitEnable.email && submitEnable.password);
-  }
-
   return (
     <div className="modal">
       <div className="modal__content">
         <span className="close" onClick={onClick}>&times;</span>
         <h2 className="modal__title">Sign up and start learning</h2>
         <form className="modal__form" onSubmit={handleSubmit}>
-          <Input value={fullName} onChange={onChangeFullName} className="modal__input" type="text" name="fullName" placeholder="Full name" />
+          <Input value={fullName}
+                 onChange={onChangeFullName}
+                 className="modal__input"
+                 type="text" name="fullName"
+                 placeholder="Full name
+                 " />
           {formErrors.fullName && <p>{formErrors.fullName}</p>}
-          <Input value={email} onChange={onChangeEmail} className="modal__input" type="email" name="email" placeholder="Email" />
+          <Input value={email}
+                 onChange={onChangeEmail}
+                 className="modal__input"
+                 type="email" name="email"
+                 placeholder="Email"
+          />
           {formErrors.email && <p>{formErrors.email}</p>}
-          <Input value={password} onChange={onChangePassword} className="modal__input" type="password" name="password" placeholder="Password" />
+          <Input value={password}
+                 onChange={onChangePassword}
+                 className="modal__input"
+                 type="password" name="password"
+                 placeholder="Password"
+          />
           {formErrors.password && <p>{formErrors.password}</p>}
           <div className="modal__indicator-bar">
             <span className="modal__indicator"></span>
