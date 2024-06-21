@@ -10,11 +10,16 @@ import 'swiper/css';
 
 export function ReviewList() {
   const sectionClassName = 'reviews';
-  let [reviewsDb, error] = useGetDataFromUrl(API_COMMENTS);
+  let [reviewsDb, error, isLoading] = useGetDataFromUrl(API_COMMENTS);
 
+  if (isLoading) {
+    return (
+      <span>Loading...</span>
+    );
+  }
   if (error) {
     return (
-      <h2>Smth wrong: {error}</h2>
+      <span>Smth wrong: {error}</span>
     );
   }
   if (reviewsDb.length > 10) {
