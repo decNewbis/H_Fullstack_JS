@@ -1,93 +1,21 @@
-import {useEffect, useState} from "react";
 import {Button} from "../Button";
 import {Input} from "../Input";
-import {REG_EXPS} from "../../constants";
+import {useForm} from "./useForm";
 import "./_sign-up.scss";
 
-
-
 export function SignUp({onClick}) {
-  const [fullName, setFullName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-  const [formErrors, setFormErrors] = useState({
-    fullName: '',
-    email: '',
-    password: ''
-  });
-  const [submitEnable, setSubmitEnable] = useState({
-    fullName: false,
-    email: false,
-    password: false
-  });
 
-  useEffect(() => {
-    const error = {
-      fullName: isFullNameValid(fullName),
-      email: isEmailValid(email),
-      password: isPasswordValid(password)
-    };
-    const allValid = Object.values(submitEnable).every(Boolean);
-    setFormErrors(error);
-    setIsButtonDisabled(!allValid);
-  }, [submitEnable]);
+  const {
+    fullName, email, password,
+    isButtonDisabled, formErrors,
+    onChangeFullName, onChangePassword, onChangeEmail,
+    handleFocusOut
+  } = useForm();
 
   function handleSubmit(event) {
     event.preventDefault();
+    console.log('send form...');
     onClick();
-  }
-
-  function onChangeFullName(event) {
-    const value = event.target.value;
-    if (value.length < 25) {
-      setFullName(value);
-    }
-    setSubmitEnable({...submitEnable, fullName: isFullNameValid(value) === ''});
-  }
-
-  function onChangePassword(event) {
-    const value = event.target.value;
-    if (value.length < 15) {
-      setPassword(value);
-    }
-
-    setSubmitEnable({...submitEnable, password: isPasswordValid(value) === ''});
-  }
-
-  function onChangeEmail(event) {
-    const value = event.target.value;
-    if (value.length < 25) {
-      setEmail(value);
-    }
-    setSubmitEnable({...submitEnable, email: isEmailValid(value) === ''});
-  }
-
-  function isFullNameValid(value) {
-    const words = value.split(' ');
-    const isLengthMoreThenTwo = words.every((word) => word.length >= 2);
-    if (words.length >= 2 && isLengthMoreThenTwo) {
-      return '';
-    }
-    return 'The full name must contain at least 2 words and 2 characters in each word'
-  }
-
-  function isPasswordValid(value) {
-    if(
-      REG_EXPS.minimum8Chars.test(value) &&
-      REG_EXPS.withoutSpaces.test(value) &&
-      REG_EXPS.containsSymbols.test(value)
-    ){
-      return '';
-    }
-    return 'Password must contain at least one number, one letter, and one special character';
-  }
-
-  function isEmailValid(value) {
-    if (REG_EXPS.emailNamingRegExp.test(value)) {
-      return '';
-    }
-    return 'Email is invalid';
   }
 
   return (
@@ -98,6 +26,7 @@ export function SignUp({onClick}) {
         <form className="modal__form" onSubmit={handleSubmit}>
           <Input value={fullName}
                  onChange={onChangeFullName}
+                 onBlur={handleFocusOut}
                  className="modal__input"
                  type="text" name="fullName"
                  placeholder="Full name
@@ -105,6 +34,7 @@ export function SignUp({onClick}) {
           {formErrors.fullName && <p>{formErrors.fullName}</p>}
           <Input value={email}
                  onChange={onChangeEmail}
+                 onBlur={handleFocusOut}
                  className="modal__input"
                  type="email" name="email"
                  placeholder="Email"
@@ -112,6 +42,7 @@ export function SignUp({onClick}) {
           {formErrors.email && <p>{formErrors.email}</p>}
           <Input value={password}
                  onChange={onChangePassword}
+                 onBlur={handleFocusOut}
                  className="modal__input"
                  type="password" name="password"
                  placeholder="Password"
