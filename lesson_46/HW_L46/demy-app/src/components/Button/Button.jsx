@@ -1,5 +1,6 @@
+import {Link} from "react-router-dom";
 import "./_button.scss";
-import {Buttonbar} from "../Buttonbar";
+
 
 function handlerClick(event, func) {
   if (func) {
@@ -21,6 +22,7 @@ export function Button({type='link', link='#', theme='', onClick, disabled=false
     );
   }
   return (
-    <a href={link} {...receiveProps}>{children}</a>
+    // <a href={link} {...receiveProps}>{children}</a>
+    <Link to={link} {...receiveProps}>{children}</Link>
   );
 }
