@@ -2,6 +2,7 @@ export const Input = (
   {
     className='',
     onChange,
+    onBlur=null,
     type = "text",
     name='',
     placeholder='',
@@ -16,6 +17,7 @@ export const Input = (
     <label>
       <input className={className}
              onChange={onChange}
+             onBlur={onBlur}
              type={type}
              name={name}
              placeholder={placeholder}
