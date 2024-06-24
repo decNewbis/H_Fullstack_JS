@@ -5,5 +5,10 @@ const REG_EXPS = {
   containsSymbols: /(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])/,
   emailNamingRegExp: /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu,
 };
+const ERROR_MESSAGES = {
+  fullName: 'The full name must contain at least 2 words and 2 characters in each word',
+  password: 'Password must contain at least one number, one letter, and one special character',
+  email: 'Email is invalid'
+}
 
-export { API_COMMENTS, REG_EXPS};
+export { API_COMMENTS, REG_EXPS, ERROR_MESSAGES};
