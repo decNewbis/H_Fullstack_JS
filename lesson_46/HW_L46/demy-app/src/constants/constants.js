@@ -10,5 +10,12 @@ const ERROR_MESSAGES = {
   password: 'Password must contain at least one number, one letter, and one special character',
   email: 'Email is invalid'
 }
+const LINKS = {
+  homepage: '/',
+  registration: '/registration'
+}
+const KEYS = {
+  keyNotificationLineLocalStorage: 'currentNotificationLineVisible'
+}
 
-export { API_COMMENTS, REG_EXPS, ERROR_MESSAGES};
+export { API_COMMENTS, REG_EXPS, ERROR_MESSAGES, LINKS, KEYS};
