@@ -11,7 +11,7 @@ export function Buttonbar({onClick}) {
         <Button theme="light">Log in</Button>
       </li>
       <li className="authbar__item">
-        <Button theme="dark" onClick={onClick}>Sign up</Button>
+        <Button link='/registration' theme="dark">Sign up</Button>
       </li>
       <li className="authbar__item">
         <Button theme="light">🌐</Button>
