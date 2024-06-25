@@ -5,7 +5,7 @@ import {ReviewList} from "../RviewList";
 export function Homepage() {
   return (
     <section>
-      <div className={`${styles.wrapper} ${styles.backgroundImage}`}>
+      <div className={`${styles.wrapper} ${styles['background-image']}`}>
         <div className={`${styles.content}`}>
           <h1 className={`${styles.title}`}>
             Jump into learning for less

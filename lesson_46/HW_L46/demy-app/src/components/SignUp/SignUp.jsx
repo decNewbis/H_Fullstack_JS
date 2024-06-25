@@ -22,7 +22,7 @@ export function SignUp() {
   }
 
   return (
-    <div className={styles.signUp}>
+    <div className={styles['sign-up']}>
       <div className={styles.content}>
         <h1 className={styles.title}>Sign up and start learning</h1>
         <form className={styles.form} onSubmit={handleSubmit}>
