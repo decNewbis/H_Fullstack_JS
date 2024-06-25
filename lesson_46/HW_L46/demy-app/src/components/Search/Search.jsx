@@ -1,10 +1,10 @@
-import "./_search.scss";
-import "./_media-search.scss"
+import searchStyles from "./_search.module.scss";
+import mediaSearchStyles from "./_media-search.module.scss"
 
 export function Search() {
   return (
-    <form action="">
-      <input type="search" placeholder="Search..."/>
+    <form className={searchStyles.searchInput} action="">
+      <input className={mediaSearchStyles.searchInput} type="search" placeholder="Search..."/>
     </form>
   );
 }

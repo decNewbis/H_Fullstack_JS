@@ -1,19 +1,19 @@
-import "./_buttonbar.scss";
 import {Button} from "../Button";
+import styles from "./_buttonbar.module.scss";
 
 export function Buttonbar({onClick}) {
   return (
-    <ul className="authbar__list">
-      <li className="authbar__item">
+    <ul className={styles.list}>
+      <li>
         <Button>🛒</Button>
       </li>
-      <li className="authbar__item">
+      <li>
         <Button theme="light">Log in</Button>
       </li>
-      <li className="authbar__item">
+      <li>
         <Button link='/registration' theme="dark">Sign up</Button>
       </li>
-      <li className="authbar__item">
+      <li>
         <Button theme="light">🌐</Button>
       </li>
     </ul>

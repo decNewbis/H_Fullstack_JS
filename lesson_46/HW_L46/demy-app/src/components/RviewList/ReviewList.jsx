@@ -4,12 +4,16 @@ import {Review} from "../Review";
 import {useGetDataFromUrl} from "../../hooks";
 import {API_COMMENTS} from "../../constants";
 import 'swiper/css/navigation';
-import "./_reviews.scss";
+import "./_reviews-swiper.scss"
+import styles from "./_reviews.module.scss";
 import 'swiper/css';
 
 
+
+
+
+
 export function ReviewList() {
-  const sectionClassName = 'reviews';
   let [reviewsDb, error, isLoading] = useGetDataFromUrl(API_COMMENTS);
 
   if (isLoading) {
@@ -27,9 +31,9 @@ export function ReviewList() {
   }
 
   return (
-    <section className={sectionClassName}>
-      <div className={`${sectionClassName}__wrapper`}>
-        <h2 className={`${sectionClassName}__title`}>How learners like you are achieving their goals</h2>
+    <section className={styles.reviews}>
+      <div className={styles.wrapper}>
+        <h2 className={styles.title}>How learners like you are achieving their goals</h2>
         <Swiper slidesPerView={3}
                 loop={true}
                 centeredSlides={true}
@@ -39,10 +43,10 @@ export function ReviewList() {
                 }}
                 navigation={true}
                 modules={[Navigation]}
-                className={`${sectionClassName}__swiper`}>
+                className={styles.swiper}>
           {reviewsDb.map(({body: text, email: author, name: courseName, id: key}) => {
             author = author.split('@')[0];
-            const contentProps = {text, author, courseName, sectionClassName}
+            const contentProps = {text, author, courseName}
             return (
               <SwiperSlide key={key}>
                 <Review contentProps={contentProps} />
