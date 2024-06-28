@@ -30,10 +30,10 @@ export const DishDetails = () => {
   return (
     <Main>
       <Grid container spacing={2} sx={{minWidth: 720, maxWidth: 855}}>
-        <Grid xs={8}>
-          <Image src={dataDetails.strMealThumb} alt={dataDetails.strMeal} maxWidth="450px" />
+        <Grid item xs={6}>
+          <Image src={dataDetails.strMealThumb} alt={dataDetails.strMeal} maxWidth="350px" />
         </Grid>
-        <Grid xs={4}>
+        <Grid item xs={6}>
           <Typography sx={{ mt: 2, mb: 1 }} variant="h6" component="div">
             Ingredients:
           </Typography>
@@ -43,11 +43,12 @@ export const DishDetails = () => {
               <ListItemText
                 primary={`${id}. ${ingredient}: ${measure}`}
               />
+              <Image src={`${API.ingredientThumbnail}${ingredient}-Small.png`} alt={ingredient} maxWidth='45px' pd='0' />
             </ListItem>
           ))}
           </List>
         </Grid>
-        <Grid xs={12}>
+        <Grid item xs={12}>
           <h1>Instructions</h1>
           <Paragraph>{dataDetails.strInstructions}</Paragraph>
         </Grid>
