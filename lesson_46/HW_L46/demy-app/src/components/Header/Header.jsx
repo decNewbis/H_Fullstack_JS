@@ -1,21 +1,18 @@
-import "./_header.scss";
 import {Navbar} from "../Navbar";
 import {NotificationLine} from "../NotificationLine";
 import {useVisibility} from "../../hooks";
-import {SignUp} from "../SignUp";
+import {KEYS} from "../../constants";
+import styles from "./_header.module.scss";
 
 export function Header() {
-  const keyNotificationLineLocalStorage = "currentNotificationLineVisible";
-  const keySignUpLocalStorage = "currentSignUpVisible";
+  const keyNotificationLineLocalStorage = KEYS.keyNotificationLineLocalStorage;
   const [isNotificationLineVisible, toggleNotificationLineVisible] = useVisibility(keyNotificationLineLocalStorage, true);
-  const [isSignUpVisible, toggleSignUpVisible] = useVisibility(keySignUpLocalStorage, false);
 
   return (
-    <header className="header">
+    <header className={styles.header}>
       { isNotificationLineVisible && <NotificationLine onClick={toggleNotificationLineVisible}/> }
-      <div className="header__wrapper">
-        <Navbar onClick={toggleSignUpVisible} />
-        { isSignUpVisible && <SignUp onClick={toggleSignUpVisible}/> }
+      <div className={styles.wrapper}>
+        <Navbar />
       </div>
     </header>
   );

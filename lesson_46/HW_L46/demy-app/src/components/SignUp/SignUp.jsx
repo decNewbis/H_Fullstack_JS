@@ -1,10 +1,13 @@
+import {useNavigate, Link} from "react-router-dom";
 import {Button} from "../Button";
 import {Input} from "../Input";
 import {useForm} from "./useForm";
-import "./_sign-up.scss";
+import {LINKS} from "../../constants";
+import styles from "./_sign-up.module.scss";
 
-export function SignUp({onClick}) {
+export function SignUp() {
 
+  const navigate = useNavigate();
   const {
     fullName, email, password,
     isButtonDisabled, formErrors,
@@ -15,19 +18,18 @@ export function SignUp({onClick}) {
   function handleSubmit(event) {
     event.preventDefault();
     console.log('send form...');
-    onClick();
+    navigate(LINKS.homepage);
   }
 
   return (
-    <div className="modal">
-      <div className="modal__content">
-        <span className="close" onClick={onClick}>&times;</span>
-        <h2 className="modal__title">Sign up and start learning</h2>
-        <form className="modal__form" onSubmit={handleSubmit}>
+    <div className={styles['sign-up']}>
+      <div className={styles.content}>
+        <h1 className={styles.title}>Sign up and start learning</h1>
+        <form className={styles.form} onSubmit={handleSubmit}>
           <Input value={fullName}
                  onChange={onChangeFullName}
                  onBlur={handleFocusOut}
-                 className="modal__input"
+                 className={styles.input}
                  type="text" name="fullName"
                  placeholder="Full name
                  " />
@@ -35,7 +37,7 @@ export function SignUp({onClick}) {
           <Input value={email}
                  onChange={onChangeEmail}
                  onBlur={handleFocusOut}
-                 className="modal__input"
+                 className={styles.input}
                  type="email" name="email"
                  placeholder="Email"
           />
@@ -43,33 +45,33 @@ export function SignUp({onClick}) {
           <Input value={password}
                  onChange={onChangePassword}
                  onBlur={handleFocusOut}
-                 className="modal__input"
+                 className={styles.input}
                  type="password" name="password"
                  placeholder="Password"
           />
           {formErrors.password && <p>{formErrors.password}</p>}
-          <div className="modal__indicator-bar">
-            <span className="modal__indicator"></span>
-            <span className="modal__indicator"></span>
-            <span className="modal__indicator"></span>
-            <span className="modal__indicator"></span>
+          <div className={styles.indicatorBar}>
+            <span className={styles.indicator}></span>
+            <span className={styles.indicator}></span>
+            <span className={styles.indicator}></span>
+            <span className={styles.indicator}></span>
           </div>
-          <Input className="modal__checkbox" type="checkbox" name="checkbox">
+          <Input type="checkbox" name="checkbox">
             Send me special offers, personalized recommendations, and learning tips.
           </Input>
-          <Button type="button" theme="modal__submit" disabled={isButtonDisabled}>Sign up</Button>
+          <Button type="button" theme={styles.submit} disabled={isButtonDisabled}>Sign up</Button>
         </form>
-        <div className="modal__helpers">
-          <span className="modal__text">
+        <div className={styles.helpers}>
+          <span className={styles.text}>
             By signing up, you agree to our{' '}
-            <a href="#">Terms of Use</a>
+            <Link to="#">Terms of Use</Link>
             {' '}and{' '}
-            <a href="#">Privacy Policy</a>
+            <Link to="#">Privacy Policy</Link>
             .
           </span>
-          <span className="modal__options">
+          <span className={styles.options}>
             Already have an account?{' '}
-            <a href="#">Log in</a>
+            <Link to='#'>Log in</Link>
           </span>
         </div>
       </div>

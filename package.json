@@ -11,5 +11,8 @@
   },
   "keywords": [],
   "author": "decNewbis",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "react-router-dom": "^6.24.0"
+  }
 }

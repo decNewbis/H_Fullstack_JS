@@ -1,30 +1,32 @@
-import "./_navbar.scss";
+import {Link} from "react-router-dom";
 import logo from "../../assets/svg/logo.svg";
 import {Search} from "../Search";
 import {Buttonbar} from "../Buttonbar";
+import {LINKS} from "../../constants";
+import styles from "./_navbar.module.scss";
 
 export function Navbar({onClick}) {
   return (
-    <nav className="navbar">
-      <ul className="navbar__list">
-        <li className="navbar__item">
-          <a href="/">
+    <nav className={styles.navbar}>
+      <ul className={styles.list}>
+        <li className={styles.item}>
+          <Link to={LINKS.homepage}>
             <img src={logo} alt="logo"/>
-          </a>
+          </Link>
         </li>
-        <li className="navbar__item">
-          <a href="#">Categories</a>
+        <li className={styles.item}>
+          <Link to="#">Categories</Link>
         </li>
-        <li className="navbar__item">
+        <li className={styles.item}>
           <Search />
         </li>
-        <li className="navbar__item">
-          <a href="#">Demy Business</a>
+        <li className={styles.item}>
+          <Link to="#">Demy Business</Link>
         </li>
-        <li className="navbar__item">
-          <a href="#">Teach on Demy</a>
+        <li className={styles.item}>
+          <Link to="#">Teach on Demy</Link>
         </li>
-        <li className="navbar__item">
+        <li className={styles.item}>
           <Buttonbar onClick={onClick} />
         </li>
       </ul>

@@ -1,23 +1,23 @@
-import "./_notification-line.scss";
+import styles from "./_notification-line.module.scss";
 
 export function NotificationLine({onClick}) {
 
   return (
-    <div className="notification">
-      <div className="notification__wrapper">
-          <div className="notification__line">
-            <span className="notification__close" onClick={onClick}>x</span>
-            <span className="notification__message">
+    <div className={styles.notification}>
+      <div className={styles.wrapper}>
+          <div className={styles.line}>
+            <span className={styles.close} onClick={onClick}>x</span>
+            <span className={styles.message}>
               New to Demy? Learning leds to opportunity
             </span>
             <span> | </span>
-            <span className="notification__offer">
+            <span>
               Shop now to get an exclusive offer: Courses from €14.99.
             </span>
           </div>
-          <div className="notification__line">
-            <span className="notification__deadline">Ends</span>
-            <span className="notification__date">12.06.24</span>
+          <div className={styles.line}>
+            <span className={styles.deadline}>Ends</span>
+            <span className={styles.date}>12.06.24</span>
           </div>
       </div>
     </div>

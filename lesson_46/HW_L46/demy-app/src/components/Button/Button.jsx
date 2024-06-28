@@ -1,19 +1,10 @@
-import "./_button.scss";
-import {Buttonbar} from "../Buttonbar";
-
-function handlerClick(event, func) {
-  if (func) {
-    event.preventDefault();
-    func();
-  } else {
-    return null;
-  }
-}
+import {Link} from "react-router-dom";
+import styles from "./_button.module.scss";
 
 export function Button({type='link', link='#', theme='', onClick, disabled=false, children}) {
   const receiveProps = {
-    className: `button ${theme}`,
-    onClick: (event) => handlerClick(event, onClick)
+    className: `${styles.button} ${styles[theme] || theme}`,
+    onClick: onClick
   }
   if (type === "button") {
     return (
@@ -21,6 +12,6 @@ export function Button({type='link', link='#', theme='', onClick, disabled=false
     );
   }
   return (
-    <a href={link} {...receiveProps}>{children}</a>
+    <Link to={link} {...receiveProps}>{children}</Link>
   );
 }
