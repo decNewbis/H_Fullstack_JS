@@ -31,6 +31,9 @@ export const DishDetails = () => {
     <Main>
       <Grid container spacing={2} sx={{minWidth: 720, maxWidth: 855}}>
         <Grid item xs={6}>
+          <Typography sx={{ mt: 2, mb: 0, ml: 2, mr: 1 }} variant="h6" component="div">
+            {dataDetails.strMeal}
+          </Typography>
           <Image src={dataDetails.strMealThumb} alt={dataDetails.strMeal} maxWidth="350px" />
         </Grid>
         <Grid item xs={6}>
