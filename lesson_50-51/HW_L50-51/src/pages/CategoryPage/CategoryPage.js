@@ -46,7 +46,7 @@ export const CategoryPage = () => {
               </CardContent>
               <CardActions>
                 <Button size="small">
-                  <Link to={`/${idMeal}`}>Details</Link>
+                  <Link to={`/dish/${idMeal}`}>Details</Link>
                 </Button>
               </CardActions>
             </Card>
