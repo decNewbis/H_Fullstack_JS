@@ -1,20 +1,12 @@
 .footer {
-    min-height: 50px;
+    min-width: 950px;
     background-color: beige;
     text-align: center;
     padding: 15px;
-    margin-top: auto;
     color: var(--background);
 }
-
-@media screen and (min-width: 992px) {
-
-}
-
-@media screen and (min-width: 1200px) {
-
-}
-
-@media screen and (min-width: 1440px) {
-
+.wrapper {
+    max-width: 1024px;
+    min-height: 50px;
+    margin: 0 auto;
 }
