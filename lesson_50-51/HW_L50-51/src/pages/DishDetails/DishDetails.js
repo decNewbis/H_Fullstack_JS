@@ -32,7 +32,7 @@ export const DishDetails = () => {
           <Typography sx={{ mt: 2, mb: 0, ml: 2, mr: 1 }} variant="h6" component="div">
             {dataDetails.strMeal}
           </Typography>
-          <Image src={dataDetails.strMealThumb} alt={dataDetails.strMeal} maxWidth="350px" />
+          <Image src={dataDetails.strMealThumb} alt={dataDetails.strMeal} style={{maxWidth: "350px"}} />
         </Grid>
         <Grid item xs={6}>
           <Typography sx={{ mt: 2, mb: 1 }} variant="h6" component="div">
@@ -45,7 +45,10 @@ export const DishDetails = () => {
               <ListItemText
                 primary={`${id}. ${ingredient}: ${measure}`}
               />
-              <Image src={`${API.ingredientThumbnail}${ingredient}-Small.png`} alt={ingredient} maxWidth='45px' pd='0' />
+              <Image
+                src={`${API.ingredientThumbnail}${ingredient}-Small.png`}
+                alt={ingredient} style={{maxWidth: '45px'}} pd='0'
+              />
             </ListItem>
           ))}
           </List>
