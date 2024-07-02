@@ -1,31 +1,29 @@
 import {useParams} from "react-router-dom";
 import {Grid, Typography, List, ListItem, ListItemText} from "@mui/material";
-import {useData} from "../../hooks";
+import {useData, useMemoIngredients} from "../../hooks";
 import {Main} from "../../styledComponents/Main";
 import {Paragraph} from "../../styledComponents/Paragraph";
 import {Image} from "../../styledComponents/Image";
 import {API} from "../../constants";
+import {useState, useEffect} from "react";
 
 
 export const DishDetails = () => {
   let {dishId} = useParams();
-  const data = useData(`${API.dishDetails}${dishId}`)
-  console.log('data', data)
+  const [loading, setLoading] = useState(true);
+  const [dataDetails, setDataDetails] = useState(null);
+  const data = useData(`${API.dishDetails}${dishId}`);
+  const ingredients = useMemoIngredients(dataDetails);
 
-  if(!data?.meals) {
+  useEffect(() => {
+    if (data?.meals) {
+      setDataDetails(data?.meals[0]);
+      setLoading(false);
+    }
+  }, [data]);
+  if(loading) {
     return null;
   }
-  const dataDetails = data.meals[0];
-
-  const ingredients = [];
-  for (let i=1; i <= 20; i++) {
-    const ingredient = dataDetails[`strIngredient${i}`];
-    const measure = dataDetails[`strMeasure${i}`];
-    if (ingredient) {
-      ingredients.push({ id: i, ingredient, measure });
-    }
-  }
-  console.log('ingredients', ingredients);
 
   return (
     <Main>
@@ -40,6 +38,7 @@ export const DishDetails = () => {
           <Typography sx={{ mt: 2, mb: 1 }} variant="h6" component="div">
             Ingredients:
           </Typography>
+
           <List dense={false}>
           {ingredients.map(({ id, ingredient, measure }) => (
             <ListItem key={id} sx={{pt:0, pb:0}}>

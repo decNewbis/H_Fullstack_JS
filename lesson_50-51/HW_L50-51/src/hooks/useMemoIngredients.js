@@ -10,9 +10,7 @@ export const useMemoIngredients = (data) => {
       if (ingredient) {
         tempIngredientsList.push({id: i, ingredient, measure});
       }
-      console.log('useMemoIngredients', 'smth doing')
     }
-    console.log('useMemoIngredients')
     return tempIngredientsList;
   }, [data]);
 }
