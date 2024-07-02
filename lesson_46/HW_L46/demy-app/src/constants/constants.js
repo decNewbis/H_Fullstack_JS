@@ -12,7 +12,9 @@ const ERROR_MESSAGES = {
 }
 const LINKS = {
   homepage: '/',
-  registration: '/registration'
+  registration: '/registration',
+  courses: '/courses',
+  profile: '/profile',
 }
 const KEYS = {
   keyNotificationLineLocalStorage: 'currentNotificationLineVisible'
