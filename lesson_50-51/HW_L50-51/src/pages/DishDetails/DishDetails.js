@@ -42,7 +42,7 @@ export const DishDetails = () => {
           </Typography>
           <List dense={false}>
           {ingredients.map(({ id, ingredient, measure }) => (
-            <ListItem sx={{pt:0, pb:0}}>
+            <ListItem key={id} sx={{pt:0, pb:0}}>
               <ListItemText
                 primary={`${id}. ${ingredient}: ${measure}`}
               />
