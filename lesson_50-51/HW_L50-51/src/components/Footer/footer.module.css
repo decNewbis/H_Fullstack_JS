@@ -1,0 +1,12 @@
+.footer {
+    min-width: 950px;
+    background-color: beige;
+    text-align: center;
+    padding: 15px;
+    color: var(--background);
+}
+.wrapper {
+    max-width: 1024px;
+    min-height: 50px;
+    margin: 0 auto;
+}
