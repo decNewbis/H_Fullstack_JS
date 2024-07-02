@@ -9,7 +9,6 @@ import { Home } from "./pages/Home";
 import { CategoryPage } from "./pages/CategoryPage";
 import './App.css';
 import {DishDetails} from "./pages/DishDetails";
-import {AppWrapper} from "./styledComponents/App";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
