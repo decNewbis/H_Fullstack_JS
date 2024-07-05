@@ -1,7 +1,4 @@
-import {useState} from "react";
 import {Link} from "react-router-dom";
-import {saveCourse, deleteCourse} from "../../store/slices/courseSlice";
-import {useDispatch, useSelector} from "react-redux";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
@@ -19,16 +16,9 @@ import {useForm} from "../../pages/CoursesPage/useForm";
 import styles from "../../pages/CoursesPage/_coursespage.module.scss";
 import {Input} from "../Input";
 import {Textarea} from "../Textarea";
-import {addToFavorite, deleteFromFavorite} from "../../store/slices/profileSlice";
+import {useCourseAction} from "./useCourseAction";
 
 export function CourseCard({id, title, author, link, description, isAccessibleEditing=false}) {
-  const [isEdit, setIsEdit] = useState(false);
-  const initialIsFavoriteState = Boolean(
-    useSelector(state => state.profile.favoriteList.find(item => item.id === id))
-  );
-  const [isFavorite, setIsFavorite] = useState(initialIsFavoriteState);
-  const dispatch = useDispatch();
-
   const {
     title: editTitle, setTitle,
     author: editAuthor, setAuthor,
@@ -37,43 +27,18 @@ export function CourseCard({id, title, author, link, description, isAccessibleEd
     onChangeHandler
   } = useForm();
 
-  const editHandler = () => {
-    setTitle(title);
-    setAuthor(author);
-    setLink(link);
-    setDescription(description);
-    setIsEdit(!isEdit);
-  };
+  const courseContext = {
+    id, title, author, link, description,
+    editTitle, setTitle, editAuthor, setAuthor,
+    editLink, setLink, editDescription, setDescription
+  }
 
-  const saveHandler = () => {
-    const editedCourse = {
-      id,
-      title: editTitle,
-      author: editAuthor,
-      link: editLink,
-      description: editDescription
-    }
-    dispatch(saveCourse(editedCourse));
-    setIsEdit(!isEdit);
-  };
-
-  const cancelHandler = () => {
-    setIsEdit(!isEdit);
-  };
-
-  const deleteHandler = () => {
-    dispatch(deleteCourse(id));
-  };
-
-  const addToFavoriteHandler = () => {
-    dispatch(addToFavorite({id, title, author, link, description}));
-    setIsFavorite(!isFavorite);
-  };
-
-  const deleteFromFavoriteHandler = () => {
-    dispatch(deleteFromFavorite(id));
-    setIsFavorite(!isFavorite);
-  };
+  const {
+    isEdit, isFavorite,
+    editHandler, saveHandler,
+    cancelHandler, deleteHandler,
+    addToFavoriteHandler, deleteFromFavoriteHandler
+  } = useCourseAction(courseContext);
 
   return (
     <Grid item xs={6} md={4} >
