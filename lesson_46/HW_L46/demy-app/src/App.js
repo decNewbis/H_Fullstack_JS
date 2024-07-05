@@ -4,6 +4,8 @@ import {Main} from "./components/Main";
 import {Homepage} from "./pages/Homepage";
 import {SignUp} from "./pages/SignUp";
 import {LINKS} from "./constants";
+import {CoursesPage} from "./pages/CoursesPage";
+import {ProfilePage} from "./pages/ProfilePage";
 
 function App() {
   return (
@@ -13,8 +15,8 @@ function App() {
         <Routes>
           <Route path={LINKS.homepage} element={<Main />}>
             <Route path={LINKS.homepage} element={<Homepage />} />
-            <Route path={LINKS.courses} element={<Homepage />} />
-            <Route path={LINKS.profile} element={<Homepage />} />
+            <Route path={LINKS.courses} element={<CoursesPage />} />
+            <Route path={LINKS.profile} element={<ProfilePage />} />
             <Route path={LINKS.registration} element={<SignUp />} />
           </Route>
         </Routes>
