@@ -1,3 +1,4 @@
+import {useSelector}  from "react-redux";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { Link } from 'react-router-dom';
@@ -5,10 +6,11 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import IconButton from '@mui/material/IconButton';
 import { Header as StyledHeader } from '../../styledComponents/Header';
 import {useTheme} from "../../context/themeContext";
+import styles from "./_header.module.css";
 
 export const Header = () => {
   const { theme } = useTheme();
-  console.log('header', theme);
+  const mealsCounter = useSelector(state => Object.keys(state?.cart?.meals).length);
 
   return (
     <StyledHeader theme={theme}>
@@ -28,6 +30,7 @@ export const Header = () => {
       <Link to="/cart">
         <IconButton color="primary" aria-label="add to shopping cart">
           <AddShoppingCartIcon />
+          {mealsCounter ? <span className={styles.badge}>{mealsCounter}</span> : null}
         </IconButton>
       </Link>
 
