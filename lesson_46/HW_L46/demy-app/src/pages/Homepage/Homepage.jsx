@@ -1,6 +1,6 @@
 import styles from './_homepage.module.scss';
-import {Partners} from "../Partners";
-import {ReviewList} from "../RviewList";
+import {Partners} from "../../components/Partners";
+import {ReviewList} from "../../components/RviewList";
 
 export function Homepage() {
   return (

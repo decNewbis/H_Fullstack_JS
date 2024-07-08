@@ -21,10 +21,10 @@ export function Navbar({onClick}) {
           <Search />
         </li>
         <li className={styles.item}>
-          <Link to="#">Demy Business</Link>
+          <Link to={LINKS.courses}>Courses</Link>
         </li>
         <li className={styles.item}>
-          <Link to="#">Teach on Demy</Link>
+          <Link to={LINKS.profile}>Profile</Link>
         </li>
         <li className={styles.item}>
           <Buttonbar onClick={onClick} />
