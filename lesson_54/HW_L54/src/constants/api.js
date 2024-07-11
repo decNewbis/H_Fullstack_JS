@@ -4,4 +4,5 @@ export const API = {
   category: `${domain}/filter.php?c=`,
   categories: `${domain}/list.php?c=list`,
   mealId: `${domain}/lookup.php?i=`,
+  ingredientImage: `https://www.themealdb.com/images/ingredients/`,
 }
