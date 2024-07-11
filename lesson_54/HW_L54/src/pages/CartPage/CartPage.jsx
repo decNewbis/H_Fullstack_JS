@@ -27,7 +27,7 @@ export const CartPage = () => {
   return (
     <main>
       <h1>Meals</h1>
-      {meals
+      {meals.length > 0
         ? <OrderList
           meals={meals}
           orderQuantities={orderQuantities}
@@ -37,7 +37,7 @@ export const CartPage = () => {
         />
         : <p>Oops! Looks like you haven't chosen anything =\</p>
       }
-      {ingredients
+      {Object.keys(ingredients).length > 0
         ? <>
           <h2>Sum of all ingredients required to buy in market:</h2>
           <OrderIngredientsList ingredients={ingredients} />
