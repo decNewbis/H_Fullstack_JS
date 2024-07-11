@@ -4,64 +4,107 @@ import { API, STATUS } from "../../constants";
 export const fetchMealById = createAsyncThunk(
   'cart/fetchMealById',
   async (idMeal, thunkAPI) => {
-    const store = thunkAPI.getState()
-    console.log('store', store);
-
 
     try {
       const response = await fetch(`${API.mealId}${idMeal}`)
-      // if (response.ok) {
-      //   thunkAPI.dispatch(removeMeal(idMeal))
-      // }
       const data = await response.json()
 
-
-      // throw new Error(`Meal ${idMeal} not found`)
       return data?.meals?.[0]
     } catch(error) {
-      thunkAPI.rejectWithValue('error')
+      return thunkAPI.rejectWithValue('error');
     }
 
   }
-)
+);
+
+export const deleteOrder = createAsyncThunk(
+  'cart/deleteOrder',
+  async (idMeal) => {
+    return new Promise((resolve) =>
+    setTimeout(() => {
+      resolve({idMeal});
+    }, 200));
+  }
+);
+
+const increaseDecreaseValue = (type) => {
+  return createAsyncThunk(
+    type,
+    async (idMeal) => {
+      return new Promise((resolve) =>
+        setTimeout(() => {
+          resolve({idMeal, value: 1});
+        }, 200));
+    }
+  );
+};
+
+export const increaseOrder = increaseDecreaseValue('cart/increaseOrder');
+export const decreaseOrder = increaseDecreaseValue('cart/decreaseOrder');
 
 const initialState = {
   meals: {},
+  orderQuantities: {},
   status: STATUS.IDLE,
-}
+};
 
 const cartSlice = createSlice({
   name: 'cart',
   initialState: initialState,
-  reducers: {
-    // remove: (state, action) => {
-    //   const ifMealAlreadyAdded = state?.find((item) => item.id === action.payload.id)
-    //   if (!ifMealAlreadyAdded) {
-    //     state.push(action.payload);
-    //
-    //     // state = [...state, action.payload]
-    //     // state.push(action.payload) -> [data].slice()
-    //   }
-    // },
-    // removeMeal: (state, action) => {
-    //   const ifMealWasAddedBefore = state?.findIndex((item) => item.id === action.payload.id)
-    //   if (ifMealWasAddedBefore >= 0) {
-    //     state.splice(ifMealWasAddedBefore, 1)
-    //   }
-    // },
-  },
+  reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchMealById.pending, (state, action) => {
-      state.status = STATUS.LOADING;
-    })
-    builder.addCase(fetchMealById.fulfilled, (state, action) => {
-      // console.log(action.payload);
-      state.meals[action.payload.idMeal] = action.payload;
-      state.status = STATUS.IDLE;
-    })
-    builder.addCase(fetchMealById.rejected, (state, action) => {
-      state.status = STATUS.ERROR;
-    })
+    builder
+      .addCase(fetchMealById.pending, (state, action) => {
+        state.status = STATUS.LOADING;
+      })
+      .addCase(fetchMealById.fulfilled, (state, action) => {
+        const idMeal = action.payload.idMeal;
+        state.meals[idMeal] = action.payload;
+        state.orderQuantities[idMeal] = 1;
+        state.status = STATUS.IDLE;
+      })
+      .addCase(fetchMealById.rejected, (state, action) => {
+        state.status = STATUS.ERROR;
+      })
+      .addCase(deleteOrder.pending, (state, action) => {
+        state.status = STATUS.LOADING;
+      })
+      .addCase(deleteOrder.fulfilled, (state, action) => {
+        const idMeal = action.payload.idMeal;
+        delete state.meals[idMeal]
+        delete state.orderQuantities[idMeal];
+      })
+      .addCase(deleteOrder.rejected, (state, action) => {
+        state.status = STATUS.ERROR;
+      })
+
+      .addCase(increaseOrder.pending, (state, action) => {
+        state.status = STATUS.LOADING;
+      })
+      .addCase(increaseOrder.fulfilled, (state, action) => {
+        const idMeal = action.payload.idMeal;
+        const orderQuantity = state.orderQuantities[idMeal];
+        if (orderQuantity <= 9999) {
+          state.orderQuantities[idMeal] += action.payload.value;
+        }
+      })
+      .addCase(increaseOrder.rejected, (state, action) => {
+        state.status = STATUS.ERROR;
+      })
+
+      .addCase(decreaseOrder.pending, (state, action) => {
+        state.status = STATUS.LOADING;
+      })
+      .addCase(decreaseOrder.fulfilled, (state, action) => {
+        const idMeal = action.payload.idMeal;
+        const orderQuantity = state.orderQuantities[idMeal];
+          if (orderQuantity > 0) {
+            state.orderQuantities[idMeal] -= action.payload.value;
+          }
+      })
+      .addCase(decreaseOrder.rejected, (state, action) => {
+        state.status = STATUS.ERROR;
+      })
   }
 })
 
