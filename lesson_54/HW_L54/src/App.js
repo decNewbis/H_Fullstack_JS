@@ -11,6 +11,7 @@ import { Meal } from "./pages/Meal";
 import { Profile } from "./pages/Profile";
 import './App.css';
 import {withMealIdRequest} from "./HOC/withMealIdRequest";
+import {CartPage} from "./pages/CartPage";
 
 const MealId = withMealIdRequest(Meal);
 
@@ -22,7 +23,7 @@ const router = createBrowserRouter(
         <Route path="/category/:category" element={<CategoryPage />}/>
         <Route path=":mealId" element={<MealId />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/cart" element={<div>Cart page</div>} />
+        <Route path="/cart" element={<CartPage />} />
       </Route>
     </>
   )
