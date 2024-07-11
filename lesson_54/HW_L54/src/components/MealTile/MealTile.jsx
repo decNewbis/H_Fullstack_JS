@@ -9,13 +9,12 @@ import { Link } from "react-router-dom";
 
 
 export const MealTile = ({idMeal, strMeal, strMealThumb, addToCart, cart}) => {
-  const [isLoading, setisLoading] = useState(false);
-  console.log('cart', cart);
+  const [isLoading, setIsLoading] = useState(false);
   const isAddedToCart = cart.meals[idMeal]
 
   const handleClick = () => {
     addToCart(idMeal)
-    setisLoading(true);
+    setIsLoading(true);
   }
 
   const getButtonStatus = () => {
@@ -48,8 +47,7 @@ export const MealTile = ({idMeal, strMeal, strMealThumb, addToCart, cart}) => {
           <Button size="small">
             <Link to={`/${idMeal}`}>Details</Link>
           </Button>
-
-          <Button disabled={isLoading || isAddedToCart} onClick={handleClick} size="small">
+          <Button disabled={isLoading || !!isAddedToCart} onClick={handleClick} size="small">
             {getButtonStatus()}
           </Button>
         </CardActions>
