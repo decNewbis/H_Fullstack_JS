@@ -1,0 +1,22 @@
+.image {
+    max-width: 50px;
+    max-height: 50px;
+}
+
+.list {
+    display: grid;
+    grid-template-columns: 300px 300px;
+    column-gap: 20px;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.group {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
