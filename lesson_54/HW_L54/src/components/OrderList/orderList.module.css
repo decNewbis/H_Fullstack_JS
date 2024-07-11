@@ -1,0 +1,23 @@
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+.mealThumb {
+    max-width: 80px;
+    max-height: 80px;
+}
+.mealTitle {
+    max-width: 300px;
+    min-width: 280px;
+}
+.group {
+    display: flex;
+    gap: 16px;
+}
