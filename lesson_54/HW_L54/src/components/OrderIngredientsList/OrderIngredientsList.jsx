@@ -9,11 +9,11 @@ export const OrderIngredientsList = ({ingredients}) => {
           <li key={key} className={styles.item}>
             <div className={styles.group}>
               <img className={styles.image} src={`${API.ingredientImage}${key}-small.png`} alt={`Illustration of ${key}`}/>
-              <span className=''>{key}</span>
+              <span>{key}</span>
             </div>
             <div className={styles.group}>
-              <span className=''>{ingredients[key]?.quantity}</span>
-              <span className=''>{ingredients[key]?.unit}</span>
+              <span>{ingredients[key]?.quantity}</span>
+              <span>{ingredients[key]?.unit}</span>
             </div>
           </li>
         );
