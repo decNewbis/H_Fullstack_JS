@@ -1,0 +1,22 @@
+.product-section {
+    padding: 30px;
+}
+.name-and-image {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    float: left;
+}
+
+.imageForProduct {
+    max-width: 400px;
+    max-height: 400px;
+}
+
+.block-product {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 100px;
+    margin-bottom: 50px;
+}
