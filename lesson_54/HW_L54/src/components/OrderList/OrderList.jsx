@@ -1,6 +1,28 @@
+import {useCallback} from 'react';
 import styles from "./orderList.module.css";
 
 export const OrderList = ({meals, orderQuantities, onDelete, onIncrease, onDecrease}) => {
+  const handleDecrease = useCallback(
+    (idMeal) => {
+      onDecrease(idMeal);
+    },
+    [onDecrease]
+  );
+
+  const handleIncrease = useCallback(
+    (idMeal) => {
+      onIncrease(idMeal);
+    },
+    [onIncrease]
+  );
+
+  const handleDelete = useCallback(
+    (idMeal) => {
+      onDelete(idMeal);
+    },
+    [onDelete]
+  );
+
   return (
     <ul className={styles.list}>
       {meals.map(({idMeal, strMeal, strMealThumb}) => {
@@ -9,10 +31,10 @@ export const OrderList = ({meals, orderQuantities, onDelete, onIncrease, onDecre
             <img className={styles.mealThumb} src={strMealThumb} alt={`Illustration of ${strMeal}`}/>
             <span className={styles.mealTitle}>{strMeal}</span>
             <div className={styles.group}>
-              <button onClick={() => onDecrease(idMeal)}>-</button>
+              <button onClick={() => handleDecrease(idMeal)}>-</button>
               <span>{orderQuantities[idMeal]}</span>
-              <button onClick={() => onIncrease(idMeal)}>+</button>
-              <button onClick={() => onDelete(idMeal)}>Remove</button>
+              <button onClick={() => handleIncrease(idMeal)}>+</button>
+              <button onClick={() => handleDelete(idMeal)}>Remove</button>
             </div>
           </li>
         );
