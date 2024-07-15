@@ -10,11 +10,11 @@ export const Modal = () => {
 
   return (
     <div>
-      <button onClick={toggleModal}>{isOpen ? 'Close Modal' : 'Open Modal'}</button>
+      <button data-testid="toggleModalButton" onClick={toggleModal}>{isOpen ? 'Close Modal' : 'Open Modal'}</button>
       {isOpen && (
         <div role="dialog">
           <p>This is a modal window</p>
-          <button onClick={toggleModal}>Close</button>
+          <button data-testid="closeModalButton" onClick={toggleModal}>Close</button>
         </div>
       )}
     </div>
