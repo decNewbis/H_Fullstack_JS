@@ -9,8 +9,8 @@ export const Toggle = () => {
 
   return (
     <div>
-      <p>The switch is {isOn ? 'ON' : 'OFF'}</p>
-      <button onClick={handleToggle}>{isOn ? 'Turn OFF' : 'Turn ON'}</button>
+      <p data-testid="toggleMessage">The switch is {isOn ? 'ON' : 'OFF'}</p>
+      <button data-testid="toggleButton" onClick={handleToggle}>{isOn ? 'Turn OFF' : 'Turn ON'}</button>
     </div>
   );
 };
