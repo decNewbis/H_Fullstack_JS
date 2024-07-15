@@ -1,5 +1,4 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import {act} from "react";
 import { Toggle } from "./Toggle";
 
 describe('Toggle', () => {
