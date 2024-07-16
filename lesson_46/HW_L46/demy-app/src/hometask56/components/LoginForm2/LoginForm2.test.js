@@ -51,19 +51,6 @@ describe('LoginForm', () => {
     const errorMessage = screen.queryByTestId("errorMessage");
     expect(errorMessage).toHaveTextContent(/username and password are required/i);
     expect(onLogin).not.toHaveBeenCalled();
-
-    const usernameInput = screen.getByTestId("usernameInput");
-    fireEvent.change(usernameInput, { target: { value: "alibaba" }});
-    fireEvent.click(submitButton);
-    expect(errorMessage).toHaveTextContent(/username and password are required/i);
-    expect(onLogin).not.toHaveBeenCalled();
-
-
-    const passwordInput = screen.getByTestId("passwordInput");
-    fireEvent.change(passwordInput, { target: { value: "_alibaba#89" }});
-    fireEvent.click(submitButton);
-    expect(errorMessage).toHaveTextContent(/username and password are required/i);
-    expect(onLogin).not.toHaveBeenCalled();
   });
 
   it('should shows an error message when trying to submit with empty password field', () => {
