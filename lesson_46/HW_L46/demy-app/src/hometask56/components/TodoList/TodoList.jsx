@@ -14,13 +14,14 @@ export const TodoList = () => {
   return (
     <div>
       <input
+        data-testid="taskInput"
         type="text"
         value={task}
         onChange={(e) => setTask(e.target.value)}
         placeholder="Enter a task"
       />
-      <button onClick={handleAddTask}>Add Task</button>
-      <ul>
+      <button data-testid="addTaskButton" onClick={handleAddTask}>Add Task</button>
+      <ul data-testid="todoList">
         {todos.map((todo, index) => (
           <li key={index}>{todo}</li>
         ))}
