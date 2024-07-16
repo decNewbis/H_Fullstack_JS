@@ -14,6 +14,7 @@ export const LoginForm = ({ onLogin }) => {
       <label>
         Username:
         <input
+          data-testid="usernameInput"
           type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
@@ -22,12 +23,13 @@ export const LoginForm = ({ onLogin }) => {
       <label>
         Password:
         <input
+          data-testid="passwordInput"
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
       </label>
-      <button type="submit">Login</button>
+      <button data-testid="submitButton" type="submit">Login</button>
     </form>
   );
 };
