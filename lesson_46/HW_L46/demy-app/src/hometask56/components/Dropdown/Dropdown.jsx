@@ -9,13 +9,13 @@ export const Dropdown = () => {
 
   return (
     <div>
-      <select value={selected} onChange={handleSelect}>
+      <select data-testid="selectElement" value={selected} onChange={handleSelect}>
         <option value="">Select an option</option>
         <option value="Option 1">Option 1</option>
         <option value="Option 2">Option 2</option>
         <option value="Option 3">Option 3</option>
       </select>
-      {selected && <p>You selected: {selected}</p>}
+      {selected && <p data-testid="selectedItem">You selected: {selected}</p>}
     </div>
   );
 };
