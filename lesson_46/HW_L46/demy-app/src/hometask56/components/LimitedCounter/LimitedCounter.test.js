@@ -2,7 +2,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { LimitedCounter } from './LimitedCounter';
 
 describe('LimitedCounter', () => {
-  it('should renders counter and buttons with initial state', () => {
+  it('should render counter and buttons with initial state', () => {
     render(<LimitedCounter max={3} />);
     const displayCount = screen.getByTestId("displayCount");
     const incrementButton = screen.getByTestId("incrementButton");
@@ -18,7 +18,7 @@ describe('LimitedCounter', () => {
     expect(decrementButton).toBeDisabled();
   });
 
-  it('should increments the count', () => {
+  it('should increment the count', () => {
     render(<LimitedCounter max={3} />);
     const displayCount = screen.getByTestId("displayCount");
     const incrementButton = screen.getByTestId("incrementButton");
@@ -27,7 +27,7 @@ describe('LimitedCounter', () => {
     expect(displayCount).toHaveTextContent(/count: 1/i);
   });
 
-  it('should decrements the count', () => {
+  it('should decrement the count', () => {
     render(<LimitedCounter max={3} />);
     const displayCount = screen.getByTestId("displayCount");
     const incrementButton = screen.getByTestId("incrementButton");
@@ -40,7 +40,7 @@ describe('LimitedCounter', () => {
     expect(displayCount).toHaveTextContent(/count: 1/i);
   });
 
-  it( 'should disables increment button when count reaches max', () => {
+  it( 'should disable increment button when count reaches max', () => {
     render(<LimitedCounter max={3} />);
     const displayCount = screen.getByTestId("displayCount");
     const incrementButton = screen.getByTestId("incrementButton");
@@ -53,7 +53,7 @@ describe('LimitedCounter', () => {
     expect(incrementButton).toBeDisabled();
   });
 
-  it('should enables increment and decrement buttons correctly', () => {
+  it('should enable increment and decrement buttons correctly', () => {
     render(<LimitedCounter max={3} />)
     const displayCount = screen.getByTestId("displayCount");
     const incrementButton = screen.getByTestId("incrementButton");

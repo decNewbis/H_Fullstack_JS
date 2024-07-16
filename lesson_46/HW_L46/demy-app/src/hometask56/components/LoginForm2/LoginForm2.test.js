@@ -2,7 +2,7 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import { LoginForm2 } from "./LoginForm2";
 
 describe('LoginForm', () => {
-  it('should renders the form with username, password and submit button', () => {
+  it('should render the form with username, password and submit button', () => {
     render(<LoginForm2 onLogin={jest.fn()} />);
     const usernameInput = screen.getByTestId("usernameInput");
     const passwordInput = screen.getByTestId("passwordInput");
@@ -14,7 +14,7 @@ describe('LoginForm', () => {
     expect(errorMessage).not.toBeInTheDocument();
   });
 
-  it('should updates username and password state on input change', () => {
+  it('should update username and password state on input change', () => {
     render(<LoginForm2 onLogin={jest.fn()} />);
     const usernameInput = screen.getByTestId("usernameInput");
     const passwordInput = screen.getByTestId("passwordInput");
@@ -26,7 +26,7 @@ describe('LoginForm', () => {
     expect(passwordInput.value).toBe("_alibaba#89");
   });
 
-  it('should calls onLogin with username and password when the form submitted', () => {
+  it('should call onLogin with username and password when the form submitted', () => {
     const onLogin = jest.fn();
     render(<LoginForm2 onLogin={onLogin} />);
     const usernameInput = screen.getByTestId("usernameInput");
@@ -42,7 +42,7 @@ describe('LoginForm', () => {
     expect(errorMessage).not.toBeInTheDocument();
   });
 
-  it('should shows an error message when trying to submit with empty all fields', () => {
+  it('should show an error message when trying to submit with empty all fields', () => {
     const onLogin = jest.fn();
     render(<LoginForm2 onLogin={onLogin} />);
     const submitButton = screen.getByTestId("submitButton");
@@ -53,7 +53,7 @@ describe('LoginForm', () => {
     expect(onLogin).not.toHaveBeenCalled();
   });
 
-  it('should shows an error message when trying to submit with empty password field', () => {
+  it('should show an error message when trying to submit with empty password field', () => {
     const onLogin = jest.fn();
     render(<LoginForm2 onLogin={onLogin} />);
     const submitButton = screen.getByTestId("submitButton");
@@ -66,7 +66,7 @@ describe('LoginForm', () => {
     expect(onLogin).not.toHaveBeenCalled();
   });
 
-  it('should shows an error message when trying to submit with empty username field', () => {
+  it('should show an error message when trying to submit with empty username field', () => {
     const onLogin = jest.fn();
     render(<LoginForm2 onLogin={onLogin} />);
     const submitButton = screen.getByTestId("submitButton");
@@ -79,7 +79,7 @@ describe('LoginForm', () => {
     expect(onLogin).not.toHaveBeenCalled();
   });
 
-  it('should clears error message when the form submitted successfully', () => {
+  it('should clear error message when the form submitted successfully', () => {
     const onLogin = jest.fn();
     render(<LoginForm2 onLogin={onLogin} />);
     const usernameInput = screen.getByTestId("usernameInput");

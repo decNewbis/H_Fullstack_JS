@@ -2,7 +2,7 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import { Modal } from "./Modal";
 
 describe("Modal", () => {
-  it('should renders a button to open the modal', () => {
+  it('should render a button to open the modal', () => {
     render(<Modal />);
     const toggleModalButton = screen.getByRole("button", {name: /open modal/i});
     expect(toggleModalButton).toBeInTheDocument();
@@ -37,7 +37,7 @@ describe("Modal", () => {
     expect(modalDialog).not.toBeInTheDocument();
   });
 
-  it('should toogles state close/open toggleModalButton click', () => {
+  it('should toggle state close/open toggleModalButton click', () => {
     render(<Modal />);
     const toggleModalButton = screen.getByTestId("toggleModalButton");
     expect(toggleModalButton).toHaveTextContent(/open modal/i);

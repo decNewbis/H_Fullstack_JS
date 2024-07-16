@@ -2,7 +2,7 @@ import { render, screen, fireEvent} from "@testing-library/react";
 import { Tabs } from "./Tabs";
 
 describe('Tabs', () => {
-  it('should renders with initial state showing content of Tab 1', () => {
+  it('should render with initial state showing content of Tab 1', () => {
     render(<Tabs />);
     const tab1Button = screen.getByTestId("tab1Button");
     const tab2Button = screen.getByTestId("tab2Button");

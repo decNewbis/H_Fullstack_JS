@@ -2,7 +2,7 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import { Dropdown } from "./Dropdown";
 
 describe('Dropdown', () => {
-  it('should renders element with options', () => {
+  it('should render element with options', () => {
     render(<Dropdown />);
     const selectElement = screen.getByTestId("selectElement");
     const options = screen.getAllByRole("option");
@@ -12,7 +12,7 @@ describe('Dropdown', () => {
     expect(selectedItem).not.toBeInTheDocument();
   });
 
-  it('should renders the default "Select an option" as the initial value', () => {
+  it('should render the default "Select an option" as the initial value', () => {
     render(<Dropdown />);
     const selectElement = screen.getByTestId("selectElement");
     const defaultOption = screen.getByText(/Select an option/i);
@@ -20,7 +20,7 @@ describe('Dropdown', () => {
     expect(defaultOption).toBeInTheDocument();
   });
 
-  it('should updates the selected value and display it', () => {
+  it('should update the selected value and display it', () => {
     render(<Dropdown />);
     const selectElement = screen.getByTestId("selectElement");
 

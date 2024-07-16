@@ -2,7 +2,7 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import { Toggle } from "./Toggle";
 
 describe('Toggle', () => {
-  it('should renders with initial state OFF', () => {
+  it('should render with initial state OFF', () => {
     render(<Toggle />);
     const toggleMessage = screen.getByTestId("toggleMessage");
     expect(toggleMessage).toBeInTheDocument();
@@ -13,7 +13,7 @@ describe('Toggle', () => {
     expect(toggleButton).toHaveTextContent("Turn ON");
   });
 
-  it('should toggles state ON/OFF button click', () => {
+  it('should toggle state ON/OFF button click', () => {
     render(<Toggle />);
     const toggleButton = screen.getByTestId("toggleButton");
     fireEvent.click(toggleButton);

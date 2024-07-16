@@ -2,7 +2,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { CharacterCounter } from './CharacterCounter';
 
 describe('CharacterCounter', () => {
-  it('should renders textarea and charCount', () => {
+  it('should render textarea and charCount', () => {
     render(<CharacterCounter />);
     const textarea = screen.getByTestId("textarea");
     const charCount = screen.getByTestId("charCount");
@@ -16,7 +16,7 @@ describe('CharacterCounter', () => {
     expect(charCount).toHaveTextContent(/character count: 0/i);
   });
 
-  it('should updates the charCount as text is entered', () => {
+  it('should update the charCount as text is entered', () => {
     render(<CharacterCounter />);
     const textarea = screen.getByTestId("textarea");
     fireEvent.change(textarea, { target: { value: 'Hillel' } });

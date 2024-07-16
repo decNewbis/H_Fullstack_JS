@@ -2,7 +2,7 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import { LoginForm } from "./LoginForm";
 
 describe('LoginForm', () => {
-  it('should renders the form with username, password and submit button', () => {
+  it('should render the form with username, password and submit button', () => {
     render(<LoginForm onLogin={jest.fn()} />);
     const usernameInput = screen.getByTestId("usernameInput");
     const passwordInput = screen.getByTestId("passwordInput");
@@ -12,7 +12,7 @@ describe('LoginForm', () => {
     expect(submitButton).toBeInTheDocument();
   });
 
-  it('should updates username and password state on input change', () => {
+  it('should update username and password state on input change', () => {
     render(<LoginForm onLogin={jest.fn()} />);
     const usernameInput = screen.getByTestId("usernameInput");
     const passwordInput = screen.getByTestId("passwordInput");
@@ -24,7 +24,7 @@ describe('LoginForm', () => {
     expect(passwordInput.value).toBe("_alibaba#89");
   });
 
-  it('should calls onLogin with username and password when the form submitted', () => {
+  it('should call onLogin with username and password when the form submitted', () => {
     const onLogin = jest.fn();
     render(<LoginForm onLogin={onLogin} />);
     const usernameInput = screen.getByTestId("usernameInput");
