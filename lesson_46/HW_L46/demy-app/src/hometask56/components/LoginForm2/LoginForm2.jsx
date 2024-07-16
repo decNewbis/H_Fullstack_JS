@@ -20,6 +20,7 @@ export const LoginForm2 = ({ onLogin }) => {
       <label>
         Username:
         <input
+          data-testid="usernameInput"
           type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
@@ -28,13 +29,14 @@ export const LoginForm2 = ({ onLogin }) => {
       <label>
         Password:
         <input
+          data-testid="passwordInput"
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
       </label>
-      <button type="submit">Login</button>
-      {error && <p>{error}</p>}
+      <button data-testid="submitButton" type="submit">Login</button>
+      {error && <p data-testid="errorMessage">{error}</p>}
     </form>
   );
 };
