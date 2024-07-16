@@ -40,19 +40,21 @@ export function CoursesPage() {
       <div className={styles.wrapper_addition}>
         <div className={styles.container_addition}>
           <h1 className={styles.title}>Courses</h1>
-          <Input className={styles.input} value={title}
+          <Input data-testid="titleInput" className={styles.input} value={title}
                  onChange={(event) => onChangeHandler(event, setTitle)}
                  name="title" placeholder="Title" />
-          <Input className={styles.input} value={author}
+          <Input data-testid="authorInput" className={styles.input} value={author}
                  onChange={(event) => onChangeHandler(event, setAuthor)}
                  name="author" placeholder="Author" />
-          <Input className={styles.input} value={link}
+          <Input data-testid="linkInput" className={styles.input} value={link}
                  onChange={(event) => onChangeHandler(event, setLink)}
                  name="link" placeholder="Link to video" />
-          <Textarea className={styles.input} value={description}
+          <Textarea data-testid="descriptionInput" className={styles.input} value={description}
                  onChange={(event) => onChangeHandler(event, setDescription)}
                  name="description" placeholder="Description" />
-          <Button onClick={addCourseHandler} type="button" theme={styles.button}>Add new course</Button>
+          <Button data-testid="addNewCourseButton" onClick={addCourseHandler} type="button" theme={styles.button}>
+            Add new course
+          </Button>
         </div>
       </div>
       <div className={styles.wrapper_grid}>
