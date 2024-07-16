@@ -17,9 +17,9 @@ export const LimitedCounter = ({ max }) => {
 
   return (
     <div>
-      <p>Count: {count}</p>
-      <button onClick={increment} disabled={count >= max}>Increment</button>
-      <button onClick={decrement} disabled={count <= 0}>Decrement</button>
+      <p data-testid="displayCount">Count: {count}</p>
+      <button data-testid="incrementButton" onClick={increment} disabled={count >= max}>Increment</button>
+      <button data-testid="decrementButton" onClick={decrement} disabled={count <= 0}>Decrement</button>
     </div>
   );
 };
