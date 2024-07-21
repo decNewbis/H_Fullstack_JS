@@ -1,0 +1,51 @@
+.section {
+  min-width: 974px;
+}
+
+.wrapper {
+  &_addition, &_grid {
+    margin: 20px auto 0;
+  }
+  &_addition {
+    width: 700px;
+    text-align: center;
+  }
+  &_grid {
+    max-width: 1024px;
+    padding: 16px;
+  }
+}
+
+.container {
+  &_addition {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px;
+    border: 1px solid #000;
+    border-radius: 12px;
+  }
+}
+
+.title {
+  font-size: 24px;
+}
+
+.input {
+  padding: 0 16px;
+  box-sizing: border-box;
+  min-width: 100%;
+  min-height: 60px;
+  border: 1px solid #2d2f31;
+
+  &::placeholder {
+    font-weight: 700;
+  }
+}
+
+.button {
+  min-height: 60px;
+  color: #fff;
+  font-weight: 700;
+  background-color: #000;
+}

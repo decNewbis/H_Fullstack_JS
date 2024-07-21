@@ -1,0 +1,7 @@
+@media (min-width: 1000px) {
+  .partners {
+    &__list {
+      grid-template-columns: repeat(auto-fit, minmax(101px, 1fr));
+    }
+  }
+}
