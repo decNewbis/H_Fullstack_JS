@@ -1,3 +1,4 @@
+import {FC} from "react";
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import {Header} from "./components/Header";
 import {Main} from "./components/Main";
@@ -7,7 +8,7 @@ import {LINKS} from "./constants";
 import {CoursesPage} from "./pages/CoursesPage";
 import {ProfilePage} from "./pages/ProfilePage";
 
-function App() {
+const App:FC = () => {
   return (
     <Router>
       <div className="App">
