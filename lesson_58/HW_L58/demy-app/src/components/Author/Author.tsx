@@ -1,7 +1,16 @@
+import {FC} from 'react';
 import {getNameInitials} from "./functions";
-import styles from "../RviewList/_reviews.module.scss"
+import styles from "../RviewList/_reviews.module.scss";
 
-export function Author({contentProps}) {
+interface ContentProps {
+    author: string;
+}
+
+interface AuthorProps {
+    contentProps: ContentProps;
+}
+
+export const Author:FC<AuthorProps> = ({contentProps}) => {
   const {author} = contentProps;
   return (
     <div className={styles.author}>
