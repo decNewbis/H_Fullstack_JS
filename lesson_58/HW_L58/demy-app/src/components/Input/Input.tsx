@@ -2,28 +2,28 @@ import {FC, ReactNode, ChangeEventHandler, FocusEventHandler} from "react";
 import {InputType, AutoCompleteState} from "../../constants";
 
 interface InputProps {
+  value: string;
+  onChange: ChangeEventHandler<HTMLInputElement>;
   children?: ReactNode;
-  onChange?: ChangeEventHandler<HTMLInputElement>;
   onBlur?: FocusEventHandler<HTMLInputElement>;
   autoComplete?: AutoCompleteState;
   className?: string;
   type?: InputType;
   name?: string;
   placeholder?: string;
-  value?: string;
 }
 
 export const Input:FC<InputProps> = (
   {
-    children,
+    value ,
     onChange,
+    children,
     onBlur,
     autoComplete,
     className = '',
     type = InputType.DEFAULT,
     name = '',
     placeholder = '',
-    value = '',
   }
 ) => {
   if (!name) {
