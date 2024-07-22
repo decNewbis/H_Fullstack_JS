@@ -24,6 +24,6 @@ const App:FC = () => {
       </div>
     </Router>
   );
-}
+};
 
 export { App };
