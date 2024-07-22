@@ -1,3 +1,4 @@
+import {FC} from "react";
 import {Link} from "react-router-dom";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -18,7 +19,24 @@ import {Input} from "../Input";
 import {Textarea} from "../Textarea";
 import {useCourseAction} from "./useCourseAction";
 
-export function CourseCard({id, title, author, link, description, isAccessibleEditing=false}) {
+interface CourseCardProps {
+  id: string;
+  title: string;
+  author: string;
+  link: string;
+  description: string;
+  isAccessibleEditing?: Boolean;
+}
+
+export const CourseCard:FC<CourseCardProps> = (
+  {
+    id,
+    title,
+    author,
+    link,
+    description,
+    isAccessibleEditing=false
+  }) => {
   const {
     title: editTitle, setTitle,
     author: editAuthor, setAuthor,
@@ -60,7 +78,7 @@ export function CourseCard({id, title, author, link, description, isAccessibleEd
           </Typography>
           <Typography paragraph>
             { isEdit
-              ? <Textarea value={editDescription} rows="5" cols="30"
+              ? <Textarea value={editDescription} rows={5} cols={30}
                              onChange={(event) => onChangeHandler(event, setDescription)}
                              name="description" placeholder="Description" />
               : description }
@@ -95,4 +113,4 @@ export function CourseCard({id, title, author, link, description, isAccessibleEd
       </Card>
     </Grid>
   );
-}
+};
