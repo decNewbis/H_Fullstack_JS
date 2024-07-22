@@ -43,4 +43,4 @@ export const Input:FC<InputProps> = (
       {children && <span>{children}</span>}
     </label>
   );
-}
+};
