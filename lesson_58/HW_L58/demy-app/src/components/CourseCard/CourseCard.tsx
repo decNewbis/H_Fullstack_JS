@@ -25,7 +25,7 @@ interface CourseCardProps {
   author: string;
   link: string;
   description: string;
-  isAccessibleEditing?: Boolean;
+  isAccessibleEditing?: boolean;
 }
 
 export const CourseCard:FC<CourseCardProps> = (
