@@ -33,7 +33,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "install": "npm install --legacy-peer-deps",
+    "install:legacy": "npm install --legacy-peer-deps",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "test:coverage": "react-scripts test --coverage --watchAll=false",
