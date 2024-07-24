@@ -7,6 +7,7 @@ interface TextareaProps {
   cols: number;
   placeholder: string;
   onChange: ChangeEventHandler<HTMLTextAreaElement>;
+  className?: string;
   name?: string;
 }
 
@@ -17,12 +18,13 @@ export const Textarea:FC<TextareaProps> = (
     cols,
     placeholder,
     onChange,
+    className,
     name
   }) => {
   return (
     <textarea
       onChange={onChange}
-      className={textareaStyles.textarea}
+      className={`${textareaStyles.textarea} ${className}`}
       value={value}
       rows={rows}
       cols={cols}
