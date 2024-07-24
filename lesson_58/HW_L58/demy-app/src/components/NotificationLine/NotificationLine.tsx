@@ -1,6 +1,11 @@
+import {FC} from "react";
 import styles from "./_notification-line.module.scss";
 
-export function NotificationLine({onClick}) {
+interface NotificationLineProps {
+  onClick: () => void;
+}
+
+export const NotificationLine: FC<NotificationLineProps> = ({onClick}) => {
 
   return (
     <div className={styles.notification}>
@@ -22,4 +27,4 @@ export function NotificationLine({onClick}) {
       </div>
     </div>
   );
-}
+};
