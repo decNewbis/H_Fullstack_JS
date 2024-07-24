@@ -3,7 +3,7 @@ import Grid from "@mui/material/Grid";
 import {v4 as uuidv4} from 'uuid';
 import {useDispatch, useSelector} from "react-redux";
 import {addCourse} from "../../store/slices/courseSlice";
-import {ButtonType, Theme} from "../../constants";
+import {ButtonType} from "../../constants";
 import styles from './_coursespage.module.scss';
 import {Input} from "../../components/Input";
 import {Textarea} from "../../components/Textarea";
