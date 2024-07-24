@@ -1,4 +1,9 @@
-export const companiesLogoDb = [
+interface CompaniesLogo {
+  srcLogo: string;
+  name: string;
+}
+
+export const companiesLogoDb: CompaniesLogo[] = [
   {srcLogo: "vw.png", name: "volkswagen"},
   {srcLogo: "samsung.png", name: "samsung"},
   {srcLogo: "cisco.png", name: "cisco"},

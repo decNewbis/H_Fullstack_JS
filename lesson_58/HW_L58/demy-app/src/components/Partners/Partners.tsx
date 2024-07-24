@@ -1,11 +1,10 @@
+import {FC} from "react";
 import "./_partners.scss";
 import "./_media-partners.scss";
-
 import {images} from "./functions";
-
 import {companiesLogoDb} from "./companiesLogoDb";
 
-export function Partners() {
+export const Partners: FC = () => {
 
   return (
     <section className="partners">
@@ -27,4 +26,4 @@ export function Partners() {
       </div>
     </section>
   );
-}
+};
