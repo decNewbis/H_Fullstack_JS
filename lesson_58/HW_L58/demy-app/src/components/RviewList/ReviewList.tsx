@@ -1,3 +1,4 @@
+import {FC} from "react";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import {Review} from "../Review";
@@ -8,12 +9,7 @@ import "./_reviews-swiper.scss"
 import styles from "./_reviews.module.scss";
 import 'swiper/css';
 
-
-
-
-
-
-export function ReviewList() {
+export const ReviewList: FC = () => {
   let [reviewsDb, error, isLoading] = useGetDataFromUrl(API_COMMENTS);
 
   if (isLoading) {
@@ -57,4 +53,4 @@ export function ReviewList() {
       </div>
     </section>
   );
-}
+};
