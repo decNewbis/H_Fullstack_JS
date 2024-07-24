@@ -3,7 +3,7 @@ import {InputType, AutoCompleteState} from "../../constants";
 
 interface InputProps {
   value: string;
-  onChange: ChangeEventHandler<HTMLInputElement>;
+  onChange?: ChangeEventHandler<HTMLInputElement>;
   children?: ReactNode;
   onBlur?: FocusEventHandler<HTMLInputElement>;
   autoComplete?: AutoCompleteState;
@@ -15,7 +15,7 @@ interface InputProps {
 
 export const Input:FC<InputProps> = (
   {
-    value ,
+    value,
     onChange,
     children,
     onBlur,
