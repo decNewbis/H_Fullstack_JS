@@ -3,10 +3,10 @@ import textareaStyles from "./_textarea.module.scss";
 
 interface TextareaProps {
   value: string;
-  rows: number;
-  cols: number;
   placeholder: string;
   onChange: ChangeEventHandler<HTMLTextAreaElement>;
+  rows?: number;
+  cols?: number;
   className?: string;
   name?: string;
 }
