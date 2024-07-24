@@ -33,4 +33,4 @@ export const Navbar: FC = () => {
       </ul>
     </nav>
   );
-}
+};
