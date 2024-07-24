@@ -1,9 +1,20 @@
+import {FC} from "react";
 import quoteIcon from "../../assets/png/reviews/quotes.png";
 import {Author} from "../Author";
 import {Course} from "../Course";
 import styles from "../RviewList/_reviews.module.scss"
 
-export function Review({contentProps}) {
+interface ContentProps {
+  text: string;
+  author: string;
+  courseName: string;
+}
+
+interface ReviewProps {
+  contentProps: ContentProps;
+}
+
+export const Review:FC<ReviewProps> = ({contentProps}) => {
   const {text} = contentProps;
   return (
     <div className={styles.container}>
@@ -18,4 +29,4 @@ export function Review({contentProps}) {
       </div>
     </div>
   );
-}
+};
