@@ -31,7 +31,7 @@ interface UseCourseActionResult {
   deleteFromFavoriteHandler: () => void,
 }
 
-export const useCourseAction = (courseContext: CourseContextProps) => {
+export const useCourseAction = (courseContext: CourseContextProps): UseCourseActionResult => {
   const {
     id, title, author, link, description,
     editTitle, setTitle, editAuthor, setAuthor,
