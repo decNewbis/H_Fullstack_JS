@@ -1,11 +1,12 @@
+import {FC} from "react";
 import {CourseCard} from "../../components/CourseCard";
 import Grid from "@mui/material/Grid";
 import {useSelector} from "react-redux";
 import styles from "./_profilepdage.module.scss";
+import {RootState} from "../../store";
 
-
-export function ProfilePage() {
-  const {firstName, lastName, favoriteList} = useSelector(state => state.profile);
+export const ProfilePage: FC = () => {
+  const {firstName, lastName, favoriteList} = useSelector((state: RootState) => state.profile);
 
   return (
     <section className={styles.section}>
@@ -29,4 +30,4 @@ export function ProfilePage() {
       </div>
     </section>
   );
-}
+};
