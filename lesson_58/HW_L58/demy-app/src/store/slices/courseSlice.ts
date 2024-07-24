@@ -1,7 +1,19 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {mockCourses} from "../../pages/CoursesPage/mock";
 
-const initialState = {
+interface CourseItem {
+  id: string;
+  title: string;
+  author: string;
+  link: string;
+  description: string;
+}
+
+interface CourseState {
+  courseList: CourseItem[];
+}
+
+const initialState: CourseState = {
   courseList: [...mockCourses],
 };
 
@@ -9,11 +21,11 @@ export const courseSlice = createSlice({
   name: "courses",
   initialState,
   reducers: {
-    addCourse: (state, action) => {
+    addCourse: (state, action: PayloadAction<CourseItem>) => {
       state.courseList.push(action.payload);
     },
-    saveCourse: (state, action) => {
-      let index = state.courseList.findIndex((course) => course.id === action.payload.id);
+    saveCourse: (state, action: PayloadAction<CourseItem>) => {
+      let index: number = state.courseList.findIndex((course) => course.id === action.payload.id);
       if (index !== -1) {
         state.courseList[index] = {
           ...state.courseList[index],
@@ -21,7 +33,7 @@ export const courseSlice = createSlice({
         };
       }
     },
-    deleteCourse: (state, action) => {
+    deleteCourse: (state, action: PayloadAction<string>) => {
       state.courseList = state.courseList.filter((course) => course.id !== action.payload);
     },
   }
