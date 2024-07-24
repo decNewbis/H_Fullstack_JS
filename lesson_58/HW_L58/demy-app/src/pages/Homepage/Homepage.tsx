@@ -1,8 +1,9 @@
+import {FC} from "react";
 import styles from './_homepage.module.scss';
 import {Partners} from "../../components/Partners";
 import {ReviewList} from "../../components/RviewList";
 
-export function Homepage() {
+export const Homepage: FC = () => {
   return (
     <section>
       <div className={`${styles.wrapper} ${styles['background-image']}`}>
@@ -20,4 +21,4 @@ export function Homepage() {
       <ReviewList />
     </section>
   );
-}
+};
