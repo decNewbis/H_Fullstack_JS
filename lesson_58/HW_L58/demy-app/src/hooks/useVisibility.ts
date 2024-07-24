@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
+import {Keys} from "../constants";
 
-export function useVisibility(key, initValue) {
-  const getInitSate = () => {
-    const savedSate = JSON.parse(localStorage.getItem(key));
+type UseVisibilityResult = [boolean, () => void];
+
+export function useVisibility(key: Keys, initValue: boolean): UseVisibilityResult {
+  const getInitSate = (): boolean => {
+    const savedSate: string | null = localStorage.getItem(key);
     if (savedSate === null) {
       return initValue;
     } else {
-      return savedSate;
+      return JSON.parse(savedSate);
     }
   }
   const [isVisible, setIsVisible] = useState(getInitSate);
@@ -14,7 +17,7 @@ export function useVisibility(key, initValue) {
     localStorage.setItem(key, JSON.stringify(isVisible));
   }, [isVisible, key]);
   const toggleVisibility = () => {
-    setIsVisible(prevState => !prevState);
+    setIsVisible((prevState: boolean) => !prevState);
   }
   return [isVisible, toggleVisibility];
 }
