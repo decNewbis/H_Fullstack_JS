@@ -1,13 +1,35 @@
-import {useEffect, useState} from "react";
+import {useEffect, useState, ChangeEvent} from "react";
 import {isFullNameValid, isPasswordValid, isEmailValid} from "./validationForm";
+import {ErrorMessages} from "../../constants";
 
-const useForm = () => {
-  const [fullName, setFullName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-  const [isFocused, setIsFocused] = useState(false);
-  const [formErrors, setFormErrors] = useState({
+type OnChangeType = ChangeEvent<HTMLInputElement>;
+
+interface FormErrorsTypes {
+  fullName: string | ErrorMessages;
+  email: string | ErrorMessages;
+  password: string | ErrorMessages;
+}
+
+interface UseFormResult {
+  fullName: string;
+  email: string;
+  password: string;
+  isButtonDisabled: boolean;
+  isFocused: boolean;
+  formErrors: FormErrorsTypes;
+  onChangeFullName: (event: OnChangeType) => void;
+  onChangePassword: (event: OnChangeType) => void;
+  onChangeEmail: (event: OnChangeType) => void;
+  handleFocusOut: () => void;
+}
+
+const useForm = (): UseFormResult => {
+  const [fullName, setFullName] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(true);
+  const [isFocused, setIsFocused] = useState<boolean>(false);
+  const [formErrors, setFormErrors] = useState<FormErrorsTypes>({
     fullName: '',
     email: '',
     password: ''
@@ -19,10 +41,10 @@ const useForm = () => {
   });
 
   useEffect(() => {
-    const error = {
-      fullName: fullName !== '' && isFullNameValid(fullName),
-      email: email !== '' && isEmailValid(email),
-      password: password !== '' && isPasswordValid(password)
+    const error: FormErrorsTypes = {
+      fullName: (fullName !== '') ? isFullNameValid(fullName) : '',
+      email: (email !== '') ? isEmailValid(email) : '',
+      password: (password !== '') ? isPasswordValid(password) : ''
     };
     const allSubmitEnable = Object.values(submitEnable).every(Boolean);
     const errorNotExists = Object.values(error).every((element) => element === '');
@@ -31,7 +53,7 @@ const useForm = () => {
     setIsButtonDisabled(!allValid);
   }, [submitEnable, isFocused]);
 
-  const onChangeFullName = (event) => {
+  const onChangeFullName = (event: OnChangeType) => {
     const value = event.target.value;
     if (value.length < 25) {
       setFullName(value);
@@ -40,7 +62,7 @@ const useForm = () => {
     setIsFocused(true);
   };
 
-  const onChangePassword = (event) => {
+  const onChangePassword = (event: OnChangeType) => {
     const value = event.target.value;
     if (value.length < 15) {
       setPassword(value);
@@ -49,7 +71,7 @@ const useForm = () => {
     setIsFocused(true);
   };
 
-  const onChangeEmail = (event) => {
+  const onChangeEmail = (event: OnChangeType) => {
     const value = event.target.value;
     if (value.length < 25) {
       setEmail(value);

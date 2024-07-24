@@ -1,11 +1,14 @@
-import {useNavigate, Link} from "react-router-dom";
+import {FC, FormEvent} from "react";
+import {Link, useNavigate} from "react-router-dom";
 import {Button} from "../../components/Button";
 import {Input} from "../../components/Input";
 import {useForm} from "./useForm";
-import {LINKS} from "../../constants";
+import {ButtonType, InputType, Links} from "../../constants";
 import styles from "./_sign-up.module.scss";
 
-export function SignUp() {
+type HandleSubmit = FormEvent<HTMLFormElement>
+
+export const SignUp: FC = () => {
 
   const navigate = useNavigate();
   const {
@@ -15,10 +18,10 @@ export function SignUp() {
     handleFocusOut
   } = useForm();
 
-  function handleSubmit(event) {
+  function handleSubmit(event: HandleSubmit) {
     event.preventDefault();
     console.log('send form...');
-    navigate(LINKS.homepage);
+    navigate(Links.HOMEPAGE);
   }
 
   return (
@@ -30,7 +33,7 @@ export function SignUp() {
                  onChange={onChangeFullName}
                  onBlur={handleFocusOut}
                  className={styles.input}
-                 type="text" name="fullName"
+                 type={InputType.TEXT} name="fullName"
                  placeholder="Full name
                  " />
           {formErrors.fullName && <p>{formErrors.fullName}</p>}
@@ -38,7 +41,7 @@ export function SignUp() {
                  onChange={onChangeEmail}
                  onBlur={handleFocusOut}
                  className={styles.input}
-                 type="email" name="email"
+                 type={InputType.EMAIL} name="email"
                  placeholder="Email"
           />
           {formErrors.email && <p>{formErrors.email}</p>}
@@ -46,7 +49,7 @@ export function SignUp() {
                  onChange={onChangePassword}
                  onBlur={handleFocusOut}
                  className={styles.input}
-                 type="password" name="password"
+                 type={InputType.PASSWORD} name="password"
                  placeholder="Password"
           />
           {formErrors.password && <p>{formErrors.password}</p>}
@@ -56,10 +59,10 @@ export function SignUp() {
             <span className={styles.indicator}></span>
             <span className={styles.indicator}></span>
           </div>
-          <Input type="checkbox" name="checkbox">
+          <Input type={InputType.CHECKBOX} name="checkbox" value=''>
             Send me special offers, personalized recommendations, and learning tips.
           </Input>
-          <Button type="button" theme={styles.submit} disabled={isButtonDisabled}>Sign up</Button>
+          <Button type={ButtonType.BUTTON} theme={styles.submit} disabled={isButtonDisabled}>Sign up</Button>
         </form>
         <div className={styles.helpers}>
           <span className={styles.text}>
@@ -77,4 +80,4 @@ export function SignUp() {
       </div>
     </div>
   );
-}
+};
