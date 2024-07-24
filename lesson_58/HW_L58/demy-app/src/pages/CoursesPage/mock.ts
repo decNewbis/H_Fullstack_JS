@@ -1,4 +1,12 @@
-export const mockCourses = [
+interface Course {
+  id: string;
+  title: string;
+  author: string;
+  link: string;
+  description: string;
+}
+
+export const mockCourses: Course[] = [
   {
     id: "ee4f5ea6-044a-4e9b-8b18-d48e95812336",
     title: '100 Days of Code: The Complete Python Pro Bootcamp',

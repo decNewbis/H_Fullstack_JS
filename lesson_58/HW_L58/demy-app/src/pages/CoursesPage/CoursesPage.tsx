@@ -1,17 +1,28 @@
+import {FC} from "react";
 import Grid from "@mui/material/Grid";
 import {v4 as uuidv4} from 'uuid';
 import {useDispatch, useSelector} from "react-redux";
 import {addCourse} from "../../store/slices/courseSlice";
+import {ButtonType, Theme} from "../../constants";
 import styles from './_coursespage.module.scss';
 import {Input} from "../../components/Input";
 import {Textarea} from "../../components/Textarea";
 import {Button} from "../../components/Button";
 import {CourseCard} from "../../components/CourseCard";
 import {useForm} from "./useForm";
+import {RootState} from "../../store";
 
-export function CoursesPage() {
+interface Course {
+  id: string;
+  title: string;
+  author: string;
+  link: string;
+  description: string;
+}
+
+export const CoursesPage: FC = () => {
   const dispatch = useDispatch();
-  const courseList = useSelector(state => state.courses.courseList);
+  const courseList = useSelector((state: RootState) => state.courses.courseList);
   const {
     title, setTitle,
     author, setAuthor,
@@ -21,7 +32,7 @@ export function CoursesPage() {
   } = useForm();
 
   const addCourseHandler = () => {
-    const newCourse = {
+    const newCourse: Course = {
       id: uuidv4(),
       title,
       author,
@@ -52,7 +63,7 @@ export function CoursesPage() {
           <Textarea data-testid="descriptionInput" className={styles.input} value={description}
                  onChange={(event) => onChangeHandler(event, setDescription)}
                  name="description" placeholder="Description" />
-          <Button data-testid="addNewCourseButton" onClick={addCourseHandler} type="button" theme={styles.button}>
+          <Button data-testid="addNewCourseButton" onClick={addCourseHandler} type={ButtonType.BUTTON} theme={styles.button}>
             Add new course
           </Button>
         </div>
@@ -76,4 +87,4 @@ export function CoursesPage() {
       </div>
     </section>
   );
-}
+};
