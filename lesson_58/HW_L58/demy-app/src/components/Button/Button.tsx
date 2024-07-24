@@ -13,7 +13,7 @@ interface ButtonProps extends EventHandlerProps{
   type?: ButtonType;
   link?: string;
   disabled?: boolean;
-  theme?: Theme;
+  theme?: Theme | string;
 }
 
 interface ReceiveProps extends EventHandlerProps{
