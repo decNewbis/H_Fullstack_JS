@@ -1,9 +1,10 @@
+import {FC} from "react";
 import {Outlet} from 'react-router-dom';
 
-export function Main() {
+export const Main: FC = () => {
   return (
     <main>
       <Outlet />
     </main>
   );
-}
+};
