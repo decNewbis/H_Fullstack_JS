@@ -1,16 +1,17 @@
+import {FC} from "react";
 import {Link} from "react-router-dom";
 import logo from "../../assets/svg/logo.svg";
 import {Search} from "../Search";
 import {Buttonbar} from "../Buttonbar";
-import {LINKS} from "../../constants";
+import {Links} from "../../constants";
 import styles from "./_navbar.module.scss";
 
-export function Navbar({onClick}) {
+export const Navbar: FC = () => {
   return (
     <nav className={styles.navbar}>
       <ul className={styles.list}>
         <li className={styles.item}>
-          <Link to={LINKS.homepage}>
+          <Link to={Links.HOMEPAGE}>
             <img src={logo} alt="logo"/>
           </Link>
         </li>
@@ -21,13 +22,13 @@ export function Navbar({onClick}) {
           <Search />
         </li>
         <li className={styles.item}>
-          <Link to={LINKS.courses}>Courses</Link>
+          <Link to={Links.COURSES}>Courses</Link>
         </li>
         <li className={styles.item}>
-          <Link to={LINKS.profile}>Profile</Link>
+          <Link to={Links.PROFILE}>Profile</Link>
         </li>
         <li className={styles.item}>
-          <Buttonbar onClick={onClick} />
+          <Buttonbar />
         </li>
       </ul>
     </nav>
