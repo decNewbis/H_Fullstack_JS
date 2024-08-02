@@ -9,6 +9,10 @@ const PORT = 3000;
 const API_PATH = '/api';
 app.use(bodyParser.json());
 
+const getUser = (xUserId) => {
+  return users.find((user) => user.id === xUserId);
+};
+
 app.post(`${API_PATH}/register`, (req, res) => {
   const { email, password } = req.body;
   const newUser = {
@@ -32,7 +36,7 @@ app.post(`${API_PATH}/register`, (req, res) => {
 
 app.get(`${API_PATH}/products`, (req, res) => {
   const xUserId = req.header("x-user-id");
-  const currentUser = users.find((user) => user.id === xUserId);
+  const currentUser = getUser(xUserId);
 
   if (currentUser) {
     res.status(200).json(products);
