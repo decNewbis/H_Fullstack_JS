@@ -46,7 +46,20 @@ app.get(`${API_PATH}/products`, (req, res) => {
 });
 
 app.get(`${API_PATH}/products/:productId`, (req, res) => {
+  const xUserId = req.header("x-user-id");
+  const currentUser = getUser(xUserId);
 
+  if (currentUser) {
+    const { productId } = req.params;
+    const foundProductById = products.find((product) => product.id === +productId);
+    if (foundProductById) {
+      res.status(200).json(foundProductById);
+    } else {
+      res.status(200).json({"error": "product not found"});
+    }
+  } else {
+    res.status(401).json({"error": "you do not have access rights to the content"});
+  }
 });
 
 app.put(`${API_PATH}/cart/:productId`, (req, res) => {
