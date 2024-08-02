@@ -31,7 +31,14 @@ app.post(`${API_PATH}/register`, (req, res) => {
 });
 
 app.get(`${API_PATH}/products`, (req, res) => {
+  const xUserId = req.header("x-user-id");
+  const currentUser = users.find((user) => user.id === xUserId);
 
+  if (currentUser) {
+    res.status(200).json(products);
+  } else {
+    res.status(401).json({"error": "you do not have access rights to the content"});
+  }
 });
 
 app.get(`${API_PATH}/products/:productId`, (req, res) => {
