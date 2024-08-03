@@ -27,22 +27,27 @@ const getOrderByUserId = (userId) => {
 
 app.post(`${API_PATH}/register`, (req, res) => {
   const { email, password } = req.body;
+
+  const isUserAlreadyExists = users.some((user) => user.email === email);
+    if (isUserAlreadyExists) {
+    return res.status(409).json({"error": "user already exists"});
+  }
+
   const newUser = {
     id: crypto.randomUUID(),
     email,
     password,
   };
-
   users.push(newUser);
   const currentUser = users.find((user) => user.id === newUser.id);
 
   if (currentUser) {
-    res.status(201).json({
+    return res.status(201).json({
       id: currentUser.id,
       email: currentUser.email
     });
   } else {
-    res.status(500).json({"error": "registration failed"});
+    return res.status(500).json({"error": "registration failed"});
   }
 });
 
