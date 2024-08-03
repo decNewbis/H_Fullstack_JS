@@ -144,6 +144,7 @@ app.post(`${API_PATH}/cart/checkout`, (req, res) => {
       } else {
         const newOrder = {
           ...cart,
+          id: crypto.randomUUID(),
           totalPrice
         };
         orders.push(newOrder);
