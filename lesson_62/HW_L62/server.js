@@ -21,6 +21,10 @@ const getCartByUserId = (userId) => {
   return carts.find((cart) => cart.userId === userId);
 };
 
+const getOrderByUserId = (userId) => {
+  return orders.find((order) => order.userId === userId);
+};
+
 app.post(`${API_PATH}/register`, (req, res) => {
   const { email, password } = req.body;
   const newUser = {
@@ -121,6 +125,36 @@ app.delete(`${API_PATH}/cart/:productId`, (req, res) => {
   }
 });
 
-app.post(`${API_PATH}/cart/checkout`, (req, res) => {})
+app.post(`${API_PATH}/cart/checkout`, (req, res) => {
+  const xUserId = req.header("x-user-id");
+  const currentUser = getUser(xUserId);
+
+  if (currentUser) {
+    const cart = getCartByUserId(currentUser.id);
+    const order = getOrderByUserId(currentUser.id);
+
+    if (cart) {
+      const totalPrice = cart.products.reduce((total, product) => {
+        return total + product.price;
+      }, 0);
+      if (order) {
+        order.products = cart.products;
+        order.totalPrice = totalPrice;
+        res.status(200).json(order);
+      } else {
+        const newOrder = {
+          ...cart,
+          totalPrice
+        };
+        orders.push(newOrder);
+        res.status(200).json(newOrder);
+      }
+    } else {
+      res.status(404).json({"message": "product not found"});
+    }
+  } else {
+    res.status(401).json({"error": "you do not have access rights to the content"});
+  }
+});
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
