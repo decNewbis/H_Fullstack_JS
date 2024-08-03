@@ -103,7 +103,22 @@ app.put(`${API_PATH}/cart/:productId`, (req, res) => {
 });
 
 app.delete(`${API_PATH}/cart/:productId`, (req, res) => {
+  const xUserId = req.header("x-user-id");
+  const currentUser = getUser(xUserId);
 
+  if (currentUser) {
+    const { productId } = req.params;
+    const cart = getCartByUserId(currentUser.id);
+
+    if (cart) {
+      cart.products = cart.products.filter((product) => product.id !== +productId);
+      res.status(200).json(cart);
+    } else {
+      res.status(204);
+    }
+  } else {
+    res.status(401).json({"error": "you do not have access rights to the content"});
+  }
 });
 
 app.post(`${API_PATH}/cart/checkout`, (req, res) => {})
