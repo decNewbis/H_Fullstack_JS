@@ -1,11 +1,12 @@
 import express from "express";
 import crypto from "crypto";
 import bodyParser from "body-parser";
+import 'dotenv/config';
 
 import { products, users, carts, orders } from "./storage.js";
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT;
 const API_PATH = '/api';
 app.use(bodyParser.json());
 
