@@ -4,10 +4,13 @@ import bodyParser from "body-parser";
 import 'dotenv/config';
 
 import { products, users, carts, orders } from "./storage.js";
+import { isAuthorized, isValidEmail, isValidPassword, isUserAlreadyExists, errorHandling } from "./middlewares.js";
+import { ErrorObjectNotFound } from "./errorHandler.js";
 
 const app = express();
 const PORT = process.env.PORT;
-const API_PATH = '/api';
+const API_PATH = process.env.API_PATH;
+const xUserIdKey = process.env.X_USER_ID_KEY;
 app.use(bodyParser.json());
 
 const getUser = (xUserId) => {
@@ -26,78 +29,49 @@ const getOrderByUserId = (userId) => {
   return orders.find((order) => order.userId === userId);
 };
 
-const sendProductNotFoundResponse = (res) => {
-  return res.status(404).json({"message": "product not found"});
-};
-
-const sendUnauthorizedResponse = (res) => {
-  res.status(401).json({"error": "you do not have access rights to the content"});
-};
-
-app.post(`${API_PATH}/register`, (req, res) => {
+app.post(`${API_PATH}/register`, isValidEmail, isValidPassword, isUserAlreadyExists, (req, res) => {
   const { email, password } = req.body;
-
-  const isUserAlreadyExists = users.some((user) => user.email === email);
-    if (isUserAlreadyExists) {
-    return res.status(409).json({"error": "user already exists"});
-  }
-
   const newUser = {
     id: crypto.randomUUID(),
     email,
     password,
   };
+
   users.push(newUser);
 
+  res.set(xUserIdKey, newUser.id);
   return res.status(201).json({
     id: newUser.id,
     email: newUser.email
   });
 });
 
-app.get(`${API_PATH}/products`, (req, res) => {
-  const xUserId = req.header("x-user-id");
-  const currentUser = getUser(xUserId);
-
-  if (currentUser) {
-    res.status(200).json(products);
-  } else {
-    // res.status(401).json({"error": "you do not have access rights to the content"});
-    sendUnauthorizedResponse(res);
-  }
+app.get(`${API_PATH}/products`, isAuthorized, (req, res) => {
+  res.status(200).json(products);
 });
 
-app.get(`${API_PATH}/products/:productId`, (req, res) => {
-  const xUserId = req.header("x-user-id");
-  const currentUser = getUser(xUserId);
-
-  if (!currentUser) {
-    return sendUnauthorizedResponse(res);
-  }
+app.get(`${API_PATH}/products/:productId`, isAuthorized, (req, res, next) => {
   const { productId } = req.params;
   const foundProductById = getProductById(productId);
-  if (foundProductById) {
-    res.status(200).json(foundProductById);
-  } else {
-    sendProductNotFoundResponse(res);
-  }
-});
-
-app.put(`${API_PATH}/cart/:productId`, (req, res) => {
-  const xUserId = req.header("x-user-id");
-  const currentUser = getUser(xUserId);
-
-  if (!currentUser) {
-    return sendUnauthorizedResponse(res);
-  }
-
-  const { productId } = req.params;
-  const foundProductById = getProductById(productId);
-  const cart = getCartByUserId(currentUser.id);
 
   if (!foundProductById) {
-    return sendProductNotFoundResponse(res);
+    throw new ErrorObjectNotFound("product not found");
   }
+  res.status(200).json(foundProductById);
+});
+
+app.put(`${API_PATH}/cart/:productId`, isAuthorized, (req, res) => {
+  const { productId } = req.params;
+  const foundProductById = getProductById(productId);
+
+  if (!foundProductById) {
+    throw new ErrorObjectNotFound("product not found");
+  }
+
+  const xUserId = req.header(xUserIdKey);
+  const currentUser = getUser(xUserId);
+  const cart = getCartByUserId(currentUser.id);
+
   if (!cart) {
     const products = [];
     products.push(foundProductById);
@@ -114,37 +88,26 @@ app.put(`${API_PATH}/cart/:productId`, (req, res) => {
   }
 });
 
-app.delete(`${API_PATH}/cart/:productId`, (req, res) => {
-  const xUserId = req.header("x-user-id");
+app.delete(`${API_PATH}/cart/:productId`, isAuthorized, (req, res) => {
+  const xUserId = req.header(xUserIdKey);
   const currentUser = getUser(xUserId);
-
-  if (!currentUser) {
-    return sendUnauthorizedResponse(res);
-  }
-
   const { productId } = req.params;
   const cart = getCartByUserId(currentUser.id);
 
   if (cart) {
     cart.products = cart.products.filter((product) => product.id !== +productId);
     res.status(200).json(cart);
-  } else {
-    res.status(204);
   }
 });
 
-app.post(`${API_PATH}/cart/checkout`, (req, res) => {
-  const xUserId = req.header("x-user-id");
+app.post(`${API_PATH}/cart/checkout`, isAuthorized, (req, res) => {
+  const xUserId = req.header(xUserIdKey);
   const currentUser = getUser(xUserId);
-
-  if (!currentUser) {
-    return sendUnauthorizedResponse(res);
-  }
   const cart = getCartByUserId(currentUser.id);
   const order = getOrderByUserId(currentUser.id);
 
   if (!cart) {
-    return sendProductNotFoundResponse(res);
+    throw new ErrorObjectNotFound("cart not found");
   }
 
   const totalPrice = cart.products.reduce((total, product) => {
@@ -165,5 +128,7 @@ app.post(`${API_PATH}/cart/checkout`, (req, res) => {
     res.status(200).json(newOrder);
   }
 });
+
+app.use(errorHandling);
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
