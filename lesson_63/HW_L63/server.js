@@ -50,7 +50,7 @@ app.get(`${API_PATH}/products`, isAuthorized, (req, res) => {
   res.status(200).json(products);
 });
 
-app.get(`${API_PATH}/products/:productId`, isAuthorized, (req, res, next) => {
+app.get(`${API_PATH}/products/:productId`, isAuthorized, (req, res) => {
   const { productId } = req.params;
   const foundProductById = getProductById(productId);
 
