@@ -1,5 +1,6 @@
 import { users } from "./storage.js";
-import {ErrorUnauthorized, ErrorUserAlreadyExists, ErrorValidation } from "./errorHandler.js";
+import { ErrorUnauthorized, ErrorUserAlreadyExists, ErrorValidation } from "./errorHandler.js";
+import { validateSignupData } from "./validation.js";
 
 const xUserIdKey = process.env.X_USER_ID_KEY;
 
@@ -21,30 +22,7 @@ export const isUserAlreadyExists = (req, res, next) => {
   next();
 };
 
-export const isValidEmail = (req, res, next) => {
-  const { email } = req.body;
-  const maxLength = 254;
-  const emailNamingRegExp = /^(([a-zA-Z0-9._-]+)@([a-zA-Z0-9.-]+)(\.[a-zA-Z]{2,}))/iu;
-
-  if(!emailNamingRegExp.test(email) || email.length > maxLength) {
-    throw new ErrorValidation("Invalid email");
-  }
-  next();
-};
-
-export const isValidPassword = (req, res, next) => {
-  const { password } = req.body;
-  const minimum8CharsRegExp = /^.{8,15}$/;
-  const withoutSpacesRegExp = /^\S{8,15}$/;
-  const containsSymbolsRegExp = /(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]/;
-
-  if (!minimum8CharsRegExp.test(password)
-    || !withoutSpacesRegExp.test(password)
-    || !containsSymbolsRegExp.test(password)) {
-    throw new ErrorValidation("Invalid password");
-  }
-  next();
-};
+export const signupMiddlewareArray = [validateSignupData, isUserAlreadyExists];
 
 export const errorHandling = (err, req, res, next) => {
   res.status(err.statusCode).json({"error": err.message});
