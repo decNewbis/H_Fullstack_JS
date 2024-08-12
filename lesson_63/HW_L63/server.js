@@ -4,7 +4,11 @@ import bodyParser from "body-parser";
 import 'dotenv/config';
 
 import { products, users, carts, orders } from "./storage.js";
-import { isAuthorized, isValidEmail, isValidPassword, isUserAlreadyExists, errorHandling } from "./middlewares.js";
+import {
+  isAuthorized,
+  errorHandling,
+  signupMiddlewareArray
+} from "./middlewares.js";
 import { ErrorObjectNotFound } from "./errorHandler.js";
 
 const app = express();
@@ -29,7 +33,7 @@ const getOrderByUserId = (userId) => {
   return orders.find((order) => order.userId === userId);
 };
 
-app.post(`${API_PATH}/register`, isValidEmail, isValidPassword, isUserAlreadyExists, (req, res) => {
+app.post(`${API_PATH}/register`, signupMiddlewareArray, (req, res) => {
   const { email, password } = req.body;
   const newUser = {
     id: crypto.randomUUID(),
