@@ -1,3 +1,5 @@
+import { writeFileSync, readFileSync } from "fs";
+import { writeFile, readFile } from "fs/promises";
 import express from "express";
 import crypto from "crypto";
 import bodyParser from "body-parser";
@@ -9,12 +11,13 @@ import {
   errorHandling,
   signupMiddlewareArray
 } from "./middlewares.js";
-import { ErrorObjectNotFound } from "./errorHandler.js";
+import { ErrorObjectNotFound, ErrorReadWriteFile } from "./errorHandler.js";
 
 const app = express();
 const PORT = process.env.PORT;
 const API_PATH = process.env.API_PATH;
 const xUserIdKey = process.env.X_USER_ID_KEY;
+const productsStore = process.env.PRODUCTS_STORE;
 app.use(bodyParser.json());
 
 const getUser = (xUserId) => {
@@ -31,6 +34,23 @@ const getCartByUserId = (userId) => {
 
 const getOrderByUserId = (userId) => {
   return orders.find((order) => order.userId === userId);
+};
+
+const readProductsStore = async (filename) => {
+  try {
+    const data = await readFile(`${filename}`, { encoding: "utf8" });
+    return JSON.parse(data);
+  } catch (err) {
+    throw new ErrorReadWriteFile(err);
+  }
+};
+
+const writeProductsStore = async (filename, data) => {
+  try {
+    await writeFile(`${filename}`, JSON.stringify(data), { encoding: "utf8", flag: "w" });
+  } catch (err) {
+    throw new ErrorReadWriteFile(err);
+  }
 };
 
 app.post(`${API_PATH}/register`, signupMiddlewareArray, (req, res) => {
@@ -130,6 +150,29 @@ app.post(`${API_PATH}/cart/checkout`, isAuthorized, (req, res) => {
     };
     orders.push(newOrder);
     res.status(200).json(newOrder);
+  }
+});
+
+app.post(`${API_PATH}/product`, isAuthorized, async (req, res, next) => {
+  const { name, description, price } = req.body;
+  const newProduct = {
+    id: crypto.randomUUID(),
+    name,
+    description,
+    price,
+    videos: [],
+    images: [],
+    previews: []
+  }
+
+  try {
+    const customProductsList = await readProductsStore(productsStore);
+    customProductsList.push(newProduct);
+    
+    await writeProductsStore(productsStore, customProductsList);
+    res.status(201).send(newProduct);
+  } catch (err) {
+    next(new ErrorReadWriteFile(err));
   }
 });
 
