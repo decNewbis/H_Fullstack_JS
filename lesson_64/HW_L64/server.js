@@ -206,7 +206,7 @@ app.post(`${API_PATH}/product/:productId/image/upload`, isAuthorized, (req, res,
   });
 });
 
-app.post(`${API_PATH}/product/:productId/video/upload`, (req, res, next) => {
+app.post(`${API_PATH}/product/:productId/video/upload`, isAuthorized, (req, res, next) => {
   const filename = `${crypto.randomUUID()}.${productVideoFormat}`;
   const { productId } = req.params;
   if (!existsSync(`./${videosFolderName}`)) {
@@ -225,6 +225,26 @@ app.post(`${API_PATH}/product/:productId/video/upload`, (req, res, next) => {
       next(new ErrorReadWriteFile(err));
     }
   });
+});
+
+app.get(`${API_PATH}/product/image/:filename`, (req, res) => {
+  const { filename } = req.params;
+  const filePath = `./${imgFolderName}/${filename}`;
+  const head = {
+    "Content-Type": `image/${productImgFormat}`
+  };
+  res.writeHead(200, head);
+  createReadStream(filePath).pipe(res);
+});
+
+app.get(`${API_PATH}/product/video/:filename`, (req, res) => {
+  const { filename } = req.params;
+  const filePath = `./${videosFolderName}/${filename}`;
+  const head = {
+    "Content-Type": `video/${productVideoFormat}`
+  };
+  res.writeHead(200, head);
+  createReadStream(filePath).pipe(res);
 });
 
 app.use(errorHandling);
