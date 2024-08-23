@@ -1,4 +1,4 @@
-import { writeFileSync, readFileSync } from "fs";
+import { createWriteStream, createReadStream, existsSync, mkdirSync } from "fs";
 import { writeFile, readFile } from "fs/promises";
 import express from "express";
 import crypto from "crypto";
@@ -18,6 +18,8 @@ const PORT = process.env.PORT;
 const API_PATH = process.env.API_PATH;
 const xUserIdKey = process.env.X_USER_ID_KEY;
 const productsStore = process.env.PRODUCTS_STORE;
+const productImgFormat = process.env.PRODUCT_IMG_FORMAT;
+const productVideoFormat = process.env.PRODUCT_VIDEO_FORMAT;
 app.use(bodyParser.json());
 
 const getUser = (xUserId) => {
@@ -51,6 +53,10 @@ const writeProductsStore = async (filename, data) => {
   } catch (err) {
     throw new ErrorReadWriteFile(err);
   }
+};
+
+const getCustomProductById = (productId, productsList) => {
+  return productsList.find((product) => product.id === productId);
 };
 
 app.post(`${API_PATH}/register`, signupMiddlewareArray, (req, res) => {
@@ -168,13 +174,36 @@ app.post(`${API_PATH}/product`, isAuthorized, async (req, res, next) => {
   try {
     const customProductsList = await readProductsStore(productsStore);
     customProductsList.push(newProduct);
-    
+
     await writeProductsStore(productsStore, customProductsList);
     res.status(201).send(newProduct);
   } catch (err) {
     next(new ErrorReadWriteFile(err));
   }
 });
+
+app.post(`${API_PATH}/product/:productId/image/upload`, (req, res, next) => {
+  const filename = `${crypto.randomUUID()}.${productImgFormat}`;
+  const { productId } = req.params;
+  if (!existsSync("./images")) {
+    mkdirSync("./images");
+  }
+  const writeableStream = createWriteStream(`./images/${filename}`, { encoding: "binary", flags: "w" });
+  req.pipe(writeableStream).on('finish', async () => {
+    try {
+      const customProductsList = await readProductsStore(productsStore);
+      const foundProduct = getCustomProductById(productId, customProductsList);
+      foundProduct.images.push(`${filename}`);
+
+      await writeProductsStore(productsStore, customProductsList);
+      res.status(200).send(foundProduct);
+    } catch (err) {
+      next(new ErrorReadWriteFile(err));
+    }
+  });
+});
+
+
 
 app.use(errorHandling);
 
