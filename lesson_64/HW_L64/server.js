@@ -13,7 +13,6 @@ import {
 } from "./middlewares.js";
 import { ErrorObjectNotFound, ErrorReadWriteFile } from "./errorHandler.js";
 import eventEmitter from "./eventEmits.js";
-import eventEmits from "./eventEmits.js";
 
 const app = express();
 const PORT = process.env.PORT;
