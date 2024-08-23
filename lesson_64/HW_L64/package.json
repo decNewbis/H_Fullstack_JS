@@ -11,7 +11,7 @@
   "author": "",
   "license": "ISC",
   "nodemonConfig": {
-    "ignore": ["products.store.json"]
+    "ignore": ["products.store.json", "*.log"]
   },
   "dependencies": {
     "body-parser": "^1.20.2",
