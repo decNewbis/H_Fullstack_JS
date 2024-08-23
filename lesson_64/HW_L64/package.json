@@ -11,12 +11,16 @@
   "author": "",
   "license": "ISC",
   "nodemonConfig": {
-    "ignore": ["products.store.json", "*.log"]
+    "ignore": [
+      "products.store.json",
+      "*.log"
+    ]
   },
   "dependencies": {
     "body-parser": "^1.20.2",
     "dotenv": "^16.4.5",
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "sharp": "^0.33.5"
   },
   "devDependencies": {
     "nodemon": "^3.1.4"
