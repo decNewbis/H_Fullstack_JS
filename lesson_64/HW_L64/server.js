@@ -64,6 +64,60 @@ const getCustomProductById = (productId, productsList) => {
   return productsList.find((product) => product.id === productId);
 };
 
+const ensureDirectoryExists = (directory) => {
+  if (!existsSync(directory)) {
+    mkdirSync(directory);
+  }
+};
+
+const ensureFileExists = (filename, next) => {
+  if (!existsSync(filename)) {
+    return next(new ErrorReadWriteFile('File not found'));
+  }
+};
+
+const handleFileUpload = async (req, res, next, uploadParams) => {
+  const {
+    productId,
+    filename,
+    previewFilename=null,
+    filePath,
+    previewFilePath=null,
+    fileType
+  } = uploadParams;
+
+  eventEmitter.emit('fileUploadStart', {productId, filename});
+  const writeableStream = createWriteStream(filePath, { encoding: "binary", flags: "w" });
+  req.pipe(writeableStream)
+    .on('finish', async () => {
+      try {
+        const customProductsList = await readProductsStore(productsStore);
+        const foundProduct = getCustomProductById(`${productId}`, customProductsList);
+        foundProduct[fileType].push(filename);
+        if (fileType === 'images') {
+          foundProduct.previews.push(previewFilename)
+        }
+
+        await writeProductsStore(productsStore, customProductsList);
+
+        if (fileType === 'images') {
+          await sharp(filePath)
+            .resize(150, 150)
+            .toFile(previewFilePath);
+        }
+        res.status(200).send(foundProduct);
+        eventEmitter.emit('fileUploadEnd', {productId, filename});
+      } catch (err) {
+        eventEmitter.emit('fileUploadFailed', {productId, filename, err});
+        next(new ErrorReadWriteFile(err));
+      }
+    })
+    .on('error', (err) => {
+      eventEmitter.emit('fileUploadFailed', {productId, filename, err});
+      next(new ErrorReadWriteFile(err));
+    });
+};
+
 app.post(`${API_PATH}/register`, signupMiddlewareArray, (req, res) => {
   const { email, password } = req.body;
   const newUser = {
@@ -187,86 +241,49 @@ app.post(`${API_PATH}/product`, isAuthorized, async (req, res, next) => {
   }
 });
 
-// app.post(`${API_PATH}/product/:productId/image/upload`, isAuthorized, (req, res, next) => {
-app.post(`${API_PATH}/product/:productId/image/upload`, (req, res, next) => {
+app.post(`${API_PATH}/product/:productId/image/upload`, isAuthorized, async (req, res, next) => {
   const filename = `${crypto.randomUUID()}.${productImgFormat}`;
   const previewFilename = `resized_${filename}`;
   const { productId } = req.params;
   const imageFilePath = `./${imgFolderName}/${filename}`;
   const previewImageFilePath = `./${previewFolderName}/${previewFilename}`;
-  if (!existsSync(`./${imgFolderName}`)) {
-    mkdirSync(`./${imgFolderName}`);
-  }
-  if (!existsSync(`./${previewFolderName}`)) {
-    mkdirSync(`./${previewFolderName}`);
-  }
+  const fileType = 'images';
+  const uploadParams = {
+    productId,
+    filename,
+    previewFilename,
+    filePath: imageFilePath,
+    previewFilePath: previewImageFilePath,
+    fileType
+  };
 
-  eventEmitter.emit('fileUploadStart', {productId, filename});
-  const writeableStream = createWriteStream(imageFilePath, { encoding: "binary", flags: "w" });
-  req.pipe(writeableStream)
-    .on('finish', async () => {
-      try {
-        const customProductsList = await readProductsStore(productsStore);
-        const foundProduct = getCustomProductById(`${productId}`, customProductsList);
-        foundProduct.images.push(filename);
-        foundProduct.previews.push(previewFilename);
+  ensureDirectoryExists(`./${imgFolderName}`);
+  ensureDirectoryExists(`./${previewFolderName}`);
 
-        await writeProductsStore(productsStore, customProductsList);
-        await sharp(imageFilePath)
-          .resize(150, 150)
-          .toFile(previewImageFilePath, (err) => {
-            next(new ErrorReadWriteFile(err));
-          });
-        res.status(200).send(foundProduct);
-        eventEmitter.emit('fileUploadEnd', {productId, filename});
-      } catch (err) {
-        eventEmitter.emit('fileUploadFailed', {productId, filename, err});
-        next(new ErrorReadWriteFile(err));
-      }
-    })
-    .on('error', (err) => {
-      eventEmitter.emit('fileUploadFailed', {productId, filename, err});
-      next(new ErrorReadWriteFile(err));
-    });
+  await handleFileUpload(req, res, next, uploadParams);
 });
 
-app.post(`${API_PATH}/product/:productId/video/upload`, isAuthorized, (req, res, next) => {
+app.post(`${API_PATH}/product/:productId/video/upload`, isAuthorized, async (req, res, next) => {
   const filename = `${crypto.randomUUID()}.${productVideoFormat}`;
   const { productId } = req.params;
   const videoFilePath = `./${videosFolderName}/${filename}`;
-  if (!existsSync(`./${videosFolderName}`)) {
-    mkdirSync(`./${videosFolderName}`);
-  }
+  const fileType = 'videos';
+  const uploadParams = {
+    productId,
+    filename,
+    filePath: videoFilePath,
+    fileType
+  };
 
-  eventEmitter.emit('fileUploadStart', {productId, filename});
-  const writeableStream = createWriteStream(videoFilePath, { encoding: "binary", flags: "w" });
-  req.pipe(writeableStream)
-    .on('finish', async () => {
-      try {
-        const customProductsList = await readProductsStore(productsStore);
-        const foundProduct = getCustomProductById(productId, customProductsList);
-        foundProduct.videos.push(filename);
+  ensureDirectoryExists(`./${videosFolderName}`);
 
-        await writeProductsStore(productsStore, customProductsList);
-        res.status(200).send(foundProduct);
-        eventEmitter.emit('fileUploadEnd', {productId, filename});
-      } catch (err) {
-        eventEmitter.emit('fileUploadFailed', {productId, filename, err});
-        next(new ErrorReadWriteFile(err));
-      }
-    })
-    .on('error', (err) => {
-      eventEmitter.emit('fileUploadFailed', {productId, filename, err});
-      next(new ErrorReadWriteFile(err));
-    });
+  await handleFileUpload(req, res, next, uploadParams);
 });
 
-app.get(`${API_PATH}/product/image/:filename`, (req, res, next) => {
+app.get(`${API_PATH}/product/image/:filename`, isAuthorized, (req, res, next) => {
   const { filename } = req.params;
   const filePath = `./${imgFolderName}/${filename}`;
-  if (!existsSync(filePath)) {
-    return next(new ErrorReadWriteFile('File not found'));
-  }
+  ensureFileExists(filePath, next);
   const head = {
     "Content-Type": `image/${productImgFormat}`
   };
@@ -277,12 +294,10 @@ app.get(`${API_PATH}/product/image/:filename`, (req, res, next) => {
     });
 });
 
-app.get(`${API_PATH}/product/video/:filename`, (req, res, next) => {
+app.get(`${API_PATH}/product/video/:filename`, isAuthorized, (req, res, next) => {
   const { filename } = req.params;
   const filePath = `./${videosFolderName}/${filename}`;
-  if (!existsSync(filePath)) {
-    return next(new ErrorReadWriteFile('File not found'));
-  }
+  ensureFileExists(filePath, next);
   const head = {
     "Content-Type": `video/${productVideoFormat}`
   };
@@ -290,12 +305,10 @@ app.get(`${API_PATH}/product/video/:filename`, (req, res, next) => {
   createReadStream(filePath).pipe(res);
 });
 
-app.get(`${API_PATH}/product/preview/:filename`, (req, res, next) => {
+app.get(`${API_PATH}/product/preview/:filename`, isAuthorized, (req, res, next) => {
   const { filename } = req.params;
   const filePath = `./${previewFolderName}/${filename}`;
-  if (!existsSync(filePath)) {
-    return next(new ErrorReadWriteFile('File not found'));
-  }
+  ensureFileExists(filePath, next);
   const head = {
     "Content-Type": `image/${productImgFormat}`
   };
