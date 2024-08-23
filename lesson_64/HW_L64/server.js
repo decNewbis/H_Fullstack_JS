@@ -290,6 +290,22 @@ app.get(`${API_PATH}/product/video/:filename`, (req, res, next) => {
   createReadStream(filePath).pipe(res);
 });
 
+app.get(`${API_PATH}/product/preview/:filename`, (req, res, next) => {
+  const { filename } = req.params;
+  const filePath = `./${previewFolderName}/${filename}`;
+  if (!existsSync(filePath)) {
+    return next(new ErrorReadWriteFile('File not found'));
+  }
+  const head = {
+    "Content-Type": `image/${productImgFormat}`
+  };
+  res.writeHead(200, head);
+  createReadStream(filePath).pipe(res)
+    .on('error', (err) => {
+      next(new ErrorReadWriteFile(err));
+    });
+});
+
 app.use(errorHandling);
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
