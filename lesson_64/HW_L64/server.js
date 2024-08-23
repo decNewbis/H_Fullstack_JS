@@ -72,7 +72,7 @@ const ensureDirectoryExists = (directory) => {
 
 const ensureFileExists = (filename, next) => {
   if (!existsSync(filename)) {
-    return next(new ErrorReadWriteFile('File not found'));
+    throw new ErrorObjectNotFound('File not found');
   }
 };
 
@@ -116,6 +116,20 @@ const handleFileUpload = async (req, res, next, uploadParams) => {
       eventEmitter.emit('fileUploadFailed', {productId, filename, err});
       next(new ErrorReadWriteFile(err));
     });
+};
+
+const getFileByName = (res, next, requestParams) => {
+  const {filePath, contentType} = requestParams;
+  try {
+    ensureFileExists(filePath, next);
+  } catch (err) {
+    return next(err);
+  }
+  const head = {
+    "Content-Type": contentType
+  };
+  res.writeHead(200, head);
+  createReadStream(filePath).pipe(res);
 };
 
 app.post(`${API_PATH}/register`, signupMiddlewareArray, (req, res) => {
@@ -283,40 +297,34 @@ app.post(`${API_PATH}/product/:productId/video/upload`, isAuthorized, async (req
 app.get(`${API_PATH}/product/image/:filename`, isAuthorized, (req, res, next) => {
   const { filename } = req.params;
   const filePath = `./${imgFolderName}/${filename}`;
-  ensureFileExists(filePath, next);
-  const head = {
-    "Content-Type": `image/${productImgFormat}`
+  const contentType = `image/${productImgFormat}`;
+  const requestParams = {
+    filePath,
+    contentType
   };
-  res.writeHead(200, head);
-  createReadStream(filePath).pipe(res)
-    .on('error', (err) => {
-      next(new ErrorReadWriteFile(err));
-    });
+  getFileByName(res, next, requestParams);
 });
 
 app.get(`${API_PATH}/product/video/:filename`, isAuthorized, (req, res, next) => {
   const { filename } = req.params;
   const filePath = `./${videosFolderName}/${filename}`;
-  ensureFileExists(filePath, next);
-  const head = {
-    "Content-Type": `video/${productVideoFormat}`
+  const contentType = `video/${productVideoFormat}`;
+  const requestParams = {
+    filePath,
+    contentType
   };
-  res.writeHead(200, head);
-  createReadStream(filePath).pipe(res);
+  getFileByName(res, next, requestParams);
 });
 
 app.get(`${API_PATH}/product/preview/:filename`, isAuthorized, (req, res, next) => {
   const { filename } = req.params;
   const filePath = `./${previewFolderName}/${filename}`;
-  ensureFileExists(filePath, next);
-  const head = {
-    "Content-Type": `image/${productImgFormat}`
+  const contentType = `image/${productImgFormat}`;
+  const requestParams = {
+    filePath,
+    contentType
   };
-  res.writeHead(200, head);
-  createReadStream(filePath).pipe(res)
-    .on('error', (err) => {
-      next(new ErrorReadWriteFile(err));
-    });
+  getFileByName(res, next, requestParams);
 });
 
 app.use(errorHandling);
