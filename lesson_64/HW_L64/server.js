@@ -12,6 +12,8 @@ import {
   signupMiddlewareArray
 } from "./middlewares.js";
 import { ErrorObjectNotFound, ErrorReadWriteFile } from "./errorHandler.js";
+import eventEmitter from "./eventEmits.js";
+import eventEmits from "./eventEmits.js";
 
 const app = express();
 const PORT = process.env.PORT;
@@ -184,26 +186,35 @@ app.post(`${API_PATH}/product`, isAuthorized, async (req, res, next) => {
   }
 });
 
-app.post(`${API_PATH}/product/:productId/image/upload`, isAuthorized, (req, res, next) => {
+// app.post(`${API_PATH}/product/:productId/image/upload`, isAuthorized, (req, res, next) => {
+app.post(`${API_PATH}/product/:productId/image/upload`, (req, res, next) => {
   const filename = `${crypto.randomUUID()}.${productImgFormat}`;
   const { productId } = req.params;
   if (!existsSync(`./${imgFolderName}`)) {
     mkdirSync(`./${imgFolderName}`);
   }
+
+  eventEmitter.emit('fileUploadStart', {productId, filename});
   const writeableStream = createWriteStream(`./${imgFolderName}/${filename}`, { encoding: "binary", flags: "w" });
-  req.pipe(writeableStream).on('finish', async () => {
+  req.pipe(writeableStream)
+    .on('finish', async () => {
+      try {
+        const customProductsList = await readProductsStore(productsStore);
+        const foundProduct = getCustomProductById(`${productId}`, customProductsList);
+        foundProduct.images.push(`${filename}`);
 
-    try {
-      const customProductsList = await readProductsStore(productsStore);
-      const foundProduct = getCustomProductById(productId, customProductsList);
-      foundProduct.images.push(`${filename}`);
-
-      await writeProductsStore(productsStore, customProductsList);
-      res.status(200).send(foundProduct);
-    } catch (err) {
+        await writeProductsStore(productsStore, customProductsList);
+        res.status(200).send(foundProduct);
+        eventEmitter.emit('fileUploadEnd', {productId, filename});
+      } catch (err) {
+        eventEmitter.emit('fileUploadFailed', {productId, filename, err});
+        next(new ErrorReadWriteFile(err));
+      }
+    })
+    .on('error', (err) => {
+      eventEmitter.emit('fileUploadFailed', {productId, filename, err});
       next(new ErrorReadWriteFile(err));
-    }
-  });
+    });
 });
 
 app.post(`${API_PATH}/product/:productId/video/upload`, isAuthorized, (req, res, next) => {
@@ -212,19 +223,28 @@ app.post(`${API_PATH}/product/:productId/video/upload`, isAuthorized, (req, res,
   if (!existsSync(`./${videosFolderName}`)) {
     mkdirSync(`./${videosFolderName}`);
   }
-  const writeableStream = createWriteStream(`./${videosFolderName}/${filename}`, { encoding: "binary", flags: "w" });
-  req.pipe(writeableStream).on('finish', async () => {
-    try {
-      const customProductsList = await readProductsStore(productsStore);
-      const foundProduct = getCustomProductById(productId, customProductsList);
-      foundProduct.videos.push(`${filename}`);
 
-      await writeProductsStore(productsStore, customProductsList);
-      res.status(200).send(foundProduct);
-    } catch (err) {
+  eventEmitter.emit('fileUploadStart', {productId, filename});
+  const writeableStream = createWriteStream(`./${videosFolderName}/${filename}`, { encoding: "binary", flags: "w" });
+  req.pipe(writeableStream)
+    .on('finish', async () => {
+      try {
+        const customProductsList = await readProductsStore(productsStore);
+        const foundProduct = getCustomProductById(productId, customProductsList);
+        foundProduct.videos.push(`${filename}`);
+
+        await writeProductsStore(productsStore, customProductsList);
+        res.status(200).send(foundProduct);
+        eventEmitter.emit('fileUploadEnd', {productId, filename});
+      } catch (err) {
+        eventEmitter.emit('fileUploadFailed', {productId, filename, err});
+        next(new ErrorReadWriteFile(err));
+      }
+    })
+    .on('error', (err) => {
+      eventEmitter.emit('fileUploadFailed', {productId, filename, err});
       next(new ErrorReadWriteFile(err));
-    }
-  });
+    });
 });
 
 app.get(`${API_PATH}/product/image/:filename`, (req, res) => {
