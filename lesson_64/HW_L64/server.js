@@ -13,6 +13,7 @@ import {
 } from "./middlewares.js";
 import { ErrorObjectNotFound, ErrorReadWriteFile } from "./errorHandler.js";
 import eventEmitter from "./eventEmits.js";
+import sharp from "sharp";
 
 const app = express();
 const PORT = process.env.PORT;
@@ -23,6 +24,7 @@ const productImgFormat = process.env.PRODUCT_IMG_FORMAT;
 const productVideoFormat = process.env.PRODUCT_VIDEO_FORMAT;
 const imgFolderName = process.env.IMG_FOLDER_NAME;
 const videosFolderName = process.env.VIDEOS_FOLDER_NAME;
+const previewFolderName = process.env.PREVIEWS_FOLDER_NAME;
 app.use(bodyParser.json());
 
 const getUser = (xUserId) => {
@@ -188,21 +190,33 @@ app.post(`${API_PATH}/product`, isAuthorized, async (req, res, next) => {
 // app.post(`${API_PATH}/product/:productId/image/upload`, isAuthorized, (req, res, next) => {
 app.post(`${API_PATH}/product/:productId/image/upload`, (req, res, next) => {
   const filename = `${crypto.randomUUID()}.${productImgFormat}`;
+  const previewFilename = `resized_${filename}`;
   const { productId } = req.params;
+  const imageFilePath = `./${imgFolderName}/${filename}`;
+  const previewImageFilePath = `./${previewFolderName}/${previewFilename}`;
   if (!existsSync(`./${imgFolderName}`)) {
     mkdirSync(`./${imgFolderName}`);
   }
+  if (!existsSync(`./${previewFolderName}`)) {
+    mkdirSync(`./${previewFolderName}`);
+  }
 
   eventEmitter.emit('fileUploadStart', {productId, filename});
-  const writeableStream = createWriteStream(`./${imgFolderName}/${filename}`, { encoding: "binary", flags: "w" });
+  const writeableStream = createWriteStream(imageFilePath, { encoding: "binary", flags: "w" });
   req.pipe(writeableStream)
     .on('finish', async () => {
       try {
         const customProductsList = await readProductsStore(productsStore);
         const foundProduct = getCustomProductById(`${productId}`, customProductsList);
-        foundProduct.images.push(`${filename}`);
+        foundProduct.images.push(filename);
+        foundProduct.previews.push(previewFilename);
 
         await writeProductsStore(productsStore, customProductsList);
+        await sharp(imageFilePath)
+          .resize(150, 150)
+          .toFile(previewImageFilePath, (err) => {
+            next(new ErrorReadWriteFile(err));
+          });
         res.status(200).send(foundProduct);
         eventEmitter.emit('fileUploadEnd', {productId, filename});
       } catch (err) {
@@ -219,18 +233,19 @@ app.post(`${API_PATH}/product/:productId/image/upload`, (req, res, next) => {
 app.post(`${API_PATH}/product/:productId/video/upload`, isAuthorized, (req, res, next) => {
   const filename = `${crypto.randomUUID()}.${productVideoFormat}`;
   const { productId } = req.params;
+  const videoFilePath = `./${videosFolderName}/${filename}`;
   if (!existsSync(`./${videosFolderName}`)) {
     mkdirSync(`./${videosFolderName}`);
   }
 
   eventEmitter.emit('fileUploadStart', {productId, filename});
-  const writeableStream = createWriteStream(`./${videosFolderName}/${filename}`, { encoding: "binary", flags: "w" });
+  const writeableStream = createWriteStream(videoFilePath, { encoding: "binary", flags: "w" });
   req.pipe(writeableStream)
     .on('finish', async () => {
       try {
         const customProductsList = await readProductsStore(productsStore);
         const foundProduct = getCustomProductById(productId, customProductsList);
-        foundProduct.videos.push(`${filename}`);
+        foundProduct.videos.push(filename);
 
         await writeProductsStore(productsStore, customProductsList);
         res.status(200).send(foundProduct);
@@ -246,19 +261,28 @@ app.post(`${API_PATH}/product/:productId/video/upload`, isAuthorized, (req, res,
     });
 });
 
-app.get(`${API_PATH}/product/image/:filename`, (req, res) => {
+app.get(`${API_PATH}/product/image/:filename`, (req, res, next) => {
   const { filename } = req.params;
   const filePath = `./${imgFolderName}/${filename}`;
+  if (!existsSync(filePath)) {
+    return next(new ErrorReadWriteFile('File not found'));
+  }
   const head = {
     "Content-Type": `image/${productImgFormat}`
   };
   res.writeHead(200, head);
-  createReadStream(filePath).pipe(res);
+  createReadStream(filePath).pipe(res)
+    .on('error', (err) => {
+      next(new ErrorReadWriteFile(err));
+    });
 });
 
-app.get(`${API_PATH}/product/video/:filename`, (req, res) => {
+app.get(`${API_PATH}/product/video/:filename`, (req, res, next) => {
   const { filename } = req.params;
   const filePath = `./${videosFolderName}/${filename}`;
+  if (!existsSync(filePath)) {
+    return next(new ErrorReadWriteFile('File not found'));
+  }
   const head = {
     "Content-Type": `video/${productVideoFormat}`
   };
