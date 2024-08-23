@@ -70,7 +70,7 @@ const ensureDirectoryExists = (directory) => {
   }
 };
 
-const ensureFileExists = (filename, next) => {
+const ensureFileExists = (filename) => {
   if (!existsSync(filename)) {
     throw new ErrorObjectNotFound('File not found');
   }
