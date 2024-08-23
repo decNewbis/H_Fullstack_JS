@@ -20,6 +20,8 @@ const xUserIdKey = process.env.X_USER_ID_KEY;
 const productsStore = process.env.PRODUCTS_STORE;
 const productImgFormat = process.env.PRODUCT_IMG_FORMAT;
 const productVideoFormat = process.env.PRODUCT_VIDEO_FORMAT;
+const imgFolderName = process.env.IMG_FOLDER_NAME;
+const videosFolderName = process.env.VIDEOS_FOLDER_NAME;
 app.use(bodyParser.json());
 
 const getUser = (xUserId) => {
@@ -167,7 +169,7 @@ app.post(`${API_PATH}/product`, isAuthorized, async (req, res, next) => {
     description,
     price,
     videos: [],
-    images: [],
+    imgFolderName: [],
     previews: []
   }
 
@@ -182,14 +184,15 @@ app.post(`${API_PATH}/product`, isAuthorized, async (req, res, next) => {
   }
 });
 
-app.post(`${API_PATH}/product/:productId/image/upload`, (req, res, next) => {
+app.post(`${API_PATH}/product/:productId/image/upload`, isAuthorized, (req, res, next) => {
   const filename = `${crypto.randomUUID()}.${productImgFormat}`;
   const { productId } = req.params;
-  if (!existsSync("./images")) {
-    mkdirSync("./images");
+  if (!existsSync(`./${imgFolderName}`)) {
+    mkdirSync(`./${imgFolderName}`);
   }
-  const writeableStream = createWriteStream(`./images/${filename}`, { encoding: "binary", flags: "w" });
+  const writeableStream = createWriteStream(`./${imgFolderName}/${filename}`, { encoding: "binary", flags: "w" });
   req.pipe(writeableStream).on('finish', async () => {
+
     try {
       const customProductsList = await readProductsStore(productsStore);
       const foundProduct = getCustomProductById(productId, customProductsList);
@@ -203,7 +206,26 @@ app.post(`${API_PATH}/product/:productId/image/upload`, (req, res, next) => {
   });
 });
 
+app.post(`${API_PATH}/product/:productId/video/upload`, (req, res, next) => {
+  const filename = `${crypto.randomUUID()}.${productVideoFormat}`;
+  const { productId } = req.params;
+  if (!existsSync(`./${videosFolderName}`)) {
+    mkdirSync(`./${videosFolderName}`);
+  }
+  const writeableStream = createWriteStream(`./${videosFolderName}/${filename}`, { encoding: "binary", flags: "w" });
+  req.pipe(writeableStream).on('finish', async () => {
+    try {
+      const customProductsList = await readProductsStore(productsStore);
+      const foundProduct = getCustomProductById(productId, customProductsList);
+      foundProduct.videos.push(`${filename}`);
 
+      await writeProductsStore(productsStore, customProductsList);
+      res.status(200).send(foundProduct);
+    } catch (err) {
+      next(new ErrorReadWriteFile(err));
+    }
+  });
+});
 
 app.use(errorHandling);
 
