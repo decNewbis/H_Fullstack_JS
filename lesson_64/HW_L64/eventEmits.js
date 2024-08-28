@@ -1,3 +1,5 @@
+import path from 'path';
+import {fileURLToPath} from "url";
 import EventEmitter from "events";
 import {writeFile} from "fs/promises";
 import {ErrorReadWriteFile} from "./errorHandler.js";
@@ -5,6 +7,8 @@ import {existsSync, mkdirSync} from "fs";
 
 const uploadLogFileName = process.env.UPLOAD_LOG_FILE_NAME;
 const logFilesFolderName = process.env.LOG_FILES_FOLDER_NAME;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const eventEmitter = new EventEmitter();
 const formatDate = () => {
@@ -20,11 +24,12 @@ const formatDate = () => {
 };
 
 const writeUploadLog = async (data) => {
-  if (!existsSync(`./${logFilesFolderName}`)) {
-    mkdirSync(`./${logFilesFolderName}`);
+  const logFilesFolderNamePath = path.join(__dirname, logFilesFolderName);
+  if (!existsSync(logFilesFolderNamePath)) {
+    mkdirSync(logFilesFolderNamePath);
   }
   try {
-    await writeFile(`./${logFilesFolderName}/${uploadLogFileName}`, data, { encoding: "utf8", flag: "a" });
+    await writeFile(path.join(logFilesFolderNamePath, uploadLogFileName), data, { encoding: "utf8", flag: "a" });
   } catch (err) {
     throw new ErrorReadWriteFile(err);
   }
