@@ -61,7 +61,7 @@ const writeProductsStore = async (filename, data) => {
 };
 
 const getCustomProductById = (productId, productsList) => {
-  return productsList.find((product) => product.id === productId);
+  return productsList.find((product) => product.id === `${productId}`);
 };
 
 const ensureDirectoryExists = (directory) => {
@@ -92,7 +92,7 @@ const handleFileUpload = async (req, res, next, uploadParams) => {
     .on('finish', async () => {
       try {
         const customProductsList = await readProductsStore(productsStore);
-        const foundProduct = getCustomProductById(`${productId}`, customProductsList);
+        const foundProduct = getCustomProductById(productId, customProductsList);
         foundProduct[fileType].push(filename);
         if (fileType === 'images') {
           foundProduct.previews.push(previewFilename)
