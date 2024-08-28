@@ -28,3 +28,9 @@ export class ErrorValidation extends ErrorHandler {
     super(400, message);
   }
 }
+
+export class ErrorReadWriteFile extends ErrorHandler {
+  constructor(message) {
+    super(500, message);
+  }
+}
