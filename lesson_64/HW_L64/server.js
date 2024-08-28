@@ -1,4 +1,6 @@
 import { createWriteStream, createReadStream, existsSync, mkdirSync } from "fs";
+import path from 'path';
+import {fileURLToPath} from "url";
 import { writeFile, readFile } from "fs/promises";
 import express from "express";
 import crypto from "crypto";
@@ -25,6 +27,11 @@ const productVideoFormat = process.env.PRODUCT_VIDEO_FORMAT;
 const imgFolderName = process.env.IMG_FOLDER_NAME;
 const videosFolderName = process.env.VIDEOS_FOLDER_NAME;
 const previewFolderName = process.env.PREVIEWS_FOLDER_NAME;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const imgFolderNamePath = path.join(__dirname, imgFolderName);
+const previewFolderNamePath = path.join(__dirname, previewFolderName);
+const videosFolderNamePath = path.join(__dirname, videosFolderName);
 app.use(bodyParser.json());
 
 const getUser = (xUserId) => {
@@ -259,8 +266,8 @@ app.post(`${API_PATH}/product/:productId/image/upload`, isAuthorized, async (req
   const filename = `${crypto.randomUUID()}.${productImgFormat}`;
   const previewFilename = `resized_${filename}`;
   const { productId } = req.params;
-  const imageFilePath = `./${imgFolderName}/${filename}`;
-  const previewImageFilePath = `./${previewFolderName}/${previewFilename}`;
+  const imageFilePath = path.join(imgFolderNamePath, filename);
+  const previewImageFilePath = path.join(previewFolderNamePath, previewFilename);
   const fileType = 'images';
   const uploadParams = {
     productId,
@@ -271,8 +278,8 @@ app.post(`${API_PATH}/product/:productId/image/upload`, isAuthorized, async (req
     fileType
   };
 
-  ensureDirectoryExists(`./${imgFolderName}`);
-  ensureDirectoryExists(`./${previewFolderName}`);
+  ensureDirectoryExists(imgFolderNamePath);
+  ensureDirectoryExists(previewFolderNamePath);
 
   await handleFileUpload(req, res, next, uploadParams);
 });
@@ -280,7 +287,7 @@ app.post(`${API_PATH}/product/:productId/image/upload`, isAuthorized, async (req
 app.post(`${API_PATH}/product/:productId/video/upload`, isAuthorized, async (req, res, next) => {
   const filename = `${crypto.randomUUID()}.${productVideoFormat}`;
   const { productId } = req.params;
-  const videoFilePath = `./${videosFolderName}/${filename}`;
+  const videoFilePath = path.join(videosFolderNamePath, filename);
   const fileType = 'videos';
   const uploadParams = {
     productId,
@@ -289,14 +296,14 @@ app.post(`${API_PATH}/product/:productId/video/upload`, isAuthorized, async (req
     fileType
   };
 
-  ensureDirectoryExists(`./${videosFolderName}`);
+  ensureDirectoryExists(videosFolderNamePath);
 
   await handleFileUpload(req, res, next, uploadParams);
 });
 
 app.get(`${API_PATH}/product/image/:filename`, isAuthorized, (req, res, next) => {
   const { filename } = req.params;
-  const filePath = `./${imgFolderName}/${filename}`;
+  const filePath = path.join(imgFolderNamePath, filename);
   const contentType = `image/${productImgFormat}`;
   const requestParams = {
     filePath,
@@ -307,7 +314,7 @@ app.get(`${API_PATH}/product/image/:filename`, isAuthorized, (req, res, next) =>
 
 app.get(`${API_PATH}/product/video/:filename`, isAuthorized, (req, res, next) => {
   const { filename } = req.params;
-  const filePath = `./${videosFolderName}/${filename}`;
+  const filePath = path.join(videosFolderNamePath, filename);
   const contentType = `video/${productVideoFormat}`;
   const requestParams = {
     filePath,
@@ -318,7 +325,7 @@ app.get(`${API_PATH}/product/video/:filename`, isAuthorized, (req, res, next) =>
 
 app.get(`${API_PATH}/product/preview/:filename`, isAuthorized, (req, res, next) => {
   const { filename } = req.params;
-  const filePath = `./${previewFolderName}/${filename}`;
+  const filePath = path.join(previewFolderNamePath, filename);
   const contentType = `image/${productImgFormat}`;
   const requestParams = {
     filePath,
