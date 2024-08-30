@@ -6,7 +6,7 @@ import {users} from "../storage.js";
 const router = Router();
 const xUserIdKey = process.env.X_USER_ID_KEY;
 
-router.post(`/register`, signupMiddlewareArray, (req, res) => {
+router.post('/register', signupMiddlewareArray, (req, res) => {
   const { email, password } = req.body;
   const newUser = {
     id: uuid(),

@@ -23,7 +23,7 @@ const getOrderByUserId = (userId) => {
   return orders.find((order) => order.userId === userId);
 };
 
-router.put('/cart/:productId', isAuthorized, (req, res) => {
+router.put('/:productId', isAuthorized, (req, res) => {
   const { productId } = req.params;
   const foundProductById = getProductById(productId);
 
@@ -51,7 +51,7 @@ router.put('/cart/:productId', isAuthorized, (req, res) => {
   }
 });
 
-router.delete('/cart/:productId', isAuthorized, (req, res) => {
+router.delete('/:productId', isAuthorized, (req, res) => {
   const xUserId = req.header(xUserIdKey);
   const currentUser = getUser(xUserId);
   const { productId } = req.params;
@@ -63,7 +63,7 @@ router.delete('/cart/:productId', isAuthorized, (req, res) => {
   }
 });
 
-router.post('/cart/checkout', isAuthorized, (req, res) => {
+router.post('/checkout', isAuthorized, (req, res) => {
   const xUserId = req.header(xUserIdKey);
   const currentUser = getUser(xUserId);
   const cart = getCartByUserId(currentUser.id);

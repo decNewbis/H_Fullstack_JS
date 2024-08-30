@@ -9,11 +9,11 @@ const getProductById = (productId) => {
   return products.find((product) => product.id === +productId);
 };
 
-router.get('/products', isAuthorized, (req, res) => {
+router.get('/', isAuthorized, (req, res) => {
   res.status(200).json(products);
 });
 
-router.get('/products/:productId', isAuthorized, (req, res) => {
+router.get('/:productId', isAuthorized, (req, res) => {
   const { productId } = req.params;
   const foundProductById = getProductById(productId);
 
