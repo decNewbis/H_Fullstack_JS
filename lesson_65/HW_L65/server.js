@@ -15,6 +15,7 @@ import {
 } from "./middlewares.js";
 import userRoutes from "./routes/user.routes.js";
 import productsRoutes from "./routes/products.routes.js";
+import cartRoutes from "./routes/cart.routes.js";
 import { ErrorObjectNotFound, ErrorReadWriteFile } from "./errorHandler.js";
 import eventEmitter from "./eventEmits.js";
 import sharp from "sharp";
@@ -22,7 +23,7 @@ import sharp from "sharp";
 const app = express();
 const PORT = process.env.PORT;
 const API_PATH = process.env.API_PATH;
-const xUserIdKey = process.env.X_USER_ID_KEY;
+// const xUserIdKey = process.env.X_USER_ID_KEY;
 const productsStore = process.env.PRODUCTS_STORE;
 const productImgFormat = process.env.PRODUCT_IMG_FORMAT;
 const productVideoFormat = process.env.PRODUCT_VIDEO_FORMAT;
@@ -36,21 +37,21 @@ const previewFolderNamePath = path.join(__dirname, previewFolderName);
 const videosFolderNamePath = path.join(__dirname, videosFolderName);
 app.use(bodyParser.json());
 
-const getUser = (xUserId) => {
-  return users.find((user) => user.id === xUserId);
-};
+// const getUser = (xUserId) => {
+//   return users.find((user) => user.id === xUserId);
+// };
 
-const getProductById = (productId) => {
-  return products.find((product) => product.id === +productId);
-};
+// const getProductById = (productId) => {
+//   return products.find((product) => product.id === +productId);
+// };
 
-const getCartByUserId = (userId) => {
-  return carts.find((cart) => cart.userId === userId);
-};
+// const getCartByUserId = (userId) => {
+//   return carts.find((cart) => cart.userId === userId);
+// };
 
-const getOrderByUserId = (userId) => {
-  return orders.find((order) => order.userId === userId);
-};
+// const getOrderByUserId = (userId) => {
+//   return orders.find((order) => order.userId === userId);
+// };
 
 const readProductsStore = async (filename) => {
   try {
@@ -174,74 +175,75 @@ app.use(`${API_PATH}`, productsRoutes);
 //   res.status(200).json(foundProductById);
 // });
 
-app.put(`${API_PATH}/cart/:productId`, isAuthorized, (req, res) => {
-  const { productId } = req.params;
-  const foundProductById = getProductById(productId);
+app.use(`${API_PATH}`, cartRoutes);
+// app.put(`${API_PATH}/cart/:productId`, isAuthorized, (req, res) => {
+//   const { productId } = req.params;
+//   const foundProductById = getProductById(productId);
+//
+//   if (!foundProductById) {
+//     throw new ErrorObjectNotFound("product not found");
+//   }
+//
+//   const xUserId = req.header(xUserIdKey);
+//   const currentUser = getUser(xUserId);
+//   const cart = getCartByUserId(currentUser.id);
+//
+//   if (!cart) {
+//     const products = [];
+//     products.push(foundProductById);
+//     const newCart = {
+//       id: crypto.randomUUID(),
+//       userId: currentUser.id,
+//       products
+//     };
+//     carts.push(newCart);
+//     res.status(200).json(newCart);
+//   } else {
+//     cart.products.push(foundProductById);
+//     res.status(200).json(cart);
+//   }
+// });
 
-  if (!foundProductById) {
-    throw new ErrorObjectNotFound("product not found");
-  }
+// app.delete(`${API_PATH}/cart/:productId`, isAuthorized, (req, res) => {
+//   const xUserId = req.header(xUserIdKey);
+//   const currentUser = getUser(xUserId);
+//   const { productId } = req.params;
+//   const cart = getCartByUserId(currentUser.id);
+//
+//   if (cart) {
+//     cart.products = cart.products.filter((product) => product.id !== +productId);
+//     res.status(200).json(cart);
+//   }
+// });
 
-  const xUserId = req.header(xUserIdKey);
-  const currentUser = getUser(xUserId);
-  const cart = getCartByUserId(currentUser.id);
-
-  if (!cart) {
-    const products = [];
-    products.push(foundProductById);
-    const newCart = {
-      id: crypto.randomUUID(),
-      userId: currentUser.id,
-      products
-    };
-    carts.push(newCart);
-    res.status(200).json(newCart);
-  } else {
-    cart.products.push(foundProductById);
-    res.status(200).json(cart);
-  }
-});
-
-app.delete(`${API_PATH}/cart/:productId`, isAuthorized, (req, res) => {
-  const xUserId = req.header(xUserIdKey);
-  const currentUser = getUser(xUserId);
-  const { productId } = req.params;
-  const cart = getCartByUserId(currentUser.id);
-
-  if (cart) {
-    cart.products = cart.products.filter((product) => product.id !== +productId);
-    res.status(200).json(cart);
-  }
-});
-
-app.post(`${API_PATH}/cart/checkout`, isAuthorized, (req, res) => {
-  const xUserId = req.header(xUserIdKey);
-  const currentUser = getUser(xUserId);
-  const cart = getCartByUserId(currentUser.id);
-  const order = getOrderByUserId(currentUser.id);
-
-  if (!cart) {
-    throw new ErrorObjectNotFound("cart not found");
-  }
-
-  const totalPrice = cart.products.reduce((total, product) => {
-    return total + product.price;
-  }, 0);
-
-  if (order) {
-    order.products = cart.products;
-    order.totalPrice = totalPrice;
-    res.status(200).json(order);
-  } else {
-    const newOrder = {
-      ...cart,
-      id: crypto.randomUUID(),
-      totalPrice
-    };
-    orders.push(newOrder);
-    res.status(200).json(newOrder);
-  }
-});
+// app.post(`${API_PATH}/cart/checkout`, isAuthorized, (req, res) => {
+//   const xUserId = req.header(xUserIdKey);
+//   const currentUser = getUser(xUserId);
+//   const cart = getCartByUserId(currentUser.id);
+//   const order = getOrderByUserId(currentUser.id);
+//
+//   if (!cart) {
+//     throw new ErrorObjectNotFound("cart not found");
+//   }
+//
+//   const totalPrice = cart.products.reduce((total, product) => {
+//     return total + product.price;
+//   }, 0);
+//
+//   if (order) {
+//     order.products = cart.products;
+//     order.totalPrice = totalPrice;
+//     res.status(200).json(order);
+//   } else {
+//     const newOrder = {
+//       ...cart,
+//       id: crypto.randomUUID(),
+//       totalPrice
+//     };
+//     orders.push(newOrder);
+//     res.status(200).json(newOrder);
+//   }
+// });
 
 app.post(`${API_PATH}/product`, isAuthorized, async (req, res, next) => {
   const { name, description, price } = req.body;
