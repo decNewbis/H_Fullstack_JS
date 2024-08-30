@@ -14,6 +14,7 @@ import {
   // signupMiddlewareArray
 } from "./middlewares.js";
 import userRoutes from "./routes/user.routes.js";
+import productsRoutes from "./routes/products.routes.js";
 import { ErrorObjectNotFound, ErrorReadWriteFile } from "./errorHandler.js";
 import eventEmitter from "./eventEmits.js";
 import sharp from "sharp";
@@ -158,19 +159,20 @@ app.use(`${API_PATH}`, userRoutes);
 //   });
 // });
 
-app.get(`${API_PATH}/products`, isAuthorized, (req, res) => {
-  res.status(200).json(products);
-});
+app.use(`${API_PATH}`, productsRoutes);
+// app.get(`${API_PATH}/products`, isAuthorized, (req, res) => {
+//   res.status(200).json(products);
+// });
 
-app.get(`${API_PATH}/products/:productId`, isAuthorized, (req, res) => {
-  const { productId } = req.params;
-  const foundProductById = getProductById(productId);
-
-  if (!foundProductById) {
-    throw new ErrorObjectNotFound("product not found");
-  }
-  res.status(200).json(foundProductById);
-});
+// app.get(`${API_PATH}/products/:productId`, isAuthorized, (req, res) => {
+//   const { productId } = req.params;
+//   const foundProductById = getProductById(productId);
+//
+//   if (!foundProductById) {
+//     throw new ErrorObjectNotFound("product not found");
+//   }
+//   res.status(200).json(foundProductById);
+// });
 
 app.put(`${API_PATH}/cart/:productId`, isAuthorized, (req, res) => {
   const { productId } = req.params;
