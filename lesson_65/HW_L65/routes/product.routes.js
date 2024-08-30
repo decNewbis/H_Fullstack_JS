@@ -1,26 +1,15 @@
-import { createWriteStream, createReadStream, existsSync, mkdirSync } from "fs";
-import path from 'path';
-import {fileURLToPath} from "url";
-import { writeFile, readFile } from "fs/promises";
-import express from "express";
+import {Router} from "express";
+import {isAuthorized} from "../middlewares.js";
 import crypto from "crypto";
-import bodyParser from "body-parser";
-import 'dotenv/config';
-
-import { products, users, carts, orders } from "./storage.js";
-import {
-  isAuthorized,
-  errorHandling,
-  signupMiddlewareArray
-} from "./middlewares.js";
-import { ErrorObjectNotFound, ErrorReadWriteFile } from "./errorHandler.js";
-import eventEmitter from "./eventEmits.js";
+import {ErrorReadWriteFile, ErrorObjectNotFound} from "../errorHandler.js";
+import path from "path";
+import {readFile, writeFile} from "fs/promises";
+import {fileURLToPath} from "url";
+import {createReadStream, createWriteStream, existsSync, mkdirSync} from "fs";
+import eventEmitter from "../eventEmits.js";
 import sharp from "sharp";
 
-const app = express();
-const PORT = process.env.PORT;
-const API_PATH = process.env.API_PATH;
-const xUserIdKey = process.env.X_USER_ID_KEY;
+const router = Router();
 const productsStore = process.env.PRODUCTS_STORE;
 const productImgFormat = process.env.PRODUCT_IMG_FORMAT;
 const productVideoFormat = process.env.PRODUCT_VIDEO_FORMAT;
@@ -29,30 +18,13 @@ const videosFolderName = process.env.VIDEOS_FOLDER_NAME;
 const previewFolderName = process.env.PREVIEWS_FOLDER_NAME;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const imgFolderNamePath = path.join(__dirname, imgFolderName);
-const previewFolderNamePath = path.join(__dirname, previewFolderName);
-const videosFolderNamePath = path.join(__dirname, videosFolderName);
-app.use(bodyParser.json());
-
-const getUser = (xUserId) => {
-  return users.find((user) => user.id === xUserId);
-};
-
-const getProductById = (productId) => {
-  return products.find((product) => product.id === +productId);
-};
-
-const getCartByUserId = (userId) => {
-  return carts.find((cart) => cart.userId === userId);
-};
-
-const getOrderByUserId = (userId) => {
-  return orders.find((order) => order.userId === userId);
-};
+const imgFolderNamePath = path.join(__dirname, '../', imgFolderName);
+const previewFolderNamePath = path.join(__dirname, '../', previewFolderName);
+const videosFolderNamePath = path.join(__dirname, '../', videosFolderName);
 
 const readProductsStore = async (filename) => {
   try {
-    const data = await readFile(`${filename}`, { encoding: "utf8" });
+    const data = await readFile(path.join(__dirname, '../', filename), { encoding: "utf8" });
     return JSON.parse(data);
   } catch (err) {
     throw new ErrorReadWriteFile(err);
@@ -61,7 +33,7 @@ const readProductsStore = async (filename) => {
 
 const writeProductsStore = async (filename, data) => {
   try {
-    await writeFile(`${filename}`, JSON.stringify(data), { encoding: "utf8", flag: "w" });
+    await writeFile(path.join(__dirname, '../', filename), JSON.stringify(data), { encoding: "utf8", flag: "w" });
   } catch (err) {
     throw new ErrorReadWriteFile(err);
   }
@@ -71,15 +43,15 @@ const getCustomProductById = (productId, productsList) => {
   return productsList.find((product) => product.id === `${productId}`);
 };
 
-const ensureDirectoryExists = (directory) => {
-  if (!existsSync(directory)) {
-    mkdirSync(directory);
-  }
-};
-
 const ensureFileExists = (filename) => {
   if (!existsSync(filename)) {
     throw new ErrorObjectNotFound('File not found');
+  }
+};
+
+const ensureDirectoryExists = (directory) => {
+  if (!existsSync(directory)) {
+    mkdirSync(directory);
   }
 };
 
@@ -139,107 +111,7 @@ const getFileByName = (res, next, requestParams) => {
   createReadStream(filePath).pipe(res);
 };
 
-app.post(`${API_PATH}/register`, signupMiddlewareArray, (req, res) => {
-  const { email, password } = req.body;
-  const newUser = {
-    id: crypto.randomUUID(),
-    email,
-    password,
-  };
-
-  users.push(newUser);
-
-  res.set(xUserIdKey, newUser.id);
-  return res.status(201).json({
-    id: newUser.id,
-    email: newUser.email
-  });
-});
-
-app.get(`${API_PATH}/products`, isAuthorized, (req, res) => {
-  res.status(200).json(products);
-});
-
-app.get(`${API_PATH}/products/:productId`, isAuthorized, (req, res) => {
-  const { productId } = req.params;
-  const foundProductById = getProductById(productId);
-
-  if (!foundProductById) {
-    throw new ErrorObjectNotFound("product not found");
-  }
-  res.status(200).json(foundProductById);
-});
-
-app.put(`${API_PATH}/cart/:productId`, isAuthorized, (req, res) => {
-  const { productId } = req.params;
-  const foundProductById = getProductById(productId);
-
-  if (!foundProductById) {
-    throw new ErrorObjectNotFound("product not found");
-  }
-
-  const xUserId = req.header(xUserIdKey);
-  const currentUser = getUser(xUserId);
-  const cart = getCartByUserId(currentUser.id);
-
-  if (!cart) {
-    const products = [];
-    products.push(foundProductById);
-    const newCart = {
-      id: crypto.randomUUID(),
-      userId: currentUser.id,
-      products
-    };
-    carts.push(newCart);
-    res.status(200).json(newCart);
-  } else {
-    cart.products.push(foundProductById);
-    res.status(200).json(cart);
-  }
-});
-
-app.delete(`${API_PATH}/cart/:productId`, isAuthorized, (req, res) => {
-  const xUserId = req.header(xUserIdKey);
-  const currentUser = getUser(xUserId);
-  const { productId } = req.params;
-  const cart = getCartByUserId(currentUser.id);
-
-  if (cart) {
-    cart.products = cart.products.filter((product) => product.id !== +productId);
-    res.status(200).json(cart);
-  }
-});
-
-app.post(`${API_PATH}/cart/checkout`, isAuthorized, (req, res) => {
-  const xUserId = req.header(xUserIdKey);
-  const currentUser = getUser(xUserId);
-  const cart = getCartByUserId(currentUser.id);
-  const order = getOrderByUserId(currentUser.id);
-
-  if (!cart) {
-    throw new ErrorObjectNotFound("cart not found");
-  }
-
-  const totalPrice = cart.products.reduce((total, product) => {
-    return total + product.price;
-  }, 0);
-
-  if (order) {
-    order.products = cart.products;
-    order.totalPrice = totalPrice;
-    res.status(200).json(order);
-  } else {
-    const newOrder = {
-      ...cart,
-      id: crypto.randomUUID(),
-      totalPrice
-    };
-    orders.push(newOrder);
-    res.status(200).json(newOrder);
-  }
-});
-
-app.post(`${API_PATH}/product`, isAuthorized, async (req, res, next) => {
+router.post('/', isAuthorized, async (req, res, next) => {
   const { name, description, price } = req.body;
   const newProduct = {
     id: crypto.randomUUID(),
@@ -262,7 +134,7 @@ app.post(`${API_PATH}/product`, isAuthorized, async (req, res, next) => {
   }
 });
 
-app.post(`${API_PATH}/product/:productId/image/upload`, isAuthorized, async (req, res, next) => {
+router.post('/:productId/image/upload', isAuthorized, async (req, res, next) => {
   const filename = `${crypto.randomUUID()}.${productImgFormat}`;
   const previewFilename = `resized_${filename}`;
   const { productId } = req.params;
@@ -284,7 +156,7 @@ app.post(`${API_PATH}/product/:productId/image/upload`, isAuthorized, async (req
   await handleFileUpload(req, res, next, uploadParams);
 });
 
-app.post(`${API_PATH}/product/:productId/video/upload`, isAuthorized, async (req, res, next) => {
+router.post('/:productId/video/upload', isAuthorized, async (req, res, next) => {
   const filename = `${crypto.randomUUID()}.${productVideoFormat}`;
   const { productId } = req.params;
   const videoFilePath = path.join(videosFolderNamePath, filename);
@@ -301,7 +173,7 @@ app.post(`${API_PATH}/product/:productId/video/upload`, isAuthorized, async (req
   await handleFileUpload(req, res, next, uploadParams);
 });
 
-app.get(`${API_PATH}/product/image/:filename`, isAuthorized, (req, res, next) => {
+router.get('/image/:filename', isAuthorized, (req, res, next) => {
   const { filename } = req.params;
   const filePath = path.join(imgFolderNamePath, filename);
   const contentType = `image/${productImgFormat}`;
@@ -312,7 +184,7 @@ app.get(`${API_PATH}/product/image/:filename`, isAuthorized, (req, res, next) =>
   getFileByName(res, next, requestParams);
 });
 
-app.get(`${API_PATH}/product/video/:filename`, isAuthorized, (req, res, next) => {
+router.get('/video/:filename', isAuthorized, (req, res, next) => {
   const { filename } = req.params;
   const filePath = path.join(videosFolderNamePath, filename);
   const contentType = `video/${productVideoFormat}`;
@@ -323,7 +195,7 @@ app.get(`${API_PATH}/product/video/:filename`, isAuthorized, (req, res, next) =>
   getFileByName(res, next, requestParams);
 });
 
-app.get(`${API_PATH}/product/preview/:filename`, isAuthorized, (req, res, next) => {
+router.get('/preview/:filename', isAuthorized, (req, res, next) => {
   const { filename } = req.params;
   const filePath = path.join(previewFolderNamePath, filename);
   const contentType = `image/${productImgFormat}`;
@@ -334,6 +206,4 @@ app.get(`${API_PATH}/product/preview/:filename`, isAuthorized, (req, res, next) 
   getFileByName(res, next, requestParams);
 });
 
-app.use(errorHandling);
-
-app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
+export default router;
