@@ -11,8 +11,9 @@ import { products, users, carts, orders } from "./storage.js";
 import {
   isAuthorized,
   errorHandling,
-  signupMiddlewareArray
+  // signupMiddlewareArray
 } from "./middlewares.js";
+import userRoutes from "./routes/user.routes.js";
 import { ErrorObjectNotFound, ErrorReadWriteFile } from "./errorHandler.js";
 import eventEmitter from "./eventEmits.js";
 import sharp from "sharp";
@@ -139,22 +140,23 @@ const getFileByName = (res, next, requestParams) => {
   createReadStream(filePath).pipe(res);
 };
 
-app.post(`${API_PATH}/register`, signupMiddlewareArray, (req, res) => {
-  const { email, password } = req.body;
-  const newUser = {
-    id: crypto.randomUUID(),
-    email,
-    password,
-  };
-
-  users.push(newUser);
-
-  res.set(xUserIdKey, newUser.id);
-  return res.status(201).json({
-    id: newUser.id,
-    email: newUser.email
-  });
-});
+app.use(`${API_PATH}`, userRoutes);
+// app.post(`${API_PATH}/register`, signupMiddlewareArray, (req, res) => {
+//   const { email, password } = req.body;
+//   const newUser = {
+//     id: crypto.randomUUID(),
+//     email,
+//     password,
+//   };
+//
+//   users.push(newUser);
+//
+//   res.set(xUserIdKey, newUser.id);
+//   return res.status(201).json({
+//     id: newUser.id,
+//     email: newUser.email
+//   });
+// });
 
 app.get(`${API_PATH}/products`, isAuthorized, (req, res) => {
   res.status(200).json(products);
