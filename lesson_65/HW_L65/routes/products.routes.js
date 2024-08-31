@@ -1,16 +1,12 @@
 import {Router} from "express";
 import {isAuthorized} from "../middlewares.js";
-import {products} from "../storage.js";
 import {ErrorObjectNotFound} from "../errorHandler.js";
+import {getProducts, getProductById} from "../repositories/products.repository.js";
 
 const router = Router();
 
-const getProductById = (productId) => {
-  return products.find((product) => product.id === +productId);
-};
-
 router.get('/', isAuthorized, (req, res) => {
-  res.status(200).json(products);
+  res.status(200).json(getProducts());
 });
 
 router.get('/:productId', isAuthorized, (req, res) => {

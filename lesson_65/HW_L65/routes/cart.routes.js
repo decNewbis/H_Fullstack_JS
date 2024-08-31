@@ -2,15 +2,12 @@ import {Router} from 'express';
 import {randomUUID as uuid} from "crypto";
 import {isAuthorized} from "../middlewares.js";
 import {ErrorObjectNotFound} from "../errorHandler.js";
-import {carts, orders, products} from "../storage.js";
+import {carts, orders} from "../storage.js";
 import {getUser} from "../repositories/user.repository.js";
+import {getProductById} from "../repositories/products.repository.js";
 
 const router = Router();
 const xUserIdKey = process.env.X_USER_ID_KEY;
-
-const getProductById = (productId) => {
-  return products.find((product) => product.id === +productId);
-};
 
 const getCartByUserId = (userId) => {
   return carts.find((cart) => cart.userId === userId);
