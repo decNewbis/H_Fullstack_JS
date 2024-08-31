@@ -4,7 +4,7 @@ import {isAuthorized} from "../middlewares.js";
 import {ErrorObjectNotFound} from "../errorHandler.js";
 import {getUser} from "../repositories/user.repository.js";
 import {getProductById} from "../repositories/products.repository.js";
-import {getCartByUserId, getOrderByUserId, addNewCart, addNewOrder} from "../repositories/cart.repository.js";
+import {getCartByUserId, getOrderByUserId, createNewCart, addNewOrder} from "../repositories/cart.repository.js";
 
 const router = Router();
 const xUserIdKey = process.env.X_USER_ID_KEY;
@@ -24,7 +24,7 @@ router.put('/:productId', isAuthorized, (req, res) => {
   if (!cart) {
     const products = [];
     products.push(foundProductById);
-    const newCart = addNewCart({
+    const newCart = createNewCart({
       id: uuid(),
       userId: currentUser.id,
       products

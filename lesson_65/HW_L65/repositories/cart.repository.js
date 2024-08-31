@@ -8,7 +8,7 @@ export const getOrderByUserId = (userId) => {
   return orders.find((order) => order.userId === userId);
 };
 
-export const addNewCart = (newCart) => {
+export const createNewCart = (newCart) => {
   carts.push(newCart);
   return newCart;
 };
