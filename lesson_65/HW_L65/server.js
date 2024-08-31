@@ -1,5 +1,4 @@
-import express from "express";
-import {Router} from "express";
+import express, {Router} from "express";
 import bodyParser from "body-parser";
 import 'dotenv/config';
 
