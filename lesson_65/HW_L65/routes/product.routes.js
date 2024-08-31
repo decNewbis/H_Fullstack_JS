@@ -3,8 +3,8 @@ import {isAuthorized} from "../middlewares.js";
 import crypto from "crypto";
 import {ErrorReadWriteFile, ErrorObjectNotFound} from "../errorHandler.js";
 import path from "path";
-import {readFile, writeFile} from "fs/promises";
 import {fileURLToPath} from "url";
+import {readProductsStore, writeProductsStore} from "../repositories/product.repository.js";
 import {createReadStream, createWriteStream, existsSync, mkdirSync} from "fs";
 import eventEmitter from "../eventEmits.js";
 import sharp from "sharp";
@@ -21,23 +21,6 @@ const __dirname = path.dirname(__filename);
 const imgFolderNamePath = path.join(__dirname, '../', imgFolderName);
 const previewFolderNamePath = path.join(__dirname, '../', previewFolderName);
 const videosFolderNamePath = path.join(__dirname, '../', videosFolderName);
-
-const readProductsStore = async (filename) => {
-  try {
-    const data = await readFile(path.join(__dirname, '../', filename), { encoding: "utf8" });
-    return JSON.parse(data);
-  } catch (err) {
-    throw new ErrorReadWriteFile(err);
-  }
-};
-
-const writeProductsStore = async (filename, data) => {
-  try {
-    await writeFile(path.join(__dirname, '../', filename), JSON.stringify(data), { encoding: "utf8", flag: "w" });
-  } catch (err) {
-    throw new ErrorReadWriteFile(err);
-  }
-};
 
 const getCustomProductById = (productId, productsList) => {
   return productsList.find((product) => product.id === `${productId}`);
