@@ -1,74 +1,30 @@
-import {randomUUID as uuid} from "crypto";
-import {getCartByUserId, getOrderByUserId, createNewCart, addNewOrder} from "../repositories/cart.repository.js";
-import {getProductById} from "../repositories/products.repository.js";
-import {ErrorObjectNotFound} from "../errorHandler.js";
-import {getUser} from "../repositories/user.repository.js";
+import {addProductToCart, createCheckoutOrder, removeProductFromCart} from "../services/cart.services.js";
 
 const xUserIdKey = process.env.X_USER_ID_KEY;
 
-export const addProductByIdToCart = (req, res) => {
-  const { productId } = req.params;
-  const foundProductById = getProductById(productId);
-
-  if (!foundProductById) {
-    throw new ErrorObjectNotFound("product not found");
-  }
-
-  const xUserId = req.header(xUserIdKey);
-  const currentUser = getUser(xUserId);
-  const cart = getCartByUserId(currentUser.id);
-
-  if (!cart) {
-    const products = [];
-    products.push(foundProductById);
-    const newCart = createNewCart({
-      id: uuid(),
-      userId: currentUser.id,
-      products
-    });
-    res.status(200).json(newCart);
-  } else {
-    cart.products.push(foundProductById);
+export const addProductByIdToCart = (req, res, next) => {
+  try {
+    const cart = addProductToCart(req.header(xUserIdKey), req.params);
     res.status(200).json(cart);
+  } catch (err) {
+    next(err);
   }
 };
 
-export const removeProductByIdFromCart = (req, res) => {
-  const xUserId = req.header(xUserIdKey);
-  const currentUser = getUser(xUserId);
-  const { productId } = req.params;
-  const cart = getCartByUserId(currentUser.id);
-
-  if (cart) {
-    cart.products = cart.products.filter((product) => product.id !== +productId);
+export const removeProductByIdFromCart = (req, res, next) => {
+  try {
+    const cart = removeProductFromCart(req.header(xUserIdKey), req.params);
     res.status(200).json(cart);
+  } catch (err) {
+    next(err);
   }
 };
 
-export const checkoutOrder =(req, res) => {
-  const xUserId = req.header(xUserIdKey);
-  const currentUser = getUser(xUserId);
-  const cart = getCartByUserId(currentUser.id);
-  const order = getOrderByUserId(currentUser.id);
-
-  if (!cart) {
-    throw new ErrorObjectNotFound("cart not found");
-  }
-
-  const totalPrice = cart.products.reduce((total, product) => {
-    return total + product.price;
-  }, 0);
-
-  if (order) {
-    order.products = cart.products;
-    order.totalPrice = totalPrice;
+export const checkoutOrder =(req, res, next) => {
+  try {
+    const order = createCheckoutOrder(req.header(xUserIdKey));
     res.status(200).json(order);
-  } else {
-    const newOrder = addNewOrder({
-      ...cart,
-      id: uuid(),
-      totalPrice
-    });
-    res.status(200).json(newOrder);
+  } catch (err) {
+    next(err);
   }
 };
