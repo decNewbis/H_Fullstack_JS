@@ -5,9 +5,7 @@ import {addProductByIdToCart, checkoutOrder, removeProductByIdFromCart} from "..
 const router = Router();
 
 router.put('/:productId', isAuthorized, addProductByIdToCart);
-
 router.delete('/:productId', isAuthorized, removeProductByIdFromCart);
-
 router.post('/checkout', isAuthorized, checkoutOrder);
 
 export default router;
