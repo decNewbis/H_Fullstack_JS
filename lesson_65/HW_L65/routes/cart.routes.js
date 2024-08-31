@@ -2,20 +2,12 @@ import {Router} from 'express';
 import {randomUUID as uuid} from "crypto";
 import {isAuthorized} from "../middlewares.js";
 import {ErrorObjectNotFound} from "../errorHandler.js";
-import {carts, orders} from "../storage.js";
 import {getUser} from "../repositories/user.repository.js";
 import {getProductById} from "../repositories/products.repository.js";
+import {getCartByUserId, getOrderByUserId, addNewCart, addNewOrder} from "../repositories/cart.repository.js";
 
 const router = Router();
 const xUserIdKey = process.env.X_USER_ID_KEY;
-
-const getCartByUserId = (userId) => {
-  return carts.find((cart) => cart.userId === userId);
-};
-
-const getOrderByUserId = (userId) => {
-  return orders.find((order) => order.userId === userId);
-};
 
 router.put('/:productId', isAuthorized, (req, res) => {
   const { productId } = req.params;
@@ -32,12 +24,11 @@ router.put('/:productId', isAuthorized, (req, res) => {
   if (!cart) {
     const products = [];
     products.push(foundProductById);
-    const newCart = {
+    const newCart = addNewCart({
       id: uuid(),
       userId: currentUser.id,
       products
-    };
-    carts.push(newCart);
+    });
     res.status(200).json(newCart);
   } else {
     cart.products.push(foundProductById);
@@ -76,12 +67,11 @@ router.post('/checkout', isAuthorized, (req, res) => {
     order.totalPrice = totalPrice;
     res.status(200).json(order);
   } else {
-    const newOrder = {
+    const newOrder = addNewOrder({
       ...cart,
       id: uuid(),
       totalPrice
-    };
-    orders.push(newOrder);
+    });
     res.status(200).json(newOrder);
   }
 });
