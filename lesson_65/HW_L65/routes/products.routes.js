@@ -5,7 +5,6 @@ import {fetchProducts, fetchProductById} from "../controllers/products.controlle
 const router = Router();
 
 router.get('/', isAuthorized, fetchProducts);
-
 router.get('/:productId', isAuthorized, fetchProductById);
 
 export default router;
