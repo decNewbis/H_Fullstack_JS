@@ -2,8 +2,11 @@ import {Router} from "express";
 import {isAuthorized} from "../middlewares.js";
 import {
   addProduct,
-  getProductImageByName, getProductPreviewByName, getProductVideoByName,
-  productImageUpload, productVideoUpload
+  getProductImageByName,
+  getProductPreviewByName,
+  getProductVideoByName,
+  productImageUpload,
+  productVideoUpload
 } from "../controllers/product.controllers.js";
 
 const router = Router();
