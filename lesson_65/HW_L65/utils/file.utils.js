@@ -19,7 +19,7 @@ export const ensureDirectoryExists = (directory) => {
   }
 };
 
-export const handleFileUpload = async (req, res, next, uploadParams) => {
+export const handleFileUpload = async (req, res, next, uploadParams, callback) => {
   const {
     productId,
     filename,
@@ -48,29 +48,29 @@ export const handleFileUpload = async (req, res, next, uploadParams) => {
             .resize(150, 150)
             .toFile(previewFilePath);
         }
-        res.status(200).send(foundProduct);
         eventEmitter.emit('fileUploadEnd', {productId, filename});
+        callback(null, foundProduct);
       } catch (err) {
         eventEmitter.emit('fileUploadFailed', {productId, filename, err});
-        next(new ErrorReadWriteFile(err));
+        callback(err);
       }
     })
     .on('error', (err) => {
       eventEmitter.emit('fileUploadFailed', {productId, filename, err});
-      next(new ErrorReadWriteFile(err));
+      callback(err);
     });
 };
 
-export const getFileByName = (res, next, requestParams) => {
+export const getFileByName = (res, next, requestParams, callback) => {
   const {filePath, contentType} = requestParams;
   try {
     ensureFileExists(filePath, next);
   } catch (err) {
-    return next(err);
+    return callback(err);
   }
   const head = {
     "Content-Type": contentType
   };
-  res.writeHead(200, head);
+  callback(null, head);
   createReadStream(filePath).pipe(res);
 };
