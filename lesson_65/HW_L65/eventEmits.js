@@ -2,8 +2,8 @@ import path from 'path';
 import {fileURLToPath} from "url";
 import EventEmitter from "events";
 import {writeFile} from "fs/promises";
-import {ErrorReadWriteFile} from "./errorHandler.js";
 import {existsSync, mkdirSync} from "fs";
+import {ErrorReadWriteFile} from "./errorHandler.js";
 
 const uploadLogFileName = process.env.UPLOAD_LOG_FILE_NAME;
 const logFilesFolderName = process.env.LOG_FILES_FOLDER_NAME;
