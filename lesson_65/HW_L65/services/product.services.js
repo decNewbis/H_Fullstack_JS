@@ -38,7 +38,7 @@ export const createNewProduct = async ({name, description, price}) => {
   return newProduct;
 };
 
-export const uploadNewImage = async (req, res, next) => {
+export const uploadNewImage = async (req, res, next, callback) => {
   const filename = `${uuid()}.${productImgFormat}`;
   const previewFilename = `resized_${filename}`;
   const { productId } = req.params;
@@ -57,10 +57,10 @@ export const uploadNewImage = async (req, res, next) => {
   ensureDirectoryExists(imgFolderNamePath);
   ensureDirectoryExists(previewFolderNamePath);
 
-  await handleFileUpload(req, res, next, uploadParams);
+  await handleFileUpload(req, res, next, uploadParams, callback);
 };
 
-export const uploadNewVideo = async (req, res, next) => {
+export const uploadNewVideo = async (req, res, next, callback) => {
   const filename = `${uuid()}.${productVideoFormat}`;
   const { productId } = req.params;
   const videoFilePath = path.join(videosFolderNamePath, filename);
@@ -74,10 +74,10 @@ export const uploadNewVideo = async (req, res, next) => {
 
   ensureDirectoryExists(videosFolderNamePath);
 
-  await handleFileUpload(req, res, next, uploadParams);
+  await handleFileUpload(req, res, next, uploadParams, callback);
 };
 
-export const retrieveProductImage = (req, res, next) => {
+export const retrieveProductImage = (req, res, next, callback) => {
   const { filename } = req.params;
   const filePath = path.join(imgFolderNamePath, filename);
   const contentType = `image/${productImgFormat}`;
@@ -87,10 +87,10 @@ export const retrieveProductImage = (req, res, next) => {
     contentType
   };
 
-  getFileByName(res, next, requestParams);
+  getFileByName(res, next, requestParams, callback);
 };
 
-export const retrieveProductVideo = (req, res, next) => {
+export const retrieveProductVideo = (req, res, next, callback) => {
   const { filename } = req.params;
   const filePath = path.join(videosFolderNamePath, filename);
   const contentType = `video/${productVideoFormat}`;
@@ -100,10 +100,10 @@ export const retrieveProductVideo = (req, res, next) => {
     contentType
   };
 
-  getFileByName(res, next, requestParams);
+  getFileByName(res, next, requestParams, callback);
 };
 
-export const retrieveProductPreview = (req, res, next) => {
+export const retrieveProductPreview = (req, res, next, callback) => {
   const { filename } = req.params;
   const filePath = path.join(previewFolderNamePath, filename);
   const contentType = `image/${productImgFormat}`;
@@ -113,5 +113,5 @@ export const retrieveProductPreview = (req, res, next) => {
     contentType
   };
 
-  getFileByName(res, next, requestParams);
+  getFileByName(res, next, requestParams, callback);
 };
