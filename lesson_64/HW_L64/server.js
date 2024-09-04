@@ -247,7 +247,7 @@ app.post(`${API_PATH}/product`, isAuthorized, async (req, res, next) => {
     description,
     price,
     videos: [],
-    imgFolderName: [],
+    images: [],
     previews: []
   }
 
