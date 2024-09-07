@@ -1,5 +1,6 @@
 import express, {Router} from "express";
 import bodyParser from "body-parser";
+import cookieParser from "cookie-parser";
 import 'dotenv/config';
 
 import { errorHandling } from "./middlewares.js";
@@ -14,6 +15,7 @@ const API_PATH = process.env.API_PATH;
 const apiRouter = Router();
 
 app.use(bodyParser.json());
+app.use(cookieParser());
 
 apiRouter.use(userRoutes);
 apiRouter.use('/products', productsRoutes);
