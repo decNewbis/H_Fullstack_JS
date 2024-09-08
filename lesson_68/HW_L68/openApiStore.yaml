@@ -245,6 +245,7 @@ paths:
           description: The ID of product to retrieve
           schema:
             type: string
+            example: "1"
         - in: cookie
           name: Authorization
           required: true
@@ -304,6 +305,268 @@ paths:
                   error:
                     type: string
                     example: "Product not found"
+  /cart/{productId}:
+    put:
+      summary: Add product to cart by ID
+      description: Create cart and add product to cart
+      parameters:
+        - in: path
+          name: productID
+          required: true
+          description: The ID of product to add
+          schema:
+            type: string
+            example: "1"
+        - in: cookie
+          name: Authorization
+          required: true
+          description: Access token
+          schema:
+            type: string
+            example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
+            eyJyb2xlIjoiQWRtaW4iLCJpYXQiOjE3MjU3NjI3NjYsImV4cCI6MTcyNjM2NzU2Nn0.
+            pPoGyPszUN13tQaC1Y7Xd9NGlqHpJpzKgbdYO51ZhCY"
+        - in: cookie
+          name: xUserIdKey
+          required: true
+          description: The user ID
+          schema:
+            type: string
+            example: "761827b2-2372-4fd0-a014-e44731c68ec9"
+      responses:
+        '200':
+          description: List of chosen products
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: "351c01bb-bfd1-4576-81ae-98a9afad69d4"
+                  userId:
+                    type: string
+                    example: "761827b2-2372-4fd0-a014-e44731c68ec9"
+                  products:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        title:
+                          type: string
+                          example: "Digital Painting"
+                        description:
+                          type: string
+                          example: "A custom digital painting created by a professional artist."
+                        price:
+                          type: integer
+                          example: 50
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Invalid or missing token"
+        '403':
+          description: Access denied
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Access denied"
+        '404':
+          description: Product not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Product not found"
+    delete:
+      summary: Remove product from cart by ID
+      description: Remove product from cart
+      parameters:
+        - in: path
+          name: productId
+          required: true
+          description: The ID of product to remove
+          schema:
+            type: string
+            example: "1"
+        - in: cookie
+          name: Authorization
+          required: true
+          description: Access token
+          schema:
+            type: string
+            example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
+            eyJyb2xlIjoiQWRtaW4iLCJpYXQiOjE3MjU3NjI3NjYsImV4cCI6MTcyNjM2NzU2Nn0.
+            pPoGyPszUN13tQaC1Y7Xd9NGlqHpJpzKgbdYO51ZhCY"
+        - in: cookie
+          name: xUserIdKey
+          required: true
+          description: The user ID
+          schema:
+            type: string
+            example: "761827b2-2372-4fd0-a014-e44731c68ec9"
+      responses:
+        '200':
+          description: List of chosen products
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: "351c01bb-bfd1-4576-81ae-98a9afad69d4"
+                  userId:
+                    type: string
+                    example: "761827b2-2372-4fd0-a014-e44731c68ec9"
+                  products:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        title:
+                          type: string
+                          example: "Digital Painting"
+                        description:
+                          type: string
+                          example: "A custom digital painting created by a professional artist."
+                        price:
+                          type: integer
+                          example: 50
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Invalid or missing token"
+        '403':
+          description: Access denied
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Access denied"
+        '404':
+          description: Product not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Product not found"
+  /cart/checkout:
+    post:
+      summary: Calculate the total price
+      description: Calculate the total price of all products in cart
+      parameters:
+        - in: cookie
+          name: Authorization
+          required: true
+          description: Access token
+          schema:
+            type: string
+            example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
+            eyJyb2xlIjoiQWRtaW4iLCJpYXQiOjE3MjU3NjI3NjYsImV4cCI6MTcyNjM2NzU2Nn0.
+            pPoGyPszUN13tQaC1Y7Xd9NGlqHpJpzKgbdYO51ZhCY"
+        - in: cookie
+          name: xUserIdKey
+          required: true
+          description: The user ID
+          schema:
+            type: string
+            example: "761827b2-2372-4fd0-a014-e44731c68ec9"
+      responses:
+        '200':
+          description: List of chosen products
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: "351c01bb-bfd1-4576-81ae-98a9afad69d4"
+                  userId:
+                    type: string
+                    example: "761827b2-2372-4fd0-a014-e44731c68ec9"
+                  products:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        title:
+                          type: string
+                          example: "Digital Painting"
+                        description:
+                          type: string
+                          example: "A custom digital painting created by a professional artist."
+                        price:
+                          type: integer
+                          example: 50
+                  totalPrice:
+                    type: integer
+                    example: 150
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Invalid or missing token"
+        '403':
+          description: Access denied
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Access denied"
+        '404':
+          description: Product not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Product or cart not found"
 
 
 
