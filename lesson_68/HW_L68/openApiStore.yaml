@@ -1,0 +1,309 @@
+openapi: 3.0.3
+info:
+  title: Open API Store
+  description: Open API Store
+  version: 1.0.0
+servers:
+  - url: 'http://localhost:3000/api'
+paths:
+  /register:
+    post:
+      summary: User registration
+      description: Register a new user with email and password
+      requestBody:
+        description: Object containing email and password for registration
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: username@example.com
+                password:
+                  type: string
+                  format: password
+                  example: "#4ErDfCv"
+              required:
+                - email
+                - password
+      responses:
+        '201':
+          description: User successfully registered
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                    example: "761827b2-2372-4fd0-a014-e44731c68ec9"
+                  email:
+                    type: string
+                    format: email
+                    example: esername@example.com
+        '400':
+          description: Invalid data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Invalid data"
+
+        '409':
+          description: Email already exists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "User already exists"
+  /login:
+    post:
+      summary: User authentication and set cookie
+      description: User authentication with email and password
+      requestBody:
+        description: Object containing email and password for login
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: username@example.com
+                password:
+                  type: string
+                  format: password
+                  example: "#4ErDfCv"
+              required:
+                - email
+                - password
+      responses:
+        '200':
+          description: Successful login, cookie set
+          headers:
+            Set-Cookie:
+              description: Cookies for access and refresh tokens
+              schema:
+                type: string
+                example: "accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
+                eyJyb2xlIjoiQWRtaW4iLCJpYXQiOjE3MjU3NjI3NjYsImV4cCI6MTcyNTc2NjM2Nn0.
+                y7EmTYDqsj5D7ug9YiBjU3ibbyDI7KPW1KGzlolVDUs; Max-Age=60; Path=/; 
+                Expires=Sun, 08 Sep 2024 02:33:46 GMT; HttpOnly"
+            xUserIdKey:
+              description: The id of the authenticated user
+              schema:
+                type: string
+                example: "761827b2-2372-4fd0-a014-e44731c68ec9"
+            Authorization:
+              description: Access token
+              schema:
+                type: string
+                example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
+                eyJyb2xlIjoiQWRtaW4iLCJpYXQiOjE3MjU3NjI3NjYsImV4cCI6MTcyNTc2NjM2Nn0.
+                y7EmTYDqsj5D7ug9YiBjU3ibbyDI7KPW1KGzlolVDUs"
+        '400':
+          description: Incorrect email or password
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Incorrect email or password"
+  /logout:
+    post:
+      summary: User logout
+      description: User logout, remove refresh token from db and clear cookies
+      responses:
+        '200':
+          description: Successful logout
+  /tokens:
+    post:
+      summary: Update tokens
+      description: Renewal tokens with refresh token
+      parameters:
+        - in: cookie
+          name: refreshToken
+          required: true
+          schema:
+            type: string
+            example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
+            eyJyb2xlIjoiQWRtaW4iLCJpYXQiOjE3MjU3NjI3NjYsImV4cCI6MTcyNjM2NzU2Nn0.
+            pPoGyPszUN13tQaC1Y7Xd9NGlqHpJpzKgbdYO51ZhCY"
+        - in: cookie
+          name: xUserIdKey
+          required: true
+          schema:
+            type: string
+            example: "761827b2-2372-4fd0-a014-e44731c68ec9"
+      responses:
+        '200':
+          description: Successful update tokens, cookie set
+          headers:
+            Set-Cookie:
+              description: Cookies for access and refresh tokens
+              schema:
+                type: string
+                example: "accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
+                eyJyb2xlIjoiQWRtaW4iLCJpYXQiOjE3MjU3NjI3NjYsImV4cCI6MTcyNTc2NjM2Nn0.
+                y7EmTYDqsj5D7ug9YiBjU3ibbyDI7KPW1KGzlolVDUs; Max-Age=60; Path=/; 
+                Expires=Sun, 08 Sep 2024 02:33:46 GMT; HttpOnly"
+            Authorization:
+              description: Access token
+              schema:
+                type: string
+                example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
+                eyJyb2xlIjoiQWRtaW4iLCJpYXQiOjE3MjU3NjI3NjYsImV4cCI6MTcyNTc2NjM2Nn0.
+                y7EmTYDqsj5D7ug9YiBjU3ibbyDI7KPW1KGzlolVDUs"
+        '401':
+          description: No token provided
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "No token provided"
+        '403':
+          description: Invalid refresh token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Invalid refresh token"
+  /products:
+    get:
+      summary: Array of all products
+      description: Get array of all products in db
+      parameters:
+        - in: cookie
+          name: Authorization
+          required: true
+          description: Access token
+          schema:
+            type: string
+            example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
+            eyJyb2xlIjoiQWRtaW4iLCJpYXQiOjE3MjU3NjI3NjYsImV4cCI6MTcyNjM2NzU2Nn0.
+            pPoGyPszUN13tQaC1Y7Xd9NGlqHpJpzKgbdYO51ZhCY"
+      responses:
+        '200':
+          description: Array of all products
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                    title:
+                      type: string
+                      example: "Digital Painting"
+                    description:
+                      type: string
+                      example: "A custom digital painting created by a professional artist."
+                    price:
+                      type: integer
+                      example: 50
+        '401':
+          description: Access denied
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Access denied"
+  /products/{productId}:
+    get:
+      summary: Fetch a product by ID
+      description: Retrieve product details by product ID
+      parameters:
+        - in: path
+          name: productId
+          required: true
+          description: The ID of product to retrieve
+          schema:
+            type: string
+        - in: cookie
+          name: Authorization
+          required: true
+          description: Access token
+          schema:
+            type: string
+            example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
+            eyJyb2xlIjoiQWRtaW4iLCJpYXQiOjE3MjU3NjI3NjYsImV4cCI6MTcyNjM2NzU2Nn0.
+            pPoGyPszUN13tQaC1Y7Xd9NGlqHpJpzKgbdYO51ZhCY"
+      responses:
+        '200':
+          description: Details of product
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 10
+                  title:
+                    type: string
+                    example: "Online Personal Training Session"
+                  description:
+                    type: string
+                    example: "A personalized one-hour workout session with a certified trainer."
+                  price:
+                    type: integer
+                    example: 45
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Invalid or missing token"
+        '403':
+          description: Access denied
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Access denied"
+        '404':
+          description: Product not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Product not found"
+
+
+
