@@ -567,6 +567,412 @@ paths:
                   error:
                     type: string
                     example: "Product or cart not found"
-
-
-
+  /product/:
+    post:
+      summary: Add product to db
+      description: Add new product with details to db
+      parameters:
+        - in: cookie
+          name: Authorization
+          required: true
+          description: Access token
+          schema:
+            type: string
+            example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
+            eyJyb2xlIjoiQWRtaW4iLCJpYXQiOjE3MjU3NjI3NjYsImV4cCI6MTcyNjM2NzU2Nn0.
+            pPoGyPszUN13tQaC1Y7Xd9NGlqHpJpzKgbdYO51ZhCY"
+      requestBody:
+        description: Object containing details of new product
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: "cake"
+                description:
+                  type: string
+                  example: "Lemon cake"
+                price:
+                  type: integer
+                  example: 20
+      responses:
+        '201':
+          description: Product added successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: "43557c81-6a27-46a5-9d45-16b47f40fd8f"
+                  name:
+                    type: string
+                    example: "cake"
+                  description:
+                    type: string
+                    example: "Lemon cake"
+                  price:
+                    type: integer
+                    example: 20
+                  videos:
+                    type: array
+                    items:
+                      type: string
+                      example: "5f88403c-125f-46ee-af95-2014c8069ec5.mp4"
+                  images:
+                    type: array
+                    items:
+                      type: string
+                      example: "0c290e88-f349-468f-b1dd-12ba924ce2e1.png"
+                  previews:
+                    type: array
+                    items:
+                      type: string
+                      example: "resized_0c290e88-f349-468f-b1dd-12ba924ce2e1.png"
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Invalid or missing token"
+        '500':
+          description: Error read or write file
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Error read or write file"
+  /product/{productId}/image/upload:
+    post:
+      summary: Upload image to server
+      description: Upload product illustration by ID
+      parameters:
+        - in: path
+          name: productId
+          required: true
+          description: The product ID
+          schema:
+            type: string
+            format: uuid
+            example: "d19abaea-a716-45b4-a75e-6b3d5a32e0e0"
+        - in: cookie
+          name: Authorization
+          required: true
+          description: Access token
+          schema:
+            type: string
+            example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
+            eyJyb2xlIjoiQWRtaW4iLCJpYXQiOjE3MjU3NjI3NjYsImV4cCI6MTcyNjM2NzU2Nn0.
+            pPoGyPszUN13tQaC1Y7Xd9NGlqHpJpzKgbdYO51ZhCY"
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: Image file
+      responses:
+        '200':
+          description: Image uploaded successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: "43557c81-6a27-46a5-9d45-16b47f40fd8f"
+                  name:
+                    type: string
+                    example: "cake"
+                  description:
+                    type: string
+                    example: "Lemon cake"
+                  price:
+                    type: integer
+                    example: 20
+                  videos:
+                    type: array
+                    items:
+                      type: string
+                      example: "5f88403c-125f-46ee-af95-2014c8069ec5.mp4"
+                  images:
+                    type: array
+                    items:
+                      type: string
+                      example: "0c290e88-f349-468f-b1dd-12ba924ce2e1.png"
+                  previews:
+                    type: array
+                    items:
+                      type: string
+                      example: "resized_0c290e88-f349-468f-b1dd-12ba924ce2e1.png"
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Invalid or missing token"
+        '500':
+          description: Error read or write file
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Error read or write file"
+  /product/{productId}/video/upload:
+    post:
+      summary: Upload video to server
+      description: Upload product video-content by ID
+      parameters:
+        - in: path
+          name: productId
+          required: true
+          description: The product ID
+          schema:
+            type: string
+            format: uuid
+            example: "d19abaea-a716-45b4-a75e-6b3d5a32e0e0"
+        - in: cookie
+          name: Authorization
+          required: true
+          description: Access token
+          schema:
+            type: string
+            example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
+            eyJyb2xlIjoiQWRtaW4iLCJpYXQiOjE3MjU3NjI3NjYsImV4cCI6MTcyNjM2NzU2Nn0.
+            pPoGyPszUN13tQaC1Y7Xd9NGlqHpJpzKgbdYO51ZhCY"
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: Video file
+      responses:
+        '200':
+          description: Video uploaded successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: "43557c81-6a27-46a5-9d45-16b47f40fd8f"
+                  name:
+                    type: string
+                    example: "cake"
+                  description:
+                    type: string
+                    example: "Lemon cake"
+                  price:
+                    type: integer
+                    example: 20
+                  videos:
+                    type: array
+                    items:
+                      type: string
+                      example: "5f88403c-125f-46ee-af95-2014c8069ec5.mp4"
+                  images:
+                    type: array
+                    items:
+                      type: string
+                      example: "0c290e88-f349-468f-b1dd-12ba924ce2e1.png"
+                  previews:
+                    type: array
+                    items:
+                      type: string
+                      example: "resized_0c290e88-f349-468f-b1dd-12ba924ce2e1.png"
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Invalid or missing token"
+        '500':
+          description: Error read or write file
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Error read or write file"
+  /product/image/{filename}:
+    get:
+      summary: Get image
+      description: Get product image by ID
+      parameters:
+        - in: path
+          name: filename
+          required: true
+          description: Product image filename
+          schema:
+            type: string
+            example: "0c290e88-f349-468f-b1dd-12ba924ce2e1.png"
+        - in: cookie
+          name: Authorization
+          required: true
+          description: Access token
+          schema:
+            type: string
+            example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
+            eyJyb2xlIjoiQWRtaW4iLCJpYXQiOjE3MjU3NjI3NjYsImV4cCI6MTcyNjM2NzU2Nn0.
+            pPoGyPszUN13tQaC1Y7Xd9NGlqHpJpzKgbdYO51ZhCY"
+      responses:
+        '200':
+          description: Image successfully retrieved
+          content:
+            image/png:
+              schema:
+                type: string
+                format: binary
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Invalid or missing token, access denied"
+        '500':
+          description: Error read file
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Error read file"
+  /product/video/{filename}:
+    get:
+      summary: Get video-content
+      description: Get product video-content by ID
+      parameters:
+        - in: path
+          name: filename
+          required: true
+          description: Product video-content filename
+          schema:
+            type: string
+            example: "5f88403c-125f-46ee-af95-2014c8069ec5.mp4"
+        - in: cookie
+          name: Authorization
+          required: true
+          description: Access token
+          schema:
+            type: string
+            example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
+            eyJyb2xlIjoiQWRtaW4iLCJpYXQiOjE3MjU3NjI3NjYsImV4cCI6MTcyNjM2NzU2Nn0.
+            pPoGyPszUN13tQaC1Y7Xd9NGlqHpJpzKgbdYO51ZhCY"
+      responses:
+        '200':
+          description: Video-content successfully retrieved
+          content:
+            video/mp4:
+              schema:
+                type: string
+                format: binary
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Invalid or missing token, access denied"
+        '500':
+          description: Error read file
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Error read file"
+  /product/preview/{filename}:
+    get:
+      summary: Get preview image
+      description: Get product preview image by ID
+      parameters:
+        - in: path
+          name: filename
+          required: true
+          description: Product preview image filename
+          schema:
+            type: string
+            example: "resized_0c290e88-f349-468f-b1dd-12ba924ce2e1.png"
+        - in: cookie
+          name: Authorization
+          required: true
+          description: Access token
+          schema:
+            type: string
+            example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
+            eyJyb2xlIjoiQWRtaW4iLCJpYXQiOjE3MjU3NjI3NjYsImV4cCI6MTcyNjM2NzU2Nn0.
+            pPoGyPszUN13tQaC1Y7Xd9NGlqHpJpzKgbdYO51ZhCY"
+      responses:
+        '200':
+          description: Preview image successfully retrieved
+          content:
+            image/png:
+              schema:
+                type: string
+                format: binary
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Invalid or missing token, access denied"
+        '500':
+          description: Error read file
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Error read file"
