@@ -15,7 +15,6 @@ export const isAuthorized = (roles) => (req, res, next) => {
     if (!roles.includes(decoded.role)) {
       return next(new ErrorForbidden('Access denied'));
     }
-    req.user = decoded;
     next();
   });
 };
