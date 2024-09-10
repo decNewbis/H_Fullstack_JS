@@ -44,12 +44,12 @@ export const renewalTokens = (req, res) => {
   res.cookie('accessToken', newAccessToken, {
     httpOnly: true,
     // secure: true,
-    maxAge: 60 * 1000
+    maxAge: 60 * 60 * 1000
   });
   res.cookie('refreshToken', newRefreshToken, {
     httpOnly: true,
     // secure: true,
-    maxAge: 60 * 1000
+    maxAge: 7 * 24 * 60 * 60 * 1000
   });
   res.set('Authorization', newAccessToken);
 
