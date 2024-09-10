@@ -150,6 +150,8 @@ paths:
       tags:
         - Authentication
       description: Renewal tokens with refresh token
+      security:
+        - jwtAuth: []
       parameters:
         - in: header
           name: x-user-id
@@ -210,6 +212,8 @@ paths:
       tags:
         - Products
       description: Get array of all products in db
+      security:
+        - jwtAuth: []
       responses:
         '200':
           description: Array of all products
@@ -248,6 +252,8 @@ paths:
       tags:
         - Products
       description: Retrieve product details by product ID
+      security:
+        - jwtAuth: []
       parameters:
         - in: path
           name: productId
@@ -312,6 +318,8 @@ paths:
       tags:
         - Cart
       description: Create cart and add product to cart
+      security:
+        - jwtAuth: []
       parameters:
         - in: path
           name: productId
@@ -393,6 +401,8 @@ paths:
       tags:
         - Cart
       description: Remove product from cart
+      security:
+        - jwtAuth: []
       parameters:
         - in: path
           name: productId
@@ -475,6 +485,8 @@ paths:
       tags:
         - Cart
       description: Calculate the total price of all products in cart
+      security:
+        - jwtAuth: []
       parameters:
         - in: header
           name: x-user-id
@@ -553,6 +565,8 @@ paths:
       tags:
         - Product
       description: Add new product with details to db
+      security:
+        - jwtAuth: []
       requestBody:
         description: Object containing details of new product
         required: true
@@ -641,6 +655,8 @@ paths:
       tags:
         - Product
       description: Upload product illustration by ID
+      security:
+        - jwtAuth: []
       parameters:
         - in: path
           name: productId
@@ -732,6 +748,8 @@ paths:
       tags:
         - Product
       description: Upload product video-content by ID
+      security:
+        - jwtAuth: []
       parameters:
         - in: path
           name: productId
@@ -823,6 +841,8 @@ paths:
       tags:
         - Product
       description: Get product image by ID
+      security:
+        - jwtAuth: []
       parameters:
         - in: path
           name: filename
@@ -875,6 +895,8 @@ paths:
       tags:
         - Product
       description: Get product video-content by ID
+      security:
+        - jwtAuth: []
       parameters:
         - in: path
           name: filename
@@ -927,6 +949,8 @@ paths:
       tags:
         - Product
       description: Get product preview image by ID
+      security:
+        - jwtAuth: []
       parameters:
         - in: path
           name: filename
