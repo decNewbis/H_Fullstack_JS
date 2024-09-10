@@ -5,10 +5,20 @@ info:
   version: 1.0.0
 servers:
   - url: 'http://localhost:3000/api'
+components:
+  securitySchemes:
+    jwtAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+security:
+  - jwtAuth: []
 paths:
   /register:
     post:
       summary: User registration
+      tags:
+        - Authentication
       description: Register a new user with email and password
       requestBody:
         description: Object containing email and password for registration
@@ -69,6 +79,8 @@ paths:
   /login:
     post:
       summary: User authentication and set cookie
+      tags:
+        - Authentication
       description: User authentication with email and password
       requestBody:
         description: Object containing email and password for login
@@ -101,7 +113,7 @@ paths:
                 eyJyb2xlIjoiQWRtaW4iLCJpYXQiOjE3MjU3NjI3NjYsImV4cCI6MTcyNTc2NjM2Nn0.
                 y7EmTYDqsj5D7ug9YiBjU3ibbyDI7KPW1KGzlolVDUs; Max-Age=60; Path=/; 
                 Expires=Sun, 08 Sep 2024 02:33:46 GMT; HttpOnly"
-            xUserIdKey:
+            x-user-id:
               description: The id of the authenticated user
               schema:
                 type: string
@@ -126,6 +138,8 @@ paths:
   /logout:
     post:
       summary: User logout
+      tags:
+        - Authentication
       description: User logout, remove refresh token from db and clear cookies
       responses:
         '200':
@@ -133,8 +147,16 @@ paths:
   /tokens:
     post:
       summary: Update tokens
+      tags:
+        - Authentication
       description: Renewal tokens with refresh token
       parameters:
+        - in: header
+          name: x-user-id
+          required: true
+          schema:
+            type: string
+            example: "761827b2-2372-4fd0-a014-e44731c68ec9"
         - in: cookie
           name: refreshToken
           required: true
@@ -143,12 +165,6 @@ paths:
             example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
             eyJyb2xlIjoiQWRtaW4iLCJpYXQiOjE3MjU3NjI3NjYsImV4cCI6MTcyNjM2NzU2Nn0.
             pPoGyPszUN13tQaC1Y7Xd9NGlqHpJpzKgbdYO51ZhCY"
-        - in: cookie
-          name: xUserIdKey
-          required: true
-          schema:
-            type: string
-            example: "761827b2-2372-4fd0-a014-e44731c68ec9"
       responses:
         '200':
           description: Successful update tokens, cookie set
@@ -191,17 +207,9 @@ paths:
   /products:
     get:
       summary: Array of all products
+      tags:
+        - Products
       description: Get array of all products in db
-      parameters:
-        - in: cookie
-          name: Authorization
-          required: true
-          description: Access token
-          schema:
-            type: string
-            example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
-            eyJyb2xlIjoiQWRtaW4iLCJpYXQiOjE3MjU3NjI3NjYsImV4cCI6MTcyNjM2NzU2Nn0.
-            pPoGyPszUN13tQaC1Y7Xd9NGlqHpJpzKgbdYO51ZhCY"
       responses:
         '200':
           description: Array of all products
@@ -237,6 +245,8 @@ paths:
   /products/{productId}:
     get:
       summary: Fetch a product by ID
+      tags:
+        - Products
       description: Retrieve product details by product ID
       parameters:
         - in: path
@@ -246,15 +256,6 @@ paths:
           schema:
             type: string
             example: "1"
-        - in: cookie
-          name: Authorization
-          required: true
-          description: Access token
-          schema:
-            type: string
-            example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
-            eyJyb2xlIjoiQWRtaW4iLCJpYXQiOjE3MjU3NjI3NjYsImV4cCI6MTcyNjM2NzU2Nn0.
-            pPoGyPszUN13tQaC1Y7Xd9NGlqHpJpzKgbdYO51ZhCY"
       responses:
         '200':
           description: Details of product
@@ -308,26 +309,19 @@ paths:
   /cart/{productId}:
     put:
       summary: Add product to cart by ID
+      tags:
+        - Cart
       description: Create cart and add product to cart
       parameters:
         - in: path
-          name: productID
+          name: productId
           required: true
           description: The ID of product to add
           schema:
             type: string
             example: "1"
-        - in: cookie
-          name: Authorization
-          required: true
-          description: Access token
-          schema:
-            type: string
-            example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
-            eyJyb2xlIjoiQWRtaW4iLCJpYXQiOjE3MjU3NjI3NjYsImV4cCI6MTcyNjM2NzU2Nn0.
-            pPoGyPszUN13tQaC1Y7Xd9NGlqHpJpzKgbdYO51ZhCY"
-        - in: cookie
-          name: xUserIdKey
+        - in: header
+          name: x-user-id
           required: true
           description: The user ID
           schema:
@@ -396,6 +390,8 @@ paths:
                     example: "Product not found"
     delete:
       summary: Remove product from cart by ID
+      tags:
+        - Cart
       description: Remove product from cart
       parameters:
         - in: path
@@ -405,17 +401,8 @@ paths:
           schema:
             type: string
             example: "1"
-        - in: cookie
-          name: Authorization
-          required: true
-          description: Access token
-          schema:
-            type: string
-            example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
-            eyJyb2xlIjoiQWRtaW4iLCJpYXQiOjE3MjU3NjI3NjYsImV4cCI6MTcyNjM2NzU2Nn0.
-            pPoGyPszUN13tQaC1Y7Xd9NGlqHpJpzKgbdYO51ZhCY"
-        - in: cookie
-          name: xUserIdKey
+        - in: header
+          name: x-user-id
           required: true
           description: The user ID
           schema:
@@ -485,19 +472,12 @@ paths:
   /cart/checkout:
     post:
       summary: Calculate the total price
+      tags:
+        - Cart
       description: Calculate the total price of all products in cart
       parameters:
-        - in: cookie
-          name: Authorization
-          required: true
-          description: Access token
-          schema:
-            type: string
-            example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
-            eyJyb2xlIjoiQWRtaW4iLCJpYXQiOjE3MjU3NjI3NjYsImV4cCI6MTcyNjM2NzU2Nn0.
-            pPoGyPszUN13tQaC1Y7Xd9NGlqHpJpzKgbdYO51ZhCY"
-        - in: cookie
-          name: xUserIdKey
+        - in: header
+          name: x-user-id
           required: true
           description: The user ID
           schema:
@@ -570,17 +550,9 @@ paths:
   /product/:
     post:
       summary: Add product to db
+      tags:
+        - Product
       description: Add new product with details to db
-      parameters:
-        - in: cookie
-          name: Authorization
-          required: true
-          description: Access token
-          schema:
-            type: string
-            example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
-            eyJyb2xlIjoiQWRtaW4iLCJpYXQiOjE3MjU3NjI3NjYsImV4cCI6MTcyNjM2NzU2Nn0.
-            pPoGyPszUN13tQaC1Y7Xd9NGlqHpJpzKgbdYO51ZhCY"
       requestBody:
         description: Object containing details of new product
         required: true
@@ -643,6 +615,16 @@ paths:
                   error:
                     type: string
                     example: "Invalid or missing token"
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Access denied"
         '500':
           description: Error read or write file
           content:
@@ -656,6 +638,8 @@ paths:
   /product/{productId}/image/upload:
     post:
       summary: Upload image to server
+      tags:
+        - Product
       description: Upload product illustration by ID
       parameters:
         - in: path
@@ -666,19 +650,10 @@ paths:
             type: string
             format: uuid
             example: "d19abaea-a716-45b4-a75e-6b3d5a32e0e0"
-        - in: cookie
-          name: Authorization
-          required: true
-          description: Access token
-          schema:
-            type: string
-            example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
-            eyJyb2xlIjoiQWRtaW4iLCJpYXQiOjE3MjU3NjI3NjYsImV4cCI6MTcyNjM2NzU2Nn0.
-            pPoGyPszUN13tQaC1Y7Xd9NGlqHpJpzKgbdYO51ZhCY"
       requestBody:
         required: true
         content:
-          multipart/form-data:
+          image/png:
             schema:
               type: object
               properties:
@@ -731,6 +706,16 @@ paths:
                   error:
                     type: string
                     example: "Invalid or missing token"
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Access denied"
         '500':
           description: Error read or write file
           content:
@@ -744,6 +729,8 @@ paths:
   /product/{productId}/video/upload:
     post:
       summary: Upload video to server
+      tags:
+        - Product
       description: Upload product video-content by ID
       parameters:
         - in: path
@@ -754,19 +741,10 @@ paths:
             type: string
             format: uuid
             example: "d19abaea-a716-45b4-a75e-6b3d5a32e0e0"
-        - in: cookie
-          name: Authorization
-          required: true
-          description: Access token
-          schema:
-            type: string
-            example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
-            eyJyb2xlIjoiQWRtaW4iLCJpYXQiOjE3MjU3NjI3NjYsImV4cCI6MTcyNjM2NzU2Nn0.
-            pPoGyPszUN13tQaC1Y7Xd9NGlqHpJpzKgbdYO51ZhCY"
       requestBody:
         required: true
         content:
-          multipart/form-data:
+          video/mp4:
             schema:
               type: object
               properties:
@@ -819,6 +797,16 @@ paths:
                   error:
                     type: string
                     example: "Invalid or missing token"
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Access denied"
         '500':
           description: Error read or write file
           content:
@@ -832,6 +820,8 @@ paths:
   /product/image/{filename}:
     get:
       summary: Get image
+      tags:
+        - Product
       description: Get product image by ID
       parameters:
         - in: path
@@ -841,15 +831,6 @@ paths:
           schema:
             type: string
             example: "0c290e88-f349-468f-b1dd-12ba924ce2e1.png"
-        - in: cookie
-          name: Authorization
-          required: true
-          description: Access token
-          schema:
-            type: string
-            example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
-            eyJyb2xlIjoiQWRtaW4iLCJpYXQiOjE3MjU3NjI3NjYsImV4cCI6MTcyNjM2NzU2Nn0.
-            pPoGyPszUN13tQaC1Y7Xd9NGlqHpJpzKgbdYO51ZhCY"
       responses:
         '200':
           description: Image successfully retrieved
@@ -868,6 +849,16 @@ paths:
                   error:
                     type: string
                     example: "Invalid or missing token, access denied"
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Access denied"
         '500':
           description: Error read file
           content:
@@ -881,6 +872,8 @@ paths:
   /product/video/{filename}:
     get:
       summary: Get video-content
+      tags:
+        - Product
       description: Get product video-content by ID
       parameters:
         - in: path
@@ -889,16 +882,7 @@ paths:
           description: Product video-content filename
           schema:
             type: string
-            example: "5f88403c-125f-46ee-af95-2014c8069ec5.mp4"
-        - in: cookie
-          name: Authorization
-          required: true
-          description: Access token
-          schema:
-            type: string
-            example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
-            eyJyb2xlIjoiQWRtaW4iLCJpYXQiOjE3MjU3NjI3NjYsImV4cCI6MTcyNjM2NzU2Nn0.
-            pPoGyPszUN13tQaC1Y7Xd9NGlqHpJpzKgbdYO51ZhCY"
+            example: "08150654-6c95-4328-96dc-51ccfabdcf94.mp4"
       responses:
         '200':
           description: Video-content successfully retrieved
@@ -917,6 +901,16 @@ paths:
                   error:
                     type: string
                     example: "Invalid or missing token, access denied"
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Access denied"
         '500':
           description: Error read file
           content:
@@ -930,6 +924,8 @@ paths:
   /product/preview/{filename}:
     get:
       summary: Get preview image
+      tags:
+        - Product
       description: Get product preview image by ID
       parameters:
         - in: path
@@ -939,15 +935,6 @@ paths:
           schema:
             type: string
             example: "resized_0c290e88-f349-468f-b1dd-12ba924ce2e1.png"
-        - in: cookie
-          name: Authorization
-          required: true
-          description: Access token
-          schema:
-            type: string
-            example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
-            eyJyb2xlIjoiQWRtaW4iLCJpYXQiOjE3MjU3NjI3NjYsImV4cCI6MTcyNjM2NzU2Nn0.
-            pPoGyPszUN13tQaC1Y7Xd9NGlqHpJpzKgbdYO51ZhCY"
       responses:
         '200':
           description: Preview image successfully retrieved
@@ -966,6 +953,16 @@ paths:
                   error:
                     type: string
                     example: "Invalid or missing token, access denied"
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Access denied"
         '500':
           description: Error read file
           content:
