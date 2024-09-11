@@ -5,14 +5,14 @@ info:
   version: 1.0.0
 servers:
   - url: 'http://localhost:3000/api'
-components:
-  securitySchemes:
-    jwtAuth:
-      type: apiKey
-      in: header
-      name: Authorization
-security:
-  - jwtAuth: []
+#components:
+#  securitySchemes:
+#    jwtAuth:
+#      type: apiKey
+#      in: header
+#      name: Authorization
+#security:
+#  - jwtAuth: []
 paths:
   /register:
     post:
@@ -118,13 +118,6 @@ paths:
               schema:
                 type: string
                 example: "761827b2-2372-4fd0-a014-e44731c68ec9"
-            Authorization:
-              description: Access token
-              schema:
-                type: string
-                example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
-                eyJyb2xlIjoiQWRtaW4iLCJpYXQiOjE3MjU3NjI3NjYsImV4cCI6MTcyNTc2NjM2Nn0.
-                y7EmTYDqsj5D7ug9YiBjU3ibbyDI7KPW1KGzlolVDUs"
         '400':
           description: Incorrect email or password
           content:
@@ -150,8 +143,6 @@ paths:
       tags:
         - Authentication
       description: Renewal tokens with refresh token
-      security:
-        - jwtAuth: []
       parameters:
         - in: header
           name: x-user-id
@@ -159,6 +150,14 @@ paths:
           schema:
             type: string
             example: "761827b2-2372-4fd0-a014-e44731c68ec9"
+        - in: cookie
+          name: accessToken
+          required: true
+          schema:
+            type: string
+            example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
+            eyJyb2xlIjoiQ3VzdG9tZXIiLCJpYXQiOjE3MjYwNzM2NzIsImV4cCI6MTcyNjA3NzI3Mn0.
+            85VLpe5kUsKA01SExvU_ephI2bexcDrLRUJPERwKBr0"
         - in: cookie
           name: refreshToken
           required: true
@@ -179,13 +178,6 @@ paths:
                 eyJyb2xlIjoiQWRtaW4iLCJpYXQiOjE3MjU3NjI3NjYsImV4cCI6MTcyNTc2NjM2Nn0.
                 y7EmTYDqsj5D7ug9YiBjU3ibbyDI7KPW1KGzlolVDUs; Max-Age=60; Path=/; 
                 Expires=Sun, 08 Sep 2024 02:33:46 GMT; HttpOnly"
-            Authorization:
-              description: Access token
-              schema:
-                type: string
-                example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
-                eyJyb2xlIjoiQWRtaW4iLCJpYXQiOjE3MjU3NjI3NjYsImV4cCI6MTcyNTc2NjM2Nn0.
-                y7EmTYDqsj5D7ug9YiBjU3ibbyDI7KPW1KGzlolVDUs"
         '401':
           description: No token provided
           content:
@@ -212,8 +204,15 @@ paths:
       tags:
         - Products
       description: Get array of all products in db
-      security:
-        - jwtAuth: []
+      parameters:
+        - in: cookie
+          name: accessToken
+          required: true
+          schema:
+            type: string
+            example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
+            eyJyb2xlIjoiQ3VzdG9tZXIiLCJpYXQiOjE3MjYwNzM2NzIsImV4cCI6MTcyNjA3NzI3Mn0.
+            85VLpe5kUsKA01SExvU_ephI2bexcDrLRUJPERwKBr0"
       responses:
         '200':
           description: Array of all products
@@ -252,8 +251,6 @@ paths:
       tags:
         - Products
       description: Retrieve product details by product ID
-      security:
-        - jwtAuth: []
       parameters:
         - in: path
           name: productId
@@ -262,6 +259,14 @@ paths:
           schema:
             type: string
             example: "1"
+        - in: cookie
+          name: accessToken
+          required: true
+          schema:
+            type: string
+            example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
+            eyJyb2xlIjoiQ3VzdG9tZXIiLCJpYXQiOjE3MjYwNzM2NzIsImV4cCI6MTcyNjA3NzI3Mn0.
+            85VLpe5kUsKA01SExvU_ephI2bexcDrLRUJPERwKBr0"
       responses:
         '200':
           description: Details of product
@@ -318,8 +323,6 @@ paths:
       tags:
         - Cart
       description: Create cart and add product to cart
-      security:
-        - jwtAuth: []
       parameters:
         - in: path
           name: productId
@@ -335,6 +338,14 @@ paths:
           schema:
             type: string
             example: "761827b2-2372-4fd0-a014-e44731c68ec9"
+        - in: cookie
+          name: accessToken
+          required: true
+          schema:
+            type: string
+            example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
+            eyJyb2xlIjoiQ3VzdG9tZXIiLCJpYXQiOjE3MjYwNzM2NzIsImV4cCI6MTcyNjA3NzI3Mn0.
+            85VLpe5kUsKA01SExvU_ephI2bexcDrLRUJPERwKBr0"
       responses:
         '200':
           description: List of chosen products
@@ -387,7 +398,7 @@ paths:
                     type: string
                     example: "Access denied"
         '404':
-          description: Product not found
+          description: User or product not found
           content:
             application/json:
               schema:
@@ -401,8 +412,6 @@ paths:
       tags:
         - Cart
       description: Remove product from cart
-      security:
-        - jwtAuth: []
       parameters:
         - in: path
           name: productId
@@ -418,6 +427,14 @@ paths:
           schema:
             type: string
             example: "761827b2-2372-4fd0-a014-e44731c68ec9"
+        - in: cookie
+          name: accessToken
+          required: true
+          schema:
+            type: string
+            example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
+            eyJyb2xlIjoiQ3VzdG9tZXIiLCJpYXQiOjE3MjYwNzM2NzIsImV4cCI6MTcyNjA3NzI3Mn0.
+            85VLpe5kUsKA01SExvU_ephI2bexcDrLRUJPERwKBr0"
       responses:
         '200':
           description: List of chosen products
@@ -485,8 +502,6 @@ paths:
       tags:
         - Cart
       description: Calculate the total price of all products in cart
-      security:
-        - jwtAuth: []
       parameters:
         - in: header
           name: x-user-id
@@ -495,6 +510,14 @@ paths:
           schema:
             type: string
             example: "761827b2-2372-4fd0-a014-e44731c68ec9"
+        - in: cookie
+          name: accessToken
+          required: true
+          schema:
+            type: string
+            example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
+            eyJyb2xlIjoiQ3VzdG9tZXIiLCJpYXQiOjE3MjYwNzM2NzIsImV4cCI6MTcyNjA3NzI3Mn0.
+            85VLpe5kUsKA01SExvU_ephI2bexcDrLRUJPERwKBr0"
       responses:
         '200':
           description: List of chosen products
@@ -565,8 +588,15 @@ paths:
       tags:
         - Product
       description: Add new product with details to db
-      security:
-        - jwtAuth: []
+      parameters:
+        - in: cookie
+          name: accessToken
+          required: true
+          schema:
+            type: string
+            example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
+            eyJyb2xlIjoiQ3VzdG9tZXIiLCJpYXQiOjE3MjYwNzM2NzIsImV4cCI6MTcyNjA3NzI3Mn0.
+            85VLpe5kUsKA01SExvU_ephI2bexcDrLRUJPERwKBr0"
       requestBody:
         description: Object containing details of new product
         required: true
@@ -655,8 +685,6 @@ paths:
       tags:
         - Product
       description: Upload product illustration by ID
-      security:
-        - jwtAuth: []
       parameters:
         - in: path
           name: productId
@@ -666,6 +694,14 @@ paths:
             type: string
             format: uuid
             example: "d19abaea-a716-45b4-a75e-6b3d5a32e0e0"
+        - in: cookie
+          name: accessToken
+          required: true
+          schema:
+            type: string
+            example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
+            eyJyb2xlIjoiQ3VzdG9tZXIiLCJpYXQiOjE3MjYwNzM2NzIsImV4cCI6MTcyNjA3NzI3Mn0.
+            85VLpe5kUsKA01SExvU_ephI2bexcDrLRUJPERwKBr0"
       requestBody:
         required: true
         content:
@@ -748,8 +784,6 @@ paths:
       tags:
         - Product
       description: Upload product video-content by ID
-      security:
-        - jwtAuth: []
       parameters:
         - in: path
           name: productId
@@ -759,6 +793,14 @@ paths:
             type: string
             format: uuid
             example: "d19abaea-a716-45b4-a75e-6b3d5a32e0e0"
+        - in: cookie
+          name: accessToken
+          required: true
+          schema:
+            type: string
+            example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
+            eyJyb2xlIjoiQ3VzdG9tZXIiLCJpYXQiOjE3MjYwNzM2NzIsImV4cCI6MTcyNjA3NzI3Mn0.
+            85VLpe5kUsKA01SExvU_ephI2bexcDrLRUJPERwKBr0"
       requestBody:
         required: true
         content:
@@ -841,8 +883,6 @@ paths:
       tags:
         - Product
       description: Get product image by ID
-      security:
-        - jwtAuth: []
       parameters:
         - in: path
           name: filename
@@ -851,6 +891,14 @@ paths:
           schema:
             type: string
             example: "0c290e88-f349-468f-b1dd-12ba924ce2e1.png"
+        - in: cookie
+          name: accessToken
+          required: true
+          schema:
+            type: string
+            example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
+            eyJyb2xlIjoiQ3VzdG9tZXIiLCJpYXQiOjE3MjYwNzM2NzIsImV4cCI6MTcyNjA3NzI3Mn0.
+            85VLpe5kUsKA01SExvU_ephI2bexcDrLRUJPERwKBr0"
       responses:
         '200':
           description: Image successfully retrieved
@@ -895,8 +943,6 @@ paths:
       tags:
         - Product
       description: Get product video-content by ID
-      security:
-        - jwtAuth: []
       parameters:
         - in: path
           name: filename
@@ -905,6 +951,14 @@ paths:
           schema:
             type: string
             example: "08150654-6c95-4328-96dc-51ccfabdcf94.mp4"
+        - in: cookie
+          name: accessToken
+          required: true
+          schema:
+            type: string
+            example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
+            eyJyb2xlIjoiQ3VzdG9tZXIiLCJpYXQiOjE3MjYwNzM2NzIsImV4cCI6MTcyNjA3NzI3Mn0.
+            85VLpe5kUsKA01SExvU_ephI2bexcDrLRUJPERwKBr0"
       responses:
         '200':
           description: Video-content successfully retrieved
@@ -949,8 +1003,6 @@ paths:
       tags:
         - Product
       description: Get product preview image by ID
-      security:
-        - jwtAuth: []
       parameters:
         - in: path
           name: filename
@@ -959,6 +1011,14 @@ paths:
           schema:
             type: string
             example: "resized_0c290e88-f349-468f-b1dd-12ba924ce2e1.png"
+        - in: cookie
+          name: accessToken
+          required: true
+          schema:
+            type: string
+            example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
+            eyJyb2xlIjoiQ3VzdG9tZXIiLCJpYXQiOjE3MjYwNzM2NzIsImV4cCI6MTcyNjA3NzI3Mn0.
+            85VLpe5kUsKA01SExvU_ephI2bexcDrLRUJPERwKBr0"
       responses:
         '200':
           description: Preview image successfully retrieved
