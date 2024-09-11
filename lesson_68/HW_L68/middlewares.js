@@ -2,9 +2,10 @@ import jwt from "jsonwebtoken";
 import { users } from "./storage.js";
 import {ErrorForbidden, ErrorUnauthorized, ErrorUserAlreadyExists} from "./errorHandler.js";
 import { validateSignupData } from "./validation.js";
+import {getToken} from "./services/user.services.js";
 
 export const isAuthorized = (roles) => (req, res, next) => {
-  const accessToken = req.header('Authorization');
+  const {accessToken} = getToken(req);
   if (!accessToken) {
     return next(new ErrorUnauthorized('No token provided'));
   }
