@@ -23,7 +23,6 @@ export const logIn = (req, res) => {
     maxAge: 7 * 24 * 60 * 60 * 1000
   });
   res.set(xUserIdKey, userId);
-  res.set('Authorization', accessToken);
 
   res.status(200).send('OK');
 };
@@ -51,7 +50,6 @@ export const renewalTokens = (req, res) => {
     // secure: true,
     maxAge: 7 * 24 * 60 * 60 * 1000
   });
-  res.set('Authorization', newAccessToken);
 
   res.status(200).send('OK');
 };
