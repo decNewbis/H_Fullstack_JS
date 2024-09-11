@@ -55,17 +55,20 @@ export const logInUser = ({email, password}) => {
   };
 };
 
-const getRefreshToken = (req) => {
-  const {refreshToken} = req.cookies;
-  if (!refreshToken) {
-    throw new ErrorUnauthorized('No token provided');
+export const getToken = (req) => {
+  const {accessToken, refreshToken} = req.cookies;
+  if (!accessToken) {
+    throw new ErrorUnauthorized('No accessToken provided');
   }
-  return refreshToken;
+  if (!refreshToken) {
+    throw new ErrorUnauthorized('No refreshToken provided');
+  }
+  return {accessToken, refreshToken};
 };
 
 export const updateTokens = (req) => {
   const currentUser = getUserId(req);
-  const refreshToken = getRefreshToken(req);
+  const {refreshToken} = getToken(req);
   const storedRefreshToken = getStoredRefreshToken(currentUser);
   let newAccessToken = null;
   let newRefreshToken = null;
