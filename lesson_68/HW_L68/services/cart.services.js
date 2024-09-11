@@ -6,12 +6,15 @@ import {randomUUID as uuid} from "crypto";
 
 export const addProductToCart = (xUserId, {productId}) => {
   const foundProductById = getProductById(productId);
-
   if (!foundProductById) {
     throw new ErrorObjectNotFound("product not found");
   }
 
   const currentUser = getUser(xUserId);
+  if (!currentUser) {
+    throw new ErrorObjectNotFound("user not found");
+  }
+
   let cart = getCartByUserId(currentUser.id);
 
   if (!cart) {
