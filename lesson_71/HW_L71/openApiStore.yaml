@@ -1,0 +1,748 @@
+openapi: 3.0.3
+info:
+  title: Open API Store
+  description: Open API Store
+  version: 1.0.0
+servers:
+  - url: 'http://localhost:3000/api'
+components:
+  parameters:
+    xUserIdParameter:
+      in: header
+      name: x-user-id
+      required: true
+      schema:
+        type: string
+        example: "761827b2-2372-4fd0-a014-e44731c68ec9"
+    AccessTokenParameter:
+      in: cookie
+      name: accessToken
+      required: true
+      schema:
+        type: string
+        example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
+        eyJyb2xlIjoiQ3VzdG9tZXIiLCJpYXQiOjE3MjYwNzM2NzIsImV4cCI6MTcyNjA3NzI3Mn0.
+        85VLpe5kUsKA01SExvU_ephI2bexcDrLRUJPERwKBr0"
+    RefreshTokenParameter:
+      in: cookie
+      name: refreshToken
+      required: true
+      schema:
+        type: string
+        example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
+        eyJyb2xlIjoiQWRtaW4iLCJpYXQiOjE3MjU3NjI3NjYsImV4cCI6MTcyNjM2NzU2Nn0.
+        pPoGyPszUN13tQaC1Y7Xd9NGlqHpJpzKgbdYO51ZhCY"
+    ProductIdParameter:
+      in: path
+      name: productId
+      required: true
+      description: The ID of product to retrieve
+      schema:
+        type: string
+        example: "1"
+  schemas:
+    ErrorResponseSchema:
+      type: object
+      properties:
+        error:
+          type: string
+  responses:
+    InvalidDataResponse:  #400
+      description: Invalid data
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponseSchema'
+          examples:
+            Invalid data:
+              value:
+                error: "Invalid data"
+    IncorrectEmailOrPasswordResponse: #400
+      description: Incorrect email or password
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponseSchema'
+          examples:
+            "Incorrect email or password":
+              value:
+                error: "Incorrect email or password"
+    NoTokenProvidedResponse:  #401:
+      description: No token provided
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponseSchema'
+          examples:
+            "No token provided":
+              value:
+                error: "No token provided"
+    AccessDeniedResponse:  #401
+      description: Access denied
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponseSchema'
+          examples:
+            "Access denied":
+              value:
+                error: "Access denied"
+    UnauthorizedResponse:  #401
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponseSchema'
+          examples:
+            Unauthorized:
+              value:
+                error: "Invalid or missing token"
+    InvalidRefreshTokenResponse: #401
+      description: Invalid refresh token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponseSchema'
+          examples:
+            "Invalid refresh token":
+              value:
+                error: "Invalid refresh token"
+    ProductNotFoundResponse:  #404
+      description: Product not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponseSchema'
+          examples:
+            "Product not found":
+              value:
+                error: "Product not found"
+    EmailAlreadyExistsResponse:  #409
+      description: user already exists
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponseSchema'
+          examples:
+            "Email already exists":
+              value:
+                error: "user already exists"
+    ServerErrorResponse:  #500
+      description: Error read or write file
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponseSchema'
+          examples:
+            "Error read or write file":
+              value:
+                error: "Error read or write file"
+paths:
+  /register:
+    post:
+      summary: User registration
+      tags:
+        - Authentication
+      description: Register a new user with email and password
+      requestBody:
+        description: Object containing email and password for registration
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: username@example.com
+                password:
+                  type: string
+                  format: password
+                  example: "#4ErDfCv"
+              required:
+                - email
+                - password
+      responses:
+        '201':
+          description: User successfully registered
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                    example: "761827b2-2372-4fd0-a014-e44731c68ec9"
+                  email:
+                    type: string
+                    format: email
+                    example: esername@example.com
+        '400':
+          $ref: '#/components/responses/InvalidDataResponse'
+        '409':
+          $ref: '#/components/responses/EmailAlreadyExistsResponse'
+  /login:
+    post:
+      summary: User authentication and set cookie
+      tags:
+        - Authentication
+      description: User authentication with email and password
+      requestBody:
+        description: Object containing email and password for login
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: username@example.com
+                password:
+                  type: string
+                  format: password
+                  example: "#4ErDfCv"
+              required:
+                - email
+                - password
+      responses:
+        '200':
+          description: Successful login, cookie set
+          headers:
+            Set-Cookie:
+              description: Cookies for access and refresh tokens
+              schema:
+                type: string
+                example: "accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
+                eyJyb2xlIjoiQWRtaW4iLCJpYXQiOjE3MjU3NjI3NjYsImV4cCI6MTcyNTc2NjM2Nn0.
+                y7EmTYDqsj5D7ug9YiBjU3ibbyDI7KPW1KGzlolVDUs; Max-Age=60; Path=/; 
+                Expires=Sun, 08 Sep 2024 02:33:46 GMT; HttpOnly"
+            x-user-id:
+              description: The id of the authenticated user
+              schema:
+                type: string
+                example: "761827b2-2372-4fd0-a014-e44731c68ec9"
+        '400':
+          $ref: '#/components/responses/IncorrectEmailOrPasswordResponse'
+  /logout:
+    post:
+      summary: User logout
+      tags:
+        - Authentication
+      description: User logout, remove refresh token from db and clear cookies
+      responses:
+        '200':
+          description: Successful logout
+  /tokens:
+    post:
+      summary: Update tokens
+      tags:
+        - Authentication
+      description: Renewal tokens with refresh token
+      parameters:
+        - $ref: '#/components/parameters/xUserIdParameter'
+        - $ref: '#/components/parameters/AccessTokenParameter'
+        - $ref: '#/components/parameters/RefreshTokenParameter'
+      responses:
+        '200':
+          description: Successful update tokens, cookie set
+          headers:
+            Set-Cookie:
+              description: Cookies for access and refresh tokens
+              schema:
+                type: string
+                example: "accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
+                eyJyb2xlIjoiQWRtaW4iLCJpYXQiOjE3MjU3NjI3NjYsImV4cCI6MTcyNTc2NjM2Nn0.
+                y7EmTYDqsj5D7ug9YiBjU3ibbyDI7KPW1KGzlolVDUs; Max-Age=60; Path=/; 
+                Expires=Sun, 08 Sep 2024 02:33:46 GMT; HttpOnly"
+        '401':
+          $ref: '#/components/responses/NoTokenProvidedResponse'
+        '403':
+          $ref: '#/components/responses/InvalidRefreshTokenResponse'
+  /products:
+    get:
+      summary: Array of all products
+      tags:
+        - Products
+      description: Get array of all products in db
+      parameters:
+        - $ref: '#/components/parameters/RefreshTokenParameter'
+      responses:
+        '200':
+          description: Array of all products
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                    title:
+                      type: string
+                      example: "Digital Painting"
+                    description:
+                      type: string
+                      example: "A custom digital painting created by a professional artist."
+                    price:
+                      type: integer
+                      example: 50
+        '401':
+          $ref: '#/components/responses/AccessDeniedResponse'
+  /products/{productId}:
+    get:
+      summary: Fetch a product by ID
+      tags:
+        - Products
+      description: Retrieve product details by product ID
+      parameters:
+        - $ref: '#/components/parameters/ProductIdParameter'
+        - $ref: '#/components/parameters/AccessTokenParameter'
+      responses:
+        '200':
+          description: Details of product
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 10
+                  title:
+                    type: string
+                    example: "Online Personal Training Session"
+                  description:
+                    type: string
+                    example: "A personalized one-hour workout session with a certified trainer."
+                  price:
+                    type: integer
+                    example: 45
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/AccessDeniedResponse'
+        '404':
+          $ref: '#/components/responses/ProductNotFoundResponse'
+  /cart/{productId}:
+    put:
+      summary: Add product to cart by ID
+      tags:
+        - Cart
+      description: Create cart and add product to cart
+      parameters:
+        - $ref: '#/components/parameters/ProductIdParameter'
+        - $ref: '#/components/parameters/xUserIdParameter'
+        - $ref: '#/components/parameters/AccessTokenParameter'
+      responses:
+        '200':
+          description: List of chosen products
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: "351c01bb-bfd1-4576-81ae-98a9afad69d4"
+                  userId:
+                    type: string
+                    example: "761827b2-2372-4fd0-a014-e44731c68ec9"
+                  products:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        title:
+                          type: string
+                          example: "Digital Painting"
+                        description:
+                          type: string
+                          example: "A custom digital painting created by a professional artist."
+                        price:
+                          type: integer
+                          example: 50
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/AccessDeniedResponse'
+        '404':
+          $ref: '#/components/responses/ProductNotFoundResponse'
+    delete:
+      summary: Remove product from cart by ID
+      tags:
+        - Cart
+      description: Remove product from cart
+      parameters:
+        - $ref: '#/components/parameters/ProductIdParameter'
+        - $ref: '#/components/parameters/xUserIdParameter'
+        - $ref: '#/components/parameters/AccessTokenParameter'
+      responses:
+        '200':
+          description: List of chosen products
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: "351c01bb-bfd1-4576-81ae-98a9afad69d4"
+                  userId:
+                    type: string
+                    example: "761827b2-2372-4fd0-a014-e44731c68ec9"
+                  products:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        title:
+                          type: string
+                          example: "Digital Painting"
+                        description:
+                          type: string
+                          example: "A custom digital painting created by a professional artist."
+                        price:
+                          type: integer
+                          example: 50
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/AccessDeniedResponse'
+        '404':
+          $ref: '#/components/responses/ProductNotFoundResponse'
+  /cart/checkout:
+    post:
+      summary: Calculate the total price
+      tags:
+        - Cart
+      description: Calculate the total price of all products in cart
+      parameters:
+        - $ref: '#/components/parameters/xUserIdParameter'
+        - $ref: '#/components/parameters/AccessTokenParameter'
+      responses:
+        '200':
+          description: List of chosen products
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: "351c01bb-bfd1-4576-81ae-98a9afad69d4"
+                  userId:
+                    type: string
+                    example: "761827b2-2372-4fd0-a014-e44731c68ec9"
+                  products:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        title:
+                          type: string
+                          example: "Digital Painting"
+                        description:
+                          type: string
+                          example: "A custom digital painting created by a professional artist."
+                        price:
+                          type: integer
+                          example: 50
+                  totalPrice:
+                    type: integer
+                    example: 150
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/AccessDeniedResponse'
+        '404':
+          $ref: '#/components/responses/ProductNotFoundResponse'
+  /product/:
+    post:
+      summary: Add product to db
+      tags:
+        - Product
+      description: Add new product with details to db
+      parameters:
+        - $ref: '#/components/parameters/AccessTokenParameter'
+      requestBody:
+        description: Object containing details of new product
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: "cake"
+                description:
+                  type: string
+                  example: "Lemon cake"
+                price:
+                  type: integer
+                  example: 20
+      responses:
+        '201':
+          description: Product added successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: "43557c81-6a27-46a5-9d45-16b47f40fd8f"
+                  name:
+                    type: string
+                    example: "cake"
+                  description:
+                    type: string
+                    example: "Lemon cake"
+                  price:
+                    type: integer
+                    example: 20
+                  videos:
+                    type: array
+                    items:
+                      type: string
+                      example: "5f88403c-125f-46ee-af95-2014c8069ec5.mp4"
+                  images:
+                    type: array
+                    items:
+                      type: string
+                      example: "0c290e88-f349-468f-b1dd-12ba924ce2e1.png"
+                  previews:
+                    type: array
+                    items:
+                      type: string
+                      example: "resized_0c290e88-f349-468f-b1dd-12ba924ce2e1.png"
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/AccessDeniedResponse'
+        '500':
+          $ref: '#/components/responses/ServerErrorResponse'
+  /product/{productId}/image/upload:
+    post:
+      summary: Upload image to server
+      tags:
+        - Product
+      description: Upload product illustration by ID
+      parameters:
+        - $ref: '#/components/parameters/ProductIdParameter'
+        - $ref: '#/components/parameters/AccessTokenParameter'
+      requestBody:
+        required: true
+        content:
+          image/png:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: Image file
+      responses:
+        '200':
+          description: Image uploaded successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: "43557c81-6a27-46a5-9d45-16b47f40fd8f"
+                  name:
+                    type: string
+                    example: "cake"
+                  description:
+                    type: string
+                    example: "Lemon cake"
+                  price:
+                    type: integer
+                    example: 20
+                  videos:
+                    type: array
+                    items:
+                      type: string
+                      example: "5f88403c-125f-46ee-af95-2014c8069ec5.mp4"
+                  images:
+                    type: array
+                    items:
+                      type: string
+                      example: "0c290e88-f349-468f-b1dd-12ba924ce2e1.png"
+                  previews:
+                    type: array
+                    items:
+                      type: string
+                      example: "resized_0c290e88-f349-468f-b1dd-12ba924ce2e1.png"
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/AccessDeniedResponse'
+        '500':
+          $ref: "#/components/responses/ServerErrorResponse"
+  /product/{productId}/video/upload:
+    post:
+      summary: Upload video to server
+      tags:
+        - Product
+      description: Upload product video-content by ID
+      parameters:
+        - $ref: '#/components/parameters/ProductIdParameter'
+        - $ref: '#/components/parameters/AccessTokenParameter'
+      requestBody:
+        required: true
+        content:
+          video/mp4:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: Video file
+      responses:
+        '200':
+          description: Video uploaded successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: "43557c81-6a27-46a5-9d45-16b47f40fd8f"
+                  name:
+                    type: string
+                    example: "cake"
+                  description:
+                    type: string
+                    example: "Lemon cake"
+                  price:
+                    type: integer
+                    example: 20
+                  videos:
+                    type: array
+                    items:
+                      type: string
+                      example: "5f88403c-125f-46ee-af95-2014c8069ec5.mp4"
+                  images:
+                    type: array
+                    items:
+                      type: string
+                      example: "0c290e88-f349-468f-b1dd-12ba924ce2e1.png"
+                  previews:
+                    type: array
+                    items:
+                      type: string
+                      example: "resized_0c290e88-f349-468f-b1dd-12ba924ce2e1.png"
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/AccessDeniedResponse'
+        '500':
+          $ref: '#/components/responses/ServerErrorResponse'
+  /product/image/{filename}:
+    get:
+      summary: Get image
+      tags:
+        - Product
+      description: Get product image by ID
+      parameters:
+        - in: path
+          name: filename
+          required: true
+          description: Product image filename
+          schema:
+            type: string
+            example: "0c290e88-f349-468f-b1dd-12ba924ce2e1.png"
+        - $ref: '#/components/parameters/AccessTokenParameter'
+      responses:
+        '200':
+          description: Image successfully retrieved
+          content:
+            image/png:
+              schema:
+                type: string
+                format: binary
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/AccessDeniedResponse'
+        '500':
+          $ref: '#/components/responses/ServerErrorResponse'
+  /product/video/{filename}:
+    get:
+      summary: Get video-content
+      tags:
+        - Product
+      description: Get product video-content by ID
+      parameters:
+        - in: path
+          name: filename
+          required: true
+          description: Product video-content filename
+          schema:
+            type: string
+            example: "08150654-6c95-4328-96dc-51ccfabdcf94.mp4"
+        - $ref: '#/components/parameters/AccessTokenParameter'
+      responses:
+        '200':
+          description: Video-content successfully retrieved
+          content:
+            video/mp4:
+              schema:
+                type: string
+                format: binary
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/AccessDeniedResponse'
+        '500':
+          $ref: '#/components/responses/ServerErrorResponse'
+  /product/preview/{filename}:
+    get:
+      summary: Get preview image
+      tags:
+        - Product
+      description: Get product preview image by ID
+      parameters:
+        - in: path
+          name: filename
+          required: true
+          description: Product preview image filename
+          schema:
+            type: string
+            example: "resized_0c290e88-f349-468f-b1dd-12ba924ce2e1.png"
+        - $ref: '#/components/parameters/AccessTokenParameter'
+      responses:
+        '200':
+          description: Preview image successfully retrieved
+          content:
+            image/png:
+              schema:
+                type: string
+                format: binary
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/AccessDeniedResponse'
+        '500':
+          $ref: '#/components/responses/ServerErrorResponse'
