@@ -34,3 +34,9 @@ export class ErrorReadWriteFile extends ErrorHandler {
     super(500, message);
   }
 }
+
+export class ErrorForbidden extends ErrorHandler {
+  constructor(message) {
+    super(403, message);
+  }
+}

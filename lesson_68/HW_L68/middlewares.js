@@ -1,16 +1,23 @@
+import jwt from "jsonwebtoken";
 import { users } from "./storage.js";
-import { ErrorUnauthorized, ErrorUserAlreadyExists, ErrorValidation } from "./errorHandler.js";
+import {ErrorForbidden, ErrorUnauthorized, ErrorUserAlreadyExists} from "./errorHandler.js";
 import { validateSignupData } from "./validation.js";
+import {getToken} from "./services/user.services.js";
 
-const xUserIdKey = process.env.X_USER_ID_KEY;
-
-export const isAuthorized = (req, res, next) => {
-  const xUserId = req.header(xUserIdKey);
-  const isFoundUser = users.some((user) => user.id === xUserId);
-  if (!isFoundUser) {
-    throw new ErrorUnauthorized("you do not have access rights to the content");
+export const isAuthorized = (roles) => (req, res, next) => {
+  const {accessToken} = getToken(req);
+  if (!accessToken) {
+    return next(new ErrorUnauthorized('No token provided'));
   }
-  next();
+  jwt.verify(accessToken, process.env.JWT_ACCESS_SECRET, (err, decoded) => {
+    if (err) {
+      return next(new ErrorUnauthorized('Invalid token'));
+    }
+    if (!roles.includes(decoded.role)) {
+      return next(new ErrorForbidden('Access denied'));
+    }
+    next();
+  });
 };
 
 export const isUserAlreadyExists = (req, res, next) => {
