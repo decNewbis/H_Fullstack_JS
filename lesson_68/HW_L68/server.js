@@ -23,10 +23,15 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const openApiStore = process.env.OPEN_API_STORE;
 const swaggerSpec = YAML.load(path.join(__dirname, openApiStore));
+const swaggerUiOptions = {
+  swaggerOptions: {
+    defaultModelsExpandDepth: -1,
+  },
+};
 
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, swaggerUiOptions));
 
 apiRouter.use(userRoutes);
 apiRouter.use('/products', productsRoutes);
