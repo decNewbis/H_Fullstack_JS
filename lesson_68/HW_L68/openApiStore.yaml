@@ -5,6 +5,138 @@ info:
   version: 1.0.0
 servers:
   - url: 'http://localhost:3000/api'
+components:
+  parameters:
+    xUserIdParameter:
+      in: header
+      name: x-user-id
+      required: true
+      schema:
+        type: string
+        example: "761827b2-2372-4fd0-a014-e44731c68ec9"
+    AccessTokenParameter:
+      in: cookie
+      name: accessToken
+      required: true
+      schema:
+        type: string
+        example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
+        eyJyb2xlIjoiQ3VzdG9tZXIiLCJpYXQiOjE3MjYwNzM2NzIsImV4cCI6MTcyNjA3NzI3Mn0.
+        85VLpe5kUsKA01SExvU_ephI2bexcDrLRUJPERwKBr0"
+    RefreshTokenParameter:
+      in: cookie
+      name: refreshToken
+      required: true
+      schema:
+        type: string
+        example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
+        eyJyb2xlIjoiQWRtaW4iLCJpYXQiOjE3MjU3NjI3NjYsImV4cCI6MTcyNjM2NzU2Nn0.
+        pPoGyPszUN13tQaC1Y7Xd9NGlqHpJpzKgbdYO51ZhCY"
+    ProductIdParameter:
+      in: path
+      name: productId
+      required: true
+      description: The ID of product to retrieve
+      schema:
+        type: string
+        example: "1"
+  schemas:
+    ErrorResponseSchema:
+      type: object
+      properties:
+        error:
+          type: string
+  responses:
+    InvalidDataResponse:  #400
+      description: Invalid data
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponseSchema'
+          examples:
+            Invalid data:
+              value:
+                error: "Invalid data"
+    IncorrectEmailOrPasswordResponse: #400
+      description: Incorrect email or password
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponseSchema'
+          examples:
+            "Incorrect email or password":
+              value:
+                error: "Incorrect email or password"
+    NoTokenProvidedResponse:  #401:
+      description: No token provided
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponseSchema'
+          examples:
+            "No token provided":
+              value:
+                error: "No token provided"
+    AccessDeniedResponse:  #401
+      description: Access denied
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponseSchema'
+          examples:
+            "Access denied":
+              value:
+                error: "Access denied"
+    UnauthorizedResponse:  #401
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponseSchema'
+          examples:
+            Unauthorized:
+              value:
+                error: "Invalid or missing token"
+    InvalidRefreshTokenResponse: #401
+      description: Invalid refresh token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponseSchema'
+          examples:
+            "Invalid refresh token":
+              value:
+                error: "Invalid refresh token"
+    ProductNotFoundResponse:  #404
+      description: Product not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponseSchema'
+          examples:
+            "Product not found":
+              value:
+                error: "Product not found"
+    EmailAlreadyExistsResponse:  #409
+      description: user already exists
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponseSchema'
+          examples:
+            "Email already exists":
+              value:
+                error: "user already exists"
+    ServerErrorResponse:  #500
+      description: Error read or write file
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponseSchema'
+          examples:
+            "Error read or write file":
+              value:
+                error: "Error read or write file"
 paths:
   /register:
     post:
@@ -48,26 +180,9 @@ paths:
                     format: email
                     example: esername@example.com
         '400':
-          description: Invalid data
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    example: "Invalid data"
-
+          $ref: '#/components/responses/InvalidDataResponse'
         '409':
-          description: Email already exists
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    example: "User already exists"
+          $ref: '#/components/responses/EmailAlreadyExistsResponse'
   /login:
     post:
       summary: User authentication and set cookie
@@ -111,15 +226,7 @@ paths:
                 type: string
                 example: "761827b2-2372-4fd0-a014-e44731c68ec9"
         '400':
-          description: Incorrect email or password
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    example: "Incorrect email or password"
+          $ref: '#/components/responses/IncorrectEmailOrPasswordResponse'
   /logout:
     post:
       summary: User logout
@@ -136,28 +243,9 @@ paths:
         - Authentication
       description: Renewal tokens with refresh token
       parameters:
-        - in: header
-          name: x-user-id
-          required: true
-          schema:
-            type: string
-            example: "761827b2-2372-4fd0-a014-e44731c68ec9"
-        - in: cookie
-          name: accessToken
-          required: true
-          schema:
-            type: string
-            example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
-            eyJyb2xlIjoiQ3VzdG9tZXIiLCJpYXQiOjE3MjYwNzM2NzIsImV4cCI6MTcyNjA3NzI3Mn0.
-            85VLpe5kUsKA01SExvU_ephI2bexcDrLRUJPERwKBr0"
-        - in: cookie
-          name: refreshToken
-          required: true
-          schema:
-            type: string
-            example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
-            eyJyb2xlIjoiQWRtaW4iLCJpYXQiOjE3MjU3NjI3NjYsImV4cCI6MTcyNjM2NzU2Nn0.
-            pPoGyPszUN13tQaC1Y7Xd9NGlqHpJpzKgbdYO51ZhCY"
+        - $ref: '#/components/parameters/xUserIdParameter'
+        - $ref: '#/components/parameters/AccessTokenParameter'
+        - $ref: '#/components/parameters/RefreshTokenParameter'
       responses:
         '200':
           description: Successful update tokens, cookie set
@@ -171,25 +259,9 @@ paths:
                 y7EmTYDqsj5D7ug9YiBjU3ibbyDI7KPW1KGzlolVDUs; Max-Age=60; Path=/; 
                 Expires=Sun, 08 Sep 2024 02:33:46 GMT; HttpOnly"
         '401':
-          description: No token provided
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    example: "No token provided"
+          $ref: '#/components/responses/NoTokenProvidedResponse'
         '403':
-          description: Invalid refresh token
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    example: "Invalid refresh token"
+          $ref: '#/components/responses/InvalidRefreshTokenResponse'
   /products:
     get:
       summary: Array of all products
@@ -197,14 +269,7 @@ paths:
         - Products
       description: Get array of all products in db
       parameters:
-        - in: cookie
-          name: accessToken
-          required: true
-          schema:
-            type: string
-            example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
-            eyJyb2xlIjoiQ3VzdG9tZXIiLCJpYXQiOjE3MjYwNzM2NzIsImV4cCI6MTcyNjA3NzI3Mn0.
-            85VLpe5kUsKA01SExvU_ephI2bexcDrLRUJPERwKBr0"
+        - $ref: '#/components/parameters/RefreshTokenParameter'
       responses:
         '200':
           description: Array of all products
@@ -228,15 +293,7 @@ paths:
                       type: integer
                       example: 50
         '401':
-          description: Access denied
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    example: "Access denied"
+          $ref: '#/components/responses/AccessDeniedResponse'
   /products/{productId}:
     get:
       summary: Fetch a product by ID
@@ -244,21 +301,8 @@ paths:
         - Products
       description: Retrieve product details by product ID
       parameters:
-        - in: path
-          name: productId
-          required: true
-          description: The ID of product to retrieve
-          schema:
-            type: string
-            example: "1"
-        - in: cookie
-          name: accessToken
-          required: true
-          schema:
-            type: string
-            example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
-            eyJyb2xlIjoiQ3VzdG9tZXIiLCJpYXQiOjE3MjYwNzM2NzIsImV4cCI6MTcyNjA3NzI3Mn0.
-            85VLpe5kUsKA01SExvU_ephI2bexcDrLRUJPERwKBr0"
+        - $ref: '#/components/parameters/ProductIdParameter'
+        - $ref: '#/components/parameters/AccessTokenParameter'
       responses:
         '200':
           description: Details of product
@@ -280,35 +324,11 @@ paths:
                     type: integer
                     example: 45
         '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    example: "Invalid or missing token"
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
-          description: Access denied
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    example: "Access denied"
+          $ref: '#/components/responses/AccessDeniedResponse'
         '404':
-          description: Product not found
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    example: "Product not found"
+          $ref: '#/components/responses/ProductNotFoundResponse'
   /cart/{productId}:
     put:
       summary: Add product to cart by ID
@@ -316,28 +336,9 @@ paths:
         - Cart
       description: Create cart and add product to cart
       parameters:
-        - in: path
-          name: productId
-          required: true
-          description: The ID of product to add
-          schema:
-            type: string
-            example: "1"
-        - in: header
-          name: x-user-id
-          required: true
-          description: The user ID
-          schema:
-            type: string
-            example: "761827b2-2372-4fd0-a014-e44731c68ec9"
-        - in: cookie
-          name: accessToken
-          required: true
-          schema:
-            type: string
-            example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
-            eyJyb2xlIjoiQ3VzdG9tZXIiLCJpYXQiOjE3MjYwNzM2NzIsImV4cCI6MTcyNjA3NzI3Mn0.
-            85VLpe5kUsKA01SExvU_ephI2bexcDrLRUJPERwKBr0"
+        - $ref: '#/components/parameters/ProductIdParameter'
+        - $ref: '#/components/parameters/xUserIdParameter'
+        - $ref: '#/components/parameters/AccessTokenParameter'
       responses:
         '200':
           description: List of chosen products
@@ -370,63 +371,20 @@ paths:
                           type: integer
                           example: 50
         '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    example: "Invalid or missing token"
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
-          description: Access denied
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    example: "Access denied"
+          $ref: '#/components/responses/AccessDeniedResponse'
         '404':
-          description: User or product not found
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    example: "Product not found"
+          $ref: '#/components/responses/ProductNotFoundResponse'
     delete:
       summary: Remove product from cart by ID
       tags:
         - Cart
       description: Remove product from cart
       parameters:
-        - in: path
-          name: productId
-          required: true
-          description: The ID of product to remove
-          schema:
-            type: string
-            example: "1"
-        - in: header
-          name: x-user-id
-          required: true
-          description: The user ID
-          schema:
-            type: string
-            example: "761827b2-2372-4fd0-a014-e44731c68ec9"
-        - in: cookie
-          name: accessToken
-          required: true
-          schema:
-            type: string
-            example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
-            eyJyb2xlIjoiQ3VzdG9tZXIiLCJpYXQiOjE3MjYwNzM2NzIsImV4cCI6MTcyNjA3NzI3Mn0.
-            85VLpe5kUsKA01SExvU_ephI2bexcDrLRUJPERwKBr0"
+        - $ref: '#/components/parameters/ProductIdParameter'
+        - $ref: '#/components/parameters/xUserIdParameter'
+        - $ref: '#/components/parameters/AccessTokenParameter'
       responses:
         '200':
           description: List of chosen products
@@ -459,35 +417,11 @@ paths:
                           type: integer
                           example: 50
         '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    example: "Invalid or missing token"
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
-          description: Access denied
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    example: "Access denied"
+          $ref: '#/components/responses/AccessDeniedResponse'
         '404':
-          description: Product not found
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    example: "Product not found"
+          $ref: '#/components/responses/ProductNotFoundResponse'
   /cart/checkout:
     post:
       summary: Calculate the total price
@@ -495,21 +429,8 @@ paths:
         - Cart
       description: Calculate the total price of all products in cart
       parameters:
-        - in: header
-          name: x-user-id
-          required: true
-          description: The user ID
-          schema:
-            type: string
-            example: "761827b2-2372-4fd0-a014-e44731c68ec9"
-        - in: cookie
-          name: accessToken
-          required: true
-          schema:
-            type: string
-            example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
-            eyJyb2xlIjoiQ3VzdG9tZXIiLCJpYXQiOjE3MjYwNzM2NzIsImV4cCI6MTcyNjA3NzI3Mn0.
-            85VLpe5kUsKA01SExvU_ephI2bexcDrLRUJPERwKBr0"
+        - $ref: '#/components/parameters/xUserIdParameter'
+        - $ref: '#/components/parameters/AccessTokenParameter'
       responses:
         '200':
           description: List of chosen products
@@ -545,35 +466,11 @@ paths:
                     type: integer
                     example: 150
         '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    example: "Invalid or missing token"
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
-          description: Access denied
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    example: "Access denied"
+          $ref: '#/components/responses/AccessDeniedResponse'
         '404':
-          description: Product not found
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    example: "Product or cart not found"
+          $ref: '#/components/responses/ProductNotFoundResponse'
   /product/:
     post:
       summary: Add product to db
@@ -581,14 +478,7 @@ paths:
         - Product
       description: Add new product with details to db
       parameters:
-        - in: cookie
-          name: accessToken
-          required: true
-          schema:
-            type: string
-            example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
-            eyJyb2xlIjoiQ3VzdG9tZXIiLCJpYXQiOjE3MjYwNzM2NzIsImV4cCI6MTcyNjA3NzI3Mn0.
-            85VLpe5kUsKA01SExvU_ephI2bexcDrLRUJPERwKBr0"
+        - $ref: '#/components/parameters/AccessTokenParameter'
       requestBody:
         description: Object containing details of new product
         required: true
@@ -642,35 +532,11 @@ paths:
                       type: string
                       example: "resized_0c290e88-f349-468f-b1dd-12ba924ce2e1.png"
         '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    example: "Invalid or missing token"
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    example: "Access denied"
+          $ref: '#/components/responses/AccessDeniedResponse'
         '500':
-          description: Error read or write file
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    example: "Error read or write file"
+          $ref: '#/components/responses/ServerErrorResponse'
   /product/{productId}/image/upload:
     post:
       summary: Upload image to server
@@ -678,22 +544,8 @@ paths:
         - Product
       description: Upload product illustration by ID
       parameters:
-        - in: path
-          name: productId
-          required: true
-          description: The product ID
-          schema:
-            type: string
-            format: uuid
-            example: "d19abaea-a716-45b4-a75e-6b3d5a32e0e0"
-        - in: cookie
-          name: accessToken
-          required: true
-          schema:
-            type: string
-            example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
-            eyJyb2xlIjoiQ3VzdG9tZXIiLCJpYXQiOjE3MjYwNzM2NzIsImV4cCI6MTcyNjA3NzI3Mn0.
-            85VLpe5kUsKA01SExvU_ephI2bexcDrLRUJPERwKBr0"
+        - $ref: '#/components/parameters/ProductIdParameter'
+        - $ref: '#/components/parameters/AccessTokenParameter'
       requestBody:
         required: true
         content:
@@ -741,35 +593,11 @@ paths:
                       type: string
                       example: "resized_0c290e88-f349-468f-b1dd-12ba924ce2e1.png"
         '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    example: "Invalid or missing token"
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    example: "Access denied"
+          $ref: '#/components/responses/AccessDeniedResponse'
         '500':
-          description: Error read or write file
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    example: "Error read or write file"
+          $ref: "#/components/responses/ServerErrorResponse"
   /product/{productId}/video/upload:
     post:
       summary: Upload video to server
@@ -777,22 +605,8 @@ paths:
         - Product
       description: Upload product video-content by ID
       parameters:
-        - in: path
-          name: productId
-          required: true
-          description: The product ID
-          schema:
-            type: string
-            format: uuid
-            example: "d19abaea-a716-45b4-a75e-6b3d5a32e0e0"
-        - in: cookie
-          name: accessToken
-          required: true
-          schema:
-            type: string
-            example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
-            eyJyb2xlIjoiQ3VzdG9tZXIiLCJpYXQiOjE3MjYwNzM2NzIsImV4cCI6MTcyNjA3NzI3Mn0.
-            85VLpe5kUsKA01SExvU_ephI2bexcDrLRUJPERwKBr0"
+        - $ref: '#/components/parameters/ProductIdParameter'
+        - $ref: '#/components/parameters/AccessTokenParameter'
       requestBody:
         required: true
         content:
@@ -840,35 +654,11 @@ paths:
                       type: string
                       example: "resized_0c290e88-f349-468f-b1dd-12ba924ce2e1.png"
         '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    example: "Invalid or missing token"
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    example: "Access denied"
+          $ref: '#/components/responses/AccessDeniedResponse'
         '500':
-          description: Error read or write file
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    example: "Error read or write file"
+          $ref: '#/components/responses/ServerErrorResponse'
   /product/image/{filename}:
     get:
       summary: Get image
@@ -883,14 +673,7 @@ paths:
           schema:
             type: string
             example: "0c290e88-f349-468f-b1dd-12ba924ce2e1.png"
-        - in: cookie
-          name: accessToken
-          required: true
-          schema:
-            type: string
-            example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
-            eyJyb2xlIjoiQ3VzdG9tZXIiLCJpYXQiOjE3MjYwNzM2NzIsImV4cCI6MTcyNjA3NzI3Mn0.
-            85VLpe5kUsKA01SExvU_ephI2bexcDrLRUJPERwKBr0"
+        - $ref: '#/components/parameters/AccessTokenParameter'
       responses:
         '200':
           description: Image successfully retrieved
@@ -900,35 +683,11 @@ paths:
                 type: string
                 format: binary
         '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    example: "Invalid or missing token, access denied"
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    example: "Access denied"
+          $ref: '#/components/responses/AccessDeniedResponse'
         '500':
-          description: Error read file
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    example: "Error read file"
+          $ref: '#/components/responses/ServerErrorResponse'
   /product/video/{filename}:
     get:
       summary: Get video-content
@@ -943,14 +702,7 @@ paths:
           schema:
             type: string
             example: "08150654-6c95-4328-96dc-51ccfabdcf94.mp4"
-        - in: cookie
-          name: accessToken
-          required: true
-          schema:
-            type: string
-            example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
-            eyJyb2xlIjoiQ3VzdG9tZXIiLCJpYXQiOjE3MjYwNzM2NzIsImV4cCI6MTcyNjA3NzI3Mn0.
-            85VLpe5kUsKA01SExvU_ephI2bexcDrLRUJPERwKBr0"
+        - $ref: '#/components/parameters/AccessTokenParameter'
       responses:
         '200':
           description: Video-content successfully retrieved
@@ -960,35 +712,11 @@ paths:
                 type: string
                 format: binary
         '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    example: "Invalid or missing token, access denied"
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    example: "Access denied"
+          $ref: '#/components/responses/AccessDeniedResponse'
         '500':
-          description: Error read file
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    example: "Error read file"
+          $ref: '#/components/responses/ServerErrorResponse'
   /product/preview/{filename}:
     get:
       summary: Get preview image
@@ -1003,14 +731,7 @@ paths:
           schema:
             type: string
             example: "resized_0c290e88-f349-468f-b1dd-12ba924ce2e1.png"
-        - in: cookie
-          name: accessToken
-          required: true
-          schema:
-            type: string
-            example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
-            eyJyb2xlIjoiQ3VzdG9tZXIiLCJpYXQiOjE3MjYwNzM2NzIsImV4cCI6MTcyNjA3NzI3Mn0.
-            85VLpe5kUsKA01SExvU_ephI2bexcDrLRUJPERwKBr0"
+        - $ref: '#/components/parameters/AccessTokenParameter'
       responses:
         '200':
           description: Preview image successfully retrieved
@@ -1020,32 +741,8 @@ paths:
                 type: string
                 format: binary
         '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    example: "Invalid or missing token, access denied"
+          $ref: '#/components/responses/UnauthorizedResponse'
         '403':
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    example: "Access denied"
+          $ref: '#/components/responses/AccessDeniedResponse'
         '500':
-          description: Error read file
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    example: "Error read file"
+          $ref: '#/components/responses/ServerErrorResponse'
