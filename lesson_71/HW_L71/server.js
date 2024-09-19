@@ -6,6 +6,7 @@ import cookieParser from "cookie-parser";
 import 'dotenv/config';
 import YAML from "yamljs";
 import swaggerUi from "swagger-ui-express";
+import mongoose from "mongoose";
 
 import { errorHandling } from "./middlewares.js";
 import userRoutes from "./routes/user.routes.js";
@@ -28,6 +29,12 @@ const swaggerUiOptions = {
     defaultModelsExpandDepth: -1,
   },
 };
+const URI_DB = process.env.URI_DB;
+
+mongoose
+  .connect(URI_DB)
+  .then(() => console.log('MongoDB Connected'))
+  .catch((err) => console.log(`DB connection error: ${err}`));
 
 app.use(bodyParser.json());
 app.use(cookieParser());
