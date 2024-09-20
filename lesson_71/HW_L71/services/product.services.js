@@ -3,6 +3,7 @@ import path from "path";
 import {fileURLToPath} from "url";
 import {readProductsStore, writeProductsStore} from "../repositories/product.repository.js";
 import {ensureDirectoryExists, handleFileUpload, getFileByName} from "../utils/file.utils.js";
+import {Product} from "../models/product.js";
 
 const productsStore = process.env.PRODUCTS_STORE;
 const productImgFormat = process.env.PRODUCT_IMG_FORMAT;
@@ -20,22 +21,18 @@ export const getCustomProductById = (productId, productsList) => {
   return productsList.find((product) => product.id === `${productId}`);
 };
 
-export const createNewProduct = async ({name, description, price}) => {
+export const createNewProduct = async ({name, description, price}, next) => {
   const newProduct = {
-    id: uuid(),
     name,
     description,
-    price,
-    videos: [],
-    images: [],
-    previews: []
+    price
   }
-
-  const customProductsList = await readProductsStore(productsStore);
-  customProductsList.push(newProduct);
-  await writeProductsStore(productsStore, customProductsList);
-
-  return newProduct;
+  try {
+    const product = new Product(newProduct);
+    return await product.save();
+  } catch (err){
+    next(err);
+  }
 };
 
 export const uploadNewImage = async (req, res, next, callback) => {
