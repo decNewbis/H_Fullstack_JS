@@ -21,7 +21,7 @@ const productSchema = new Schema({
     type: Array,
     default: [],
     items: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
     },
     max: 5
   },
@@ -29,7 +29,7 @@ const productSchema = new Schema({
     type: Array,
     default: [],
     items: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
     },
     max: 10
   },
@@ -37,7 +37,7 @@ const productSchema = new Schema({
     type: Array,
     default: [],
     items: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
     },
     max: 10
   }
