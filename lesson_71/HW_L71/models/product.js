@@ -1,4 +1,5 @@
 import mongoose from  'mongoose';
+import {ErrorForbidden} from "../errorHandler.js";
 
 const Schema = mongoose.Schema;
 
@@ -31,14 +32,18 @@ const productSchema = new Schema({
   }]
 });
 
-productSchema.path('videos').validate((videosList) => {
-  return videosList.length <= 5;
-}, 'Maximum 5 videos');
-productSchema.path('images').validate((imagesList) => {
-  return imagesList.length <= 10;
-}, 'Maximum 10 images');
-productSchema.path('previews').validate((previewsList) => {
-  return previewsList.length <= 10;
-}, 'Maximum 10 previews');
+productSchema.pre('findOneAndUpdate', async function () {
+  const update = this.getUpdate();
+  const product = await this.model.findOne(this.getQuery());
+  if (update.$push && update.$push.videos && product.videos.length >= 5) {
+    throw new ErrorForbidden('Cannot add more than 5 videos.');
+  }
+  if (update.$push && update.$push.images && product.images.length >= 10) {
+    throw new ErrorForbidden('Cannot add more than 10 images.');
+  }
+  if (update.$push && update.$push.previews && product.previews.length >= 10) {
+    throw new ErrorForbidden('Cannot add more than 10 previews.');
+  }
+});
 
 export const Product = mongoose.model('Product', productSchema);
