@@ -19,7 +19,7 @@ export const addProduct = async (req, res, next) => {
 
 const handleResponseUploadMedia = (res, next) => (err, product) => {
   if (err) {
-    return next(new ErrorReadWriteFile(err));
+    return next(err);
   }
   res.status(200).send(product);
 };
