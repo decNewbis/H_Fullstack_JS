@@ -10,7 +10,7 @@ import {ErrorReadWriteFile} from "../errorHandler.js";
 
 export const addProduct = async (req, res, next) => {
   try {
-    const newProduct = await createNewProduct(req.body);
+    const newProduct = await createNewProduct(req.body, next);
     res.status(201).send(newProduct);
   } catch (err) {
     next(new ErrorReadWriteFile(err));
