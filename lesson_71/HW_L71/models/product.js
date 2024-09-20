@@ -17,30 +17,18 @@ const productSchema = new Schema({
     type: Number,
     required: true
   },
-  videos: {
-    type: Array,
-    default: [],
-    items: {
-      type: mongoose.Schema.Types.ObjectId,
-    },
-    max: 5
-  },
-  images: {
-    type: Array,
-    default: [],
-    items: {
-      type: mongoose.Schema.Types.ObjectId,
-    },
-    max: 10
-  },
-  previews: {
-    type: Array,
-    default: [],
-    items: {
-      type: mongoose.Schema.Types.ObjectId,
-    },
-    max: 10
-  }
+  videos: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Video'
+  }],
+  images: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Image'
+  }],
+  previews: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Preview'
+  }]
 });
 
 productSchema.path('videos').validate((videosList) => {
