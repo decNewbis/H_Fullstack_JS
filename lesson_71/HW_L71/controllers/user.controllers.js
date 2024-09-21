@@ -3,8 +3,8 @@ import {removeRefreshToken, saveRefreshToken} from "../repositories/user.reposit
 
 const xUserIdKey = process.env.X_USER_ID_KEY;
 
-export const signUp = async (req, res) => {
-  const newUser = await createNewUser(req.body);
+export const signUp = async (req, res, next) => {
+  const newUser = await createNewUser(req.body, next);
 
   return res.status(201).json(newUser);
 };
