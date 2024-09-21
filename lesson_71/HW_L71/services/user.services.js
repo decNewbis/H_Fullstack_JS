@@ -1,8 +1,7 @@
-import {randomUUID as uuid} from "crypto";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import {
-  addNewUser,
+  addAndSaveNewUser,
   getStoredRefreshToken,
   getUserByEmailAndPassword,
   removeRefreshToken
@@ -13,19 +12,22 @@ import {roles} from "../roles.js";
 const xUserIdKey = process.env.X_USER_ID_KEY;
 const saltRounds = parseInt(process.env.BCRYPT_SALT_ROUNDS);
 
-export const createNewUser = async ({ email, password }, role=roles.CUSTOMER) => {
-  const hash = await bcrypt.hash(password, saltRounds);
-  const newUser = addNewUser({
-    id: uuid(),
-    email,
-    password: hash,
-    role
-  });
+export const createNewUser = async ({ email, password }, next, role=roles.CUSTOMER) => {
+  try {
+    const hash = await bcrypt.hash(password, saltRounds);
+    const newUser = await addAndSaveNewUser({
+      email,
+      password: hash,
+      role
+    });
 
-  return {
-    id: newUser.id,
-    email: newUser.email,
-  };
+    return {
+      id: newUser.id,
+      email: newUser.email,
+    };
+  } catch (err) {
+    next(err)
+  }
 };
 
 export const getUserId = (req) => {
