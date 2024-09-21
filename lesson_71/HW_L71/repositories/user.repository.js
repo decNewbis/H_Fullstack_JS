@@ -1,13 +1,17 @@
 import bcrypt from "bcrypt";
+import {User} from "../models/user.js";
 import {users} from "../storage.js";
 
 export const getUser = (xUserId) => {
   return users.find((user) => user.id === xUserId);
 };
 
-export const addNewUser = (newUser) => {
-  users.push(newUser);
-  return newUser;
+export const addAndSaveNewUser = async (newUser) => {
+  return await new User(newUser).save();
+};
+
+export const getUserByEmail = async (email) => {
+  return User.findOne({email});
 };
 
 export const getUserByEmailAndPassword = ({email, password}) => {
