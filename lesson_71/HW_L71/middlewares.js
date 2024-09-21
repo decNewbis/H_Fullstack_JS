@@ -1,8 +1,8 @@
 import jwt from "jsonwebtoken";
-import { users } from "./storage.js";
 import {ErrorForbidden, ErrorUnauthorized, ErrorUserAlreadyExists} from "./errorHandler.js";
 import { validateSignupData } from "./validation.js";
 import {getToken} from "./services/user.services.js";
+import {getUserByEmail} from "./repositories/user.repository.js";
 
 export const isAuthorized = (roles) => (req, res, next) => {
   const {accessToken} = getToken(req);
@@ -20,11 +20,11 @@ export const isAuthorized = (roles) => (req, res, next) => {
   });
 };
 
-export const isUserAlreadyExists = (req, res, next) => {
+export const isUserAlreadyExists = async (req, res, next) => {
   const { email } = req.body;
-  const isFoundUser = users.some((user) => user.email === email);
+  const isFoundUser = await getUserByEmail(email);
   if (isFoundUser) {
-    throw new ErrorUserAlreadyExists("user already exists");
+    next(new ErrorUserAlreadyExists("user already exists"));
   }
   next();
 };
