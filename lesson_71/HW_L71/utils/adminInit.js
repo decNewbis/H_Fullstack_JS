@@ -1,7 +1,6 @@
 import {createNewUser} from "../services/user.services.js";
 import {roles} from "../roles.js";
 import {getUserByEmail} from "../repositories/user.repository.js";
-import {ErrorUserAlreadyExists} from "../errorHandler.js";
 
 export const initializeAdmin = async () => {
   const adminParams = {
