@@ -1,20 +1,11 @@
 import {createReadStream, createWriteStream, existsSync, mkdirSync} from "fs";
 import sharp from "sharp";
-import {ErrorObjectNotFound, ErrorReadWriteFile} from "../errorHandler.js";
+import {ErrorObjectNotFound} from "../errorHandler.js";
 import eventEmitter from "../eventEmits.js";
 import {
   addAndSaveNewImage, addAndSaveNewPreview,
   addAndSaveNewVideo, findByIdAndUpdate,
-  readProductsStore,
-  writeProductsStore
 } from "../repositories/product.repository.js";
-import {getCustomProductById} from "../services/product.services.js";
-import {Product} from "../models/product.js";
-import {Image} from "../models/image.js";
-import {Preview} from "../models/preview.js";
-import {Video} from "../models/video.js";
-
-const productsStore = process.env.PRODUCTS_STORE;
 
 export const ensureFileExists = (filename) => {
   if (!existsSync(filename)) {
