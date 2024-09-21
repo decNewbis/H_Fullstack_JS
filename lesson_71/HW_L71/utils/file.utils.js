@@ -2,8 +2,17 @@ import {createReadStream, createWriteStream, existsSync, mkdirSync} from "fs";
 import sharp from "sharp";
 import {ErrorObjectNotFound, ErrorReadWriteFile} from "../errorHandler.js";
 import eventEmitter from "../eventEmits.js";
-import {readProductsStore, writeProductsStore} from "../repositories/product.repository.js";
+import {
+  addAndSaveNewImage, addAndSaveNewPreview,
+  addAndSaveNewVideo, findByIdAndUpdate,
+  readProductsStore,
+  writeProductsStore
+} from "../repositories/product.repository.js";
 import {getCustomProductById} from "../services/product.services.js";
+import {Product} from "../models/product.js";
+import {Image} from "../models/image.js";
+import {Preview} from "../models/preview.js";
+import {Video} from "../models/video.js";
 
 const productsStore = process.env.PRODUCTS_STORE;
 
@@ -30,35 +39,47 @@ export const handleFileUpload = async (req, res, next, uploadParams, callback) =
   } = uploadParams;
 
   eventEmitter.emit('fileUploadStart', {productId, filename});
-  const writeableStream = createWriteStream(filePath, { encoding: "binary", flags: "w" });
-  req.pipe(writeableStream)
-    .on('finish', async () => {
-      try {
-        const customProductsList = await readProductsStore(productsStore);
-        const foundProduct = getCustomProductById(productId, customProductsList);
-        foundProduct[fileType].push(filename);
-        if (fileType === 'images') {
-          foundProduct.previews.push(previewFilename)
-        }
+  try {
+    let file;
+    let preview;
 
-        await writeProductsStore(productsStore, customProductsList);
+    if (fileType === 'images') {
+      file = await addAndSaveNewImage(filename);
+      preview = await addAndSaveNewPreview(previewFilename);
+    } else {
+      file = await addAndSaveNewVideo(filename);
+    }
 
+    let product = await findByIdAndUpdate(
+      productId,
+      {$push: {[fileType]: file._id}}
+    );
+
+    const writeableStream = await createWriteStream(filePath, {encoding: "binary", flags: "w"});
+
+    req.pipe(writeableStream)
+      .on('finish', async () => {
         if (fileType === 'images') {
           await sharp(filePath)
             .resize(150, 150)
             .toFile(previewFilePath);
+          product = await findByIdAndUpdate(
+            productId,
+            {$push: {previews: preview._id}}
+          );
         }
+
         eventEmitter.emit('fileUploadEnd', {productId, filename});
-        callback(null, foundProduct);
-      } catch (err) {
+        callback(null, product);
+      })
+      .on('error', (err) => {
         eventEmitter.emit('fileUploadFailed', {productId, filename, err});
         callback(err);
-      }
-    })
-    .on('error', (err) => {
-      eventEmitter.emit('fileUploadFailed', {productId, filename, err});
-      callback(err);
-    });
+      });
+  } catch (err) {
+    eventEmitter.emit('fileUploadFailed', {productId, filename, err});
+    callback(err);
+  }
 };
 
 export const getFileByName = (res, next, requestParams, callback) => {
