@@ -1,11 +1,9 @@
 import {randomUUID as uuid} from "crypto";
 import path from "path";
 import {fileURLToPath} from "url";
-import {readProductsStore, writeProductsStore} from "../repositories/product.repository.js";
+import {addAndSaveNewProduct} from "../repositories/product.repository.js";
 import {ensureDirectoryExists, handleFileUpload, getFileByName} from "../utils/file.utils.js";
-import {Product} from "../models/product.js";
 
-const productsStore = process.env.PRODUCTS_STORE;
 const productImgFormat = process.env.PRODUCT_IMG_FORMAT;
 const productVideoFormat = process.env.PRODUCT_VIDEO_FORMAT;
 const imgFolderName = process.env.IMG_FOLDER_NAME;
@@ -28,8 +26,7 @@ export const createNewProduct = async ({name, description, price}, next) => {
     price
   }
   try {
-    const product = new Product(newProduct);
-    return await product.save();
+    return await addAndSaveNewProduct(newProduct);
   } catch (err){
     next(err);
   }
