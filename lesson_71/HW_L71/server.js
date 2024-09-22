@@ -10,7 +10,6 @@ import mongoose from "mongoose";
 
 import { errorHandling } from "./middlewares.js";
 import userRoutes from "./routes/user.routes.js";
-import productsRoutes from "./routes/products.routes.js";
 import cartRoutes from "./routes/cart.routes.js";
 import productRoutes from "./routes/product.routes.js";
 import {initializeAdmin} from "./utils/adminInit.js";
@@ -41,7 +40,6 @@ app.use(cookieParser());
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, swaggerUiOptions));
 
 apiRouter.use(userRoutes);
-apiRouter.use('/products', productsRoutes);
 apiRouter.use('/cart', cartRoutes);
 apiRouter.use('/product', productRoutes);
 
