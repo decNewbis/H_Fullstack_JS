@@ -41,8 +41,8 @@ const generateRefreshToken = (payload) => {
   return jwt.sign(payload, process.env.JWT_REFRESH_SECRET, {expiresIn: '7d'});
 };
 
-export const logInUser = ({email, password}) => {
-  const user = getUserByEmailAndPassword({email, password});
+export const logInUser = async ({email, password}) => {
+  const user = await getUserByEmailAndPassword({email, password});
   if (!user) {
     throw new ErrorValidation('Incorrect email or password');
   }
@@ -53,7 +53,7 @@ export const logInUser = ({email, password}) => {
   return {
     accessToken,
     refreshToken,
-    userId: user.id
+    userId: user._id
   };
 };
 
@@ -68,10 +68,10 @@ export const getToken = (req) => {
   return {accessToken, refreshToken};
 };
 
-export const updateTokens = (req) => {
+export const updateTokens = async (req) => {
   const currentUser = getUserId(req);
   const {refreshToken} = getToken(req);
-  const storedRefreshToken = getStoredRefreshToken(currentUser);
+  const storedRefreshToken = await getStoredRefreshToken(currentUser);
   let newAccessToken = null;
   let newRefreshToken = null;
 
