@@ -1,7 +1,7 @@
 import {randomUUID as uuid} from "crypto";
 import path from "path";
 import {fileURLToPath} from "url";
-import {addAndSaveNewProduct} from "../repositories/product.repository.js";
+import {addAndSaveNewProduct, getProductById} from "../repositories/product.repository.js";
 import {ensureDirectoryExists, handleFileUpload, getFileByName} from "../utils/file.utils.js";
 
 const productImgFormat = process.env.PRODUCT_IMG_FORMAT;
@@ -14,10 +14,6 @@ const __dirname = path.dirname(__filename);
 const imgFolderNamePath = path.join(__dirname, '../', imgFolderName);
 const previewFolderNamePath = path.join(__dirname, '../', previewFolderName);
 const videosFolderNamePath = path.join(__dirname, '../', videosFolderName);
-
-export const getCustomProductById = (productId, productsList) => {
-  return productsList.find((product) => product.id === `${productId}`);
-};
 
 export const createNewProduct = async ({name, description, price}, next) => {
   const newProduct = {
@@ -108,4 +104,8 @@ export const retrieveProductPreview = (req, res, next, callback) => {
   };
 
   getFileByName(res, next, requestParams, callback);
+};
+
+export const findProductById = async ({productId}) => {
+  return await getProductById(productId);
 };
