@@ -9,9 +9,9 @@ export const signUp = async (req, res, next) => {
   return res.status(201).json(newUser);
 };
 
-export const logIn = (req, res) => {
-  const {accessToken, refreshToken, userId} = logInUser(req.body);
-  saveRefreshToken(userId, refreshToken);
+export const logIn = async (req, res) => {
+  const {accessToken, refreshToken, userId} = await logInUser(req.body);
+  await saveRefreshToken(userId, refreshToken);
   res.cookie('accessToken', accessToken, {
     httpOnly: true,
     // secure: true,
@@ -27,9 +27,9 @@ export const logIn = (req, res) => {
   res.status(200).send('OK');
 };
 
-export const logOut = (req, res) => {
+export const logOut = async (req, res) => {
   const currentUser = getUserId(req);
-  removeRefreshToken(currentUser);
+  await removeRefreshToken(currentUser);
   res.clearCookie('accessToken', {httpOnly: true});
   res.clearCookie('refreshToken', {httpOnly: true});
   res.set(xUserIdKey, '');
@@ -37,9 +37,9 @@ export const logOut = (req, res) => {
   res.status(200).send('OK');
 };
 
-export const renewalTokens = (req, res) => {
-  const {newAccessToken, newRefreshToken, userId} = updateTokens(req);
-  saveRefreshToken(userId, newRefreshToken);
+export const renewalTokens = async (req, res) => {
+  const {newAccessToken, newRefreshToken, userId} = await updateTokens(req);
+  await saveRefreshToken(userId, newRefreshToken);
   res.cookie('accessToken', newAccessToken, {
     httpOnly: true,
     // secure: true,
