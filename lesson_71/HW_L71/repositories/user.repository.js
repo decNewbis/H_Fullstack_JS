@@ -1,9 +1,8 @@
 import bcrypt from "bcrypt";
 import {User} from "../models/user.js";
-import {users} from "../storage.js";
 
-export const getUser = (xUserId) => {
-  return users.find((user) => user.id === xUserId);
+export const getUser = async (xUserId) => {
+  return User.findById(xUserId);
 };
 
 export const addAndSaveNewUser = async (newUser) => {
@@ -11,24 +10,36 @@ export const addAndSaveNewUser = async (newUser) => {
 };
 
 export const getUserByEmail = async (email) => {
-  return User.findOne({email});
+  return User.findOne({email}, {email:1, role: 1, refreshToken: 1});
 };
 
-export const getUserByEmailAndPassword = ({email, password}) => {
-  return users.find((user) => user.email === email && bcrypt.compare(password, user.password));
+export const getUserByEmailAndPassword = async ({email, password}) => {
+  const user = await User.findOne({email});
+
+  if (bcrypt.compare(password, user?.password)) {
+    return user;
+  }
 };
 
-export const saveRefreshToken = (userId, refreshToken) => {
-  const user = users.find((user) => user.id === userId);
-  user.refreshToken = refreshToken;
+export const saveRefreshToken = async (userId, refreshToken) => {
+  const options = { new: false };
+  await User.findByIdAndUpdate(
+    userId,
+    {refreshToken},
+    options
+  );
 };
 
-export const removeRefreshToken = (userId) => {
-  const user = users.find((user) => user.id === userId);
-  delete user?.refreshToken;
+export const removeRefreshToken = async (userId) => {
+  const options = { new: false };
+  await User.findByIdAndUpdate(
+    userId,
+    {refreshToken: ''},
+    options
+  );
 };
 
-export const getStoredRefreshToken = (userId) => {
-  const user = users.find((user) => user.id === userId);
+export const getStoredRefreshToken = async (userId) => {
+  const user = await User.findById(userId, {refreshToken: 1});
   return user?.refreshToken;
 };
