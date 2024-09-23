@@ -31,14 +31,17 @@ export const logIn = async (req, res, next) => {
   }
 };
 
-export const logOut = async (req, res) => {
-  const currentUser = getUserId(req);
-  await removeRefreshToken(currentUser);
-  res.clearCookie('accessToken', {httpOnly: true});
-  res.clearCookie('refreshToken', {httpOnly: true});
-  res.set(xUserIdKey, '');
-  res.set('Authorization', '');
-  res.status(200).send('OK');
+export const logOut = async (req, res, next) => {
+    const currentUser = getUserId(req);
+    if (!!currentUser) {
+      await removeRefreshToken(currentUser);
+    }
+
+    res.clearCookie('accessToken', {httpOnly: true});
+    res.clearCookie('refreshToken', {httpOnly: true});
+    res.set(xUserIdKey, '');
+    res.set('Authorization', '');
+    res.status(200).send('OK');
 };
 
 export const renewalTokens = async (req, res, next) => {
