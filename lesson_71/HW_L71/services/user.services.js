@@ -12,7 +12,7 @@ import {roles} from "../roles.js";
 const xUserIdKey = process.env.X_USER_ID_KEY;
 const saltRounds = parseInt(process.env.BCRYPT_SALT_ROUNDS);
 
-export const createNewUser = async ({ email, password }, next, role=roles.CUSTOMER) => {
+export const createNewUser = async ({ email, password, role=roles.CUSTOMER}, next) => {
   try {
     const hash = await bcrypt.hash(password, saltRounds);
     const newUser = await addAndSaveNewUser({
