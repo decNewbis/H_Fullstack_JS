@@ -1,5 +1,5 @@
 import mongoose from  'mongoose';
-import {ErrorForbidden} from "../errorHandler.js";
+import {validateFileCount} from "../utils/file.utils.js";
 
 const Schema = mongoose.Schema;
 
@@ -35,14 +35,14 @@ const productSchema = new Schema({
 productSchema.pre('findOneAndUpdate', async function () {
   const update = this.getUpdate();
   const product = await this.model.findOne(this.getQuery());
-  if (update.$push && update.$push.videos && product.videos.length >= 5) {
-    throw new ErrorForbidden('Cannot add more than 5 videos.');
+  if (update.$push.videos) {
+    validateFileCount(product, 'videos');
   }
-  if (update.$push && update.$push.images && product.images.length >= 10) {
-    throw new ErrorForbidden('Cannot add more than 10 images.');
+  if (update.$push.images) {
+    validateFileCount(product, 'images');
   }
-  if (update.$push && update.$push.previews && product.previews.length >= 10) {
-    throw new ErrorForbidden('Cannot add more than 10 previews.');
+  if (update.$push.previews) {
+    validateFileCount(product, 'previews');
   }
 });
 
