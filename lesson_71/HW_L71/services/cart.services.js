@@ -27,14 +27,15 @@ export const addProductToCart = async (xUserId, {productId}) => {
   );
 };
 
-export const removeProductFromCart = (xUserId, {productId}) => {
-  const currentUser = getUser(xUserId);
-  const cart = getCartByUserId(currentUser.id);
-
-  if (cart) {
-    cart.products = cart.products.filter((product) => product.id !== +productId);
+export const removeProductFromCart = async (xUserId, {productId}) => {
+  const currentUser = await getUser(xUserId);
+  if (!currentUser) {
+    throw new ErrorObjectNotFound("user not found");
   }
-  return cart;
+  return await findByUserIdAndUpdate(
+    currentUser._id,
+    {$pull: {products: productId}}
+  );
 };
 
 export const createCheckoutOrder = (xUserId) => {
