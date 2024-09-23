@@ -19,9 +19,9 @@ export const removeProductByIdFromCart = async (req, res, next) => {
   }
 };
 
-export const checkoutOrder =(req, res, next) => {
+export const checkoutOrder = async (req, res, next) => {
   try {
-    const order = createCheckoutOrder(getUserId(req));
+    const order = await createCheckoutOrder(getUserId(req));
     res.status(200).json(order);
   } catch (err) {
     next(err);
