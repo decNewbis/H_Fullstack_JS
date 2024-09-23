@@ -10,9 +10,9 @@ export const addProductByIdToCart = async (req, res, next) => {
   }
 };
 
-export const removeProductByIdFromCart = (req, res, next) => {
+export const removeProductByIdFromCart = async (req, res, next) => {
   try {
-    const cart = removeProductFromCart(getUserId(req), req.params);
+    const cart = await removeProductFromCart(getUserId(req), req.params);
     res.status(200).json(cart);
   } catch (err) {
     next(err);
