@@ -31,7 +31,7 @@ export const logIn = async (req, res, next) => {
   }
 };
 
-export const logOut = async (req, res, next) => {
+export const logOut = async (req, res) => {
     const currentUser = getUserId(req);
     if (!!currentUser) {
       await removeRefreshToken(currentUser);
