@@ -1,10 +1,10 @@
 import {createReadStream, createWriteStream, existsSync, mkdirSync} from "fs";
 import sharp from "sharp";
-import {ErrorObjectNotFound} from "../errorHandler.js";
+import {ErrorForbidden, ErrorObjectNotFound} from "../errorHandler.js";
 import eventEmitter from "../eventEmits.js";
 import {
   addAndSaveNewImage, addAndSaveNewPreview,
-  addAndSaveNewVideo, findByIdAndUpdate,
+  addAndSaveNewVideo, findByIdAndUpdate, getProductById,
 } from "../repositories/product.repository.js";
 
 export const ensureFileExists = (filename) => {
@@ -16,6 +16,17 @@ export const ensureFileExists = (filename) => {
 export const ensureDirectoryExists = (directory) => {
   if (!existsSync(directory)) {
     mkdirSync(directory);
+  }
+};
+
+export const validateFileCount = (product, fileType) => {
+  const limits = {
+    videos: 5,
+    images: 10,
+    previews: 10
+  }
+  if (product[fileType].length >= limits[fileType]) {
+    throw new ErrorForbidden(`Cannot add more than ${limits[fileType]} ${fileType}`);
   }
 };
 
@@ -33,6 +44,13 @@ export const handleFileUpload = async (req, res, next, uploadParams, callback) =
   try {
     let file;
     let preview;
+    let product = await getProductById(productId);
+
+    if (!product) {
+      return next(new ErrorObjectNotFound('Product not found'));
+    }
+
+    validateFileCount(product, fileType);
 
     if (fileType === 'images') {
       file = await addAndSaveNewImage(filename);
@@ -41,7 +59,7 @@ export const handleFileUpload = async (req, res, next, uploadParams, callback) =
       file = await addAndSaveNewVideo(filename);
     }
 
-    let product = await findByIdAndUpdate(
+    product = await findByIdAndUpdate(
       productId,
       {$push: {[fileType]: file._id}}
     );
