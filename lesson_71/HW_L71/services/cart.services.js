@@ -1,34 +1,30 @@
-import {getProductById} from "../repositories/products.repository.js";
+import {getProductById} from "../repositories/product.repository.js";
 import {ErrorObjectNotFound} from "../errorHandler.js";
 import {getUser} from "../repositories/user.repository.js";
-import {addNewOrder, createNewCart, getCartByUserId, getOrderByUserId} from "../repositories/cart.repository.js";
+import {
+  addNewOrder,
+  createNewCart,
+  findByUserIdAndUpdate,
+  getCartByUserId,
+  getOrderByUserId
+} from "../repositories/cart.repository.js";
 import {randomUUID as uuid} from "crypto";
 
-export const addProductToCart = (xUserId, {productId}) => {
-  const foundProductById = getProductById(productId);
+export const addProductToCart = async (xUserId, {productId}) => {
+  const foundProductById = await getProductById(productId);
   if (!foundProductById) {
     throw new ErrorObjectNotFound("product not found");
   }
 
-  const currentUser = getUser(xUserId);
+  const currentUser = await getUser(xUserId);
   if (!currentUser) {
     throw new ErrorObjectNotFound("user not found");
   }
 
-  let cart = getCartByUserId(currentUser.id);
-
-  if (!cart) {
-    const products = [foundProductById];
-    cart = createNewCart({
-      id: uuid(),
-      userId: currentUser.id,
-      products
-    });
-  } else {
-    cart.products.push(foundProductById);
-  }
-
-  return cart;
+  return await findByUserIdAndUpdate(
+    currentUser._id,
+    {$push: {products: foundProductById._id}}
+  );
 };
 
 export const removeProductFromCart = (xUserId, {productId}) => {
@@ -49,7 +45,7 @@ export const createCheckoutOrder = (xUserId) => {
   if (!cart) {
     throw new ErrorObjectNotFound("cart not found");
   }
-
+  // TODO: add counting by DB
   const totalPrice = cart.products.reduce((total, product) => {
     return total + product.price;
   }, 0);
