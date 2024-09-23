@@ -16,9 +16,10 @@ export const getUserByEmail = async (email) => {
 export const getUserByEmailAndPassword = async ({email, password}) => {
   const user = await User.findOne({email});
 
-  if (bcrypt.compare(password, user?.password)) {
+  if (user && bcrypt.compare(password, user.password)) {
     return user;
   }
+  return undefined;
 };
 
 export const saveRefreshToken = async (userId, refreshToken) => {
