@@ -1,9 +1,9 @@
 import {addProductToCart, createCheckoutOrder, removeProductFromCart} from "../services/cart.services.js";
 import {getUserId} from "../services/user.services.js";
 
-export const addProductByIdToCart = (req, res, next) => {
+export const addProductByIdToCart = async (req, res, next) => {
   try {
-    const cart = addProductToCart(getUserId(req), req.params);
+    const cart = await addProductToCart(getUserId(req), req.params);
     res.status(200).json(cart);
   } catch (err) {
     next(err);
