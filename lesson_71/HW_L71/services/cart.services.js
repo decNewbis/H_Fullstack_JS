@@ -2,13 +2,10 @@ import {getProductById} from "../repositories/product.repository.js";
 import {ErrorObjectNotFound} from "../errorHandler.js";
 import {getUser} from "../repositories/user.repository.js";
 import {
-  addNewOrder,
-  createNewCart,
-  findByUserIdAndUpdate,
-  getCartByUserId,
-  getOrderByUserId
+  findCartByUserIdAndUpdate,
+  findOrderByUserIdAndUpdate,
+  getProductsFromCartByUserId,
 } from "../repositories/cart.repository.js";
-import {randomUUID as uuid} from "crypto";
 
 export const addProductToCart = async (xUserId, {productId}) => {
   const foundProductById = await getProductById(productId);
@@ -21,7 +18,7 @@ export const addProductToCart = async (xUserId, {productId}) => {
     throw new ErrorObjectNotFound("user not found");
   }
 
-  return await findByUserIdAndUpdate(
+  return await findCartByUserIdAndUpdate(
     currentUser._id,
     {$push: {products: foundProductById._id}}
   );
@@ -32,34 +29,34 @@ export const removeProductFromCart = async (xUserId, {productId}) => {
   if (!currentUser) {
     throw new ErrorObjectNotFound("user not found");
   }
-  return await findByUserIdAndUpdate(
+  return await findCartByUserIdAndUpdate(
     currentUser._id,
     {$pull: {products: productId}}
   );
 };
 
-export const createCheckoutOrder = (xUserId) => {
-  const currentUser = getUser(xUserId);
-  const cart = getCartByUserId(currentUser.id);
-  let order = getOrderByUserId(currentUser.id);
-
-  if (!cart) {
-    throw new ErrorObjectNotFound("cart not found");
+export const createCheckoutOrder = async (xUserId) => {
+  const currentUser = await getUser(xUserId);
+  if (!currentUser) {
+    throw new ErrorObjectNotFound("user not found");
   }
-  // TODO: add counting by DB
-  const totalPrice = cart.products.reduce((total, product) => {
-    return total + product.price;
+  const cart = await getProductsFromCartByUserId(currentUser.id);
+  const products = cart.products.map((product) => {
+    return {
+      productId: product._id,
+      name: product.name,
+      price: product.price
+    };
+  });
+  const totalPrice = products.reduce((sum, product) => {
+    return sum + product.price;
   }, 0);
 
-  if (order) {
-    order.products = cart.products;
-    order.totalPrice = totalPrice;
-  } else {
-    order = addNewOrder({
-      ...cart,
-      id: uuid(),
+  return await findOrderByUserIdAndUpdate(
+    currentUser.id,
+    {
+      products,
       totalPrice
-    });
-  }
-  return order;
+    }
+  );
 };
