@@ -41,6 +41,9 @@ export const createCheckoutOrder = async (xUserId) => {
     throw new ErrorObjectNotFound("user not found");
   }
   const cart = await getProductsFromCartByUserId(currentUser.id);
+  if (!cart) {
+    throw new ErrorObjectNotFound('Cart not found');
+  }
   const products = cart.products.map((product) => {
     return {
       productId: product._id,
