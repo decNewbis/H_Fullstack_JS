@@ -9,22 +9,26 @@ export const signUp = async (req, res, next) => {
   return res.status(201).json(newUser);
 };
 
-export const logIn = async (req, res) => {
-  const {accessToken, refreshToken, userId} = await logInUser(req.body);
-  await saveRefreshToken(userId, refreshToken);
-  res.cookie('accessToken', accessToken, {
-    httpOnly: true,
-    // secure: true,
-    maxAge: 60 * 60 * 1000
-  });
-  res.cookie('refreshToken', refreshToken, {
-    httpOnly: true,
-    // secure: true,
-    maxAge: 7 * 24 * 60 * 60 * 1000
-  });
-  res.set(xUserIdKey, userId);
+export const logIn = async (req, res, next) => {
+  try {
+    const {accessToken, refreshToken, userId} = await logInUser(req.body);
+    await saveRefreshToken(userId, refreshToken);
+    res.cookie('accessToken', accessToken, {
+      httpOnly: true,
+      // secure: true,
+      maxAge: 60 * 60 * 1000
+    });
+    res.cookie('refreshToken', refreshToken, {
+      httpOnly: true,
+      // secure: true,
+      maxAge: 7 * 24 * 60 * 60 * 1000
+    });
+    res.set(xUserIdKey, userId);
 
-  res.status(200).send('OK');
+    res.status(200).send('OK');
+  } catch (err) {
+    next(err);
+  }
 };
 
 export const logOut = async (req, res) => {
@@ -37,19 +41,23 @@ export const logOut = async (req, res) => {
   res.status(200).send('OK');
 };
 
-export const renewalTokens = async (req, res) => {
-  const {newAccessToken, newRefreshToken, userId} = await updateTokens(req);
-  await saveRefreshToken(userId, newRefreshToken);
-  res.cookie('accessToken', newAccessToken, {
-    httpOnly: true,
-    // secure: true,
-    maxAge: 60 * 60 * 1000
-  });
-  res.cookie('refreshToken', newRefreshToken, {
-    httpOnly: true,
-    // secure: true,
-    maxAge: 7 * 24 * 60 * 60 * 1000
-  });
+export const renewalTokens = async (req, res, next) => {
+  try {
+    const {newAccessToken, newRefreshToken, userId} = await updateTokens(req);
+    await saveRefreshToken(userId, newRefreshToken);
+    res.cookie('accessToken', newAccessToken, {
+      httpOnly: true,
+      // secure: true,
+      maxAge: 60 * 60 * 1000
+    });
+    res.cookie('refreshToken', newRefreshToken, {
+      httpOnly: true,
+      // secure: true,
+      maxAge: 7 * 24 * 60 * 60 * 1000
+    });
 
-  res.status(200).send('OK');
+    res.status(200).send('OK');
+  } catch (err) {
+    next(err);
+  }
 };

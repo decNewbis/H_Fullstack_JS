@@ -57,11 +57,11 @@ export const fetchProducts = async (req, res) => {
   res.status(200).json(await getProducts());
 };
 
-export const fetchProductById = async (req, res) => {
+export const fetchProductById = async (req, res, next) => {
   const foundProductById = await findProductById(req.params);
 
   if (!foundProductById) {
-    throw new ErrorObjectNotFound("product not found");
+    return next(new ErrorObjectNotFound("product not found"));
   }
   res.status(200).json(foundProductById);
 };
