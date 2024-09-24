@@ -2,7 +2,7 @@ import {createNewUser} from "../services/user.services.js";
 import {roles} from "../roles.js";
 import {getUserByEmail} from "../repositories/user.repository.js";
 
-export const initializeAdmin = async (next) => {
+export const initializeAdmin = async () => {
   try {
     const adminParams = {
       email: process.env.SUPER_USER_EMAIL,
@@ -15,6 +15,6 @@ export const initializeAdmin = async (next) => {
     }
     await createNewUser(adminParams);
   } catch (err) {
-    next(err)
+    console.error(err)
   }
 };
