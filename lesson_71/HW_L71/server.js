@@ -28,7 +28,12 @@ const swaggerUiOptions = {
     defaultModelsExpandDepth: -1,
   },
 };
-const URI_DB = process.env.URI_DB;
+const MONGO_ROOT_USERNAME = process.env.MONGO_INITDB_ROOT_USERNAME;
+const MONGO_ROOT_PASSWORD = process.env.MONGO_INITDB_ROOT_PASSWORD;
+const MONGO_DB_NAME = process.env.MONGO_INITDB_DATABASE;
+const MONGO_PORT = process.env.MONGO_INITDB_PORT;
+const URI_DB = `mongodb://${MONGO_ROOT_USERNAME}:${MONGO_ROOT_PASSWORD}@mongo:${MONGO_PORT}/${MONGO_DB_NAME}?authSource=${MONGO_ROOT_USERNAME}`;
+
 
 mongoose
   .connect(URI_DB)
