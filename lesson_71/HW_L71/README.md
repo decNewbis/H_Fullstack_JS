@@ -1,4 +1,4 @@
-### `npm run start`
+### `docker-compose up`
 
 Runs the app in the development mode.\
 The app reload when you make changes.\
