@@ -6,7 +6,7 @@ import {
   retrieveProductVideo,
   retrieveProductPreview
 } from "../services/product.services.js";
-import {ErrorObjectNotFound, ErrorReadWriteFile} from "../errorHandler.js";
+import {ErrorReadWriteFile} from "../errorHandler.js";
 import {getProducts} from "../repositories/product.repository.js";
 import {findProductById} from "../services/product.services.js";
 
@@ -59,10 +59,11 @@ export const fetchProducts = async (req, res) => {
 };
 
 export const fetchProductById = async (req, res, next) => {
-  const foundProductById = await findProductById(req.params);
+  try {
+    const foundProductById = await findProductById(req.params);
 
-  if (!foundProductById) {
-    return next(new ErrorObjectNotFound("product not found"));
+    res.status(200).json(foundProductById);
+  } catch (err) {
+    next(err);
   }
-  res.status(200).json(foundProductById);
 };
