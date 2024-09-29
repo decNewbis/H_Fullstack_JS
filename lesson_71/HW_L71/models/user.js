@@ -7,11 +7,13 @@ const userSchema = new Schema({
     type: String,
     required: true,
     max: 254,
-    unique: true
+    unique: true,
+    match: [new RegExp(/^(([a-zA-Z0-9._-]+)@([a-zA-Z0-9.-]+)(\.[a-zA-Z]{2,}))/, "iu"), 'Please provide a valid email address']
   },
   password: {
     type: String,
-    required: true
+    required: true,
+    match: [new RegExp(/(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]/), 'Please provide a valid password']
   },
   role: {
     type: String,
