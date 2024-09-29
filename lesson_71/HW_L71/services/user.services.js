@@ -26,7 +26,7 @@ export const createNewUser = async ({ email, password, role=roles.CUSTOMER}, nex
       email: newUser.email,
     };
   } catch (err) {
-    next(err)
+    next(new ErrorValidation(err))
   }
 };
 
