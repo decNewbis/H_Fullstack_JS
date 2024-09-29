@@ -54,7 +54,8 @@ export const getProductPreviewByName = (req, res, next) => {
 };
 
 export const fetchProducts = async (req, res) => {
-  res.status(200).json(await getProducts());
+  const allProducts = await getProducts();
+  res.status(200).json(allProducts);
 };
 
 export const fetchProductById = async (req, res, next) => {
