@@ -3,6 +3,7 @@ import path from "path";
 import {fileURLToPath} from "url";
 import {addAndSaveNewProduct, getProductById} from "../repositories/product.repository.js";
 import {ensureDirectoryExists, handleFileUpload, getFileByName} from "../utils/file.utils.js";
+import {ErrorObjectNotFound} from "../errorHandler.js";
 
 const productImgFormat = process.env.PRODUCT_IMG_FORMAT;
 const productVideoFormat = process.env.PRODUCT_VIDEO_FORMAT;
@@ -107,5 +108,9 @@ export const retrieveProductPreview = (req, res, next, callback) => {
 };
 
 export const findProductById = async ({productId}) => {
-  return await getProductById(productId);
+  const product = await getProductById(productId);
+  if (!product) {
+    throw new ErrorObjectNotFound("product not found");
+  }
+  return product;
 };
