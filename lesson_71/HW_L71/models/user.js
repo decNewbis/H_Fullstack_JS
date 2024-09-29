@@ -7,13 +7,7 @@ const userSchema = new Schema({
     type: String,
     required: true,
     max: 254,
-    validate: {
-      validator: async function(email) {
-        const user = await this.constructor.findOne({ email });
-        return !user;
-      },
-      message: "user already exists"
-    }
+    unique: true
   },
   password: {
     type: String,
