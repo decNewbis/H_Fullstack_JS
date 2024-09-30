@@ -6,10 +6,10 @@ import cookieParser from "cookie-parser";
 import 'dotenv/config';
 import YAML from "yamljs";
 import swaggerUi from "swagger-ui-express";
+import mongoose from "mongoose";
 
 import { errorHandling } from "./middlewares.js";
 import userRoutes from "./routes/user.routes.js";
-import productsRoutes from "./routes/products.routes.js";
 import cartRoutes from "./routes/cart.routes.js";
 import productRoutes from "./routes/product.routes.js";
 import {initializeAdmin} from "./utils/adminInit.js";
@@ -28,13 +28,23 @@ const swaggerUiOptions = {
     defaultModelsExpandDepth: -1,
   },
 };
+const MONGO_ROOT_USERNAME = process.env.MONGO_INITDB_ROOT_USERNAME;
+const MONGO_ROOT_PASSWORD = process.env.MONGO_INITDB_ROOT_PASSWORD;
+const MONGO_DB_NAME = process.env.MONGO_INITDB_DATABASE;
+const MONGO_PORT = process.env.MONGO_INITDB_PORT;
+const URI_DB = `mongodb://${MONGO_ROOT_USERNAME}:${MONGO_ROOT_PASSWORD}@mongo:${MONGO_PORT}/${MONGO_DB_NAME}?authSource=${MONGO_ROOT_USERNAME}`;
+
+
+mongoose
+  .connect(URI_DB)
+  .then(() => console.log('MongoDB Connected'))
+  .catch((err) => console.log(`DB connection error: ${err}`));
 
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, swaggerUiOptions));
 
 apiRouter.use(userRoutes);
-apiRouter.use('/products', productsRoutes);
 apiRouter.use('/cart', cartRoutes);
 apiRouter.use('/product', productRoutes);
 

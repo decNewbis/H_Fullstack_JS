@@ -1,19 +1,32 @@
-import {carts, orders} from "../storage.js";
+import {Cart} from "../models/cart.js";
+import {Order} from "../models/order.js";
 
-export const getCartByUserId = (userId) => {
-  return carts.find((cart) => cart.userId === userId);
+export const getProductsFromCartByUserId = async (userId) => {
+  return Cart.findOne({userId}).populate('products', '_id name price');
 };
 
-export const getOrderByUserId = (userId) => {
-  return orders.find((order) => order.userId === userId);
+export const findCartByUserIdAndUpdate = async (userId, update) => {
+  const options = {
+    new: true,
+    upsert: true
+  }
+  return Cart.findOneAndUpdate(
+    {userId},
+    update,
+    options
+  ).populate('products', '_id name description price');
 };
 
-export const createNewCart = (newCart) => {
-  carts.push(newCart);
-  return newCart;
-};
+export const findOrderByUserIdAndUpdate = async (userId, update) => {
+  const options = {
+    new: true,
+    upsert: true
+  }
 
-export const addNewOrder = (newOrder) => {
-  orders.push(newOrder);
-  return newOrder;
+  return Order.findOneAndUpdate(
+    {userId},
+    update,
+    options
+  )
+    .populate('userId', '_id email');
 };

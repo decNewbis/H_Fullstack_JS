@@ -1,11 +1,11 @@
 import {createReadStream, createWriteStream, existsSync, mkdirSync} from "fs";
 import sharp from "sharp";
-import {ErrorObjectNotFound, ErrorReadWriteFile} from "../errorHandler.js";
+import {ErrorForbidden, ErrorObjectNotFound} from "../errorHandler.js";
 import eventEmitter from "../eventEmits.js";
-import {readProductsStore, writeProductsStore} from "../repositories/product.repository.js";
-import {getCustomProductById} from "../services/product.services.js";
-
-const productsStore = process.env.PRODUCTS_STORE;
+import {
+  addAndSaveNewImage, addAndSaveNewPreview,
+  addAndSaveNewVideo, findByIdAndUpdate, getProductById,
+} from "../repositories/product.repository.js";
 
 export const ensureFileExists = (filename) => {
   if (!existsSync(filename)) {
@@ -16,6 +16,17 @@ export const ensureFileExists = (filename) => {
 export const ensureDirectoryExists = (directory) => {
   if (!existsSync(directory)) {
     mkdirSync(directory);
+  }
+};
+
+export const validateFileCount = (product, fileType) => {
+  const limits = {
+    videos: 5,
+    images: 10,
+    previews: 10
+  }
+  if (product[fileType].length >= limits[fileType]) {
+    throw new ErrorForbidden(`Cannot add more than ${limits[fileType]} ${fileType}`);
   }
 };
 
@@ -30,35 +41,54 @@ export const handleFileUpload = async (req, res, next, uploadParams, callback) =
   } = uploadParams;
 
   eventEmitter.emit('fileUploadStart', {productId, filename});
-  const writeableStream = createWriteStream(filePath, { encoding: "binary", flags: "w" });
-  req.pipe(writeableStream)
-    .on('finish', async () => {
-      try {
-        const customProductsList = await readProductsStore(productsStore);
-        const foundProduct = getCustomProductById(productId, customProductsList);
-        foundProduct[fileType].push(filename);
-        if (fileType === 'images') {
-          foundProduct.previews.push(previewFilename)
-        }
+  try {
+    let file;
+    let preview;
+    let product = await getProductById(productId);
 
-        await writeProductsStore(productsStore, customProductsList);
+    if (!product) {
+      return next(new ErrorObjectNotFound('Product not found'));
+    }
 
+    validateFileCount(product, fileType);
+
+    if (fileType === 'images') {
+      file = await addAndSaveNewImage(filename);
+      preview = await addAndSaveNewPreview(previewFilename);
+    } else {
+      file = await addAndSaveNewVideo(filename);
+    }
+
+    product = await findByIdAndUpdate(
+      productId,
+      {$push: {[fileType]: file._id}}
+    );
+
+    const writeableStream = await createWriteStream(filePath, {encoding: "binary", flags: "w"});
+
+    req.pipe(writeableStream)
+      .on('finish', async () => {
         if (fileType === 'images') {
           await sharp(filePath)
             .resize(150, 150)
             .toFile(previewFilePath);
+          product = await findByIdAndUpdate(
+            productId,
+            {$push: {previews: preview._id}}
+          );
         }
+
         eventEmitter.emit('fileUploadEnd', {productId, filename});
-        callback(null, foundProduct);
-      } catch (err) {
+        callback(null, product);
+      })
+      .on('error', (err) => {
         eventEmitter.emit('fileUploadFailed', {productId, filename, err});
         callback(err);
-      }
-    })
-    .on('error', (err) => {
-      eventEmitter.emit('fileUploadFailed', {productId, filename, err});
-      callback(err);
-    });
+      });
+  } catch (err) {
+    eventEmitter.emit('fileUploadFailed', {productId, filename, err});
+    callback(err);
+  }
 };
 
 export const getFileByName = (res, next, requestParams, callback) => {

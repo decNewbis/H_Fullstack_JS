@@ -1,0 +1,40 @@
+version: '3.8'
+
+networks:
+  main:
+
+services:
+  backend:
+    restart: always
+    image: node:18
+    working_dir: /app
+    volumes:
+      - .:/app
+    ports:
+      - ${PORT}:${PORT}
+    command: sh -c "npm install && npm run start"
+    depends_on:
+      - mongo
+    env_file:
+      - .env
+    networks:
+      - main
+
+  mongo:
+    restart: always
+    image: mongo:latest
+    volumes:
+      - mongo_data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+      MONGO_INITDB_DATABASE: ${MONGO_INITDB_DATABASE}
+    env_file:
+      - .env
+    ports:
+      - ${MONGO_INITDB_PORT}:${MONGO_INITDB_PORT}
+    networks:
+      - main
+
+volumes:
+  mongo_data:

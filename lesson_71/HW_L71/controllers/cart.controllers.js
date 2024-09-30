@@ -1,27 +1,27 @@
 import {addProductToCart, createCheckoutOrder, removeProductFromCart} from "../services/cart.services.js";
 import {getUserId} from "../services/user.services.js";
 
-export const addProductByIdToCart = (req, res, next) => {
+export const addProductByIdToCart = async (req, res, next) => {
   try {
-    const cart = addProductToCart(getUserId(req), req.params);
+    const cart = await addProductToCart(getUserId(req), req.params);
     res.status(200).json(cart);
   } catch (err) {
     next(err);
   }
 };
 
-export const removeProductByIdFromCart = (req, res, next) => {
+export const removeProductByIdFromCart = async (req, res, next) => {
   try {
-    const cart = removeProductFromCart(getUserId(req), req.params);
+    const cart = await removeProductFromCart(getUserId(req), req.params);
     res.status(200).json(cart);
   } catch (err) {
     next(err);
   }
 };
 
-export const checkoutOrder =(req, res, next) => {
+export const checkoutOrder = async (req, res, next) => {
   try {
-    const order = createCheckoutOrder(getUserId(req));
+    const order = await createCheckoutOrder(getUserId(req));
     res.status(200).json(order);
   } catch (err) {
     next(err);

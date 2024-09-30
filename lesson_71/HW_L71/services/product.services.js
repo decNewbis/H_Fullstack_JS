@@ -1,10 +1,10 @@
 import {randomUUID as uuid} from "crypto";
 import path from "path";
 import {fileURLToPath} from "url";
-import {readProductsStore, writeProductsStore} from "../repositories/product.repository.js";
+import {addAndSaveNewProduct, getProductById} from "../repositories/product.repository.js";
 import {ensureDirectoryExists, handleFileUpload, getFileByName} from "../utils/file.utils.js";
+import {ErrorObjectNotFound} from "../errorHandler.js";
 
-const productsStore = process.env.PRODUCTS_STORE;
 const productImgFormat = process.env.PRODUCT_IMG_FORMAT;
 const productVideoFormat = process.env.PRODUCT_VIDEO_FORMAT;
 const imgFolderName = process.env.IMG_FOLDER_NAME;
@@ -16,26 +16,17 @@ const imgFolderNamePath = path.join(__dirname, '../', imgFolderName);
 const previewFolderNamePath = path.join(__dirname, '../', previewFolderName);
 const videosFolderNamePath = path.join(__dirname, '../', videosFolderName);
 
-export const getCustomProductById = (productId, productsList) => {
-  return productsList.find((product) => product.id === `${productId}`);
-};
-
-export const createNewProduct = async ({name, description, price}) => {
+export const createNewProduct = async ({name, description, price}, next) => {
   const newProduct = {
-    id: uuid(),
     name,
     description,
-    price,
-    videos: [],
-    images: [],
-    previews: []
+    price
   }
-
-  const customProductsList = await readProductsStore(productsStore);
-  customProductsList.push(newProduct);
-  await writeProductsStore(productsStore, customProductsList);
-
-  return newProduct;
+  try {
+    return await addAndSaveNewProduct(newProduct);
+  } catch (err){
+    next(err);
+  }
 };
 
 export const uploadNewImage = async (req, res, next, callback) => {
@@ -114,4 +105,12 @@ export const retrieveProductPreview = (req, res, next, callback) => {
   };
 
   getFileByName(res, next, requestParams, callback);
+};
+
+export const findProductById = async ({productId}) => {
+  const product = await getProductById(productId);
+  if (!product) {
+    throw new ErrorObjectNotFound("product not found");
+  }
+  return product;
 };

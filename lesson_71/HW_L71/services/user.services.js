@@ -1,8 +1,7 @@
-import {randomUUID as uuid} from "crypto";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import {
-  addNewUser,
+  addAndSaveNewUser,
   getStoredRefreshToken,
   getUserByEmailAndPassword,
   removeRefreshToken
@@ -13,19 +12,22 @@ import {roles} from "../roles.js";
 const xUserIdKey = process.env.X_USER_ID_KEY;
 const saltRounds = parseInt(process.env.BCRYPT_SALT_ROUNDS);
 
-export const createNewUser = async ({ email, password }, role=roles.CUSTOMER) => {
-  const hash = await bcrypt.hash(password, saltRounds);
-  const newUser = addNewUser({
-    id: uuid(),
-    email,
-    password: hash,
-    role
-  });
+export const createNewUser = async ({ email, password, role=roles.CUSTOMER}, next) => {
+  try {
+    const hash = await bcrypt.hash(password, saltRounds);
+    const newUser = await addAndSaveNewUser({
+      email,
+      password: hash,
+      role
+    });
 
-  return {
-    id: newUser.id,
-    email: newUser.email,
-  };
+    return {
+      id: newUser.id,
+      email: newUser.email,
+    };
+  } catch (err) {
+    next(new ErrorValidation(err))
+  }
 };
 
 export const getUserId = (req) => {
@@ -39,8 +41,8 @@ const generateRefreshToken = (payload) => {
   return jwt.sign(payload, process.env.JWT_REFRESH_SECRET, {expiresIn: '7d'});
 };
 
-export const logInUser = ({email, password}) => {
-  const user = getUserByEmailAndPassword({email, password});
+export const logInUser = async ({email, password}) => {
+  const user = await getUserByEmailAndPassword({email, password});
   if (!user) {
     throw new ErrorValidation('Incorrect email or password');
   }
@@ -51,7 +53,7 @@ export const logInUser = ({email, password}) => {
   return {
     accessToken,
     refreshToken,
-    userId: user.id
+    userId: user._id
   };
 };
 
@@ -66,10 +68,10 @@ export const getToken = (req) => {
   return {accessToken, refreshToken};
 };
 
-export const updateTokens = (req) => {
+export const updateTokens = async (req) => {
   const currentUser = getUserId(req);
   const {refreshToken} = getToken(req);
-  const storedRefreshToken = getStoredRefreshToken(currentUser);
+  const storedRefreshToken = await getStoredRefreshToken(currentUser);
   let newAccessToken = null;
   let newRefreshToken = null;
 
